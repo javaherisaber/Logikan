@@ -1,0 +1,51 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="AppThemeParent" />
+
+    <style name="AppThemeParent" parent="Theme.MaterialComponents.Light.NoActionBar">
+
+        <!-- major attributes -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorSecondary</item>
+        <item name="android:fontFamily">@font/yekan</item>
+        <item name="colorError">@color/colorError</item>
+        <item name="colorSecondary">@color/colorSecondary</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+
+        <!-- text attributes -->
+        <item name="textAppearanceHeadline1">@style/TextAppearance.App.Headline1</item>
+        <item name="textAppearanceHeadline2">@style/TextAppearance.App.Headline2</item>
+        <item name="textAppearanceHeadline3">@style/TextAppearance.App.Headline3</item>
+        <item name="textAppearanceHeadline4">@style/TextAppearance.App.Headline4</item>
+        <item name="textAppearanceHeadline5">@style/TextAppearance.App.Headline5</item>
+        <item name="textAppearanceHeadline6">@style/TextAppearance.App.Headline6</item>
+        <item name="textAppearanceSubtitle1">@style/TextAppearance.App.Subtitle1</item>
+        <item name="textAppearanceSubtitle2">@style/TextAppearance.App.Subtitle2</item>
+        <item name="textAppearanceBody1">@style/TextAppearance.App.Body1</item>
+        <item name="textAppearanceBody2">@style/TextAppearance.App.Body2</item>
+        <item name="textAppearanceCaption">@style/TextAppearance.App.Caption</item>
+        <item name="textAppearanceButton">@style/TextAppearance.App.Button</item>
+        <item name="textAppearanceOverline">@style/TextAppearance.App.Overline</item>
+    </style>
+    <!-- End of Base application theme -->
+
+    <!-- Toolbar Style -->
+    <style name="ToolbarStyle" parent="ToolbarStyleParent" />
+
+    <style name="ToolbarStyleParent" parent="ThemeOverlay.MaterialComponents.ActionBar">
+        <item name="android:background">@color/colorWhite</item>
+    </style>
+    <!-- End of Toolbar Style -->
+
+    <!--&lt;!&ndash; SplashScreenTheme &ndash;&gt;-->
+    <!--<style name="SplashScreenTheme" parent="SplashScreenParent"/>-->
+
+    <!--<style name="SplashScreenParent" parent="AppTheme">-->
+        <!--<item name="android:windowBackground">@drawable/splash_screen</item>-->
+    <!--</style>-->
+    <!--&lt;!&ndash; End of SplashScreenTheme &ndash;&gt;-->
+
+</resources>

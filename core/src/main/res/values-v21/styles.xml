@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="AppThemeParent">
+        <item name="android:statusBarColor">@color/colorStatusBar</item>
+    </style>
+
+    <!-- Toolbar Style -->
+    <style name="ToolbarStyle" parent="ToolbarStyleParent" />
+
+    <!--&lt;!&ndash; Splash Screen Theme &ndash;&gt;-->
+    <!--<style name="SplashScreenTheme" parent="SplashScreenParent">-->
+        <!--<item name="android:windowTranslucentStatus">true</item>-->
+        <!--<item name="android:windowTranslucentNavigation">true</item>-->
+    <!--</style>-->
+</resources>

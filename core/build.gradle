@@ -1,0 +1,80 @@
+apply plugin: 'com.android.library'
+apply plugin: 'com.jakewharton.butterknife'
+apply plugin: 'kotlin-android'
+
+android {
+    compileSdkVersion compileSdk
+    defaultConfig {
+        minSdkVersion minSdk
+        targetSdkVersion targetSdk
+        versionCode 1
+        versionName "1.0"
+        vectorDrawables.useSupportLibrary = true
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    // androidx
+    implementation "androidx.appcompat:appcompat:$appCompat"
+    implementation "androidx.constraintlayout:constraintlayout:$constraintLayout"
+    implementation "androidx.constraintlayout:constraintlayout-solver:$constraintLayout"
+    implementation "androidx.vectordrawable:vectordrawable:$vectorDrawable"
+    implementation "androidx.recyclerview:recyclerview:$recyclerView"
+    implementation "androidx.cardview:cardview:$cardView"
+    implementation "androidx.legacy:legacy-support-v4:$legacySupport"
+    implementation "androidx.preference:preference:$preference"
+    implementation "androidx.browser:browser:$browser"
+
+    // dagger
+    implementation "com.google.dagger:dagger:$dagger"
+    annotationProcessor "com.google.dagger:dagger-compiler:$dagger"
+    implementation "com.google.dagger:dagger-android:$dagger"
+    implementation "com.google.dagger:dagger-android-support:$dagger"
+    annotationProcessor "com.google.dagger:dagger-android-processor:$dagger"
+
+    // rx-reactive
+    implementation "io.reactivex.rxjava2:rxjava:$rxJava"
+    implementation "io.reactivex.rxjava2:rxandroid:$rxAndroid"
+    implementation "com.github.tbruyelle:rxpermissions:$rxPermission"
+
+    // retrofit
+    implementation "com.squareup.retrofit2:retrofit:$retrofit"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofit"
+    implementation "com.jakewharton.retrofit:retrofit2-rxjava2-adapter:$rxRetrofit"
+
+    // ok-http
+    implementation "com.squareup.okhttp3:okhttp:$okhttp"
+    implementation "com.squareup.okhttp3:logging-interceptor:$okhttpLoggingInterceptor"
+
+    // google
+    implementation "com.google.android.material:material:$material"
+    implementation "com.google.code.gson:gson:$gson"
+
+    // butter-knife
+    implementation "com.jakewharton:butterknife:$butterknife"
+    annotationProcessor "com.jakewharton:butterknife-compiler:$butterknife"
+
+    // test
+    testImplementation "junit:junit:$junit"
+    androidTestImplementation "androidx.test:runner:$runner"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$espresso"
+
+    // other dependencies
+    implementation "de.hdodenhof:circleimageview:$circleImageView"
+    implementation "com.squareup.picasso:picasso:$picasso"
+
+    // config
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+}

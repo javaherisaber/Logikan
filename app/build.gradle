@@ -1,0 +1,100 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlin-android-extensions'
+
+android {
+    compileSdkVersion compileSdk
+    defaultConfig {
+        applicationId "ir.logicfan.core.app"
+        minSdkVersion minSdk
+        targetSdkVersion targetSdk
+        versionCode 1
+        versionName "1.0"
+        vectorDrawables.useSupportLibrary = true
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    // androidx
+    implementation "androidx.appcompat:appcompat:$appCompat"
+    implementation "androidx.constraintlayout:constraintlayout:$constraintLayout"
+    implementation "androidx.constraintlayout:constraintlayout-solver:$constraintLayout"
+    implementation "androidx.vectordrawable:vectordrawable:$vectorDrawable"
+    implementation "androidx.recyclerview:recyclerview:$recyclerView"
+    implementation "androidx.cardview:cardview:$cardView"
+    implementation "androidx.legacy:legacy-support-v4:$legacySupport"
+    implementation "androidx.preference:preference:$preference"
+    implementation "androidx.browser:browser:$browser"
+    implementation "androidx.multidex:multidex:$multidex"
+
+    // dagger
+    implementation "com.google.dagger:dagger:$dagger"
+    kapt "com.google.dagger:dagger-compiler:$dagger"
+    implementation "com.google.dagger:dagger-android:$dagger"
+    implementation "com.google.dagger:dagger-android-support:$dagger"
+    kapt "com.google.dagger:dagger-android-processor:$dagger"
+
+    // retrofit
+    implementation "com.squareup.retrofit2:retrofit:$retrofit"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofit"
+    implementation "com.jakewharton.retrofit:retrofit2-rxjava2-adapter:$rxRetrofit"
+
+    // rx-reactive
+    implementation "io.reactivex.rxjava2:rxjava:$rxJava"
+    implementation "io.reactivex.rxjava2:rxandroid:$rxAndroid"
+    implementation "com.github.tbruyelle:rxpermissions:$rxPermission"
+
+    // ok-http
+    implementation "com.squareup.okhttp3:okhttp:$okhttp"
+    implementation "com.squareup.okhttp3:logging-interceptor:$okhttpLoggingInterceptor"
+
+    // google
+    implementation "com.google.android.material:material:$material"
+    implementation "com.google.code.gson:gson:$gson"
+    implementation "com.google.android.gms:play-services-maps:$googleMaps"
+    implementation "com.google.android.gms:play-services-gcm:$googleGcm"
+    implementation "com.google.android.gms:play-services-location:$googleLocation"
+    implementation "com.google.android.gms:play-services-ads:$googleAds"
+    implementation "com.google.maps.android:android-maps-utils:$mapsUtils"
+
+    // butter-knife
+    implementation "com.jakewharton:butterknife:$butterknife"
+    kapt "com.jakewharton:butterknife-compiler:$butterknife"
+
+    // test
+    testImplementation "junit:junit:$junit"
+    androidTestImplementation "androidx.test:runner:$runner"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$espresso"
+
+    // leak-canary
+    debugImplementation "com.squareup.leakcanary:leakcanary-android:$leakCanary"
+    debugImplementation "com.squareup.leakcanary:leakcanary-support-fragment:$leakCanary"
+    releaseImplementation "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanary"
+
+    // other dependencies
+    implementation "org.jetbrains.anko:anko-commons:$anko"
+    implementation "de.hdodenhof:circleimageview:$circleImageView"
+    implementation "com.squareup.picasso:picasso:$picasso"
+    implementation "co.ronash.android:pushe-base:$pushe"
+    implementation "com.github.roojin:persian-calendar-view:$persianCalendar"
+    implementation("com.crashlytics.sdk.android:crashlytics:$fabric@aar") {
+        transitive = true
+    }
+
+    // config
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"
+    implementation project(path: ':core')
+}

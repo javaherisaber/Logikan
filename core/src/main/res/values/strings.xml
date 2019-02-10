@@ -1,0 +1,61 @@
+<resources>
+    <string name="app_name">core</string>
+
+    <!-- all -->
+    <string name="all_detail">جزئیات</string>
+    <string name="all_notice">توجه</string>
+    <string name="all_settings">تنظیمات</string>
+    <string name="all_retry">تلاش دوباره</string>
+    <string name="all_more">بیشتر</string>
+    <string name="all_final_approve">تایید نهایی</string>
+    <string name="all_new">جدید</string>
+    <string name="all_hour">ساعت</string>
+    <string name="all_yes">بله</string>
+    <string name="all_no">خیر</string>
+    <!-- end of all -->
+
+    <!-- all toast -->
+    <string name="all_logout_successful">شما از حساب کاربری خارج شدید</string>
+    <!-- end of all toast -->
+
+    <!-- base preferences -->
+    <string name="key_pref_lang_list" translatable="false">pref_lang_list</string>
+    <!-- end of base preferences -->
+
+    <!-- dialog -->
+    <string name="dialog_location_permission_denied">برای مشاهده نقشه نیاز به دسترسی به مکان است، از دکمه زیر فعال کنید</string>
+    <string name="dialog_exit_account">از حساب کاربری خود خارج میشوید؟</string>
+    <!-- end of dialog -->
+
+    <!-- error -->
+    <string name="error_un_authorized_message">دسترسی امکان پذیر نیست، لطفا دوباره وارد حساب کاربری خود شوید</string>
+    <string name="error_something_went_wrong">خطایی رخ داد، لطفا بعدا امتحان کنید</string>
+    <string name="error_oops_something_went_wrong">خطایی در اتصال به شبکه رخ داد، لطفا بعدا امتحان کنید</string>
+    <string name="error_server_error">اتصال به سرور با مشکل مواجه شد، لطفا بعدا امتحان کنید</string>
+    <string name="error_connectivity_error">خطایی در اتصال به شبکه رخ داد، دوباره امتحان کنید</string>
+    <string name="error_check_your_internet_connection">اینترنت شما وصل نیست</string>
+    <string name="error_resource_not_available">این صفحه از دسترس خارج شده</string>
+
+    <string name="error_wrong_number">شماره تلفن اشتباه است</string>
+    <string name="error_wrong_code">کد وارد شده اشتباه است</string>
+    <string name="error_code_expired_try_again">کد منقضی شد، دوباره امتحان کنید</string>
+    <!-- end of error-->
+
+    <!-- tools -->
+    <string name="tools_phone_number">02138743827</string>
+    <string name="tools_mobile_number">09127778899</string>
+    <string name="tools_address">تهران، میدان ولیعصر، جنب داروخانه دکتر کاویانی</string>
+    <string name="tools_date_slash_separated">1397/10/23</string>
+    <string name="tools_date_localized">15 فروردین 1395</string>
+    <string name="tools_time_period">10:00 – 12:00</string>
+    <string name="tools_start_hour">16:00</string>
+    <string name="tools_end_hour">18:00</string>
+    <string name="tools_month">اردیبهشت</string>
+    <string name="tools_day_of_week">چهارشنبه</string>
+    <string name="tools_day">14</string>
+    <string name="tools_date_time">ساعت 8 چهاردهم شهریور 1398</string>
+    <string name="tools_profile_name">مهدی جواهری صابر</string>
+    <string name="tools_timer_expire">100 ثانیه تا انقضای کد</string>
+    <!-- end of tools -->
+
+</resources>

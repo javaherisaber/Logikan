@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+##### general #####
+<WHAT>_<WHERE>_<DESCRIPTION>_<COLOR>_<SIZE>
+this will apply in any resource
+except below items
+
+##### colors #####
+<WHAT><DESCRIPTION>
+colorPrimary
+colorBody1
+colorWhite
+
+##### dimens #####
+<WHAT>_<WHERE>_<DESCRIPTION>_<SIZE>
+margin_fab
+padding_fragment_map_card
+elevation_material_card
+textsize_medium
+
+##### strings #####
+<WHERE>_<DESCRIPTION>
+activity_main_title
+fragment_map_detail_card_headline
+all_settings
+all_done
+dialog_warning
+
+##### layout #####
+<WHAT>_<WHERE>.XML
+activity_clinic
+fragment_category
+item_clinic => recyclerView item
+view_map_marker => custom view
+
+##### drawable #####
+<WHERE>_<DESCRIPTION>_<COLOR>_<SIZE>.XML
+clinic_card_close
+main_bottom_nav_map
+all_location_black_24dp
+
+##### ID #####
+<WHAT>_<WHERE>_<DESCRIPTION>
+imageview_activity_main_logo
+toolbar_activity_clinic
+textview_fragment_map_title
+recyclerview_fragment_clinic_detail
+progressbar_fragment_category
+-->
+<resources/>
