@@ -1,8 +1,8 @@
 package ir.logicfan.core.data.network.error;
 
 import android.content.Context;
+import ir.logicfan.core.R;
 
-import com.ennings.common.R;
 
 public enum NetworkErrorType implements NetworkError {
 
