@@ -11,7 +11,7 @@ Core, base and utility functionalities required by an android project
 git tag -a 1.0 -m "v1.0"
 git push origin 1.0
 ```
-4. go to jitpack console *repositories -> YOUR_REPOSITORY -> Releases*
+4. go to [jitpack](https://jitpack.io/) console *repositories -> YOUR_REPOSITORY -> Releases*
 5. hit the **Get it** button
 
 ## How to use in your project
