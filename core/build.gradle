@@ -3,10 +3,10 @@ apply plugin: 'com.jakewharton.butterknife'
 apply plugin: 'kotlin-android'
 
 android {
-    compileSdkVersion compileSdk
+    compileSdkVersion config.compileSdk
     defaultConfig {
-        minSdkVersion minSdk
-        targetSdkVersion targetSdk
+        minSdkVersion config.minSdk
+        targetSdkVersion config.targetSdk
         versionCode 1
         versionName "1.0"
         vectorDrawables.useSupportLibrary = true
@@ -26,55 +26,55 @@ android {
 
 dependencies {
     // androidx
-    implementation "androidx.appcompat:appcompat:$appCompat"
-    implementation "androidx.constraintlayout:constraintlayout:$constraintLayout"
-    implementation "androidx.constraintlayout:constraintlayout-solver:$constraintLayout"
-    implementation "androidx.vectordrawable:vectordrawable:$vectorDrawable"
-    implementation "androidx.recyclerview:recyclerview:$recyclerView"
-    implementation "androidx.cardview:cardview:$cardView"
-    implementation "androidx.legacy:legacy-support-v4:$legacySupport"
-    implementation "androidx.preference:preference:$preference"
-    implementation "androidx.browser:browser:$browser"
+    implementation "androidx.appcompat:appcompat:${versions.appCompat}"
+    implementation "androidx.constraintlayout:constraintlayout:${versions.constraintLayout}"
+    implementation "androidx.constraintlayout:constraintlayout-solver:${versions.constraintLayout}"
+    implementation "androidx.vectordrawable:vectordrawable:${versions.vectorDrawable}"
+    implementation "androidx.recyclerview:recyclerview:${versions.recyclerView}"
+    implementation "androidx.cardview:cardview:${versions.cardView}"
+    implementation "androidx.legacy:legacy-support-v4:${versions.legacySupport}"
+    implementation "androidx.preference:preference:${versions.preference}"
+    implementation "androidx.browser:browser:${versions.browser}"
 
     // dagger
-    implementation "com.google.dagger:dagger:$dagger"
-    annotationProcessor "com.google.dagger:dagger-compiler:$dagger"
-    implementation "com.google.dagger:dagger-android:$dagger"
-    implementation "com.google.dagger:dagger-android-support:$dagger"
-    annotationProcessor "com.google.dagger:dagger-android-processor:$dagger"
+    implementation "com.google.dagger:dagger:${versions.dagger}"
+    annotationProcessor "com.google.dagger:dagger-compiler:${versions.dagger}"
+    implementation "com.google.dagger:dagger-android:${versions.dagger}"
+    implementation "com.google.dagger:dagger-android-support:${versions.dagger}"
+    annotationProcessor "com.google.dagger:dagger-android-processor:${versions.dagger}"
 
     // rx-reactive
-    implementation "io.reactivex.rxjava2:rxjava:$rxJava"
-    implementation "io.reactivex.rxjava2:rxandroid:$rxAndroid"
-    implementation "com.github.tbruyelle:rxpermissions:$rxPermission"
+    implementation "io.reactivex.rxjava2:rxjava:${versions.rxJava}"
+    implementation "io.reactivex.rxjava2:rxandroid:${versions.rxAndroid}"
+    implementation "com.github.tbruyelle:rxpermissions:${versions.rxPermission}"
 
     // retrofit
-    implementation "com.squareup.retrofit2:retrofit:$retrofit"
-    implementation "com.squareup.retrofit2:converter-gson:$retrofit"
-    implementation "com.jakewharton.retrofit:retrofit2-rxjava2-adapter:$rxRetrofit"
+    implementation "com.squareup.retrofit2:retrofit:${versions.retrofit}"
+    implementation "com.squareup.retrofit2:converter-gson:${versions.retrofit}"
+    implementation "com.jakewharton.retrofit:retrofit2-rxjava2-adapter:${versions.rxRetrofit}"
 
     // ok-http
-    implementation "com.squareup.okhttp3:okhttp:$okhttp"
-    implementation "com.squareup.okhttp3:logging-interceptor:$okhttpLoggingInterceptor"
+    implementation "com.squareup.okhttp3:okhttp:${versions.okhttp}"
+    implementation "com.squareup.okhttp3:logging-interceptor:${versions.okhttpLoggingInterceptor}"
 
     // google
-    implementation "com.google.android.material:material:$material"
-    implementation "com.google.code.gson:gson:$gson"
+    implementation "com.google.android.material:material:${versions.material}"
+    implementation "com.google.code.gson:gson:${versions.gson}"
 
     // butter-knife
-    implementation "com.jakewharton:butterknife:$butterknife"
-    annotationProcessor "com.jakewharton:butterknife-compiler:$butterknife"
+    implementation "com.jakewharton:butterknife:${versions.butterknife}"
+    annotationProcessor "com.jakewharton:butterknife-compiler:${versions.butterknife}"
 
     // test
-    testImplementation "junit:junit:$junit"
-    androidTestImplementation "androidx.test:runner:$runner"
-    androidTestImplementation "androidx.test.espresso:espresso-core:$espresso"
+    testImplementation "junit:junit:${versions.junit}"
+    androidTestImplementation "androidx.test:runner:${versions.runner}"
+    androidTestImplementation "androidx.test.espresso:espresso-core:${versions.espresso}"
 
     // other dependencies
-    implementation "de.hdodenhof:circleimageview:$circleImageView"
-    implementation "com.squareup.picasso:picasso:$picasso"
+    implementation "de.hdodenhof:circleimageview:${versions.circleImageView}"
+    implementation "com.squareup.picasso:picasso:${versions.picasso}"
 
     // config
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${versions.kotlin}"
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 }
