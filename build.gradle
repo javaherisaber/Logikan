@@ -9,6 +9,7 @@ buildscript {
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.3.1'
+        classpath "com.github.dcendents:android-maven-gradle-plugin:${versions.jitpackMaven}"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${versions.kotlin}"
         classpath "com.jakewharton:butterknife-gradle-plugin:${versions.butterknife}"
         // NOTE: Do not place your application dependencies here; they belong
