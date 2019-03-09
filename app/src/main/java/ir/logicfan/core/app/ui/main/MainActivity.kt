@@ -1,9 +1,10 @@
-package ir.logicfan.core.app
+package ir.logicfan.core.app.ui.main
 
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import com.google.android.material.snackbar.Snackbar
+import ir.logicfan.core.app.R
 import ir.logicfan.core.ui.base.BaseActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
