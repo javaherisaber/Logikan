@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="AppThemeParent">
+    <style name="AppThemeBase" parent="AppThemeParent">
         <item name="android:statusBarColor">@color/colorStatusBar</item>
         <item name="android:windowLightStatusBar">true</item>
     </style>
