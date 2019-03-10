@@ -10,12 +10,13 @@ Core, base and utility functionalities required by an android project
 ```
 git tag -a 1.0 -m "v1.0"
 git push origin 1.0
+```
 4. hit the jitpack image at the beginning of this readme
 5. wait for jitpack to build your artifact
 6. if build failed (there might be a red icon), fix the errors and repeat step 1-6
 7. hit the **Get it** button
 8. add release title and changelog to Github release section
-```
+
 That's it! jitpack will package your build automatically.
 
 ## How to use in your project
@@ -31,6 +32,6 @@ allprojects {
 module level build.gradle
 ```
 dependencies {
-    implementation "com.github.logicfanlab:AndroidProjectCore:${versions.logicfanCore}"
+    implementation "com.github.logicfanlab:AndroidProjectCore:$versions.logicfanCore"
 }
 ```
