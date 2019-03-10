@@ -139,7 +139,7 @@ class JalaliCalendar : Serializable {
             var jalaliLeap = -14
             var jp = breaks[0]
 
-            var jump = 0
+            var jump: Int
             for (j in 1..19) {
                 val jm = breaks[j]
                 jump = jm - jp
@@ -155,7 +155,7 @@ class JalaliCalendar : Serializable {
                     marchDay = 20 + (jalaliLeap - GregorianLeap)
 
                     if (jump - N < 6)
-                        N = N - jump + (jump + 4) / 33 * 33
+                        N - jump + (jump + 4) / 33 * 33
 
                     break
                 }
@@ -349,7 +349,7 @@ class JalaliCalendar : Serializable {
 
         var jp = breaks[0]
 
-        var jump = 0
+        var jump: Int
         for (j in 1..19) {
             val jm = breaks[j]
             jump = jm - jp

@@ -21,7 +21,7 @@ object LocaleManager {
         val config = context.resources.configuration
         return if (Build.VERSION.SDK_INT >= 24) {
             config.locales.get(0)
-        } else {
+        } else @Suppress("DEPRECATION") {
             config.locale
         }
     }
