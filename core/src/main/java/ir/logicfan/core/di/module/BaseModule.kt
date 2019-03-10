@@ -16,14 +16,17 @@ abstract class BaseModule {
     @ApplicationContext
     abstract fun context(application: Application): Context
 
+    @Module
     companion object {
 
         @Provides
+        @JvmStatic
         fun disposable(): CompositeDisposable {
             return CompositeDisposable()
         }
 
         @Provides
+        @JvmStatic
         fun basePrefManager(@ApplicationContext context: Context): BasePrefManager {
             return BasePrefManager(context)
         }

@@ -5,15 +5,12 @@ import android.os.Bundle
 import android.view.MenuItem
 import androidx.annotation.IdRes
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import butterknife.ButterKnife
 import butterknife.Unbinder
 import dagger.android.support.DaggerAppCompatActivity
 import ir.logicfan.core.data.pref.BasePrefManager
-import ir.logicfan.core.di.qulifier.ActivityFragmentManager
 import ir.logicfan.core.util.LocaleManager
-
 import javax.inject.Inject
 
 /**
@@ -25,10 +22,6 @@ abstract class BaseActivity : DaggerAppCompatActivity() {
 
     @Inject
     lateinit var prefManager: BasePrefManager
-
-    @Inject
-    @ActivityFragmentManager
-    lateinit var fragmentManager: FragmentManager
 
     private var butterKnifeUnbinder: Unbinder? = null
 
@@ -47,7 +40,7 @@ abstract class BaseActivity : DaggerAppCompatActivity() {
     }
 
     protected fun replaceFragmentWithFadeAnimation(@IdRes container: Int, fragment: Fragment, addToBackStack: Boolean) {
-        val ft = fragmentManager.beginTransaction()
+        val ft = supportFragmentManager.beginTransaction()
         ft.replace(container, fragment)
         if (addToBackStack) {
             ft.addToBackStack(null) // argument name is optional
