@@ -1,20 +1,13 @@
 package ir.logicfan.core.ui.base
 
-import android.content.Context
 import android.view.View
 import androidx.annotation.IdRes
 import androidx.fragment.app.Fragment
 import butterknife.ButterKnife
 import butterknife.Unbinder
 import dagger.android.support.DaggerFragment
-import ir.logicfan.core.di.qulifier.ActivityContext
-import javax.inject.Inject
 
 abstract class BaseFragment : DaggerFragment() {
-
-    @Inject
-    @ActivityContext
-    lateinit var activityContext: Context
 
     private var butterKnifeUnbinder: Unbinder? = null
 
