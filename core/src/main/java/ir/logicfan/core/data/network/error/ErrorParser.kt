@@ -10,6 +10,7 @@ object ErrorParser {
 
     private const val TAG = "HttpError"
 
+    @JvmStatic
     fun getErrorType(error: Throwable): NetworkErrorType {
         return when(error) {
             is UserOfflineException -> NetworkErrorType.NO_INTERNET
@@ -19,6 +20,7 @@ object ErrorParser {
         }
     }
 
+    @JvmStatic
     private fun getHttpErrorType(response: Response<*>): NetworkErrorType {
         Log.d(TAG, response.message())
         return when(response.code()) {

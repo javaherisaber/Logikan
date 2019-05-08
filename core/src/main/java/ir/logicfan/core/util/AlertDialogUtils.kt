@@ -9,6 +9,7 @@ import android.provider.Settings
 
 object AlertDialogUtils {
 
+    @JvmStatic
     fun showDialogWithPermissionScreenButton(
         context: Context,
         title: String,
@@ -27,6 +28,7 @@ object AlertDialogUtils {
 
     @Deprecated("This method doesn't add any value",
         ReplaceWith("built-in android alert dialog builder or KTX extension"))
+    @JvmStatic
     fun showDialogWithNegativeAndPositiveButtons(
         context: Context, title: String, message: String,
         positiveButtonText: String,

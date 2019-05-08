@@ -5,6 +5,7 @@ import java.util.*
 
 object GraphicUtils {
 
+    @JvmStatic
     fun addShadowToCircularBitmap(srcBitmap: Bitmap, shadowWidth: Int, shadowColor: Int): Bitmap {
         // Calculate the circular bitmap width with shadow
         val dstBitmapWidth = srcBitmap.width + shadowWidth * 2
@@ -38,6 +39,7 @@ object GraphicUtils {
         return dstBitmap
     }
 
+    @JvmStatic
     fun generateRandomBrightColor(): Int {
         val random = Random(System.currentTimeMillis())
 

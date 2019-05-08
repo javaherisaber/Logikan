@@ -9,6 +9,7 @@ object LocaleManager {
 
     const val DEFAULT_LANG_VALUE = "fa"
 
+    @JvmStatic
     fun setLocale(context: Context, lang: String): Context {
         val locale = Locale(lang)
         Locale.setDefault(locale)
@@ -17,6 +18,7 @@ object LocaleManager {
         return context.createConfigurationContext(config)
     }
 
+    @JvmStatic
     fun getLocale(context: Context): Locale {
         val config = context.resources.configuration
         return if (Build.VERSION.SDK_INT >= 24) {
