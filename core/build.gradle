@@ -1,9 +1,6 @@
 apply plugin: 'com.android.library'
-apply plugin: 'com.jakewharton.butterknife'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android'
-apply plugin: 'com.github.dcendents.android-maven'
-group='com.github.logicfanlab'
 
 android {
     compileSdkVersion config.compileSdk
@@ -80,10 +77,6 @@ dependencies {
     testImplementation "junit:junit:$versions.junit"
     androidTestImplementation "androidx.test:runner:$versions.runner"
     androidTestImplementation "androidx.test.espresso:espresso-core:$versions.espresso"
-
-    // other dependencies
-    implementation "de.hdodenhof:circleimageview:$versions.circleImageView"
-    implementation "com.squareup.picasso:picasso:$versions.picasso"
 
     // config
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$versions.kotlin"
