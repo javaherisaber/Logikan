@@ -6,6 +6,12 @@ Core, base and utility functionalities required by an android project
 https://medium.com/@deepakpk/how-to-add-a-git-android-library-project-as-a-sub-module-c713a653ab1f```
 
 ## Changelog
+### 1.0.3
+- Add stage build type support
+
+### 1.0.2
+- Add Java inter-op to object classes
+
 ### 1.0.1
 - Move to Bitbucket private repository
 
