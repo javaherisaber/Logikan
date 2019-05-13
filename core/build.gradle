@@ -1,14 +1,15 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'org.jetbrains.dokka-android'
 
 android {
     compileSdkVersion config.compileSdk
     defaultConfig {
         minSdkVersion config.minSdk
         targetSdkVersion config.targetSdk
-        versionCode 3
-        versionName "1.0.3"
+        versionCode 4
+        versionName "1.0.4"
         vectorDrawables.useSupportLibrary = true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -32,6 +33,12 @@ android {
             option("-Xmaxerrs", 500)
         }
     }
+    dokka {
+        outputFormat = 'html'
+        outputDirectory = "$rootDir/docs/build/docs/orchid/dokka/coredocs"
+        skipDeprecated = false // include deprecated members
+        reportUndocumented = true // Emit warnings about not documented members.
+    }
 }
 
 dependencies {
@@ -42,7 +49,6 @@ dependencies {
     implementation "androidx.vectordrawable:vectordrawable:$versions.vectorDrawable"
     implementation "androidx.recyclerview:recyclerview:$versions.recyclerView"
     implementation "androidx.cardview:cardview:$versions.cardView"
-    implementation "androidx.legacy:legacy-support-v4:$versions.legacySupport"
     implementation "androidx.preference:preference:$versions.preference"
     implementation "androidx.browser:browser:$versions.browser"
 
