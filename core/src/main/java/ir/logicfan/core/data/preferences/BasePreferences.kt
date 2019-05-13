@@ -9,6 +9,12 @@ import ir.logicfan.core.R
 import ir.logicfan.core.util.LocaleManager
 import javax.inject.Inject
 
+/**
+ * Basic preferences needed by every project
+ * you need to extend this class to add more preferences to your app
+ *
+ * @param cipherSecret a secret code to encrypt shared preferences from manipulating on root devices
+ */
 class BasePreferences @Inject
 constructor(private val context: Context, cipherSecret: CharArray) :
     SecureSharedPreferences(cipherSecret, context, context.getSharedPreferences(PREF_ID, Context.MODE_PRIVATE)) {

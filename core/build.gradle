@@ -1,6 +1,7 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'org.jetbrains.dokka-android'
 
 android {
     compileSdkVersion config.compileSdk
@@ -31,6 +32,12 @@ android {
             // Default is 100.
             option("-Xmaxerrs", 500)
         }
+    }
+    dokka {
+        outputFormat = 'html'
+        outputDirectory = "$rootDir/docs/build/docs/orchid/dokka/coredocs"
+        skipDeprecated = false // include deprecated members
+        reportUndocumented = true // Emit warnings about not documented members.
     }
 }
 
