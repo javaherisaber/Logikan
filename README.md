@@ -6,6 +6,12 @@ Core, base and utility functionalities required by an android project
 https://medium.com/@deepakpk/how-to-add-a-git-android-library-project-as-a-sub-module-c713a653ab1f```
 
 ## Changelog
+### 1.0.4
+- refactor data package with new naming
+- add dokka support
+- add kapt incremental annotation processing, parallel compile and compile avoidance to increase build speed
+- delegate SecureSharedPreferences secret key to caller module env
+
 ### 1.0.3
 - Add stage build type support
 
