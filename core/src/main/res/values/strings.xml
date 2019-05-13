@@ -19,7 +19,7 @@
     <!-- end of all toast -->
 
     <!-- base preferences -->
-    <string name="key_pref_lang_list" translatable="false">pref_lang_list</string>
+    <string name="key_pref_locale_setting" translatable="false">pref_locale_setting</string>
     <!-- end of base preferences -->
 
     <!-- dialog -->
