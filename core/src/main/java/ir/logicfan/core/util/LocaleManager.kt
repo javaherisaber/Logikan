@@ -7,7 +7,7 @@ import java.util.*
 
 object LocaleManager {
 
-    const val DEFAULT_LANG_VALUE = "fa"
+    const val DEFAULT_LOCALE = "fa"
 
     @JvmStatic
     fun setLocale(context: Context, lang: String): Context {

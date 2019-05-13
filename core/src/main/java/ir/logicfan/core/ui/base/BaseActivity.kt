@@ -9,7 +9,7 @@ import androidx.fragment.app.FragmentTransaction
 import butterknife.ButterKnife
 import butterknife.Unbinder
 import dagger.android.support.DaggerAppCompatActivity
-import ir.logicfan.core.data.pref.BasePrefManager
+import ir.logicfan.core.data.preferences.BasePreferences
 import ir.logicfan.core.util.LocaleManager
 import javax.inject.Inject
 
@@ -21,13 +21,13 @@ import javax.inject.Inject
 abstract class BaseActivity : DaggerAppCompatActivity() {
 
     @Inject
-    lateinit var prefManager: BasePrefManager
+    lateinit var basePreferences: BasePreferences
 
     private var butterKnifeUnbinder: Unbinder? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        LocaleManager.setLocale(this, prefManager.settingsPrefLangList)
+        LocaleManager.setLocale(this, basePreferences.localeSetting)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

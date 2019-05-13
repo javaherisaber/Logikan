@@ -1,4 +1,4 @@
-package ir.logicfan.core.data.pref
+package ir.logicfan.core.data.preferences
 
 
 import android.annotation.SuppressLint
@@ -9,16 +9,20 @@ import ir.logicfan.core.R
 import ir.logicfan.core.util.LocaleManager
 import javax.inject.Inject
 
-class BasePrefManager @Inject
-constructor(private val context: Context) :
-    SecureSharedPreferences(context, context.getSharedPreferences(PREF_ID, Context.MODE_PRIVATE)) {
+class BasePreferences @Inject
+constructor(private val context: Context, cipherSecret: CharArray) :
+    SecureSharedPreferences(cipherSecret, context, context.getSharedPreferences(PREF_ID, Context.MODE_PRIVATE)) {
 
     companion object {
-        private const val PREF_ID = "pref"
+        private const val PREF_ID = "securePreference"
         private const val KEY_DEVICE_ID = "deviceID"
-        private const val KEY_IS_LOGGED_IN = "isLoggedIn"
     }
 
+    /**
+     * AndroidID of device
+     * remain's unique throughout device restarts
+     * it will only be revoked on phone factory reset (or it differ's on multi-user feature in android 5+)
+     */
     val deviceID: String
         @SuppressLint("HardwareIds")
         get() {
@@ -33,19 +37,20 @@ constructor(private val context: Context) :
             return storedDeviceID!!
         }
 
-    var isLoggedIn: Boolean
-        get() = getBoolean(KEY_IS_LOGGED_IN, false)
-        set(value) = edit().putBoolean(KEY_IS_LOGGED_IN, value).apply()
-
-    var settingsPrefLangList: String
+    /**
+     * app language (default is fa)
+     * this preference must be used for default share preference
+     * because PreferenceActivity doesn't understand encrypted preference
+     */
+    var localeSetting: String
         get() {
             return PreferenceManager.getDefaultSharedPreferences(context)
-                .getString(context.getString(R.string.key_pref_lang_list), LocaleManager.DEFAULT_LANG_VALUE)!!
+                .getString(context.getString(R.string.key_pref_locale_setting), LocaleManager.DEFAULT_LOCALE)!!
         }
         set(value) {
             PreferenceManager.getDefaultSharedPreferences(context)
                 .edit()
-                .putString(context.getString(R.string.key_pref_lang_list), value)
+                .putString(context.getString(R.string.key_pref_locale_setting), value)
                 .apply()
         }
 }

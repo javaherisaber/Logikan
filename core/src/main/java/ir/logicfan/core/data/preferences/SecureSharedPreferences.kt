@@ -1,4 +1,4 @@
-package ir.logicfan.core.data.pref
+package ir.logicfan.core.data.preferences
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -21,13 +21,16 @@ import javax.crypto.spec.PBEParameterSpec
  * get out there if someone decompiled
  * your app.
  */
-abstract class SecureSharedPreferences(private val context: Context, private val delegate: SharedPreferences) :
+abstract class SecureSharedPreferences(
+    private val cipherSecret: CharArray,
+    private val context: Context,
+    private val delegate: SharedPreferences
+) :
     SharedPreferences {
 
     companion object {
         private const val UTF8 = "utf-8"
         private const val SECRET_KEY_FACTORY = "PBEWithMD5AndDES"
-        private val SECRET_PASS_CODE = charArrayOf('#', '%', 'S', '@', '6', 'D', '^') // INSERT A RANDOM PASSWORD HERE.
     }
 
     inner class Editor @SuppressLint("CommitPrefEdits")
@@ -139,7 +142,7 @@ abstract class SecureSharedPreferences(private val context: Context, private val
         try {
             val bytes = value?.toByteArray(charset(UTF8)) ?: ByteArray(0)
             val keyFactory = SecretKeyFactory.getInstance(SECRET_KEY_FACTORY)
-            val key = keyFactory.generateSecret(PBEKeySpec(SECRET_PASS_CODE))
+            val key = keyFactory.generateSecret(PBEKeySpec(cipherSecret))
             val pbeCipher = Cipher.getInstance(SECRET_KEY_FACTORY)
             pbeCipher.init(
                 Cipher.ENCRYPT_MODE, key, PBEParameterSpec(
@@ -163,7 +166,7 @@ abstract class SecureSharedPreferences(private val context: Context, private val
         try {
             val bytes = if (value != null) Base64.decode(value, Base64.DEFAULT) else ByteArray(0)
             val keyFactory = SecretKeyFactory.getInstance(SECRET_KEY_FACTORY)
-            val key = keyFactory.generateSecret(PBEKeySpec(SECRET_PASS_CODE))
+            val key = keyFactory.generateSecret(PBEKeySpec(cipherSecret))
             val pbeCipher = Cipher.getInstance(SECRET_KEY_FACTORY)
             pbeCipher.init(
                 Cipher.DECRYPT_MODE, key, PBEParameterSpec(
