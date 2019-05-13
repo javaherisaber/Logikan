@@ -1,4 +1,4 @@
-package ir.logicfan.core.data.network.gson
+package ir.logicfan.core.data.network.adapter
 
 import com.google.gson.*
 import java.lang.reflect.Type
