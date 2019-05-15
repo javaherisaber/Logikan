@@ -9,7 +9,7 @@ import android.os.Bundle
  * Listen to callback of every activity
  */
 
-class BaseActivityLifeCycle : ActivityLifecycleCallbacks {
+open class BaseActivityLifeCycle : ActivityLifecycleCallbacks {
 
     override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle) {
 

@@ -67,15 +67,10 @@ dependencies {
     // retrofit
     implementation "com.squareup.retrofit2:retrofit:$versions.retrofit"
     implementation "com.squareup.retrofit2:converter-gson:$versions.retrofit"
-    implementation "com.jakewharton.retrofit:retrofit2-rxjava2-adapter:$versions.rxRetrofit"
-
-    // ok-http
-    implementation "com.squareup.okhttp3:okhttp:$versions.okhttp"
-    implementation "com.squareup.okhttp3:logging-interceptor:$versions.okhttpLoggingInterceptor"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$versions.retrofit"
 
     // google
     implementation "com.google.android.material:material:$versions.material"
-    implementation "com.google.code.gson:gson:$versions.gson"
 
     // butter-knife
     implementation "com.jakewharton:butterknife:$versions.butterknife"
