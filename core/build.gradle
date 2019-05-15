@@ -71,6 +71,7 @@ dependencies {
 
     // google
     implementation "com.google.android.material:material:$versions.material"
+    implementation "com.google.android.gms:play-services-analytics:$versions.googleAnalytics"
 
     // butter-knife
     implementation "com.jakewharton:butterknife:$versions.butterknife"
