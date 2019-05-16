@@ -2,10 +2,11 @@
 
 Core, base and utility functionalities required by an android project
 
-## How to use in your project
-https://medium.com/@deepakpk/how-to-add-a-git-android-library-project-as-a-sub-module-c713a653ab1f```
-
 ## Changelog
+### 1.1.0
+- new error handler with more flexible design
+- mock interceptor
+
 ### 1.0.4
 - refactor data package with new naming
 - add dokka support

@@ -27,8 +27,8 @@ abstract class BaseModule {
 
         @Provides
         @JvmStatic
-        fun basePrefManager(@ApplicationContext context: Context): BasePreferences {
-            return BasePreferences(context)
+        fun basePreference(@ApplicationContext context: Context, secret: CharArray): BasePreferences {
+            return BasePreferences(context, secret)
         }
     }
 }
