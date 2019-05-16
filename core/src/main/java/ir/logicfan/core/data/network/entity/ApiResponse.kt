@@ -1,4 +1,4 @@
-package ir.logicfan.core.data.network.model.base
+package ir.logicfan.core.data.network.entity
 
 import com.google.gson.annotations.SerializedName
 
