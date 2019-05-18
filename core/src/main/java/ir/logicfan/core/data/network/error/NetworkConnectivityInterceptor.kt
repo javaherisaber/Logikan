@@ -8,7 +8,7 @@ import okhttp3.Response
 import java.io.IOException
 import javax.inject.Inject
 
-class NetworkErrorHandlingInterceptor @Inject
+class NetworkConnectivityInterceptor @Inject
 constructor(private val context: Context) : Interceptor {
 
     @Throws(IOException::class, NetworkOfflineException::class)
