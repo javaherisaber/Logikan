@@ -3,6 +3,9 @@
 Core, base and utility functionalities required by an android project
 
 ## Changelog
+### 1.2.0-alpha
+- error resolution stub for presentation layer (need to implement an interface inside BaseActivity or any other suitable place)
+
 ### 1.1.0
 - new error handler with more flexible design
 - mock interceptor
