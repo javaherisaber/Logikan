@@ -10,6 +10,8 @@ import butterknife.ButterKnife
 import butterknife.Unbinder
 import dagger.android.support.DaggerAppCompatActivity
 import ir.logicfan.core.data.preferences.BasePreferences
+import ir.logicfan.core.ui.error.DataErrorResolver
+import ir.logicfan.core.ui.error.DataResolution
 import ir.logicfan.core.util.LocaleManager
 import javax.inject.Inject
 
@@ -18,15 +20,17 @@ import javax.inject.Inject
  * All of our activities extends this class to inherit top level functionality
  */
 
-abstract class BaseActivity : DaggerAppCompatActivity() {
+abstract class BaseActivity : DaggerAppCompatActivity(), DataResolution {
 
     @Inject
     lateinit var basePreferences: BasePreferences
 
+    var dataErrorResolver: DataErrorResolver? = null
     private var butterKnifeUnbinder: Unbinder? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        dataErrorResolver = DataErrorResolver(this, this)
         LocaleManager.setLocale(this, basePreferences.localeSetting)
     }
 
@@ -56,5 +60,45 @@ abstract class BaseActivity : DaggerAppCompatActivity() {
     override fun onDestroy() {
         butterKnifeUnbinder?.unbind()
         super.onDestroy()
+    }
+
+    override fun onResolutionStart(throwable: Throwable) {
+        dataErrorResolver?.onResolutionStart(throwable)
+    }
+
+    override fun onDataUnexpectedError(localizedMessage: String, throwable: Throwable) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun onClientError(localizedMessage: String, throwable: Throwable) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun onIOError(localizedMessage: String, throwable: Throwable) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun onServerError(localizedMessage: String, throwable: Throwable) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun onNoSuchResourceError(localizedMessage: String, throwable: Throwable) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun onUnauthorizedError(localizedMessage: String, throwable: Throwable) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun onOtherHttpError(throwable: Throwable) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun onConnectivityAvailable(localizedMessage: String?, throwable: Throwable?) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun onConnectivityUnavailable(localizedMessage: String, throwable: Throwable) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 }
