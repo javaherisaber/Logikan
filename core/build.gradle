@@ -43,38 +43,29 @@ android {
 
 dependencies {
     // androidx
-    implementation "androidx.appcompat:appcompat:$versions.appCompat"
-    implementation "androidx.constraintlayout:constraintlayout:$versions.constraintLayout"
-    implementation "androidx.constraintlayout:constraintlayout-solver:$versions.constraintLayout"
-    implementation "androidx.vectordrawable:vectordrawable:$versions.vectorDrawable"
-    implementation "androidx.recyclerview:recyclerview:$versions.recyclerView"
-    implementation "androidx.cardview:cardview:$versions.cardView"
-    implementation "androidx.preference:preference:$versions.preference"
-    implementation "androidx.browser:browser:$versions.browser"
+    api "androidx.recyclerview:recyclerview:$versions.recyclerView"
 
     // dagger
-    implementation "com.google.dagger:dagger:$versions.dagger"
+    api "com.google.dagger:dagger:$versions.dagger"
     kapt "com.google.dagger:dagger-compiler:$versions.dagger"
-    implementation "com.google.dagger:dagger-android:$versions.dagger"
-    implementation "com.google.dagger:dagger-android-support:$versions.dagger"
+    api "com.google.dagger:dagger-android:$versions.dagger"
+    api "com.google.dagger:dagger-android-support:$versions.dagger"
     kapt "com.google.dagger:dagger-android-processor:$versions.dagger"
 
     // rx-reactive
-    implementation "io.reactivex.rxjava2:rxjava:$versions.rxJava"
-    implementation "io.reactivex.rxjava2:rxandroid:$versions.rxAndroid"
-    implementation "com.github.tbruyelle:rxpermissions:$versions.rxPermission"
+    api "io.reactivex.rxjava2:rxjava:$versions.rxJava"
+    api "io.reactivex.rxjava2:rxandroid:$versions.rxAndroid"
+    api "com.github.tbruyelle:rxpermissions:$versions.rxPermission"
 
     // retrofit
-    implementation "com.squareup.retrofit2:retrofit:$versions.retrofit"
-    implementation "com.squareup.retrofit2:converter-gson:$versions.retrofit"
-    implementation "com.squareup.retrofit2:adapter-rxjava2:$versions.retrofit"
+    api "com.squareup.retrofit2:retrofit:$versions.retrofit"
+    api "com.squareup.retrofit2:converter-gson:$versions.retrofit"
 
     // google
-    implementation "com.google.android.material:material:$versions.material"
-    implementation "com.google.android.gms:play-services-analytics:$versions.googleAnalytics"
+    api "com.google.android.gms:play-services-analytics:$versions.googleAnalytics"
 
     // butter-knife
-    implementation "com.jakewharton:butterknife:$versions.butterknife"
+    api "com.jakewharton:butterknife:$versions.butterknife"
     kapt "com.jakewharton:butterknife-compiler:$versions.butterknife"
 
     // test
@@ -83,6 +74,6 @@ dependencies {
     androidTestImplementation "androidx.test.espresso:espresso-core:$versions.espresso"
 
     // config
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$versions.kotlin"
+    api "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$versions.kotlin"
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 }
