@@ -12,7 +12,7 @@ import dagger.android.support.DaggerAppCompatActivity
 import ir.logicfan.core.data.preferences.BasePreferences
 import ir.logicfan.core.ui.error.DataErrorResolver
 import ir.logicfan.core.ui.error.DataResolution
-import ir.logicfan.core.util.LocaleManager
+import ir.logicfan.core.util.LocaleUtils
 import javax.inject.Inject
 
 /**
@@ -31,7 +31,7 @@ abstract class BaseActivity : DaggerAppCompatActivity(), DataResolution {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         dataErrorResolver = DataErrorResolver(this, this)
-        LocaleManager.setLocale(this, basePreferences.localeSetting)
+        LocaleUtils.setLocale(this, basePreferences.localeSetting)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

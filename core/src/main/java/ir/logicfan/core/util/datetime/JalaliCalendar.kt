@@ -1,4 +1,4 @@
-package ir.logicfan.core.util
+package ir.logicfan.core.util.datetime
 
 import java.io.Serializable
 import java.util.*

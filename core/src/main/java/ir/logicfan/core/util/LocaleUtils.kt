@@ -5,7 +5,7 @@ import android.content.res.Configuration
 import android.os.Build
 import java.util.*
 
-object LocaleManager {
+object LocaleUtils {
 
     const val DEFAULT_LOCALE = "fa"
 
