@@ -8,7 +8,6 @@ import ir.logicfan.core.R
  * At development phase you can throw a runtime exception inside your resolution class to find out what is the cause
  */
 class DataUnexpectedException : DataException(), LocalizedError {
-    override fun getLocalizedMessage(context: Context): String {
-        return context.resources.getString(R.string.error_something_went_wrong)
-    }
+    override fun getLocalizedMessage(context: Context): String =
+        context.resources.getString(R.string.error_something_went_wrong)
 }

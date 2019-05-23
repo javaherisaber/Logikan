@@ -15,7 +15,7 @@ import javax.inject.Inject
  *
  * @param cipherSecret a secret code to encrypt shared preferences from manipulating on root devices
  */
-open class BasePreferences @Inject
+open class BaseSharedPreferences @Inject
 constructor(private val context: Context, cipherSecret: CharArray) :
     SecureSharedPreferences(cipherSecret, context, context.getSharedPreferences(PREF_ID, Context.MODE_PRIVATE)) {
 

@@ -12,16 +12,14 @@ import ir.logicfan.core.data.error.DataException
  * @property onCompleteFunc act on behalf of rx function
  * @property onErrorFunc act on behalf of rx function
  */
-class DisposableDataResolvedObserver<T> (
+class DisposableDataResolvedObserver<T>(
     private val resolution: DataResolution,
     val onNextFunc: (T) -> Unit,
     val onCompleteFunc: () -> Unit = {},
     val onErrorFunc: (Throwable?) -> Unit = {}
 ) : DisposableObserver<T>() {
 
-    override fun onComplete() {
-        onCompleteFunc()
-    }
+    override fun onComplete() = onCompleteFunc()
 
     override fun onNext(t: T) {
         if (!isDisposed) {
@@ -29,10 +27,9 @@ class DisposableDataResolvedObserver<T> (
         }
     }
 
-    override fun onError(e: Throwable) {
-        when(e) {
+    override fun onError(e: Throwable) =
+        when (e) {
             is DataException -> resolution.onResolutionStart(e)
             else -> onErrorFunc(e) // this will never happen, we put it here only to satisfy when else predicate
         }
-    }
 }

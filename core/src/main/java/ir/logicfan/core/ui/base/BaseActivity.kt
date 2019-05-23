@@ -9,7 +9,7 @@ import androidx.fragment.app.FragmentTransaction
 import butterknife.ButterKnife
 import butterknife.Unbinder
 import dagger.android.support.DaggerAppCompatActivity
-import ir.logicfan.core.data.preferences.BasePreferences
+import ir.logicfan.core.data.preferences.BaseSharedPreferences
 import ir.logicfan.core.ui.error.DataErrorResolver
 import ir.logicfan.core.ui.error.DataResolution
 import ir.logicfan.core.util.LocaleUtils
@@ -23,7 +23,7 @@ import javax.inject.Inject
 abstract class BaseActivity : DaggerAppCompatActivity(), DataResolution {
 
     @Inject
-    lateinit var basePreferences: BasePreferences
+    lateinit var baseSharedPreferences: BaseSharedPreferences
 
     var dataErrorResolver: DataErrorResolver? = null
     private var butterKnifeUnbinder: Unbinder? = null
@@ -31,7 +31,7 @@ abstract class BaseActivity : DaggerAppCompatActivity(), DataResolution {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         dataErrorResolver = DataErrorResolver(this, this)
-        LocaleUtils.setLocale(this, basePreferences.localeSetting)
+        LocaleUtils.setLocale(this, baseSharedPreferences.localeSetting)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

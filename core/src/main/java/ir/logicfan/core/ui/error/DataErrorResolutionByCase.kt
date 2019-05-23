@@ -9,14 +9,13 @@ import ir.logicfan.core.data.network.error.exception.*
 /**
  * Base class to resolute data error
  */
-abstract class DataErrorResolutionByCase (private val context: Context) : DataResolution {
+abstract class DataErrorResolutionByCase(private val context: Context) : DataResolution {
 
-    override fun onResolutionStart(throwable: Throwable) {
+    override fun onResolutionStart(throwable: Throwable) =
         when (val exception = DataErrorParser.getErrorType(throwable)) {
             is NetworkException -> resoluteNetworkError(exception)
             else -> onDataUnexpectedError((exception as DataUnexpectedException).getLocalizedMessage(context), exception)
         }
-    }
 
     private fun resoluteNetworkError(exception: NetworkException) {
         when (exception) {

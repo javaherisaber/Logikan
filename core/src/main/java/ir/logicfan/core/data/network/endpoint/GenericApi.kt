@@ -1,6 +1,6 @@
 package ir.logicfan.core.data.network.endpoint
 
-import io.reactivex.Single
+import io.reactivex.Observable
 import okhttp3.ResponseBody
 import retrofit2.http.GET
 import retrofit2.http.Url
@@ -11,5 +11,5 @@ import retrofit2.http.Url
 interface GenericApi {
 
     @GET
-    fun download(@Url url: String): Single<ResponseBody>   // base url will be overridden
+    fun download(@Url url: String): Observable<ResponseBody>   // base url will be overridden
 }

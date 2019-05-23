@@ -16,18 +16,16 @@ import java.net.HttpURLConnection
 object NetworkErrorParser : ErrorType {
     private const val TAG = "HttpError"
 
-    override fun getErrorType(error: Throwable): DataException {
-        return when(error) {
-            is NetworkOfflineException -> NetworkOfflineException()
-            is HttpException -> getHttpErrorType(error.response())
-            is IOException -> NetworkIOException()
-            else -> DataUnexpectedException()
-        }
+    override fun getErrorType(error: Throwable): DataException = when (error) {
+        is NetworkOfflineException -> NetworkOfflineException()
+        is HttpException -> getHttpErrorType(error.response())
+        is IOException -> NetworkIOException()
+        else -> DataUnexpectedException()
     }
 
     private fun getHttpErrorType(response: Response<*>): DataException {
         Log.d(TAG, response.message())
-        return when(response.code()) {
+        return when (response.code()) {
             HttpURLConnection.HTTP_UNAUTHORIZED -> NetworkUnAuthorizedException()
             HttpURLConnection.HTTP_NOT_FOUND or HttpURLConnection.HTTP_MOVED_PERM -> NetworkNoSuchResourceException()
             in 400..499 -> NetworkClientException()

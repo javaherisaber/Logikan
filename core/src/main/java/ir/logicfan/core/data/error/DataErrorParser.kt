@@ -8,10 +8,8 @@ import ir.logicfan.core.data.network.error.NetworkException
  */
 object DataErrorParser : ErrorType {
 
-    override fun getErrorType(error: Throwable): DataException {
-        return when(error) {
-            is NetworkException -> NetworkErrorParser.getErrorType(error)
-            else -> DataUnexpectedException()
-        }
+    override fun getErrorType(error: Throwable): DataException = when (error) {
+        is NetworkException -> NetworkErrorParser.getErrorType(error)
+        else -> DataUnexpectedException()
     }
 }
