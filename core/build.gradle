@@ -68,6 +68,10 @@ dependencies {
     api "com.jakewharton:butterknife:$versions.butterknife"
     kapt "com.jakewharton:butterknife-compiler:$versions.butterknife"
 
+    // lifecycle, ViewModel and LiveData
+    api "androidx.lifecycle:lifecycle-extensions:$versions.archLifecycle"
+    api "androidx.lifecycle:lifecycle-reactivestreams-ktx:$versions.archLifecycle" // reactive stream support for live data
+
     // test
     testImplementation "junit:junit:$versions.junit"
     androidTestImplementation "androidx.test:runner:$versions.runner"

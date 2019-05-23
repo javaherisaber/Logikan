@@ -5,6 +5,6 @@ import io.reactivex.Observable
 object ReactiveUtils {
 
     @JvmStatic
-    fun <T> composeWith(aSyncTransformer: ASyncTransformer<T>, receiver: () -> Observable<T>) =
-        receiver().compose(aSyncTransformer)!!
+    fun <T> composeWith(transformer: Transformer<T>, receiver: () -> Observable<T>) =
+        receiver().compose(transformer)!!
 }
