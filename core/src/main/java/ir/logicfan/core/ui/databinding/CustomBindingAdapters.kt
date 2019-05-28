@@ -1,10 +1,10 @@
-package ir.logicfan.core.util.binding
+package ir.logicfan.core.ui.databinding
 
 import android.view.View
 import android.widget.ProgressBar
 import androidx.databinding.BindingAdapter
 
-object BindingAdapters {
+object CustomBindingAdapters {
 
     /**
      * hide the view if number is zero

@@ -1,4 +1,4 @@
-package ir.logicfan.core.util.binding
+package ir.logicfan.core.ui.databinding
 
 import android.view.View
 import androidx.databinding.BindingConversion
@@ -10,7 +10,7 @@ import androidx.databinding.BindingConversion
  * There is no need to specify that this converter should be used. [BindingConversion]s are
  * applied automatically.
  */
-object BindingConverters {
+object CustomBindingConverters {
 
     @BindingConversion
     @JvmStatic
