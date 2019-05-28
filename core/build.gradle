@@ -47,6 +47,7 @@ android {
 dependencies {
     // androidx
     api "androidx.recyclerview:recyclerview:$versions.recyclerView"
+    api "androidx.cardview:cardview:$versions.cardView"
 
     // dagger
     api "com.google.dagger:dagger:$versions.dagger"
