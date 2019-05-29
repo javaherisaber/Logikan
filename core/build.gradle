@@ -17,8 +17,6 @@ android {
         enabled = true
     }
     buildTypes {
-        debug {}
-        stage {}
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
