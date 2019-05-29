@@ -15,6 +15,7 @@ constructor(
     private val baseUrl: String,
     private val mockJsonProvider: MockJsonProvider,
     private val apiEnableMock: Boolean,
+    private val apiIncludeIntoMock: Array<String>,
     private val apiExcludeFromMock: Array<String>
 ) : Interceptor {
 
@@ -32,15 +33,23 @@ constructor(
             .replace(baseUrl, "")  // remove base url
             .replace("\\?.*".toRegex(), "") // remove query parameters
 
-        var excludeRequestFound = false
-        // check if requestPath is excluded
-        for (item in apiExcludeFromMock) {
+        var canProceedWithMock = apiEnableMock // can we use mock or proceed with network api
+
+        // check if requestPath is included
+        for (item in apiIncludeIntoMock) {
             if (item == requestPath) {
-                excludeRequestFound = true
+                canProceedWithMock = true
             }
         }
 
-        if (!apiEnableMock && !excludeRequestFound) {
+        // check if requestPath is excluded
+        for (item in apiExcludeFromMock) {
+            if (item == requestPath) {
+                canProceedWithMock = false
+            }
+        }
+
+        if (canProceedWithMock) {
             val json = mockJsonProvider.getMockJsonOrNull(requestPath)
             return json?.let {
                 // json is found

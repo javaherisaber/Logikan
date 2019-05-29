@@ -2,12 +2,13 @@ package ir.logicfan.core.di.module
 
 import android.app.Application
 import android.content.Context
+import androidx.lifecycle.ViewModelProvider
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
-import io.reactivex.disposables.CompositeDisposable
-import ir.logicfan.core.data.preferences.BasePreferences
+import ir.logicfan.core.data.preferences.BaseSharedPreferences
 import ir.logicfan.core.di.qulifier.ApplicationContext
+import ir.logicfan.core.ui.base.BaseViewModelFactory
 
 @Module
 abstract class BaseModule {
@@ -16,19 +17,15 @@ abstract class BaseModule {
     @ApplicationContext
     abstract fun context(application: Application): Context
 
+    @Binds
+    abstract fun baseViewModelFactory(viewModelFactory: BaseViewModelFactory): ViewModelProvider.Factory
+
     @Module
     companion object {
 
         @Provides
         @JvmStatic
-        fun disposable(): CompositeDisposable {
-            return CompositeDisposable()
-        }
-
-        @Provides
-        @JvmStatic
-        fun basePreference(@ApplicationContext context: Context, secret: CharArray): BasePreferences {
-            return BasePreferences(context, secret)
-        }
+        fun baseSharedPreferences(@ApplicationContext context: Context, secret: CharArray): BaseSharedPreferences =
+            BaseSharedPreferences(context, secret)
     }
 }

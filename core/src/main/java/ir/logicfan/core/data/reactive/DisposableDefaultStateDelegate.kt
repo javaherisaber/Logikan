@@ -1,38 +1,41 @@
-package ir.logicfan.core.ui.error
+package ir.logicfan.core.data.reactive
 
 import io.reactivex.observers.DisposableObserver
-import ir.logicfan.core.data.error.DataException
 
 /**
- * Handle all data layer related error's in one place
+ * Give you an interface to delegate error of an Observable for Observable handler
  *
  * @param T data type of your rx call
- * @property resolution strategy to resolve the error
+ * @property ObservableEmitState notify state of rx callbacks
  * @property onNextFunc act on behalf of rx function
  * @property onCompleteFunc act on behalf of rx function
  * @property onErrorFunc act on behalf of rx function
  */
-class DisposableDataResolvedObserver<T> (
-    private val resolution: DataResolution,
+class DisposableDefaultStateDelegate<T>(
+    private val observableEmitState: ObservableEmitState?,
     val onNextFunc: (T) -> Unit,
     val onCompleteFunc: () -> Unit = {},
     val onErrorFunc: (Throwable?) -> Unit = {}
 ) : DisposableObserver<T>() {
 
     override fun onComplete() {
-        onCompleteFunc()
+        if (!isDisposed) {
+            observableEmitState?.onSuccessState()
+            onCompleteFunc()
+        }
     }
 
     override fun onNext(t: T) {
         if (!isDisposed) {
+            observableEmitState?.onNextState()
             onNextFunc(t)
         }
     }
 
     override fun onError(e: Throwable) {
-        when(e) {
-            is DataException -> resolution.onResolutionStart(e)
-            else -> onErrorFunc(e) // this will never happen, we put it here only to satisfy when else predicate
+        if (!isDisposed) {
+            observableEmitState?.onErrorState(e)
+            onErrorFunc(e)
         }
     }
 }

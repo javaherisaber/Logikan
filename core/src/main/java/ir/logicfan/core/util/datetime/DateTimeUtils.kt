@@ -1,4 +1,4 @@
-package ir.logicfan.core.util
+package ir.logicfan.core.util.datetime
 
 import java.util.*
 
@@ -13,9 +13,8 @@ object DateTimeUtils {
      * @return formatted string with this style: 08:00 - 10:00
      */
     @JvmStatic
-    fun formatTimePeriod(startTime: String, endTime: String): String {
-        return String.format(TIME_LABEL_FORMAT, endTime, startTime)
-    }
+    fun formatTimePeriod(startTime: String, endTime: String): String =
+        String.format(TIME_LABEL_FORMAT, endTime, startTime)
 
     /**
      * @param dateStamp format is 2018-08-27
@@ -39,9 +38,8 @@ object DateTimeUtils {
     }
 
     @JvmStatic
-    fun getHourMinuteFromTime(time: String): String {
-        return time.split(":".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()[0]
-    }
+    fun getHourMinuteFromTime(time: String): String =
+        time.split(":".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()[0]
 
     @JvmStatic
     @Throws(IllegalArgumentException::class)

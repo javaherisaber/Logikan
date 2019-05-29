@@ -6,7 +6,7 @@ import android.content.Context
 import android.preference.PreferenceManager
 import android.provider.Settings
 import ir.logicfan.core.R
-import ir.logicfan.core.util.LocaleManager
+import ir.logicfan.core.util.LocaleUtils
 import javax.inject.Inject
 
 /**
@@ -15,7 +15,7 @@ import javax.inject.Inject
  *
  * @param cipherSecret a secret code to encrypt shared preferences from manipulating on root devices
  */
-open class BasePreferences @Inject
+open class BaseSharedPreferences @Inject
 constructor(private val context: Context, cipherSecret: CharArray) :
     SecureSharedPreferences(cipherSecret, context, context.getSharedPreferences(PREF_ID, Context.MODE_PRIVATE)) {
 
@@ -51,7 +51,7 @@ constructor(private val context: Context, cipherSecret: CharArray) :
     var localeSetting: String
         get() {
             return PreferenceManager.getDefaultSharedPreferences(context)
-                .getString(context.getString(R.string.key_pref_locale_setting), LocaleManager.DEFAULT_LOCALE)!!
+                .getString(context.getString(R.string.key_pref_locale_setting), LocaleUtils.DEFAULT_LOCALE)!!
         }
         set(value) {
             PreferenceManager.getDefaultSharedPreferences(context)

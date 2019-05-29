@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="item"
+            type="ir.logicfan.core.data.network.entity.DummyData" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="64dp">
+        <TextView
+            android:id="@+id/textview_itemDummy_title"
+            android:layout_gravity="center"
+            android:padding="16dp"
+            android:text="@{item.shortText}"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="This is a dummy title"/>
+    </androidx.cardview.widget.CardView>
+</layout>
