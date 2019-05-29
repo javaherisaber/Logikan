@@ -1,4 +1,4 @@
-package ir.logicfan.core.extension
+package ir.logicfan.core.util.extension
 
 import android.os.Build
 import android.text.Html

@@ -1,4 +1,4 @@
-package ir.logicfan.core.util
+package ir.logicfan.core.ui.util
 
 import android.graphics.*
 import java.util.*

@@ -1,4 +1,4 @@
-package ir.logicfan.core.util
+package ir.logicfan.core.data.util
 
 import android.content.Context
 import java.io.IOException

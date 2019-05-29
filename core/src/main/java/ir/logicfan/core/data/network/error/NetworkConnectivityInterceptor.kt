@@ -2,7 +2,7 @@ package ir.logicfan.core.data.network.error
 
 import android.content.Context
 import ir.logicfan.core.data.network.error.exception.NetworkOfflineException
-import ir.logicfan.core.util.Connectivity
+import ir.logicfan.core.data.util.Connectivity
 import okhttp3.Interceptor
 import okhttp3.Response
 import java.io.IOException
