@@ -1,4 +1,4 @@
-package ir.logicfan.core.ui.common
+package ir.logicfan.core.ui.listener
 
 import android.content.BroadcastReceiver
 import android.content.IntentFilter

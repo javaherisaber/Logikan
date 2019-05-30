@@ -1,4 +1,4 @@
-package ir.logicfan.core.ui.base
+package ir.logicfan.core.ui.basic
 
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.Lifecycle

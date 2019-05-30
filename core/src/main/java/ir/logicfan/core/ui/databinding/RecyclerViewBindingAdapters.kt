@@ -2,8 +2,8 @@ package ir.logicfan.core.ui.databinding
 
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
-import ir.logicfan.core.ui.base.BasicAdapter
-import ir.logicfan.core.ui.base.replaceDataSource
+import ir.logicfan.core.ui.basic.BasicAdapter
+import ir.logicfan.core.ui.basic.replaceDataSource
 
 object RecyclerViewBindingAdapters {
 

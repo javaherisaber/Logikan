@@ -1,4 +1,4 @@
-package ir.logicfan.core.ui.base
+package ir.logicfan.core.di.module
 
 import dagger.Module
 
