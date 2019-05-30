@@ -5,6 +5,9 @@ import androidx.lifecycle.ViewModelProvider
 import javax.inject.Inject
 import javax.inject.Provider
 
+/**
+ * To be used by ViewModelProviders to inject members to a ViewModel's constructor
+ */
 @Suppress("UNCHECKED_CAST")
 class BaseViewModelFactory @Inject
 constructor(private val viewModelsMap: Map<Class<out ViewModel>, @JvmSuppressWildcards Provider<ViewModel>>) :
