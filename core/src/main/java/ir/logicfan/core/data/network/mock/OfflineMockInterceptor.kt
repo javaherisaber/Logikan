@@ -1,5 +1,7 @@
 package ir.logicfan.core.data.network.mock
 
+import ir.logicfan.core.di.qulifier.ExcludeMock
+import ir.logicfan.core.di.qulifier.IncludeMock
 import okhttp3.*
 import java.io.IOException
 import javax.inject.Inject
@@ -15,8 +17,8 @@ constructor(
     private val baseUrl: String,
     private val mockJsonProvider: MockJsonProvider,
     private val apiEnableMock: Boolean,
-    private val apiIncludeIntoMock: Array<String>,
-    private val apiExcludeFromMock: Array<String>
+    @IncludeMock private val apiIncludeIntoMock: Array<String>,
+    @ExcludeMock private val apiExcludeFromMock: Array<String>
 ) : Interceptor {
 
     companion object {
