@@ -7,7 +7,6 @@ import android.preference.PreferenceManager
 import android.provider.Settings
 import ir.logicfan.core.R
 import ir.logicfan.core.ui.util.LocaleUtils
-import javax.inject.Inject
 
 /**
  * Basic preferences needed by every project
@@ -15,8 +14,7 @@ import javax.inject.Inject
  *
  * @param cipherSecret a secret code to encrypt shared preferences from manipulating on root devices
  */
-open class BaseSharedPreferences @Inject
-constructor(private val context: Context, cipherSecret: CharArray) :
+abstract class BaseSharedPreferences (private val context: Context, cipherSecret: CharArray) :
     SecureSharedPreferences(cipherSecret, context, context.getSharedPreferences(PREF_ID, Context.MODE_PRIVATE)) {
 
     companion object {
