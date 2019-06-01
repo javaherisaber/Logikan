@@ -1,4 +1,4 @@
-package ir.logicfan.core.ui.base
+package ir.logicfan.core.ui.basic
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

@@ -1,4 +1,4 @@
-package ir.logicfan.core.ui.base
+package ir.logicfan.core.di.module
 
 import androidx.fragment.app.Fragment
 import com.tbruyelle.rxpermissions2.RxPermissions

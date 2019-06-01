@@ -1,7 +1,7 @@
 package ir.logicfan.core.data.network.mock
 
 import android.content.Context
-import ir.logicfan.core.util.FileUtils
+import ir.logicfan.core.data.util.FileUtils
 import java.io.IOException
 import javax.inject.Inject
 

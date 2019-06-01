@@ -1,18 +1,12 @@
 package ir.logicfan.core.ui.base
 
-import android.app.Activity
 import android.os.Bundle
 import android.view.MenuItem
-import androidx.annotation.IdRes
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentTransaction
-import butterknife.ButterKnife
-import butterknife.Unbinder
 import dagger.android.support.DaggerAppCompatActivity
 import ir.logicfan.core.data.preferences.BaseSharedPreferences
 import ir.logicfan.core.ui.error.DataErrorResolver
 import ir.logicfan.core.ui.error.DataResolution
-import ir.logicfan.core.util.LocaleUtils
+import ir.logicfan.core.ui.util.LocaleUtils
 import javax.inject.Inject
 
 /**
@@ -26,7 +20,6 @@ abstract class BaseActivity : DaggerAppCompatActivity(), DataResolution {
     lateinit var baseSharedPreferences: BaseSharedPreferences
 
     var dataErrorResolver: DataErrorResolver? = null
-    private var butterKnifeUnbinder: Unbinder? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,25 +34,6 @@ abstract class BaseActivity : DaggerAppCompatActivity(), DataResolution {
         } else {
             super.onOptionsItemSelected(item)
         }
-    }
-
-    protected fun replaceFragmentWithFadeAnimation(@IdRes container: Int, fragment: Fragment, addToBackStack: Boolean) {
-        val ft = supportFragmentManager.beginTransaction()
-        ft.replace(container, fragment)
-        if (addToBackStack) {
-            ft.addToBackStack(null) // argument name is optional
-        }
-        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)  // add animation to replacement process
-        ft.commit()
-    }
-
-    protected fun setButterKnifeUnbinder(activity: Activity) {
-        butterKnifeUnbinder = ButterKnife.bind(activity)
-    }
-
-    override fun onDestroy() {
-        butterKnifeUnbinder?.unbind()
-        super.onDestroy()
     }
 
     override fun onResolutionStart(throwable: Throwable) {

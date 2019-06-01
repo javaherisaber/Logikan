@@ -1,6 +1,7 @@
-package ir.logicfan.core.data.reactive
+package ir.logicfan.core.data.util
 
 import io.reactivex.Observable
+import ir.logicfan.core.data.reactive.Transformer
 
 object ReactiveUtils {
 
