@@ -1,8 +1,8 @@
 package ir.logicfan.core.data.network.mapper
 
 import ir.logicfan.core.data.base.DataOutcome
+import ir.logicfan.core.data.base.Mapper
 import ir.logicfan.core.data.network.base.NetworkApiResponse
-import ir.logicfan.core.data.reactive.Mapper
 
 /**
  * Map a NetworkApiResponse object to DataOutcome
