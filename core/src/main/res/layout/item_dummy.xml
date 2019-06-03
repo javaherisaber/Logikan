@@ -3,21 +3,33 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
+        <import type="ir.logicfan.core.data.entity.DummyData" />
+
+        <variable
+            name="onViewGroupClickListener"
+            type="ir.logicfan.core.ui.viewholder.ViewHolderListener.OnViewGroupClickListener&lt;DummyData>" />
+
         <variable
             name="item"
-            type="ir.logicfan.core.data.network.entity.DummyRemoteData" />
+            type="DummyData" />
     </data>
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="64dp">
+        android:layout_height="64dp"
+        android:layout_margin="8dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:onClick="@{ (v) -> onViewGroupClickListener.onViewHolderClick(item, v)}">
+
         <TextView
             android:id="@+id/textview_itemDummy_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:padding="16dp"
             android:text="@{item.shortText}"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            tools:text="This is a dummy title"/>
+            tools:text="This is a dummy title" />
     </androidx.cardview.widget.CardView>
 </layout>

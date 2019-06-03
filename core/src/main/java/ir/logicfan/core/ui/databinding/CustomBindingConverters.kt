@@ -14,7 +14,7 @@ object CustomBindingConverters {
 
     @BindingConversion
     @JvmStatic
-    fun booleanToVisibility(isNotVisible: Boolean): Int {
-        return if (isNotVisible) View.GONE else View.VISIBLE
+    fun booleanToVisibility(isVisible: Boolean): Int {
+        return if (isVisible) View.VISIBLE else View.GONE
     }
 }
