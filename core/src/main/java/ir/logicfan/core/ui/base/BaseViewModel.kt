@@ -4,14 +4,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
-import ir.logicfan.core.data.reactive.ObservableEmitState
+import ir.logicfan.core.data.reactive.ErrorStateObserver
 import ir.logicfan.core.data.reactive.SingleLiveEvent
-import javax.inject.Inject
 
-abstract class BaseViewModel : ViewModel(), ObservableEmitState {
-
-    @Inject
-    lateinit var compositeDisposable: CompositeDisposable
+abstract class BaseViewModel(val compositeDisposable: CompositeDisposable) : ViewModel(), ErrorStateObserver {
 
     private val _errorState: SingleLiveEvent<Throwable?> = SingleLiveEvent()
     val errorState: LiveData<Throwable?>
@@ -24,15 +20,7 @@ abstract class BaseViewModel : ViewModel(), ObservableEmitState {
         super.onCleared()
     }
 
-    override fun onErrorState(throwable: Throwable?) {
+    override fun onErrorState(throwable: Throwable) {
         this._errorState.value = throwable
-    }
-
-    override fun onSuccessState() {
-        this._errorState.value = null
-    }
-
-    override fun onNextState() {
-        this._errorState.value = null
     }
 }
