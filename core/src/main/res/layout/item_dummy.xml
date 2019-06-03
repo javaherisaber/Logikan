@@ -5,7 +5,7 @@
     <data>
         <variable
             name="item"
-            type="ir.logicfan.core.data.network.entity.DummyRemoteData" />
+            type="ir.logicfan.core.data.entity.DummyData" />
     </data>
 
     <androidx.cardview.widget.CardView

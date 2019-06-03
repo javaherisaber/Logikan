@@ -1,8 +1,13 @@
-package ir.logicfan.core.data.network.entity
+package ir.logicfan.core.data.entity
 
 import com.google.gson.annotations.SerializedName
 
-data class DummyRemoteData (
+/**
+ * Can be used for all data sources
+ * if we want to use different data for each data source
+ * we might consider using mappers (and maybe with a extra domain layer)
+ */
+data class DummyData (
     @field:SerializedName("name")
     val name: String = "",
     @field:SerializedName("title")
