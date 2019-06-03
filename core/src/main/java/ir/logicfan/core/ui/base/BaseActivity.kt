@@ -2,8 +2,11 @@ package ir.logicfan.core.ui.base
 
 import android.os.Bundle
 import android.view.MenuItem
+import android.widget.Toast
 import dagger.android.support.DaggerAppCompatActivity
+import ir.logicfan.core.data.error.DataException
 import ir.logicfan.core.data.preferences.BaseSharedPreferences
+import ir.logicfan.core.ui.listener.DataTerminalErrorListener
 import ir.logicfan.core.util.LocaleUtils
 import javax.inject.Inject
 
@@ -12,7 +15,7 @@ import javax.inject.Inject
  * All of our activities extends this class to inherit top level functionality
  */
 
-abstract class BaseActivity : DaggerAppCompatActivity() {
+abstract class BaseActivity : DaggerAppCompatActivity(), DataTerminalErrorListener {
 
     @Inject
     lateinit var baseSharedPreferences: BaseSharedPreferences
@@ -28,6 +31,15 @@ abstract class BaseActivity : DaggerAppCompatActivity() {
             true
         } else {
             super.onOptionsItemSelected(item)
+        }
+    }
+
+    override fun onDataTerminalError(throwable: Throwable) {
+        when (throwable) {
+            is DataException.Offline -> {
+                // replace a new fragment here
+                Toast.makeText(this, "Yo bro, you are offline", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 }

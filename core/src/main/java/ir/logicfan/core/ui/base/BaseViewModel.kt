@@ -9,8 +9,8 @@ import ir.logicfan.core.data.reactive.SingleLiveEvent
 
 abstract class BaseViewModel(val compositeDisposable: CompositeDisposable) : ViewModel(), ErrorStateObserver {
 
-    private val _errorState: SingleLiveEvent<Throwable?> = SingleLiveEvent()
-    val errorState: LiveData<Throwable?>
+    private val _errorState: SingleLiveEvent<Throwable> = SingleLiveEvent()
+    val errorState: LiveData<Throwable>
         get() = _errorState
 
     protected fun disposableContext(operation: () -> Disposable) = compositeDisposable.add(operation())
