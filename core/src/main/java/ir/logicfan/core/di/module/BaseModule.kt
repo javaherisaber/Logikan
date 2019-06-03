@@ -5,7 +5,9 @@ import android.content.Context
 import androidx.lifecycle.ViewModelProvider
 import dagger.Binds
 import dagger.Module
+import dagger.Provides
 import dagger.Reusable
+import io.reactivex.disposables.CompositeDisposable
 import ir.logicfan.core.ui.base.BaseViewModelFactory
 
 @Module
@@ -16,6 +18,13 @@ abstract class BaseModule {
     abstract fun context(application: Application): Context
 
     @Binds
-    @Reusable
     abstract fun baseViewModelFactory(viewModelFactory: BaseViewModelFactory): ViewModelProvider.Factory
+
+    @Module
+    companion object {
+        @Provides
+        @Reusable
+        @JvmStatic
+        fun compositeDisposable(): CompositeDisposable = CompositeDisposable()
+    }
 }

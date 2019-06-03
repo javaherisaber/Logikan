@@ -1,20 +1,19 @@
-package ir.logicfan.core.data.network.error
+package ir.logicfan.core.data.network.interceptor
 
 import android.content.Context
-import ir.logicfan.core.data.network.error.exception.NetworkOfflineException
+import ir.logicfan.core.data.error.DataException
 import ir.logicfan.core.data.util.Connectivity
 import okhttp3.Interceptor
 import okhttp3.Response
-import java.io.IOException
 import javax.inject.Inject
 
 class NetworkConnectivityInterceptor @Inject
 constructor(private val context: Context) : Interceptor {
 
-    @Throws(IOException::class, NetworkOfflineException::class)
+    @Throws(DataException.Offline::class)
     override fun intercept(chain: Interceptor.Chain): Response {
         if (!Connectivity.isUserOnline(context)) {
-            throw NetworkOfflineException()
+            throw DataException.Offline()
         }
         return chain.proceed(chain.request())
     }
