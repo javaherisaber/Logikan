@@ -44,6 +44,7 @@ android {
 
 dependencies {
     // androidx
+    api "androidx.constraintlayout:constraintlayout:$versions.constraintLayout"
     api "androidx.recyclerview:recyclerview:$versions.recyclerView"
     api "androidx.cardview:cardview:$versions.cardView"
 
