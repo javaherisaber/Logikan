@@ -24,7 +24,7 @@
         android:onClick="@{ (v) -> onViewGroupClickListener.onViewHolderClick(item, v)}">
 
         <TextView
-            android:id="@+id/textview_itemDummy_title"
+            android:id="@+id/textView_itemDummy_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
