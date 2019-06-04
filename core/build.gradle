@@ -66,6 +66,7 @@ dependencies {
 
     // google
     api "com.google.android.gms:play-services-analytics:$versions.googleAnalytics"
+    api "com.google.android.material:material:$versions.material"
 
     // butter-knife
     api "com.jakewharton:butterknife:$versions.butterknife"
