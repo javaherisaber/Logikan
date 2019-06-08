@@ -19,6 +19,7 @@ class DisposableDataOutcomeObserver<T>(
     errorStateObserver: ErrorStateObserver? = null,
     private val onNextSingleDataFunc: (DataOutcome.SingleDataState<T>) -> Unit = {},
     private val onNextListDataFunc: (DataOutcome.ListDataState<T>) -> Unit = {},
+    private val onNextPagedListDataFunc: (DataOutcome.PagedListDataState<T>) -> Unit = {},
     private val onNextImperativeState: (DataOutcome.ImperativeState) -> Unit = {},
     private val onNonTerminalErrorFunc: (List<DataException.NonTerminal>) -> Unit = {},
     onNextFunc: (DataOutcome<T>) -> Unit = {},
@@ -35,6 +36,7 @@ class DisposableDataOutcomeObserver<T>(
                 }
                 is DataOutcome.SingleDataState -> onNextSingleDataFunc(t)
                 is DataOutcome.ListDataState -> onNextListDataFunc(t)
+                is DataOutcome.PagedListDataState -> onNextPagedListDataFunc(t)
                 is DataOutcome.ImperativeState -> onNextImperativeState
             }
             onNextFunc(t)

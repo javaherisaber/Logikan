@@ -22,8 +22,11 @@ class NetworkApiResponseOutcomeMapper<T> : Mapper<NetworkApiResponse<T>, DataOut
                 // Single data state
                 DataOutcome.SingleDataState(from.data)
             from.data != null && from.pagination != null ->
+                // PagedList data state
+                DataOutcome.PagedListDataState(from.data, from.pagination)
+            from.data != null && from.pagination == null ->
                 // List data state
-                DataOutcome.ListDataState(from.data, from.pagination)
+                DataOutcome.ListDataState(from.data)
             else ->
                 // Imperative state (to satisfy when expression exhaustive resolution)
                 DataOutcome.ImperativeState(from.success)
