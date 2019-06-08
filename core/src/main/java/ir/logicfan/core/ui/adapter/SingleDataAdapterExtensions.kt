@@ -1,6 +1,6 @@
 package ir.logicfan.core.ui.adapter
 
-fun <T> BasicAdapter<T>.replaceDataSource(newDataSource: List<T>?) {
+fun <T> SingleDataAdapter<T>.replaceDataSource(newDataSource: List<T>?) {
     this.dataSource.value = newDataSource
     notifyDataSetChanged()
 }

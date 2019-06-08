@@ -4,8 +4,8 @@ import androidx.annotation.LayoutRes
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.MutableLiveData
 import ir.logicfan.core.BR
-import ir.logicfan.core.ui.viewholder.BasicViewHolder
 import ir.logicfan.core.ui.viewholder.ClickableViewHolder
+import ir.logicfan.core.ui.viewholder.DataViewHolder
 import ir.logicfan.core.ui.viewholder.ViewHolderListener
 
 /**
@@ -20,9 +20,9 @@ class ClickableAdapter<T>(
     private val bindingOnViewGroupClickListenerVariableId: Int = BR.onViewGroupClickListener,
     bindingVariableId: Int = BR.item,
     dataSource: MutableLiveData<List<T>> = MutableLiveData()
-) : BasicAdapter<T>(itemLayout, bindingVariableId, dataSource) {
+) : SingleDataAdapter<T>(itemLayout, bindingVariableId, dataSource) {
 
-    override fun provideViewHolder(binding: ViewDataBinding): BasicViewHolder<T> =
+    override fun provideViewHolder(binding: ViewDataBinding): DataViewHolder<T> =
         ClickableViewHolder(
             onViewGroupClickListener,
             binding,

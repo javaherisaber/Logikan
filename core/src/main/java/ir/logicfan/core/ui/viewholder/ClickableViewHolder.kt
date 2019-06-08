@@ -14,7 +14,7 @@ class ClickableViewHolder<T>(
     binding: ViewDataBinding,
     private val bindingOnViewGroupClickListenerVariableId: Int = BR.onViewGroupClickListener,
     bindingDataVariableId: Int = BR.item
-) : BasicViewHolder<T>(binding, bindingDataVariableId) {
+) : DataViewHolder<T>(binding, bindingDataVariableId) {
 
     override fun bind(item: T?) {
         binding.setVariable(bindingOnViewGroupClickListenerVariableId, onViewGroupClickListener)
