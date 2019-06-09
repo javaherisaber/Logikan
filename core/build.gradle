@@ -4,6 +4,7 @@ apply plugin: 'kotlin-kapt'
 apply plugin: 'org.jetbrains.dokka-android'
 
 android {
+    resourcePrefix "core"
     compileSdkVersion config.compileSdk
     defaultConfig {
         minSdkVersion config.minSdk
@@ -20,6 +21,7 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            consumerProguardFiles 'proguard-rules.pro' // Rules appended to the integrating app
         }
     }
     compileOptions {
