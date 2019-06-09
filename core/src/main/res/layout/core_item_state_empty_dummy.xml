@@ -5,26 +5,26 @@
     android:layout_height="match_parent">
 
     <ImageView
-        android:id="@+id/imageView_itemStateEmpty_icon"
+        android:id="@+id/imageView_core_itemStateEmpty_icon"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:src="@drawable/ic_magnifier"
-        app:layout_constraintBottom_toTopOf="@id/textView_itemStateEmpty_message"
+        android:src="@drawable/core_ic_all_magnifier"
+        app:layout_constraintBottom_toTopOf="@id/textView_core_itemStateEmpty_message"
         app:layout_constraintVertical_chainStyle="packed"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView_itemStateEmpty_message"
+        android:id="@+id/textView_core_itemStateEmpty_message"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Empty list"
         android:textSize="22sp"
         android:layout_marginTop="32dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/imageView_itemStateEmpty_icon"
-        app:layout_constraintStart_toStartOf="@+id/imageView_itemStateEmpty_icon"
-        app:layout_constraintTop_toBottomOf="@+id/imageView_itemStateEmpty_icon" />
+        app:layout_constraintEnd_toEndOf="@+id/imageView_core_itemStateEmpty_icon"
+        app:layout_constraintStart_toStartOf="@+id/imageView_core_itemStateEmpty_icon"
+        app:layout_constraintTop_toBottomOf="@+id/imageView_core_itemStateEmpty_icon" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

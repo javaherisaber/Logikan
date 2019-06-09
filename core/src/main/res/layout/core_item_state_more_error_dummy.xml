@@ -15,12 +15,12 @@
         android:orientation="horizontal">
 
         <ImageView
-            android:id="@+id/imageView_itemStateMoreError_retry"
+            android:id="@+id/imageView_core_itemStateMoreError_retry"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:clickable="true"
             android:focusable="true"
             android:onClick="@{() -> onSimpleButtonClickListener.onSimpleButtonClick()}"
-            android:src="@drawable/ic_retry" />
+            android:src="@drawable/core_ic_all_retry" />
     </LinearLayout>
 </layout>

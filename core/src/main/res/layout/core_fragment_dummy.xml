@@ -14,12 +14,12 @@
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/textView_fragmentDummy"
+            android:id="@+id/textView_core_fragmentDummy"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="@{viewModel.title}"
             android:gravity="center"
-            android:textColor="@color/colorRedDark"
+            android:textColor="@color/core_colorRedDark"
             tools:text="Dummy fragment to showcase your idea" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
