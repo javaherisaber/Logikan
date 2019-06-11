@@ -1,7 +1,7 @@
 package ir.logicfan.core.data.entity
 
 import com.google.gson.annotations.SerializedName
-import ir.logicfan.core.ui.diffutil.Equatable
+import ir.logicfan.core.ui.recyclerview.diffutil.Equatable
 
 /**
  * Can be used for all data sources

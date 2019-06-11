@@ -7,7 +7,7 @@ import dagger.android.support.DaggerAppCompatActivity
 import ir.logicfan.core.data.error.DataException
 import ir.logicfan.core.data.preferences.BaseSharedPreferences
 import ir.logicfan.core.ui.listener.DataTerminalErrorListener
-import ir.logicfan.core.util.LocaleUtils
+import ir.logicfan.core.ui.util.LocaleUtils
 import javax.inject.Inject
 
 /**

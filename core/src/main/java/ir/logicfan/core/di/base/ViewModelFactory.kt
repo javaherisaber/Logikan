@@ -1,4 +1,4 @@
-package ir.logicfan.core.ui.base
+package ir.logicfan.core.di.base
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -10,7 +10,7 @@ import javax.inject.Provider
  * To be used by ViewModelProviders to inject members to a ViewModel's constructor
  */
 @Reusable
-class BaseViewModelFactory @Inject
+class ViewModelFactory @Inject
 constructor(private val viewModelsMap: Map<Class<out ViewModel>, @JvmSuppressWildcards Provider<ViewModel>>) :
     ViewModelProvider.Factory {
 

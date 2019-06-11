@@ -6,7 +6,6 @@ package ir.logicfan.core.data.error
  * all data sources can use this tree
  */
 sealed class DataException : Exception() {
-    class Offline : DataException()
     /**
      * Terminal exceptions are those which terminate the operation
      * in Rx world you may consider this as an error being emitted to onError callback
@@ -15,6 +14,7 @@ sealed class DataException : Exception() {
      * @property msg message of error received from data source
      */
     sealed class Terminal(val code: Int, val msg: String) : DataException() {
+        class Offline : DataException()
         class InternalServer(code: Int, msg: String) : Terminal(code, msg)
         class NotFound(code: Int, msg: String) : Terminal(code, msg)
         class UnAuthorized(code: Int, msg: String) : Terminal(code, msg)

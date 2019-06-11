@@ -1,4 +1,4 @@
-package ir.logicfan.core.util.datetime
+package ir.logicfan.core.ui.util
 
 import android.os.Handler
 

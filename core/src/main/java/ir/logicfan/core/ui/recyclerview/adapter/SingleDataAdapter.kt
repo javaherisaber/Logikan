@@ -1,4 +1,4 @@
-package ir.logicfan.core.ui.adapter
+package ir.logicfan.core.ui.recyclerview.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -8,7 +8,7 @@ import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import ir.logicfan.core.BR
-import ir.logicfan.core.ui.viewholder.DataViewHolder
+import ir.logicfan.core.ui.recyclerview.viewholder.DataViewHolder
 
 /**
  * Define an adapter which can display an adapter with single data source

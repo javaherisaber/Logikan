@@ -5,7 +5,7 @@
 
         <variable
             name="onSimpleButtonClickListener"
-            type="ir.logicfan.core.ui.viewholder.ViewHolderListener.OnSimpleButtonClickListener" />
+            type="ir.logicfan.core.ui.recyclerview.viewholder.ViewHolderListener.OnSimpleButtonClickListener" />
     </data>
 
     <LinearLayout

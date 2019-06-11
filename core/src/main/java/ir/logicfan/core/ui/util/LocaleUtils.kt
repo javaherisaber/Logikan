@@ -1,4 +1,4 @@
-package ir.logicfan.core.util
+package ir.logicfan.core.ui.util
 
 import android.content.Context
 import android.content.res.Configuration

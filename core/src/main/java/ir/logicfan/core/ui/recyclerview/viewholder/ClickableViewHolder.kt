@@ -1,4 +1,4 @@
-package ir.logicfan.core.ui.viewholder
+package ir.logicfan.core.ui.recyclerview.viewholder
 
 import androidx.databinding.ViewDataBinding
 import ir.logicfan.core.BR

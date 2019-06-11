@@ -1,12 +1,12 @@
-package ir.logicfan.core.ui.adapter
+package ir.logicfan.core.ui.recyclerview.adapter
 
 import androidx.annotation.LayoutRes
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.DiffUtil
 import ir.logicfan.core.BR
-import ir.logicfan.core.ui.viewholder.ClickableViewHolder
-import ir.logicfan.core.ui.viewholder.DataViewHolder
-import ir.logicfan.core.ui.viewholder.ViewHolderListener
+import ir.logicfan.core.ui.recyclerview.viewholder.ClickableViewHolder
+import ir.logicfan.core.ui.recyclerview.viewholder.DataViewHolder
+import ir.logicfan.core.ui.recyclerview.viewholder.ViewHolderListener
 
 /**
  * Define an adapter which can handle click on root ViewGroup

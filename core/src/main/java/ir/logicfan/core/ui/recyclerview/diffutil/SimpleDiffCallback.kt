@@ -1,4 +1,4 @@
-package ir.logicfan.core.ui.diffutil
+package ir.logicfan.core.ui.recyclerview.diffutil
 
 import androidx.recyclerview.widget.DiffUtil
 import kotlin.reflect.KProperty1

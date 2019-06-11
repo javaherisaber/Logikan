@@ -5,10 +5,11 @@
     <data>
 
         <import type="ir.logicfan.core.data.entity.DummyData" />
+        <import type="ir.logicfan.core.ui.recyclerview.viewholder.ViewHolderListener.OnViewGroupClickListener" />
 
         <variable
             name="onViewGroupClickListener"
-            type="ir.logicfan.core.ui.viewholder.ViewHolderListener.OnViewGroupClickListener&lt;DummyData>" />
+            type="OnViewGroupClickListener&lt;DummyData>" />
 
         <variable
             name="item"

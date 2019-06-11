@@ -8,7 +8,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.Reusable
 import io.reactivex.disposables.CompositeDisposable
-import ir.logicfan.core.ui.base.BaseViewModelFactory
+import ir.logicfan.core.di.base.ViewModelFactory
 
 @Module
 abstract class BaseModule {
@@ -18,7 +18,7 @@ abstract class BaseModule {
     abstract fun context(application: Application): Context
 
     @Binds
-    abstract fun baseViewModelFactory(viewModelFactory: BaseViewModelFactory): ViewModelProvider.Factory
+    abstract fun viewModelFactory(viewModelFactory: ViewModelFactory): ViewModelProvider.Factory
 
     @Module
     companion object {

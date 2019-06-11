@@ -6,7 +6,7 @@ import android.content.Context
 import android.preference.PreferenceManager
 import android.provider.Settings
 import ir.logicfan.core.R
-import ir.logicfan.core.util.LocaleUtils
+import ir.logicfan.core.ui.util.LocaleUtils
 
 /**
  * Basic preferences needed by every project

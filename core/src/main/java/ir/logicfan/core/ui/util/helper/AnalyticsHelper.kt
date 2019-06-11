@@ -1,4 +1,4 @@
-package ir.logicfan.core.util
+package ir.logicfan.core.ui.util.helper
 
 import android.content.Context
 import androidx.annotation.XmlRes
