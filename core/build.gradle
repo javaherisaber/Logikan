@@ -9,8 +9,8 @@ android {
     defaultConfig {
         minSdkVersion config.minSdk
         targetSdkVersion config.targetSdk
-        versionCode 6
-        versionName "1.2.0-alpha"
+        versionCode 7
+        versionName "1.2.0"
         vectorDrawables.useSupportLibrary = true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
