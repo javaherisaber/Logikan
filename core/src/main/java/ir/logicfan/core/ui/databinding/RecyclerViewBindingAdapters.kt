@@ -1,20 +1,19 @@
 package ir.logicfan.core.ui.databinding
 
 import androidx.databinding.BindingAdapter
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import ir.logicfan.core.ui.adapter.SingleDataAdapter
-import ir.logicfan.core.ui.adapter.replaceDataSource
 
 object RecyclerViewBindingAdapters {
 
-    @BindingAdapter("replaceAdapterDataSource")
+    @BindingAdapter("submitList")
     @JvmStatic
-    fun replaceAdapterDataSource(recyclerView: RecyclerView, dataSource: List<Nothing>?) {
+    fun submitList(recyclerView: RecyclerView, newList: List<Nothing>?) {
         val adapter = recyclerView.adapter ?: throw RuntimeException("Adapter not set when binding")
-        if (adapter is SingleDataAdapter<*>) {
-            adapter.replaceDataSource(dataSource)
+        if (adapter is ListAdapter<*, *>) {
+            adapter.submitList(newList)
         } else {
-            throw RuntimeException("Adapter is not subtype of BasicAdapter")
+            throw RuntimeException("Adapter is not subtype of ListAdapter")
         }
     }
 }

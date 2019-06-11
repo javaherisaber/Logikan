@@ -2,7 +2,7 @@ package ir.logicfan.core.ui.adapter
 
 import androidx.annotation.LayoutRes
 import androidx.databinding.ViewDataBinding
-import androidx.lifecycle.MutableLiveData
+import androidx.recyclerview.widget.DiffUtil
 import ir.logicfan.core.BR
 import ir.logicfan.core.ui.viewholder.ClickableViewHolder
 import ir.logicfan.core.ui.viewholder.DataViewHolder
@@ -19,8 +19,8 @@ class ClickableAdapter<T>(
     @LayoutRes itemLayout: Int,
     private val bindingOnViewGroupClickListenerVariableId: Int = BR.onViewGroupClickListener,
     bindingVariableId: Int = BR.item,
-    dataSource: MutableLiveData<List<T>> = MutableLiveData()
-) : SingleDataAdapter<T>(itemLayout, bindingVariableId, dataSource) {
+    diffCallback: DiffUtil.ItemCallback<T>
+) : SingleDataAdapter<T>(itemLayout, bindingVariableId, diffCallback) {
 
     override fun provideViewHolder(binding: ViewDataBinding): DataViewHolder<T> =
         ClickableViewHolder(

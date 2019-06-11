@@ -1,6 +1,7 @@
 package ir.logicfan.core.data.entity
 
 import com.google.gson.annotations.SerializedName
+import ir.logicfan.core.ui.diffutil.Equatable
 
 /**
  * Can be used for all data sources
@@ -28,4 +29,4 @@ data class DummyData (
     val imageRectangle: String = "",
     @field:SerializedName("imageSquare")
     val imageSquare: String = ""
-)
+): Equatable
