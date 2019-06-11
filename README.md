@@ -3,6 +3,9 @@
 Core, base and utility functionalities required by an android project
 
 ## Changelog
+### 1.2.0
+- Stable release with clean architecture
+
 ### 1.2.0-alpha
 - error resolution stub for presentation layer (need to implement an interface inside BaseActivity or any other suitable place)
 

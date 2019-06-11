@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="fab_margin">16dp</dimen>
-    <dimen name="stroke_cardview">2dp</dimen>
-    <dimen name="corner_radius_cardview">15dp</dimen>
-    <dimen name="corner_radius_button">10dp</dimen>
-    <dimen name="elevation_default">4dp</dimen>
-    <dimen name="elevation_mild">2dp</dimen>
+    <dimen name="core_fab_margin">16dp</dimen>
+    <dimen name="core_stroke_cardView">2dp</dimen>
+    <dimen name="core_corner_radius_cardView">15dp</dimen>
+    <dimen name="core_corner_radius_button">10dp</dimen>
+    <dimen name="core_elevation_default">4dp</dimen>
+    <dimen name="core_elevation_mild">2dp</dimen>
 </resources>
