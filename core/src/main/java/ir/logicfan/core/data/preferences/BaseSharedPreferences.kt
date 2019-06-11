@@ -6,7 +6,7 @@ import android.content.Context
 import android.preference.PreferenceManager
 import android.provider.Settings
 import ir.logicfan.core.R
-import ir.logicfan.core.util.LocaleUtils
+import ir.logicfan.core.ui.util.LocaleUtils
 
 /**
  * Basic preferences needed by every project
@@ -49,12 +49,12 @@ abstract class BaseSharedPreferences (private val context: Context, cipherSecret
     var localeSetting: String
         get() {
             return PreferenceManager.getDefaultSharedPreferences(context)
-                .getString(context.getString(R.string.key_pref_locale_setting), LocaleUtils.DEFAULT_LOCALE)!!
+                .getString(context.getString(R.string.core_key_pref_locale_setting), LocaleUtils.DEFAULT_LOCALE)!!
         }
         set(value) {
             PreferenceManager.getDefaultSharedPreferences(context)
                 .edit()
-                .putString(context.getString(R.string.key_pref_locale_setting), value)
+                .putString(context.getString(R.string.core_key_pref_locale_setting), value)
                 .apply()
         }
 }

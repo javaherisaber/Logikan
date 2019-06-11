@@ -4,6 +4,7 @@ apply plugin: 'kotlin-kapt'
 apply plugin: 'org.jetbrains.dokka-android'
 
 android {
+    resourcePrefix "core"
     compileSdkVersion config.compileSdk
     defaultConfig {
         minSdkVersion config.minSdk
@@ -20,6 +21,7 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            consumerProguardFiles 'proguard-rules.pro' // Rules appended to the integrating app
         }
     }
     compileOptions {
@@ -66,10 +68,7 @@ dependencies {
 
     // google
     api "com.google.android.gms:play-services-analytics:$versions.googleAnalytics"
-
-    // butter-knife
-    api "com.jakewharton:butterknife:$versions.butterknife"
-    kapt "com.jakewharton:butterknife-compiler:$versions.butterknife"
+    api "com.google.android.material:material:$versions.material"
 
     // lifecycle, ViewModel and LiveData
     api "androidx.lifecycle:lifecycle-extensions:$versions.archLifecycle"

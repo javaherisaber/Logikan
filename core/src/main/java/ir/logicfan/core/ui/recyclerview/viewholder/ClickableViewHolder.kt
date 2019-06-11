@@ -1,4 +1,4 @@
-package ir.logicfan.core.ui.viewholder
+package ir.logicfan.core.ui.recyclerview.viewholder
 
 import androidx.databinding.ViewDataBinding
 import ir.logicfan.core.BR
@@ -14,7 +14,7 @@ class ClickableViewHolder<T>(
     binding: ViewDataBinding,
     private val bindingOnViewGroupClickListenerVariableId: Int = BR.onViewGroupClickListener,
     bindingDataVariableId: Int = BR.item
-) : BasicViewHolder<T>(binding, bindingDataVariableId) {
+) : DataViewHolder<T>(binding, bindingDataVariableId) {
 
     override fun bind(item: T?) {
         binding.setVariable(bindingOnViewGroupClickListenerVariableId, onViewGroupClickListener)

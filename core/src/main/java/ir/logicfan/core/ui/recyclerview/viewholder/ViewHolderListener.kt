@@ -1,4 +1,4 @@
-package ir.logicfan.core.ui.viewholder
+package ir.logicfan.core.ui.recyclerview.viewholder
 
 import android.view.View
 
@@ -14,5 +14,13 @@ interface ViewHolderListener {
      */
     interface OnViewGroupClickListener <T> {
         fun onViewHolderClick(data: T, view: View)
+    }
+
+    /**
+     * When we have a simple button inside ViewHolder without data
+     * eg. retry button
+     */
+    interface OnSimpleButtonClickListener {
+        fun onSimpleButtonClick()
     }
 }

@@ -1,34 +1,34 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppThemeBase" parent="AppThemeParent" />
+    <style name="CoreAppTheme" parent="CoreAppThemeParent" />
 
-    <style name="AppThemeParent" parent="Theme.MaterialComponents.Light.NoActionBar">
+    <style name="CoreAppThemeParent" parent="Theme.MaterialComponents.Light.NoActionBar">
 
         <!-- major attributes -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorSecondary</item>
+        <item name="colorPrimary">@color/core_colorPrimary</item>
+        <item name="colorPrimaryDark">@color/core_colorPrimaryDark</item>
+        <item name="colorAccent">@color/core_colorSecondary</item>
         <item name="android:fontFamily">@font/yekan</item>
-        <item name="colorError">@color/colorError</item>
-        <item name="colorSecondary">@color/colorSecondary</item>
+        <item name="colorError">@color/core_colorError</item>
+        <item name="colorSecondary">@color/core_colorSecondary</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
 
         <!-- text attributes -->
-        <item name="textAppearanceHeadline1">@style/TextAppearance.App.Headline1</item>
-        <item name="textAppearanceHeadline2">@style/TextAppearance.App.Headline2</item>
-        <item name="textAppearanceHeadline3">@style/TextAppearance.App.Headline3</item>
-        <item name="textAppearanceHeadline4">@style/TextAppearance.App.Headline4</item>
-        <item name="textAppearanceHeadline5">@style/TextAppearance.App.Headline5</item>
-        <item name="textAppearanceHeadline6">@style/TextAppearance.App.Headline6</item>
-        <item name="textAppearanceSubtitle1">@style/TextAppearance.App.Subtitle1</item>
-        <item name="textAppearanceSubtitle2">@style/TextAppearance.App.Subtitle2</item>
-        <item name="textAppearanceBody1">@style/TextAppearance.App.Body1</item>
-        <item name="textAppearanceBody2">@style/TextAppearance.App.Body2</item>
-        <item name="textAppearanceCaption">@style/TextAppearance.App.Caption</item>
-        <item name="textAppearanceButton">@style/TextAppearance.App.Button</item>
-        <item name="textAppearanceOverline">@style/TextAppearance.App.Overline</item>
+        <item name="textAppearanceHeadline1">@style/Core.TextAppearance.Headline1</item>
+        <item name="textAppearanceHeadline2">@style/Core.TextAppearance.Headline2</item>
+        <item name="textAppearanceHeadline3">@style/Core.TextAppearance.Headline3</item>
+        <item name="textAppearanceHeadline4">@style/Core.TextAppearance.Headline4</item>
+        <item name="textAppearanceHeadline5">@style/Core.TextAppearance.Headline5</item>
+        <item name="textAppearanceHeadline6">@style/Core.TextAppearance.Headline6</item>
+        <item name="textAppearanceSubtitle1">@style/Core.TextAppearance.Subtitle1</item>
+        <item name="textAppearanceSubtitle2">@style/Core.TextAppearance.Subtitle2</item>
+        <item name="textAppearanceBody1">@style/Core.TextAppearance.Body1</item>
+        <item name="textAppearanceBody2">@style/Core.TextAppearance.Body2</item>
+        <item name="textAppearanceCaption">@style/Core.TextAppearance.Caption</item>
+        <item name="textAppearanceButton">@style/Core.TextAppearance.Button</item>
+        <item name="textAppearanceOverline">@style/Core.TextAppearance.Overline</item>
     </style>
     <!-- End of Base application theme -->
 

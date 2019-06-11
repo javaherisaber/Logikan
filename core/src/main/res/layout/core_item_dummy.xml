@@ -5,10 +5,11 @@
     <data>
 
         <import type="ir.logicfan.core.data.entity.DummyData" />
+        <import type="ir.logicfan.core.ui.recyclerview.viewholder.ViewHolderListener.OnViewGroupClickListener" />
 
         <variable
             name="onViewGroupClickListener"
-            type="ir.logicfan.core.ui.viewholder.ViewHolderListener.OnViewGroupClickListener&lt;DummyData>" />
+            type="OnViewGroupClickListener&lt;DummyData>" />
 
         <variable
             name="item"
@@ -24,7 +25,7 @@
         android:onClick="@{ (v) -> onViewGroupClickListener.onViewHolderClick(item, v)}">
 
         <TextView
-            android:id="@+id/textview_itemDummy_title"
+            android:id="@+id/textView_core_itemDummy_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"

@@ -7,7 +7,7 @@ import dagger.android.support.DaggerAppCompatActivity
 import ir.logicfan.core.data.error.DataException
 import ir.logicfan.core.data.preferences.BaseSharedPreferences
 import ir.logicfan.core.ui.listener.DataTerminalErrorListener
-import ir.logicfan.core.util.LocaleUtils
+import ir.logicfan.core.ui.util.LocaleUtils
 import javax.inject.Inject
 
 /**
@@ -36,9 +36,10 @@ abstract class BaseActivity : DaggerAppCompatActivity(), DataTerminalErrorListen
 
     override fun onDataTerminalError(throwable: Throwable) {
         when (throwable) {
-            is DataException.Offline -> {
-                // replace a new fragment here
-                Toast.makeText(this, "Yo bro, you are offline", Toast.LENGTH_SHORT).show()
+            is DataException.Terminal.UnAuthorized -> {
+                // logout user info in ActivityBaseViewModel (new class maybe extending from BaseViewModel)
+                // and add login fragment here (also add to back stack)
+                Toast.makeText(this, "please login again", Toast.LENGTH_SHORT).show()
             }
         }
     }
