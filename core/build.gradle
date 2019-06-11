@@ -70,10 +70,6 @@ dependencies {
     api "com.google.android.gms:play-services-analytics:$versions.googleAnalytics"
     api "com.google.android.material:material:$versions.material"
 
-    // butter-knife
-    api "com.jakewharton:butterknife:$versions.butterknife"
-    kapt "com.jakewharton:butterknife-compiler:$versions.butterknife"
-
     // lifecycle, ViewModel and LiveData
     api "androidx.lifecycle:lifecycle-extensions:$versions.archLifecycle"
     api "androidx.lifecycle:lifecycle-reactivestreams-ktx:$versions.archLifecycle" // reactive stream support for live data
