@@ -1,7 +1,6 @@
 package ir.logicfan.core.ui.base
 
 import android.os.Bundle
-import android.view.MenuItem
 import android.widget.Toast
 import dagger.android.support.DaggerAppCompatActivity
 import ir.logicfan.core.data.error.DataException
@@ -23,15 +22,6 @@ abstract class BaseActivity : DaggerAppCompatActivity(), DataTerminalErrorListen
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         LocaleUtils.setLocale(this, baseSharedPreferences.localeSetting)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return if (item.itemId == android.R.id.home) {
-            finish()
-            true
-        } else {
-            super.onOptionsItemSelected(item)
-        }
     }
 
     override fun onDataTerminalError(throwable: Throwable) {
