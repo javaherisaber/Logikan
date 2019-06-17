@@ -25,7 +25,7 @@ class DisposableDataOutcomeObserver<T>(
     onNextFunc: (DataOutcome<T>) -> Unit = {},
     onCompleteFunc: () -> Unit = {},
     onErrorFunc: (Throwable) -> Unit = {}
-) : DisposableDelegateErrorObserver<DataOutcome<T>>(onNextFunc, errorStateObserver, onCompleteFunc, onErrorFunc) {
+) : DisposableDelegateErrorObserver<DataOutcome<T>>(errorStateObserver, onNextFunc, onCompleteFunc, onErrorFunc) {
 
     override fun onNext(t: DataOutcome<T>) {
         if (!isDisposed) {
