@@ -13,8 +13,11 @@ object LocaleUtils {
     fun setLocale(context: Context, lang: String): Context {
         val locale = Locale(lang)
         Locale.setDefault(locale)
-        val config = Configuration(context.resources.configuration)
+        val res = context.resources
+        val config = Configuration(res.configuration)
         config.setLocale(locale)
+        @Suppress("DEPRECATION")
+        res.updateConfiguration(config, res.displayMetrics)
         return context.createConfigurationContext(config)
     }
 
