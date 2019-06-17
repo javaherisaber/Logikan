@@ -5,11 +5,12 @@ import androidx.lifecycle.ViewModel
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import ir.logicfan.core.data.reactive.ErrorStateObserver
-import ir.logicfan.core.data.reactive.SingleLiveEvent
+import ir.logicfan.core.ui.reactive.SingleLiveEvent
 
 abstract class BaseViewModel(val compositeDisposable: CompositeDisposable) : ViewModel(), ErrorStateObserver {
 
-    private val _errorState: SingleLiveEvent<Throwable> = SingleLiveEvent()
+    private val _errorState: SingleLiveEvent<Throwable> =
+        SingleLiveEvent()
     val errorState: LiveData<Throwable>
         get() = _errorState
 
