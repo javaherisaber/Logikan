@@ -13,7 +13,10 @@ object AlertDialogUtils {
         context: Context,
         title: String,
         message: String,
-        positiveButtonText: String
+        positiveButtonText: String,
+        negativeButtonText: String,
+        neutralButtonText: String,
+        onNeutralButtonClick: () -> Unit
     ) {
         AlertDialog.Builder(context)
             .setTitle(title)
@@ -22,6 +25,11 @@ object AlertDialogUtils {
                 val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
                 intent.data = Uri.parse("package:" + context.packageName)
                 context.startActivity(intent)
+            }.setNegativeButton(negativeButtonText) { dialog, _ ->
+                dialog.dismiss()
+            }.setNeutralButton(neutralButtonText) { dialog, _ ->
+                dialog.dismiss()
+                onNeutralButtonClick()
             }.show()
     }
 }
