@@ -1,9 +1,16 @@
 package ir.logicfan.core.ui.util
 
 import android.graphics.*
+import java.io.InputStream
 import java.util.*
 
 object GraphicUtils {
+
+    @JvmStatic
+    fun addShadowToCircularBitmap(inputStream: InputStream): Bitmap {
+        val bitmap = BitmapFactory.decodeStream(inputStream)
+        return addShadowToCircularBitmap(bitmap)
+    }
 
     @JvmStatic
     fun addShadowToCircularBitmap(
