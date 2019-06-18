@@ -14,7 +14,7 @@ abstract class BaseViewModel(val compositeDisposable: CompositeDisposable) : Vie
     val errorState: LiveData<Throwable>
         get() = _errorState
 
-    protected fun disposableContext(operation: () -> Disposable) = compositeDisposable.add(operation())
+    fun disposableContext(operation: () -> Disposable) = compositeDisposable.add(operation())
 
     override fun onCleared() {
         compositeDisposable.clear()
