@@ -13,7 +13,7 @@ import ir.logicfan.core.data.reactive.ErrorStateObserver
  * @property onErrorFunc emit error for the lambda
  */
 open class DisposableDelegateErrorObserver<T>(
-    private val errorStateObserver: ErrorStateObserver? = null,
+    private val errorStateObserver: ErrorStateObserver,
     val onNextFunc: (T) -> Unit,
     val onCompleteFunc: () -> Unit = {},
     val onErrorFunc: (Throwable) -> Unit = {}
@@ -33,7 +33,7 @@ open class DisposableDelegateErrorObserver<T>(
 
     override fun onError(e: Throwable) {
         if (!isDisposed) {
-            errorStateObserver?.onErrorState(e)
+            errorStateObserver.onErrorState(e)
             onErrorFunc(e)
         }
     }
