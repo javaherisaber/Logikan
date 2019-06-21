@@ -11,7 +11,7 @@ import androidx.databinding.ViewDataBinding
  *
  * @param T type of data holder
  */
-open class DataViewHolder<T>(itemView: View) : SimpleViewHolder(itemView) {
+open class DataBindingViewHolder<T>(binding: ViewDataBinding) : SimpleBindingViewHolder(binding) {
 
     private lateinit var itemDataToBindingId: Pair<T, Int>
     private var dataClickListenerToBindingIdMap = HashMap<OnDataClickListener<T>, Int>()
@@ -38,13 +38,13 @@ open class DataViewHolder<T>(itemView: View) : SimpleViewHolder(itemView) {
         this.dataClickListenerToBindingIdMap = dataClickListenerToBindingIdMap
     }
 
-    override fun bind(binding: ViewDataBinding) {
+    override fun bind() {
         if (this::itemDataToBindingId.isInitialized) {
             binding.setVariable(itemDataToBindingId.second, itemDataToBindingId.first)
         }
         for ((listener, variableId) in dataClickListenerToBindingIdMap) {
             binding.setVariable(variableId, listener)
         }
-        super.bind(binding)
+        super.bind()
     }
 }

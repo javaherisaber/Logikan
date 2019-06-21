@@ -6,7 +6,7 @@
 
         <import type="ir.logicfan.core.data.entity.DummyData" />
 
-        <import type="ir.logicfan.core.ui.recyclerview.viewholder.DataViewHolder.OnDataClickListener" />
+        <import type="ir.logicfan.core.ui.recyclerview.viewholder.DataBindingViewHolder.OnDataClickListener" />
 
         <variable
             name="onDataClickListener"

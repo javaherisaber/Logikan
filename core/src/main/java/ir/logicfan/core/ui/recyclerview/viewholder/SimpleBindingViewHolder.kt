@@ -9,16 +9,13 @@ import androidx.lifecycle.LifecycleRegistry
 import androidx.recyclerview.widget.RecyclerView
 
 /**
- * A very simple lifecycle aware ViewHolder to be used inside a RecyclerView.Adapter
+ * A very simple lifecycle aware ViewHolder with data binding support to be used inside a RecyclerView.Adapter
  *
  * @property binding data binding handle to bind your layout
  * @property viewOnClickListenerToBindingIdMap simple view click listener
- *
- * @param itemView viewGroup which this layout will reside into it
  */
-open class SimpleViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), LifecycleOwner {
+open class SimpleBindingViewHolder(val binding: ViewDataBinding) : RecyclerView.ViewHolder(binding.root), LifecycleOwner {
 
-    private lateinit var binding: ViewDataBinding
     private var viewOnClickListenerToBindingIdMap = HashMap<View.OnClickListener, Int>()
 
     /**
@@ -51,12 +48,9 @@ open class SimpleViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView),
 
     /**
      * bind variables to data binding
-     *
-     * @param binding data binding handle to bind your layout
      */
     @CallSuper // derived function must call super (at the end of your own implementation)
-    open fun bind(binding: ViewDataBinding) {
-        this.binding = binding
+    open fun bind() {
         for ((listener, variableId) in viewOnClickListenerToBindingIdMap) {
             binding.setVariable(variableId, listener)
         }
@@ -67,8 +61,6 @@ open class SimpleViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView),
      * Release binding variables and resources
      */
     private fun unbind() {
-        if (this::binding.isInitialized) {
-            binding.unbind()
-        }
+        binding.unbind()
     }
 }
