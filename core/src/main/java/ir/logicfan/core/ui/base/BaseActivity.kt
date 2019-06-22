@@ -2,7 +2,7 @@ package ir.logicfan.core.ui.base
 
 import android.os.Bundle
 import dagger.android.support.DaggerAppCompatActivity
-import ir.logicfan.core.data.preferences.BaseSharedPreferences
+import ir.logicfan.core.data.sharedpreferences.BaseSharedPreferences
 import ir.logicfan.core.ui.util.LocaleUtils
 import javax.inject.Inject
 

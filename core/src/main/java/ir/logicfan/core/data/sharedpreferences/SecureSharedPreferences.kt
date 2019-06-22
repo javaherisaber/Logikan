@@ -1,4 +1,4 @@
-package ir.logicfan.core.data.preferences
+package ir.logicfan.core.data.sharedpreferences
 
 import android.annotation.SuppressLint
 import android.content.Context
