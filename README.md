@@ -3,6 +3,10 @@
 Core, base and utility functionalities required by an android project
 
 ## Changelog
+### 1.2.2
+- Change dokka output directory to apply new documentation strategy
+- Enable correctErrorTypes for kapt to fix some generated code while build
+
 ### 1.2.1
 - Delete onOptionsItemSelected callback cause navigation is handling this
 - Fix naming conventions for resources
