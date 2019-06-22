@@ -1,5 +1,12 @@
 <resources>
 
+    <!--
+    # CODE OF CONDUCT
+    NEVER directly reference these colors in your application because doing so will result in coupled resources
+    and makes your resources less flexible to change
+    you can use inherit your own theme from these styles
+    -->
+
     <!-- Base application theme. -->
     <style name="CoreAppTheme" parent="CoreAppThemeParent" />
 

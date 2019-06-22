@@ -1,12 +1,23 @@
 package ir.logicfan.core.ui.util
 
 import android.graphics.*
+import java.io.InputStream
 import java.util.*
 
 object GraphicUtils {
 
     @JvmStatic
-    fun addShadowToCircularBitmap(srcBitmap: Bitmap, shadowWidth: Int, shadowColor: Int): Bitmap {
+    fun addShadowToCircularBitmap(inputStream: InputStream): Bitmap {
+        val bitmap = BitmapFactory.decodeStream(inputStream)
+        return addShadowToCircularBitmap(bitmap)
+    }
+
+    @JvmStatic
+    fun addShadowToCircularBitmap(
+        srcBitmap: Bitmap,
+        shadowWidth: Int = 36,
+        shadowColor: Int = generateRandomBrightColor()
+    ): Bitmap {
         // Calculate the circular bitmap width with shadow
         val dstBitmapWidth = srcBitmap.width + shadowWidth * 2
         val dstBitmap = Bitmap.createBitmap(dstBitmapWidth, dstBitmapWidth, Bitmap.Config.ARGB_8888)

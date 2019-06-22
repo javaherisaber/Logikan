@@ -16,7 +16,7 @@ import ir.logicfan.core.data.reactive.ErrorStateObserver
  * @property onNonTerminalErrorFunc emit non terminal error
  */
 class DisposableDataOutcomeObserver<T>(
-    errorStateObserver: ErrorStateObserver? = null,
+    errorStateObserver: ErrorStateObserver,
     private val onNextSingleDataFunc: (DataOutcome.SingleDataState<T>) -> Unit = {},
     private val onNextListDataFunc: (DataOutcome.ListDataState<T>) -> Unit = {},
     private val onNextPagedListDataFunc: (DataOutcome.PagedListDataState<T>) -> Unit = {},
@@ -25,7 +25,7 @@ class DisposableDataOutcomeObserver<T>(
     onNextFunc: (DataOutcome<T>) -> Unit = {},
     onCompleteFunc: () -> Unit = {},
     onErrorFunc: (Throwable) -> Unit = {}
-) : DisposableDelegateErrorObserver<DataOutcome<T>>(onNextFunc, errorStateObserver, onCompleteFunc, onErrorFunc) {
+) : DisposableDelegateErrorObserver<DataOutcome<T>>(errorStateObserver, onNextFunc, onCompleteFunc, onErrorFunc) {
 
     override fun onNext(t: DataOutcome<T>) {
         if (!isDisposed) {

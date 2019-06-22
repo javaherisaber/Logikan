@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!--
+    # CODE OF CONDUCT
+    NEVER directly reference these colors in your application because doing so will result in coupled resources
+    and makes your resources less flexible to change
+    you can use inherit your own typography from these styles
+    -->
+
     <style name="Core.TextAppearance.Headline1" parent="TextAppearance.MaterialComponents.Headline1">
         <item name="android:textSize">42sp</item>
         <item name="fontFamily">@font/yekan</item>

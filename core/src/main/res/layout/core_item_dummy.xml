@@ -5,11 +5,12 @@
     <data>
 
         <import type="ir.logicfan.core.data.entity.DummyData" />
-        <import type="ir.logicfan.core.ui.recyclerview.viewholder.ViewHolderListener.OnViewGroupClickListener" />
+
+        <import type="ir.logicfan.core.ui.recyclerview.viewholder.DataBindingViewHolder.OnDataClickListener" />
 
         <variable
-            name="onViewGroupClickListener"
-            type="OnViewGroupClickListener&lt;DummyData>" />
+            name="onDataClickListener"
+            type="OnDataClickListener&lt;DummyData>" />
 
         <variable
             name="item"
@@ -22,7 +23,7 @@
         android:layout_margin="8dp"
         android:clickable="true"
         android:focusable="true"
-        android:onClick="@{ (v) -> onViewGroupClickListener.onViewHolderClick(item, v)}">
+        android:onClick="@{ (v) -> onDataClickListener.onViewHolderClick(v, item)}">
 
         <TextView
             android:id="@+id/textView_core_itemDummy_title"
@@ -31,6 +32,6 @@
             android:layout_gravity="center"
             android:padding="16dp"
             android:text="@{item.shortText}"
-            tools:text="This is a dummy title" />
+            tools:text="@string/core_tools_dummyText" />
     </androidx.cardview.widget.CardView>
 </layout>
