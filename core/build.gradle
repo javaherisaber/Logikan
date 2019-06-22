@@ -38,7 +38,7 @@ android {
     }
     dokka {
         outputFormat = 'html'
-        outputDirectory = "$rootDir/docs/build/docs/orchid/dokka/coredocs"
+        outputDirectory = "$rootDir/androidprojectdocs/docs/build/docs/orchid/dokka/coredocs"
         skipDeprecated = false // include deprecated members
         reportUndocumented = true // Emit warnings about not documented members.
     }
