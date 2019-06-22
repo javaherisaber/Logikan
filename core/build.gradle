@@ -9,8 +9,8 @@ android {
     defaultConfig {
         minSdkVersion config.minSdk
         targetSdkVersion config.targetSdk
-        versionCode 7
-        versionName "1.2.0"
+        versionCode 8
+        versionName "1.2.1"
         vectorDrawables.useSupportLibrary = true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -49,6 +49,14 @@ dependencies {
     api "androidx.constraintlayout:constraintlayout:$versions.constraintLayout"
     api "androidx.recyclerview:recyclerview:$versions.recyclerView"
     api "androidx.cardview:cardview:$versions.cardView"
+
+    // image
+    api "com.github.bumptech.glide:glide:$versions.glide"
+    api "de.hdodenhof:circleimageview:$versions.circleImageView"
+
+    // navigation
+    api "androidx.navigation:navigation-fragment-ktx:$versions.navigation"
+    api "androidx.navigation:navigation-ui-ktx:$versions.navigation"
 
     // dagger
     api "com.google.dagger:dagger:$versions.dagger"

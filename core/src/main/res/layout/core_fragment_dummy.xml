@@ -4,6 +4,7 @@
     tools:context=".ui.fragment.DummyFragment">
 
     <data>
+
         <variable
             name="viewModel"
             type="ir.logicfan.core.ui.viewmodel.DummyViewModel" />
@@ -17,9 +18,9 @@
             android:id="@+id/textView_core_fragmentDummy"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="@{viewModel.title}"
             android:gravity="center"
+            android:text="@{viewModel.title}"
             android:textColor="@color/core_colorRedDark"
-            tools:text="Dummy fragment to showcase your idea" />
+            tools:text="@string/core_tools_dummyText" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

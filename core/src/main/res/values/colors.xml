@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!--
+    # CODE OF CONDUCT
+    NEVER directly reference these colors in your application because doing so will result in coupled resources
+    and makes your resources less flexible to change
+    you can use in your colors.xml as a good default
+    -->
     <color name="core_colorPrimary">#6200ee</color>
     <color name="core_colorPrimaryLight">#b682ff</color>
     <color name="core_colorPrimaryAlpha">#336200ee</color>

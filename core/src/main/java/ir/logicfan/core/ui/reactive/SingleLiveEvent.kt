@@ -1,4 +1,4 @@
-package ir.logicfan.core.data.reactive
+package ir.logicfan.core.ui.reactive
 
 import android.util.Log
 import androidx.annotation.MainThread

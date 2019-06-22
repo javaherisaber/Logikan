@@ -4,10 +4,13 @@ import dagger.Module
 import dagger.Provides
 import dagger.Reusable
 import ir.logicfan.core.data.network.endpoint.DummyApi
-import ir.logicfan.core.data.network.mapper.NetworkApiResponseOutcomeMapper
+import ir.logicfan.core.data.network.endpoint.GenericApi
+import ir.logicfan.core.data.mapper.NetworkApiResponseToDataOutcomeMapper
 import ir.logicfan.core.data.reactive.ASyncTransformer
 import ir.logicfan.core.data.repository.DummyRepository
 import ir.logicfan.core.data.repository.DummyRepositoryImpl
+import ir.logicfan.core.data.repository.GenericRepository
+import ir.logicfan.core.data.repository.GenericRepositoryImpl
 
 @Module
 abstract class BaseRepositoryModule {
@@ -19,9 +22,17 @@ abstract class BaseRepositoryModule {
         @JvmStatic
         fun dummyRepository(dummyApi: DummyApi): DummyRepository = DummyRepositoryImpl(
             dummyApi,
-            NetworkApiResponseOutcomeMapper(),
-            NetworkApiResponseOutcomeMapper(),
+            NetworkApiResponseToDataOutcomeMapper(),
+            NetworkApiResponseToDataOutcomeMapper(),
             ASyncTransformer(),
+            ASyncTransformer()
+        )
+
+        @Provides
+        @Reusable
+        @JvmStatic
+        fun genericRepository(genericApi: GenericApi): GenericRepository = GenericRepositoryImpl(
+            genericApi,
             ASyncTransformer()
         )
     }

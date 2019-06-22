@@ -1,61 +1,37 @@
 <resources>
+    <!--
+    # CODE OF CONDUCT
+    NEVER directly reference these colors in your application because doing so will result in coupled resources
+    and makes your resources less flexible to change
+    you can copy and paste these strings into your own app and then remove "core_" prefix
+    -->
     <string name="core_app_name">core</string>
 
-    <!-- all -->
-    <string name="core_all_detail">جزئیات</string>
-    <string name="core_all_notice">توجه</string>
-    <string name="core_all_settings">تنظیمات</string>
-    <string name="core_all_retry">تلاش دوباره</string>
-    <string name="core_all_more">بیشتر</string>
-    <string name="core_all_final_approve">تایید نهایی</string>
-    <string name="core_all_new">جدید</string>
-    <string name="core_all_hour">ساعت</string>
-    <string name="core_all_yes">بله</string>
-    <string name="core_all_no">خیر</string>
-    <!-- end of all -->
-
-    <!-- all toast -->
-    <string name="core_all_logout_successful">شما از حساب کاربری خارج شدید</string>
-    <!-- end of all toast -->
+    <!-- item -->
+    <string name="core_itemStateEmptyDummy_message">Empty list</string>
+    <string name="core_itemStateInitialErrorDummy_retry">Retry</string>
+    <string name="core_itemStateInitialLoadDummy_message">loading your list</string>
+    <!-- end of item -->
 
     <!-- base preferences -->
-    <string name="core_key_pref_locale_setting" translatable="false">pref_locale_setting</string>
+    <string name="core_sharedPreferencesKey_localeSetting" translatable="false">pref_locale_setting</string>
     <!-- end of base preferences -->
 
-    <!-- dialog -->
-    <string name="core_dialog_location_permission_denied">برای مشاهده نقشه نیاز به دسترسی به مکان است، از دکمه زیر فعال کنید</string>
-    <string name="core_dialog_exit_account">از حساب کاربری خود خارج میشوید؟</string>
-    <!-- end of dialog -->
-
     <!-- error -->
-    <string name="core_error_un_authorized_message">دسترسی امکان پذیر نیست، لطفا دوباره وارد حساب کاربری خود شوید</string>
+    <string name="core_error_unAuthorized_message">دسترسی امکان پذیر نیست، لطفا دوباره وارد حساب کاربری خود شوید</string>
     <string name="core_error_something_went_wrong">خطایی رخ داد، لطفا بعدا امتحان کنید</string>
     <string name="core_error_oops_something_went_wrong">خطایی در اتصال به شبکه رخ داد، لطفا بعدا امتحان کنید</string>
-    <string name="core_error_server_error">اتصال به سرور با مشکل مواجه شد، لطفا بعدا امتحان کنید</string>
-    <string name="core_error_connectivity_error">خطایی در اتصال به شبکه رخ داد، دوباره امتحان کنید</string>
+    <string name="core_error_serverError">اتصال به سرور با مشکل مواجه شد، لطفا بعدا امتحان کنید</string>
+    <string name="core_error_connectivityError">خطایی در اتصال به شبکه رخ داد، دوباره امتحان کنید</string>
     <string name="core_error_check_your_internet_connection">اینترنت شما وصل نیست</string>
     <string name="core_error_resource_not_available">این صفحه از دسترس خارج شده</string>
-
     <string name="core_error_wrong_number">شماره تلفن اشتباه است</string>
     <string name="core_error_wrong_code">کد وارد شده اشتباه است</string>
     <string name="core_error_code_expired_try_again">کد منقضی شد، دوباره امتحان کنید</string>
     <!-- end of error-->
 
     <!-- tools -->
-    <string name="core_tools_phone_number">02138743827</string>
-    <string name="core_tools_mobile_number">09127778899</string>
-    <string name="core_tools_address">تهران، میدان ولیعصر، جنب داروخانه دکتر کاویانی</string>
-    <string name="core_tools_date_slash_separated">1397/10/23</string>
-    <string name="core_tools_date_localized">15 فروردین 1395</string>
-    <string name="core_tools_time_period">10:00 – 12:00</string>
-    <string name="core_tools_start_hour">16:00</string>
-    <string name="core_tools_end_hour">18:00</string>
-    <string name="core_tools_month">اردیبهشت</string>
-    <string name="core_tools_day_of_week">چهارشنبه</string>
-    <string name="core_tools_day">14</string>
-    <string name="core_tools_date_time">ساعت 8 چهاردهم شهریور 1398</string>
-    <string name="core_tools_profile_name">مهدی جواهری صابر</string>
-    <string name="core_tools_timer_expire">100 ثانیه تا انقضای کد</string>
+    <string name="core_tools_dummyText">Dummy text to showcase your idea</string>
     <!-- end of tools -->
 
 </resources>
