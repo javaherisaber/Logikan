@@ -9,8 +9,8 @@ android {
     defaultConfig {
         minSdkVersion config.minSdk
         targetSdkVersion config.targetSdk
-        versionCode 8
-        versionName "1.2.1"
+        versionCode 9
+        versionName "1.2.2"
         vectorDrawables.useSupportLibrary = true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -30,6 +30,7 @@ android {
     }
     kapt {
         useBuildCache = true
+        correctErrorTypes = true
         javacOptions {
             // Increase the max count of errors from annotation processors.
             // Default is 100.
@@ -38,7 +39,7 @@ android {
     }
     dokka {
         outputFormat = 'html'
-        outputDirectory = "$rootDir/docs/build/docs/orchid/dokka/coredocs"
+        outputDirectory = "$rootDir/androidprojectdocs/docs/build/docs/orchid/dokka/coredocs"
         skipDeprecated = false // include deprecated members
         reportUndocumented = true // Emit warnings about not documented members.
     }
