@@ -3,6 +3,28 @@
 Core, base and utility functionalities required by an android project
 
 ## Changelog
+### 1.2.1
+- Delete onOptionsItemSelected callback cause navigation is handling this
+- Fix naming conventions for resources
+- Add vertical line separator layout
+- Add code of conduct for resources
+- Fix locale not changing
+- Add good defaults to GraphicUtils class
+- Create GenericRepository to access generic api
+- Create Event and EventObserver for presentation layer communication
+- Reorder constructor parameters in Disposable's to better suit our needs
+- Create better generic ViewHolder and Adapter for recyclerView
+- Add navigationArchitectureComponent, circleImageView, Glide dependencies
+- Add negative and neutral buttons with a neutralCallback for AlertDialog
+- Make disposableContext visibility to public so we can use in platform
+- Add go to location settings AlertDialog
+- Add emitUnitEvent extension to BaseViewHolder
+- Mark errorStateObserver as nonNull and mandatory property in observers
+   anyone who need data must know how to handle it's errors
+- Remove terminal error handler from BaseActivity (each app has it's own)
+- Add AppExecutor to SingleDataAdapter diffUtil and fix binding issue
+   appExecutor is needed to calculate differences in diffUtil off the main thread
+
 ### 1.2.0
 - Stable release with clean architecture
 
