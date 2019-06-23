@@ -1,8 +1,12 @@
 # AndroidProjectCore
 
-Core, base and utility functionalities required by an android project
+Core, base and utility functionality required by an android project
 
 ## Changelog
+### 1.2.3
+- Unify data binding classes with good packaging strategy
+- Move repository interface classes to data/domain/repository
+
 ### 1.2.2
 - Change dokka output directory to apply new documentation strategy
 - Enable correctErrorTypes for kapt to fix some generated code while build
