@@ -1,4 +1,4 @@
-package ir.logicfan.core.ui.databinding
+package ir.logicfan.core.ui.databinding.converter
 
 import android.view.View
 import androidx.databinding.BindingConversion

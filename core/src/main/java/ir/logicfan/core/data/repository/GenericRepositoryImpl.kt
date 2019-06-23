@@ -4,6 +4,7 @@ import io.reactivex.Observable
 import ir.logicfan.core.data.network.endpoint.GenericApi
 import ir.logicfan.core.data.reactive.Transformer
 import ir.logicfan.core.data.util.ReactiveUtils.composeWith
+import ir.logicfan.core.domain.repository.GenericRepository
 import okhttp3.ResponseBody
 import javax.inject.Inject
 

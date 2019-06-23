@@ -1,4 +1,4 @@
-package ir.logicfan.core.ui.databinding
+package ir.logicfan.core.ui.databinding.adapter
 
 import android.view.View
 import android.widget.ProgressBar

@@ -8,6 +8,7 @@ import ir.logicfan.core.data.network.base.NetworkApiResponse
 import ir.logicfan.core.data.network.endpoint.DummyApi
 import ir.logicfan.core.data.reactive.Transformer
 import ir.logicfan.core.data.util.ReactiveUtils.composeWith
+import ir.logicfan.core.domain.repository.DummyRepository
 import javax.inject.Inject
 
 class DummyRepositoryImpl @Inject
