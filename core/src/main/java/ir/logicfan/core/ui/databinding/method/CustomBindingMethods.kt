@@ -1,4 +1,4 @@
-package ir.logicfan.core.ui.databinding
+package ir.logicfan.core.ui.databinding.method
 
 import android.widget.ImageView
 import androidx.databinding.BindingMethod

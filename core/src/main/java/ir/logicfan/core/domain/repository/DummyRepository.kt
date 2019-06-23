@@ -1,4 +1,4 @@
-package ir.logicfan.core.data.repository
+package ir.logicfan.core.domain.repository
 
 import io.reactivex.Observable
 import ir.logicfan.core.data.base.DataOutcome
