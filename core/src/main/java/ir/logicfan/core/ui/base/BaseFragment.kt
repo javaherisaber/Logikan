@@ -5,7 +5,6 @@ import android.view.View
 import androidx.annotation.CallSuper
 import androidx.lifecycle.Observer
 import dagger.android.support.DaggerFragment
-import ir.logicfan.core.ui.listener.DataTerminalErrorListener
 import ir.logicfan.core.ui.util.delegate.autoClearedActivityListener
 
 abstract class BaseFragment : DaggerFragment() {
@@ -19,5 +18,12 @@ abstract class BaseFragment : DaggerFragment() {
         attachBaseViewModel().errorState.observe(this, Observer {
             dataTerminalErrorListener.onDataTerminalError(it)
         })
+    }
+
+    /**
+     * Propagate error from rx callbacks to suitable error resolver
+     */
+    interface DataTerminalErrorListener {
+        fun onDataTerminalError(throwable: Throwable)
     }
 }
