@@ -1,4 +1,4 @@
-package ir.logicfan.core.ui.viewmodel
+package ir.logicfan.core.ui.feature.dummy
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
