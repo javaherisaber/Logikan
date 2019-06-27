@@ -1,5 +1,6 @@
 package ir.logicfan.core.ui.recyclerview.viewholder
 
+import android.util.Log
 import android.view.View
 import androidx.annotation.CallSuper
 import androidx.databinding.ViewDataBinding
@@ -61,6 +62,11 @@ open class SimpleBindingViewHolder(val binding: ViewDataBinding) : RecyclerView.
      * Release binding variables and resources
      */
     private fun unbind() {
+        Log.d(TAG, "RecyclerView item unbind called")
         binding.unbind()
+    }
+
+    companion object {
+        private var TAG = SimpleBindingViewHolder::class.java.simpleName
     }
 }
