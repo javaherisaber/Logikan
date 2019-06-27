@@ -13,5 +13,5 @@ abstract class DummyModule {
     @PerFragment
     @IntoMap
     @ViewModelKey(DummyViewModel::class)
-    abstract fun dummyViewModel(dummyViewModel: DummyViewModel): ViewModel
+    abstract fun bindDummyViewModel(dummyViewModel: DummyViewModel): ViewModel
 }
