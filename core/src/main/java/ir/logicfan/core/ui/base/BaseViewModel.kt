@@ -1,12 +1,13 @@
 package ir.logicfan.core.ui.base
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import ir.logicfan.core.data.reactive.ErrorStateObserver
-import ir.logicfan.core.ui.reactive.Event
+import ir.logicfan.core.ui.reactive.LiveEvent
 import ir.logicfan.core.ui.reactive.SingleLiveEvent
 
 abstract class BaseViewModel(val compositeDisposable: CompositeDisposable) : ViewModel(), ErrorStateObserver {
@@ -20,6 +21,7 @@ abstract class BaseViewModel(val compositeDisposable: CompositeDisposable) : Vie
 
     override fun onCleared() {
         compositeDisposable.clear()
+        Log.d(TAG, "ViewModel recycled in : ${this.javaClass.simpleName}")
         super.onCleared()
     }
 
@@ -28,8 +30,9 @@ abstract class BaseViewModel(val compositeDisposable: CompositeDisposable) : Vie
     }
 
     companion object {
-        fun emitUnitEvent(liveObject: MutableLiveData<Event<Unit>>) {
-            liveObject.value = Event(Unit)
+        private var TAG = BaseViewModel::class.java.simpleName
+        fun emitUnitEvent(liveObject: MutableLiveData<LiveEvent<Unit>>) {
+            liveObject.value = LiveEvent(Unit)
         }
     }
 }

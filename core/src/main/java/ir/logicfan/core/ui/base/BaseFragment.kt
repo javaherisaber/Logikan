@@ -1,6 +1,7 @@
 package ir.logicfan.core.ui.base
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.annotation.CallSuper
 import androidx.lifecycle.Observer
@@ -25,5 +26,14 @@ abstract class BaseFragment : DaggerFragment() {
      */
     interface DataTerminalErrorListener {
         fun onDataTerminalError(throwable: Throwable)
+    }
+
+    override fun onDestroy() {
+        Log.d(TAG, "onDestroy callback on : ${this.javaClass.simpleName}")
+        super.onDestroy()
+    }
+
+    companion object {
+        private var TAG = BaseFragment::class.java.simpleName
     }
 }
