@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import ir.logicfan.core.data.reactive.ErrorStateObserver
-import ir.logicfan.core.ui.reactive.LiveEvent
+import ir.logicfan.core.ui.reactive.OneShotEvent
 import ir.logicfan.core.ui.reactive.SingleLiveEvent
 
 abstract class BaseViewModel(val compositeDisposable: CompositeDisposable) : ViewModel(), ErrorStateObserver {
@@ -31,8 +31,8 @@ abstract class BaseViewModel(val compositeDisposable: CompositeDisposable) : Vie
 
     companion object {
         private var TAG = BaseViewModel::class.java.simpleName
-        fun emitUnitEvent(liveObject: MutableLiveData<LiveEvent<Unit>>) {
-            liveObject.value = LiveEvent(Unit)
+        fun emitUnitEvent(oneShotObject: MutableLiveData<OneShotEvent<Unit>>) {
+            oneShotObject.value = OneShotEvent(Unit)
         }
     }
 }
