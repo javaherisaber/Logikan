@@ -17,6 +17,7 @@ constructor(
     private val baseUrl: String,
     private val mockJsonProvider: MockJsonProvider,
     private val apiEnableMock: Boolean,
+    private val apiResponseLatency: Long,
     @IncludeMock private val apiIncludeIntoMock: Array<String>,
     @ExcludeMock private val apiExcludeFromMock: Array<String>
 ) : Interceptor {
@@ -57,6 +58,7 @@ constructor(
                 // json is found
                 val contentType = MediaType.parse(RESPONSE_MEDIA_TYPE)
                 val responseBody = ResponseBody.create(contentType, it)
+                Thread.sleep(apiResponseLatency)
                 Response.Builder()
                     .body(responseBody)
                     .request(chain.request()).message(RESPONSE_MESSAGE)

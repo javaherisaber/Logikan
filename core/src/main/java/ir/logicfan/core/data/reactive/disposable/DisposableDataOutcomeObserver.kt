@@ -37,7 +37,7 @@ class DisposableDataOutcomeObserver<T>(
                 is DataOutcome.SingleDataState -> onNextSingleDataFunc(t)
                 is DataOutcome.ListDataState -> onNextListDataFunc(t)
                 is DataOutcome.PagedListDataState -> onNextPagedListDataFunc(t)
-                is DataOutcome.ImperativeState -> onNextImperativeState
+                is DataOutcome.ImperativeState -> onNextImperativeState(t)
             }
             onNextFunc(t)
         }

@@ -3,6 +3,18 @@
 Core, base and utility functionality required by an android project
 
 ## Changelog
+### 1.3
+- Add api response latency to OfflineMockInterceptor
+- Add success property to Single, List and PagedList data in DataOutcome
+- Create CustomNavigationUI extensions to handle navigationView's menuItem
+- Delete redundant classes and listeners
+- Add logging to classes with lifecycle
+- Add Gender and SpinnerBindingAdapter
+- Fix JalaliCalendar conversion issues
+- Add timestamp support for Clock and JalaliCalendar
+- Replace `Live` prefix with `OneShot` in LiveEvent for better naming
+- Create ListExtensions
+
 ### 1.2.3
 - Unify data binding classes with good packaging strategy
 - Move repository interface classes to data/domain/repository

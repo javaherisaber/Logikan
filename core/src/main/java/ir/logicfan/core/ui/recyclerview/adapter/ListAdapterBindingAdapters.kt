@@ -1,4 +1,4 @@
-package ir.logicfan.core.ui.databinding.adapter
+package ir.logicfan.core.ui.recyclerview.adapter
 
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.ListAdapter
