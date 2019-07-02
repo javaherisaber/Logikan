@@ -13,13 +13,13 @@ class NetworkApiResponseToDataOutcomeMapper<T> : Mapper<NetworkApiResponse<T>, D
     override fun mapFrom(from: NetworkApiResponse<T>): DataOutcome<T> = when {
         from.data != null && from.pagination == null && from.data is List<*> ->
             // List data state
-            DataOutcome.ListDataState(from.data)
+            DataOutcome.ListDataState(from.success, from.data)
         from.data != null && from.pagination == null ->
             // Single data state
-            DataOutcome.SingleDataState(from.data)
+            DataOutcome.SingleDataState(from.success, from.data)
         from.data != null && from.pagination != null && from.data is List<*> ->
             // PagedList data state
-            DataOutcome.PagedListDataState(from.data, from.pagination)
+            DataOutcome.PagedListDataState(from.success, from.data, from.pagination)
         from.data == null && from.error == null && from.pagination == null ->
             // Imperative state
             DataOutcome.ImperativeState(from.success)

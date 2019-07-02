@@ -31,7 +31,7 @@ sealed class DataOutcome<out T> {
      * @param T type of data being emitted
      * @property data data being emitted
      */
-    data class SingleDataState<out T>(val data: T) : DataOutcome<T>()
+    data class SingleDataState<out T>(val success: Boolean, val data: T) : DataOutcome<T>()
 
     /**
      * When the result of request is a list of data
@@ -39,7 +39,7 @@ sealed class DataOutcome<out T> {
      * @param T type of data being emitted
      * @property dataList list of data being emitted
      */
-    data class ListDataState<out T>(val dataList: T) : DataOutcome<T>()
+    data class ListDataState<out T>(val success: Boolean, val dataList: T) : DataOutcome<T>()
 
     /**
      * When the result of request is a paged list of data
@@ -48,5 +48,8 @@ sealed class DataOutcome<out T> {
      * @property dataList list of data being emitted
      * @property pagination information need to do pagination on next pages
      */
-    data class PagedListDataState<out T>(val dataList: T, val pagination: PaginationData): DataOutcome<T>()
+    data class PagedListDataState<out T>(
+        val success: Boolean,
+        val dataList: T, val pagination: PaginationData
+    ) : DataOutcome<T>()
 }

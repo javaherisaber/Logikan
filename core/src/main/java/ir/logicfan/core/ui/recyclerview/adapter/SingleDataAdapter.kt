@@ -59,7 +59,7 @@ open class SingleDataAdapter<T>(
             LayoutInflater.from(parent.context), itemLayout, parent, false
         )
         val viewHolder = provideViewHolder(binding)
-        binding.setLifecycleOwner(viewHolder)  // register for lifecycle events
+        binding.lifecycleOwner = viewHolder  // register for lifecycle events
         viewHolder.addViewOnClickListener(viewOnClickListenerToBindingIdMap)
         viewHolder.addDataClickListener(dataClickListenerToBindingIdMap)
         return viewHolder

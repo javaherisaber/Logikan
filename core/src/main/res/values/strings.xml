@@ -17,6 +17,10 @@
     <string name="core_sharedPreferencesKey_localeSetting" translatable="false">pref_locale_setting</string>
     <!-- end of base preferences -->
 
+    <!-- all -->
+    <string name="core_all_hour">ساعت</string>
+    <!-- end of all -->
+
     <!-- error -->
     <string name="core_error_unAuthorized_message">دسترسی امکان پذیر نیست، لطفا دوباره وارد حساب کاربری خود شوید</string>
     <string name="core_error_something_went_wrong">خطایی رخ داد، لطفا بعدا امتحان کنید</string>
