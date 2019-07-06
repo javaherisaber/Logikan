@@ -15,6 +15,7 @@ open class DataBindingViewHolder<T>(binding: ViewDataBinding) : SimpleBindingVie
 
     private lateinit var itemDataToBindingId: Pair<T, Int>
     private var dataClickListenerToBindingIdMap = HashMap<OnDataClickListener<T>, Int>()
+    private var positionalDataClickListenerToBindingIdMap = HashMap<OnPositionalDataClickListener<T>, Int>()
 
     /**
      * Define a click listener with carrying data
@@ -26,16 +27,30 @@ open class DataBindingViewHolder<T>(binding: ViewDataBinding) : SimpleBindingVie
         fun onViewHolderClick(view: View, data: R)
     }
 
+    interface OnPositionalDataClickListener<R> {
+        fun onViewHolderClick(view: View, data: R, position: Int)
+    }
+
     fun addItemBinding(item: T, bindingId: Int) {
         itemDataToBindingId = item to bindingId
     }
 
-    fun addDataClickListener(onDataClickListener: OnDataClickListener<T>, bindingVariableId: Int) {
-        dataClickListenerToBindingIdMap[onDataClickListener] = bindingVariableId
+    fun addPositionalDataClickListener(positionalDataClickListenerToBindingIdMap: HashMap<OnPositionalDataClickListener<T>, Int>) {
+        this.positionalDataClickListenerToBindingIdMap = positionalDataClickListenerToBindingIdMap
     }
 
     fun addDataClickListener(dataClickListenerToBindingIdMap: HashMap<OnDataClickListener<T>, Int>) {
         this.dataClickListenerToBindingIdMap = dataClickListenerToBindingIdMap
+    }
+
+    @Throws(RuntimeException::class)
+    fun rebindItem(item: T) {
+        if (this::itemDataToBindingId.isInitialized) {
+            binding.setVariable(itemDataToBindingId.second, item)
+            rebind()
+        } else {
+            throw RuntimeException("You cannot call rebind unless you bind before")
+        }
     }
 
     override fun bind() {
@@ -43,6 +58,9 @@ open class DataBindingViewHolder<T>(binding: ViewDataBinding) : SimpleBindingVie
             binding.setVariable(itemDataToBindingId.second, itemDataToBindingId.first)
         }
         for ((listener, variableId) in dataClickListenerToBindingIdMap) {
+            binding.setVariable(variableId, listener)
+        }
+        for ((listener, variableId) in positionalDataClickListenerToBindingIdMap) {
             binding.setVariable(variableId, listener)
         }
         super.bind()

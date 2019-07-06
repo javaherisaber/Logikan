@@ -58,6 +58,10 @@ open class SimpleBindingViewHolder(val binding: ViewDataBinding) : RecyclerView.
         binding.executePendingBindings()
     }
 
+    protected fun rebind() {
+        binding.executePendingBindings()
+    }
+
     /**
      * Release binding variables and resources
      */

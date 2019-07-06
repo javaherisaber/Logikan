@@ -3,6 +3,10 @@
 Core, base and utility functionality required by an android project
 
 ## Changelog
+### 1.3.1
+- Add collections extensions
+- Add payload support to recycler view classes to enable partial updates
+
 ### 1.3
 - Add api response latency to OfflineMockInterceptor
 - Add success property to Single, List and PagedList data in DataOutcome
