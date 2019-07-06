@@ -9,7 +9,6 @@ import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.AsyncDifferConfig
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
-import ir.logicfan.core.BR
 import ir.logicfan.core.data.base.AppExecutors
 import ir.logicfan.core.ui.recyclerview.viewholder.DataBindingViewHolder
 
@@ -29,7 +28,8 @@ open class SingleDataAdapter<T>(
     appExecutors: AppExecutors,
     @LayoutRes protected val itemLayout: Int,
     diffCallback: DiffUtil.ItemCallback<T>,
-    private val bindingItemVariableId: Int? = BR.item
+    private val bindingItemVariableId: Int,
+    private val positionBindingVariableId: Int? = null
 ) : ListAdapter<T, DataBindingViewHolder<T>>(
     AsyncDifferConfig.Builder<T>(diffCallback)
         .setBackgroundThreadExecutor(appExecutors.diskIO())
@@ -38,6 +38,15 @@ open class SingleDataAdapter<T>(
 
     private val viewOnClickListenerToBindingIdMap = HashMap<View.OnClickListener, Int>()
     private val dataClickListenerToBindingIdMap = HashMap<DataBindingViewHolder.OnDataClickListener<T>, Int>()
+    private val positionalDataClickListenerToBindingIdMap =
+        HashMap<DataBindingViewHolder.OnPositionalDataClickListener<T>, Int>()
+
+    fun addPositionalDataClickListener(
+        onPositionalDataClickListener: DataBindingViewHolder.OnPositionalDataClickListener<T>,
+        bindingVariableId: Int
+    ) {
+        positionalDataClickListenerToBindingIdMap[onPositionalDataClickListener] = bindingVariableId
+    }
 
     fun addDataClickListener(
         onDataClickListener: DataBindingViewHolder.OnDataClickListener<T>,
@@ -62,14 +71,16 @@ open class SingleDataAdapter<T>(
         binding.lifecycleOwner = viewHolder  // register for lifecycle events
         viewHolder.addViewOnClickListener(viewOnClickListenerToBindingIdMap)
         viewHolder.addDataClickListener(dataClickListenerToBindingIdMap)
+        viewHolder.addPositionalDataClickListener(positionalDataClickListenerToBindingIdMap)
         return viewHolder
     }
 
     open fun provideViewHolder(binding: ViewDataBinding): DataBindingViewHolder<T> = DataBindingViewHolder(binding)
 
     override fun onBindViewHolder(holder: DataBindingViewHolder<T>, position: Int) {
-        bindingItemVariableId?.let {
-            holder.addItemBinding(getItem(position), bindingItemVariableId)
+        holder.addItemBinding(getItem(position), bindingItemVariableId)
+        positionBindingVariableId?.let {
+            holder.binding.setVariable(it, position)
         }
         holder.bind()
     }
