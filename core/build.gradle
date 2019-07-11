@@ -50,6 +50,7 @@ dependencies {
     api "androidx.constraintlayout:constraintlayout:$versions.constraintLayout"
     api "androidx.recyclerview:recyclerview:$versions.recyclerView"
     api "androidx.cardview:cardview:$versions.cardView"
+    api 'androidx.core:core-ktx:1.0.1'
 
     // image
     api "com.github.bumptech.glide:glide:$versions.glide"
