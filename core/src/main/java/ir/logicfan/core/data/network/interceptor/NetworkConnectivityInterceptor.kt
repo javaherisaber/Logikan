@@ -7,6 +7,9 @@ import okhttp3.Interceptor
 import okhttp3.Response
 import javax.inject.Inject
 
+/**
+ * Define an interceptor to check fo connectivity and throw Offline exception if not connected
+ */
 class NetworkConnectivityInterceptor @Inject
 constructor(private val context: Context) : Interceptor {
 

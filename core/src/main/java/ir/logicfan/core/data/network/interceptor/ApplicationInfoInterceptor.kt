@@ -1,6 +1,5 @@
 package ir.logicfan.core.data.network.interceptor
 
-import android.content.Context
 import ir.logicfan.core.di.qulifier.ApplicationType
 import ir.logicfan.core.ui.util.ApplicationUtils
 import okhttp3.Interceptor
@@ -13,15 +12,15 @@ import javax.inject.Inject
  */
 class ApplicationInfoInterceptor @Inject
 constructor(
-    private val context: Context,
+    private val applicationUtils: ApplicationUtils,
     @ApplicationType private val applicationType: String
 ) : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
         val request = chain.request().newBuilder()
             .addHeader("Application-Type", applicationType)
-            .addHeader("Application-Package", ApplicationUtils.getPackageName(context))
-            .addHeader("Application-VersionCode", ApplicationUtils.getApkVersionCode(context))
-            .addHeader("Application-VersionName", ApplicationUtils.getApkVersionName(context))
+            .addHeader("Application-Package", applicationUtils.getPackageName())
+            .addHeader("Application-VersionCode", applicationUtils.getApkVersionCode())
+            .addHeader("Application-VersionName", applicationUtils.getApkVersionName())
             .build()
         return chain.proceed(request)
     }

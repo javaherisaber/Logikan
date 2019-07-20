@@ -3,24 +3,21 @@ package ir.logicfan.core.ui.util
 import android.content.Context
 import android.content.pm.PackageInfo
 import androidx.core.content.pm.PackageInfoCompat
+import javax.inject.Inject
 
 /**
  * Utilities to work with application related attributes
  */
-object ApplicationUtils {
+class ApplicationUtils @Inject constructor(private val context: Context) {
 
-    @JvmStatic
-    fun getApkVersionCode(context: Context): String {
-        val packageInfo = getPackageInfo(context)
-        return PackageInfoCompat.getLongVersionCode(packageInfo).toString()
+    private val mPackageInfo: PackageInfo
+        get() = context.packageManager.getPackageInfo(context.packageName, 0)
+
+    fun getApkVersionCode(): String {
+        return PackageInfoCompat.getLongVersionCode(mPackageInfo).toString()
     }
 
-    @JvmStatic
-    fun getApkVersionName(context: Context): String = getPackageInfo(context).versionName
+    fun getApkVersionName(): String = mPackageInfo.versionName
 
-    @JvmStatic
-    fun getPackageName(context: Context): String = getPackageInfo(context).packageName
-
-    private fun getPackageInfo(context: Context): PackageInfo =
-        context.packageManager.getPackageInfo(context.packageName, 0)
+    fun getPackageName(): String = mPackageInfo.packageName
 }
