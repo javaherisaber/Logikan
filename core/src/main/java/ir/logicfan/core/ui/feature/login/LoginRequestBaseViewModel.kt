@@ -14,16 +14,13 @@ constructor(
 ) : BaseViewModel(compositeDisposable) {
 
     private val _showWrongMobileError = MutableLiveData<OneShotEvent<Unit>>()
-    val showWrongMobileError: LiveData<OneShotEvent<Unit>>
-        get() = _showWrongMobileError
+    val showWrongMobileError: LiveData<OneShotEvent<Unit>> = _showWrongMobileError
 
     protected val _showTryLaterError = MutableLiveData<OneShotEvent<Unit>>()
-    val showTryLaterError: LiveData<OneShotEvent<Unit>>
-        get() = _showTryLaterError
+    val showTryLaterError: LiveData<OneShotEvent<Unit>> = _showTryLaterError
 
     private val _navigateToVerify = MutableLiveData<OneShotEvent<String>>()
-    val navigateToVerify: LiveData<OneShotEvent<String>>
-        get() = _navigateToVerify
+    val navigateToVerify: LiveData<OneShotEvent<String>> = _navigateToVerify
 
     val inputMobile = MutableLiveData<String>() // two way data binding
 

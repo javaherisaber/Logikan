@@ -27,7 +27,7 @@ class DummyFragment : BaseFragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
         DataBindingUtil.inflate<CoreFragmentDummyBinding>(inflater, R.layout.core_fragment_dummy, container, false)
             .apply {
-                lifecycleOwner = this@DummyFragment
+                lifecycleOwner = this@DummyFragment.viewLifecycleOwner
                 viewModel = this@DummyFragment.viewModel
             }.root
 }

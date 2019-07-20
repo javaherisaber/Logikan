@@ -13,26 +13,14 @@ constructor(
 ) : BaseViewModel(compositeDisposable) {
 
     protected val _showTryLaterError = MutableLiveData<OneShotEvent<Unit>>()
-    val showTryLaterError: LiveData<OneShotEvent<Unit>>
-        get() = _showTryLaterError
+    val showTryLaterError: LiveData<OneShotEvent<Unit>> = _showTryLaterError
 
     protected val _showWrongCode = MutableLiveData<OneShotEvent<Unit>>()
-    val showWrongCode: LiveData<OneShotEvent<Unit>>
-        get() = _showWrongCode
-
-    protected val _showTimerExpired = MutableLiveData<OneShotEvent<Unit>>()
-    val showTimerExpired: LiveData<OneShotEvent<Unit>>
-        get() = _showTimerExpired
+    val showWrongCode: LiveData<OneShotEvent<Unit>> = _showWrongCode
 
     protected val _showLoginSuccessful = MutableLiveData<OneShotEvent<Unit>>()
-    val showLoginSuccessful: LiveData<OneShotEvent<Unit>>
-        get() = _showLoginSuccessful
-
-    protected val _navigateUp = MutableLiveData<OneShotEvent<Unit>>()
-    val navigateUp: LiveData<OneShotEvent<Unit>>
-        get() = _navigateUp
+    val showLoginSuccessful: LiveData<OneShotEvent<Unit>> = _showLoginSuccessful
 
     protected val _navigateOutOfLogin = MutableLiveData<OneShotEvent<Unit>>()
-    val navigateOutOfLogin: LiveData<OneShotEvent<Unit>>
-        get() = _navigateOutOfLogin
+    val navigateOutOfLogin: LiveData<OneShotEvent<Unit>> = _navigateOutOfLogin
 }
