@@ -1,5 +1,6 @@
 package ir.logicfan.core.data.network.mock
 
+import ir.logicfan.core.di.qulifier.ApiBaseUrl
 import ir.logicfan.core.di.qulifier.ExcludeMock
 import ir.logicfan.core.di.qulifier.IncludeMock
 import okhttp3.*
@@ -14,7 +15,7 @@ import javax.inject.Inject
  */
 class OfflineMockInterceptor @Inject
 constructor(
-    private val baseUrl: String,
+    @ApiBaseUrl private val baseUrl: String,
     private val mockJsonProvider: MockJsonProvider,
     private val apiEnableMock: Boolean,
     private val apiResponseLatency: Long,

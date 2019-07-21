@@ -10,6 +10,8 @@ import java.util.*
  */
 data class Clock(var hour: Int = 0, var minute: Int = 0, var second: Int = 0) {
 
+    constructor(seconds: Int) : this(seconds.div(60).div(60), seconds.div(60), seconds.rem(60))
+
     init {
         validateArguments(hour, minute, second)
     }
@@ -25,6 +27,11 @@ data class Clock(var hour: Int = 0, var minute: Int = 0, var second: Int = 0) {
             throw IllegalArgumentException("Wrong value for minute, it must be from 0 to 59")
         if (second >= 60 || second < 0)
             throw IllegalArgumentException("Wrong value for hour, it must be from 0 to 59")
+    }
+
+    private fun getClockLabelMinuteSecondType(): String {
+        val labels = getLabels()
+        return MessageFormat.format("{0}:{1}", labels.second, labels.third)
     }
 
     private fun getClockLabelHourMinuteType(): String {
@@ -55,6 +62,7 @@ data class Clock(var hour: Int = 0, var minute: Int = 0, var second: Int = 0) {
         }
         hourText += hour
         minuteText += minute
+        secondText += second
         return Triple(hourText, minuteText, secondText)
     }
 
@@ -62,7 +70,7 @@ data class Clock(var hour: Int = 0, var minute: Int = 0, var second: Int = 0) {
      * To be used by [getClockLabel] method to return suitable labeled clock
      */
     enum class ClockLabelType {
-        HOUR_MINUTE, HOUR_MINUTE_SECOND
+        HOUR_MINUTE, HOUR_MINUTE_SECOND, MINUTE_SECOND
     }
 
     companion object {
@@ -70,6 +78,7 @@ data class Clock(var hour: Int = 0, var minute: Int = 0, var second: Int = 0) {
         fun getClockLabel(clock: Clock, type: ClockLabelType): String = when (type) {
             ClockLabelType.HOUR_MINUTE -> clock.getClockLabelHourMinuteType()
             ClockLabelType.HOUR_MINUTE_SECOND -> clock.getClockLabelHourMinuteSecondType()
+            ClockLabelType.MINUTE_SECOND -> clock.getClockLabelMinuteSecondType()
         }
 
         /**

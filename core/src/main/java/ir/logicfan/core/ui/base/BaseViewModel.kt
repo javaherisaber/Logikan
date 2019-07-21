@@ -1,6 +1,7 @@
 package ir.logicfan.core.ui.base
 
 import android.util.Log
+import androidx.annotation.CallSuper
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -19,6 +20,7 @@ abstract class BaseViewModel(val compositeDisposable: CompositeDisposable) : Vie
 
     fun disposableContext(operation: () -> Disposable) = compositeDisposable.add(operation())
 
+    @CallSuper
     override fun onCleared() {
         compositeDisposable.clear()
         Log.d(TAG, "ViewModel recycled in : ${this.javaClass.simpleName}")
