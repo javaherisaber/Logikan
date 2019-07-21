@@ -9,8 +9,7 @@ import javax.inject.Inject
 class DummyViewModel @Inject constructor(compositeDisposable: CompositeDisposable) : BaseViewModel(compositeDisposable) {
 
     private val _title = MutableLiveData<String>()
-    val title: LiveData<String>
-        get() = _title
+    val title: LiveData<String> = _title
 
     init {
         this._title.value = "Dummy data to showcase your idea"

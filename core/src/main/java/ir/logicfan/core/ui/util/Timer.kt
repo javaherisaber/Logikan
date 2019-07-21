@@ -17,18 +17,20 @@ class Timer(private var seconds: Int, private val listener: TimerListener?) {
         val handler = Handler()
         handler.post(object : Runnable {
             override fun run() {
-                if (seconds == 0) {
-                    listener?.onTimerExpired()
-                } else {
-                    seconds -= 1
-                    listener?.onTimerElapsed(seconds)
-                    handler.postDelayed(this, DELAY_MILLIS)  // execute run() in the future
+                when (seconds) {
+                    -1 -> return
+                    0 -> listener?.onTimerExpired()
+                    else -> {
+                        seconds -= 1
+                        listener?.onTimerElapsed(seconds)
+                        handler.postDelayed(this, DELAY_MILLIS)  // execute run() in the future
+                    }
                 }
             }
         })
     }
 
     fun stop() {
-        this.seconds = 0
+        this.seconds = -1
     }
 }

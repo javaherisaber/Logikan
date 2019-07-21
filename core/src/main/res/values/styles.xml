@@ -16,7 +16,6 @@
         <item name="colorPrimary">@color/core_colorPrimary</item>
         <item name="colorPrimaryDark">@color/core_colorPrimaryDark</item>
         <item name="colorAccent">@color/core_colorSecondary</item>
-        <item name="android:fontFamily">@font/yekan</item>
         <item name="colorError">@color/core_colorError</item>
         <item name="colorSecondary">@color/core_colorSecondary</item>
         <item name="windowActionBar">false</item>
