@@ -3,6 +3,14 @@
 Core, base and utility functionality required by an android project
 
 ## Changelog
+### 1.3.2
+- Remove fontFamily from AppTheme, it was shadowing typography
+- Create LoginRequestBaseViewModel and LoginVerifyBaseViewModel
+- Add @CallSuper to BaseViewModel.onCleared()
+- Add Minute:Second label type to Clock
+- Create TextWatcher for chained EditTexts
+- Create NavigationExtensions, FragmentExtensions and StringUtils
+
 ### 1.3.1
 - Add collections extensions
 - Add payload support to recycler view classes to enable partial updates
