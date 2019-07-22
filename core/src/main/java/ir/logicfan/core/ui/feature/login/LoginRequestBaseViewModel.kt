@@ -6,10 +6,8 @@ import io.reactivex.disposables.CompositeDisposable
 import ir.logicfan.core.ui.base.BaseViewModel
 import ir.logicfan.core.ui.reactive.OneShotEvent
 import ir.logicfan.core.util.extension.isValidIranMobile
-import javax.inject.Inject
 
-open class LoginRequestBaseViewModel @Inject
-constructor(
+abstract class LoginRequestBaseViewModel(
     compositeDisposable: CompositeDisposable
 ) : BaseViewModel(compositeDisposable) {
 

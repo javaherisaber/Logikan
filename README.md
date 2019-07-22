@@ -3,6 +3,11 @@
 Core, base and utility functionality required by an android project
 
 ## Changelog
+### 1.3.3
+- Create EditTextExtensions
+- Mark LoginVerifyBaseViewModel and LoginRequestBaseViewModel as abstract
+- Remove non reusable properties from LoginVerifyBaseViewModel
+
 ### 1.3.2
 - Remove fontFamily from AppTheme, it was shadowing typography
 - Create LoginRequestBaseViewModel and LoginVerifyBaseViewModel
