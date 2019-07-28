@@ -49,7 +49,7 @@ class JalaliCalendarTest {
 
     @Test
     fun getJalaliCalendar() {
-        assertEquals(JalaliCalendar.getJalaliCalendar(TIMESTAMP), jalaliCalendar)
+        assertEquals(JalaliCalendar.getJalaliCalendarFromUnixTimestamp(TIMESTAMP), jalaliCalendar)
     }
 
     companion object {

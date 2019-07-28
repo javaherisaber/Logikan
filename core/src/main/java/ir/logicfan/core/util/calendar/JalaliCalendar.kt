@@ -78,6 +78,28 @@ data class JalaliCalendar(var year: Int, var month: MonthPersian, var day: Int, 
     }
 
     /**
+     * Convert current calendar to Iso timestamp (yyyy-MM-dd HH:mm:ss)
+     */
+    @SuppressLint("SimpleDateFormat")
+    fun toIsoTimestamp(): String {
+        val gregorian = toGregorian()
+        val year = gregorian.get(Calendar.YEAR)
+        val month = gregorian.get(Calendar.MONTH) + 1 // gregorian calendar is zero based
+        var monthText = ""
+        if (month < 10) {
+            monthText += "0"
+        }
+        monthText += month
+        val day = gregorian.get(Calendar.DAY_OF_MONTH)
+        var dayText = ""
+        if (day < 10) {
+            dayText += "0"
+        }
+        dayText += day
+        return "$year-$monthText-$dayText ${Clock.getClockLabel(this.clock, Clock.ClockLabelType.HOUR_MINUTE_SECOND)}"
+    }
+
+    /**
      * type 1 is the following format:
      * 12 اردیبهشت 1395
      */
@@ -139,13 +161,34 @@ data class JalaliCalendar(var year: Int, var month: MonthPersian, var day: Int, 
          */
         @SuppressLint("SimpleDateFormat")
         @JvmStatic
-        fun getJalaliCalendar(timestamp: String): JalaliCalendar? = try {
+        fun getJalaliCalendarFromUnixTimestamp(timestamp: String): JalaliCalendar? = try {
             val date = Date(timestamp.toLong() * 1000L)
             val formatted = SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(date)
-            val dateTimeParts = formatted.split(" ")
+            val gregorian = getGregorianCalendarFromFormattedIsoTimestamp(formatted)
+            JalaliCalendar(gregorian)
+        } catch (ex: NumberFormatException) {
+            // string does not contain timestamp
+            null
+        }
+
+        @JvmStatic
+        fun getJalaliCalendarFromIsoTimestamp(timestamp: String): JalaliCalendar? = try {
+            val gregorian = getGregorianCalendarFromFormattedIsoTimestamp(timestamp)
+            JalaliCalendar(gregorian)
+        } catch (ex: NumberFormatException) {
+            // string does not contain proper timestamp
+            null
+        }
+
+        /**
+         * @param formattedTimestamp date time with this format yyyy-MM-dd HH:mm:ss
+         */
+        @JvmStatic
+        private fun getGregorianCalendarFromFormattedIsoTimestamp(formattedTimestamp: String): GregorianCalendar {
+            val dateTimeParts = formattedTimestamp.split(" ")
             val dateParts = dateTimeParts[0].split("-")
             val timeParts = dateTimeParts[1].split(":")
-            val gregorian = GregorianCalendar(
+            return GregorianCalendar(
                 dateParts[0].toInt(), // year
                 dateParts[1].toInt() - 1, // month (gregorian month is zero based)
                 dateParts[2].toInt(), // day of month
@@ -153,10 +196,6 @@ data class JalaliCalendar(var year: Int, var month: MonthPersian, var day: Int, 
                 timeParts[1].toInt(), // minute
                 timeParts[2].toInt() // second
             )
-            JalaliCalendar(gregorian)
-        } catch (ex: NumberFormatException) {
-            // string does not contain timestamp
-            null
         }
     }
 }
