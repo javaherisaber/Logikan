@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import io.reactivex.disposables.CompositeDisposable
 import ir.logicfan.core.ui.base.BaseViewModel
 import ir.logicfan.core.ui.reactive.OneShotEvent
+import ir.logicfan.core.ui.util.extension.postOneShotUnit
 import ir.logicfan.core.util.extension.isValidIranMobile
 
 abstract class LoginRequestBaseViewModel(
@@ -25,11 +26,11 @@ abstract class LoginRequestBaseViewModel(
     protected fun doIfInputMobileIsValid(operation: (String) -> Unit) {
         inputMobile.value?.let {
             when {
-                it.isEmpty() -> emitUnitEvent(_showWrongMobileError)
+                it.isEmpty() -> _showWrongMobileError.postOneShotUnit()
                 it.isValidIranMobile() -> operation(it)
-                else -> emitUnitEvent(_showWrongMobileError)
+                else -> _showWrongMobileError.postOneShotUnit()
             }
-        } ?: emitUnitEvent(_showWrongMobileError)
+        } ?: _showWrongMobileError.postOneShotUnit()
     }
 
     protected fun emitNavigateToVerify(mobile: String) {
