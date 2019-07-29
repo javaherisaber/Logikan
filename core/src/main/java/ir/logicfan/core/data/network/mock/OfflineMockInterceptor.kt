@@ -8,7 +8,9 @@ import java.io.IOException
 import javax.inject.Inject
 
 /**
- * provide network response from json mock in local device
+ * Provide network response from json mock in local device
+ * You should remove `Base Url` and `Query parameters` from requestPath in Mock module
+ * If your request contains `Path parameters` eg. {product_id}, replace it with {#}
  *
  * @property apiEnableMock master setting to enable or disable mock
  * @property apiExcludeFromMock exclude specific endpoint from being mocked
@@ -36,6 +38,7 @@ constructor(
         val requestPath = url
             .replace(baseUrl, "")  // remove base url
             .replace("\\?.*".toRegex(), "") // remove query parameters
+            .replace("\\d+".toRegex(), "{#}") // replace dynamic path (eg. id) with {#}
 
         var canProceedWithMock = apiEnableMock // can we use mock or proceed with network api
 
