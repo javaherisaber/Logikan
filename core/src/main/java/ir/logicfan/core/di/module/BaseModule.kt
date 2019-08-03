@@ -23,7 +23,6 @@ abstract class BaseModule {
     @Module
     companion object {
         @Provides
-        @Reusable
         @JvmStatic
         fun compositeDisposable(): CompositeDisposable = CompositeDisposable()
     }
