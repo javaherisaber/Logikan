@@ -1,3 +1,4 @@
+<!DOCTYPE resources [<!ENTITY currency "تومان">]>
 <resources>
     <!--
     # CODE OF CONDUCT
@@ -19,6 +20,7 @@
 
     <!-- all -->
     <string name="core_all_hour">ساعت</string>
+    <string name="core_all_price_with">%1$s &currency;</string>
     <!-- end of all -->
 
     <!-- error -->

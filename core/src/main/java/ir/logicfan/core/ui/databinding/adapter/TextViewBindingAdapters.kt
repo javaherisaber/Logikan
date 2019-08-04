@@ -4,10 +4,23 @@ import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import ir.logicfan.core.R
 import ir.logicfan.core.util.Clock
+import ir.logicfan.core.util.StringUtils
 import ir.logicfan.core.util.calendar.JalaliCalendar
 import java.text.MessageFormat
 
 object TextViewBindingAdapters {
+    /**
+     * Set TextView's text with price separated thousands
+     */
+    @BindingAdapter("price")
+    @JvmStatic
+    fun price(textView: TextView, price: Long?) {
+        price?.let {
+            val context = textView.context
+            val priceSeparatedThousands = StringUtils.numberToSeparatedThousands(it)
+            textView.text = context.getString(R.string.core_all_price_with, priceSeparatedThousands)
+        }
+    }
 
     /**
      * Set TextView's text with Jalali date extracted from Unix formatted timestamp
@@ -16,7 +29,7 @@ object TextViewBindingAdapters {
      */
     @BindingAdapter(value = ["jalaliUnixDateLabel", "jalaliLabelType"], requireAll = true)
     @JvmStatic
-    fun jalaliUnixDateLabel(textView: TextView, timestamp: String?, jalaliLabelType: JalaliCalendar.JalaliLabelType) {
+    fun jalaliUnixDateLabel(textView: TextView, timestamp: Long?, jalaliLabelType: JalaliCalendar.JalaliLabelType) {
         if (timestamp == null) {
             return
         }
@@ -56,9 +69,9 @@ object TextViewBindingAdapters {
      */
     @BindingAdapter(value = ["jalaliDateTimeLabel", "jalaliLabelType", "clockLabelType"], requireAll = true)
     @JvmStatic
-    fun jalaliDateTimeLabel(
+    fun jalaliUnixDateTimeLabel(
         textView: TextView,
-        timestamp: String?,
+        timestamp: Long?,
         jalaliLabelType: JalaliCalendar.JalaliLabelType,
         clockLabelType: Clock.ClockLabelType
     ) {
