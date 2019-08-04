@@ -11,65 +11,78 @@
     <style name="Core.TextAppearance.Headline1" parent="TextAppearance.MaterialComponents.Headline1">
         <item name="android:textSize">42sp</item>
         <item name="fontFamily">@font/yekan</item>
+        <item name="android:fontFamily">@font/yekan</item>
     </style>
 
     <style name="Core.TextAppearance.Headline2" parent="TextAppearance.MaterialComponents.Headline2">
         <item name="android:textSize">30sp</item>
         <item name="fontFamily">@font/yekan</item>
+        <item name="android:fontFamily">@font/yekan</item>
     </style>
 
     <style name="Core.TextAppearance.Headline3" parent="TextAppearance.MaterialComponents.Headline3">
         <item name="android:textSize">22sp</item>
         <item name="fontFamily">@font/yekan</item>
+        <item name="android:fontFamily">@font/yekan</item>
     </style>
 
     <style name="Core.TextAppearance.Headline4" parent="TextAppearance.MaterialComponents.Headline4">
         <item name="android:textSize">18sp</item>
         <item name="android:textColor">@color/core_colorBlack</item>
         <item name="fontFamily">@font/yekan</item>
+        <item name="android:fontFamily">@font/yekan</item>
     </style>
 
     <style name="Core.TextAppearance.Headline5" parent="TextAppearance.MaterialComponents.Headline5">
         <item name="android:textSize">14sp</item>
         <item name="fontFamily">@font/yekan</item>
+        <item name="android:fontFamily">@font/yekan</item>
     </style>
 
     <style name="Core.TextAppearance.Headline6" parent="TextAppearance.MaterialComponents.Headline6">
         <item name="android:textSize">12sp</item>
         <item name="fontFamily">@font/yekan</item>
+        <item name="android:fontFamily">@font/yekan</item>
     </style>
 
     <style name="Core.TextAppearance.Subtitle1" parent="TextAppearance.MaterialComponents.Subtitle1">
         <item name="fontFamily">@font/yekan</item>
+        <item name="android:fontFamily">@font/yekan</item>
     </style>
 
     <style name="Core.TextAppearance.Subtitle2" parent="TextAppearance.MaterialComponents.Subtitle2">
         <item name="fontFamily">@font/yekan</item>
+        <item name="android:fontFamily">@font/yekan</item>
     </style>
 
     <style name="Core.TextAppearance.Body1" parent="TextAppearance.MaterialComponents.Body1">
         <item name="android:textSize">16sp</item>
         <item name="fontFamily">@font/yekan</item>
+        <item name="android:fontFamily">@font/yekan</item>
         <item name="android:textColor">@color/core_colorBody1</item>
     </style>
 
     <style name="Core.TextAppearance.Body2" parent="TextAppearance.MaterialComponents.Body2">
         <item name="android:textSize">14sp</item>
         <item name="fontFamily">@font/yekan</item>
+        <item name="android:fontFamily">@font/yekan</item>
         <item name="android:textColor">@color/core_colorBody2</item>
     </style>
 
     <style name="Core.TextAppearance.Caption" parent="TextAppearance.MaterialComponents.Caption">
         <item name="android:textSize">12sp</item>
         <item name="fontFamily">@font/yekan</item>
+        <item name="android:fontFamily">@font/yekan</item>
     </style>
 
     <style name="Core.TextAppearance.Button" parent="TextAppearance.MaterialComponents.Button">
         <item name="fontFamily">@font/yekan</item>
+        <item name="android:fontFamily">@font/yekan</item>
     </style>
 
     <style name="Core.TextAppearance.Overline" parent="TextAppearance.MaterialComponents.Overline">
         <item name="fontFamily">@font/yekan</item>
+        <item name="android:fontFamily">@font/yekan</item>
     </style>
 
 </resources>
