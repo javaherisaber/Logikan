@@ -53,6 +53,6 @@ class JalaliCalendarTest {
     }
 
     companion object {
-        const val TIMESTAMP = "1561836600" // corresponding to 1398/04/09
+        const val TIMESTAMP = 1561836600L // corresponding to 1398/04/09
     }
 }

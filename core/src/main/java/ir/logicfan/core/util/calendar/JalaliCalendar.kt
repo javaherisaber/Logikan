@@ -148,6 +148,14 @@ data class JalaliCalendar(var year: Int, var month: MonthPersian, var day: Int, 
         @JvmStatic
         fun currentUnixTimestamp(): Long = System.currentTimeMillis() / 1000
 
+        /**
+         * Calculate difference between given unix timestamp and now
+         * (unix timestamp is simply seconds passed since 1970)
+         *  @return seconds
+         */
+        @JvmStatic
+        fun timestampDifferenceSeconds(unixTimestamp: Long): Int = (unixTimestamp - currentUnixTimestamp()).toInt()
+
         @JvmStatic
         fun getDateLabel(jalaliCalendar: JalaliCalendar, type: JalaliLabelType): String = when (type) {
             JalaliLabelType.LETTER_MONTH -> jalaliCalendar.getDateLabelLetterMonth()
@@ -156,13 +164,13 @@ data class JalaliCalendar(var year: Int, var month: MonthPersian, var day: Int, 
         }
 
         /**
-         * @param timestamp Unix Timestamp with this format : 1561783493
+         * @param unixTimestamp Unix Timestamp with this format : 1561783493
          * @return [JalaliCalendar] object is timestamp is correct or null otherwise
          */
         @SuppressLint("SimpleDateFormat")
         @JvmStatic
-        fun getJalaliCalendarFromUnixTimestamp(timestamp: String): JalaliCalendar? = try {
-            val date = Date(timestamp.toLong() * 1000L)
+        fun getJalaliCalendarFromUnixTimestamp(unixTimestamp: Long): JalaliCalendar? = try {
+            val date = Date(unixTimestamp * 1000L)
             val formatted = SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(date)
             val gregorian = getGregorianCalendarFromFormattedIsoTimestamp(formatted)
             JalaliCalendar(gregorian)
@@ -172,8 +180,8 @@ data class JalaliCalendar(var year: Int, var month: MonthPersian, var day: Int, 
         }
 
         @JvmStatic
-        fun getJalaliCalendarFromIsoTimestamp(timestamp: String): JalaliCalendar? = try {
-            val gregorian = getGregorianCalendarFromFormattedIsoTimestamp(timestamp)
+        fun getJalaliCalendarFromIsoTimestamp(isoTimestamp: String): JalaliCalendar? = try {
+            val gregorian = getGregorianCalendarFromFormattedIsoTimestamp(isoTimestamp)
             JalaliCalendar(gregorian)
         } catch (ex: NumberFormatException) {
             // string does not contain proper timestamp
