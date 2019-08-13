@@ -4,39 +4,98 @@ import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import ir.logicfan.core.R
 import ir.logicfan.core.util.Clock
+import ir.logicfan.core.util.StringUtils
 import ir.logicfan.core.util.calendar.JalaliCalendar
 import java.text.MessageFormat
 
 object TextViewBindingAdapters {
+    /**
+     * Set TextView's text with price separated thousands
+     * @param priceLabel label being added as prefix text
+     */
+    @BindingAdapter(value =["price", "priceLabel"], requireAll = false)
+    @JvmStatic
+    fun price(textView: TextView, price: Long?, priceLabel: String?) {
+        price?.let {
+            val context = textView.context
+            val priceSeparatedThousands = StringUtils.numberToSeparatedThousands(it)
+            var resultText = ""
+            priceLabel?.let {
+                resultText += "$priceLabel "
+            }
+            resultText += context.getString(R.string.core_all_price_with, priceSeparatedThousands)
+            textView.text = resultText
+        }
+    }
 
     /**
-     * Set text with requested type
+     * Set TextView's text with Jalali date extracted from Unix formatted timestamp
      *
      * @param timestamp Unix epoch timestamp
-     * @param jalaliLabelType defined inside JalaliCalendar class
      */
-    @BindingAdapter(value = ["jalaliDateLabel", "jalaliLabelType"], requireAll = true)
+    @BindingAdapter(value = ["jalaliUnixDateLabel", "jalaliLabelType"], requireAll = true)
     @JvmStatic
-    fun jalaliDateLabel(textView: TextView, timestamp: String?, jalaliLabelType: JalaliCalendar.JalaliLabelType) {
+    fun jalaliUnixDateLabel(textView: TextView, timestamp: Long?, jalaliLabelType: JalaliCalendar.JalaliLabelType) {
         if (timestamp == null) {
             return
         }
-        val jalaliCalendar = JalaliCalendar.getJalaliCalendar(timestamp)
+        val jalaliCalendar = JalaliCalendar.getJalaliCalendarFromUnixTimestamp(timestamp)
+        setJalaliDateLabel(textView, jalaliCalendar, jalaliLabelType)
+    }
+
+    /**
+     * Set TextView's text with Jalali date extracted from ISO formatted timestamp
+     *
+     * @param timestamp ISO timestamp with this format yyyy-MM-dd HH:mm:ss
+     */
+    @BindingAdapter(value = ["jalaliIsoDateLabel", "jalaliLabelType"], requireAll = true)
+    @JvmStatic
+    fun jalaliIsoDateLabel(textView: TextView, timestamp: String?, jalaliLabelType: JalaliCalendar.JalaliLabelType) {
+        if (timestamp == null) {
+            return
+        }
+        val jalaliCalendar = JalaliCalendar.getJalaliCalendarFromIsoTimestamp(timestamp)
+        setJalaliDateLabel(textView, jalaliCalendar, jalaliLabelType)
+    }
+
+    private fun setJalaliDateLabel(
+        textView: TextView,
+        jalaliCalendar: JalaliCalendar?,
+        jalaliLabelType: JalaliCalendar.JalaliLabelType
+    ) {
         jalaliCalendar?.let {
             textView.text = JalaliCalendar.getDateLabel(it, jalaliLabelType)
         }
     }
 
     /**
-     * Set text with requested type
+     * Set TextView's text with Jalali datetime extracted from Unix timestamp
      *
      * @param timestamp Unix epoch timestamp
-     * @param jalaliLabelType defined inside JalaliCalendar class
-     * @param clockLabelType defined inside Clock class
      */
     @BindingAdapter(value = ["jalaliDateTimeLabel", "jalaliLabelType", "clockLabelType"], requireAll = true)
     @JvmStatic
-    fun jalaliDateTimeLabel(
+    fun jalaliUnixDateTimeLabel(
+        textView: TextView,
+        timestamp: Long?,
+        jalaliLabelType: JalaliCalendar.JalaliLabelType,
+        clockLabelType: Clock.ClockLabelType
+    ) {
+        if (timestamp == null) {
+            return
+        }
+        val jalaliCalendar = JalaliCalendar.getJalaliCalendarFromUnixTimestamp(timestamp)
+        setJalaliDateTimeLabel(textView, jalaliCalendar, jalaliLabelType, clockLabelType)
+    }
+
+    /**
+     * Set TextView's text with Jalali datetime extracted from ISO formatted timestamp
+     *
+     * @param timestamp ISO timestamp with this format yyyy-MM-dd HH:mm:ss
+     */
+    @BindingAdapter(value = ["jalaliIsoDateTimeLabel", "jalaliLabelType", "clockLabelType"], requireAll = true)
+    @JvmStatic
+    fun jalaliIsoDateTimeLabel(
         textView: TextView,
         timestamp: String?,
         jalaliLabelType: JalaliCalendar.JalaliLabelType,
@@ -45,7 +104,16 @@ object TextViewBindingAdapters {
         if (timestamp == null) {
             return
         }
-        val jalaliCalendar = JalaliCalendar.getJalaliCalendar(timestamp)
+        val jalaliCalendar = JalaliCalendar.getJalaliCalendarFromIsoTimestamp(timestamp)
+        setJalaliDateTimeLabel(textView, jalaliCalendar, jalaliLabelType, clockLabelType)
+    }
+
+    private fun setJalaliDateTimeLabel(
+        textView: TextView,
+        jalaliCalendar: JalaliCalendar?,
+        jalaliLabelType: JalaliCalendar.JalaliLabelType,
+        clockLabelType: Clock.ClockLabelType
+    ) {
         jalaliCalendar?.let {
             val hourText = textView.context.getString(R.string.core_all_hour)
             val timeLabel = Clock.getClockLabel(jalaliCalendar.clock, clockLabelType)

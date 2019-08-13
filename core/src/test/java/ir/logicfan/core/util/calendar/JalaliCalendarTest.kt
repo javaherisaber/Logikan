@@ -49,10 +49,10 @@ class JalaliCalendarTest {
 
     @Test
     fun getJalaliCalendar() {
-        assertEquals(JalaliCalendar.getJalaliCalendar(TIMESTAMP), jalaliCalendar)
+        assertEquals(JalaliCalendar.getJalaliCalendarFromUnixTimestamp(TIMESTAMP), jalaliCalendar)
     }
 
     companion object {
-        const val TIMESTAMP = "1561836600" // corresponding to 1398/04/09
+        const val TIMESTAMP = 1561836600L // corresponding to 1398/04/09
     }
 }

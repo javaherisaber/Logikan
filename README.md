@@ -3,6 +3,15 @@
 Core, base and utility functionality required by an android project
 
 ## Changelog
+### 1.4
+- Add unix and iso timestamp types
+- Request path (eg. product/{id}) support in OfflineMockInterceptor
+- BaseViewModel.emitUnitEvent() deprecated in favor of extension function
+- Add expandableTextView anchor, binding adapter
+- Add countDown and countUp functionality to Clock
+- Create CoreColoredStrikeThroughTextView
+- Add Unified price binding adapter
+
 ### 1.3.3
 - Create EditTextExtensions
 - Mark LoginVerifyBaseViewModel and LoginRequestBaseViewModel as abstract
