@@ -33,6 +33,14 @@ abstract class BaseViewModel(val compositeDisposable: CompositeDisposable) : Vie
 
     companion object {
         private var TAG = BaseViewModel::class.java.simpleName
+        @Deprecated(
+            "There is a more readable extension function for this purpose " +
+                    "in LiveDataExtensions with name postOneShotUnit()",
+            ReplaceWith(
+                "oneShotObject.postOneShotUnit()",
+                "ir.logicfan.core.ui.util.extension.postOneShotUnit"
+            )
+        )
         fun emitUnitEvent(oneShotObject: MutableLiveData<OneShotEvent<Unit>>) {
             oneShotObject.value = OneShotEvent(Unit)
         }
