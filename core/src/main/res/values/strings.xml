@@ -24,8 +24,9 @@
     <!-- end of all -->
 
     <!-- error -->
+    <string name="core_error_try_later">خطایی رخ داد، لطفا بعدا امتحان کنید</string>
+    <string name="core_error_try_again">خطایی رخ داد، لطفا دوباره امتحان کنید</string>
     <string name="core_error_unAuthorized_message">دسترسی امکان پذیر نیست، لطفا دوباره وارد حساب کاربری خود شوید</string>
-    <string name="core_error_something_went_wrong">خطایی رخ داد، لطفا بعدا امتحان کنید</string>
     <string name="core_error_oops_something_went_wrong">خطایی در اتصال به شبکه رخ داد، لطفا بعدا امتحان کنید</string>
     <string name="core_error_serverError">اتصال به سرور با مشکل مواجه شد، لطفا بعدا امتحان کنید</string>
     <string name="core_error_connectivityError">خطایی در اتصال به شبکه رخ داد، دوباره امتحان کنید</string>
