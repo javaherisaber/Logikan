@@ -33,12 +33,14 @@ constructor(
 
     @Throws(IOException::class)
     override fun intercept(chain: Interceptor.Chain): Response {
-        val url = chain.request().url().toString()
-
-        val requestPath = url
+        val request = chain.request()
+        val route = request.url().toString()
             .replace(baseUrl, "")  // remove base url
             .replace("\\?.*".toRegex(), "") // remove query parameters
             .replace("\\d+".toRegex(), "{#}") // replace dynamic path (eg. id) with {#}
+
+        // example requestPath -> [DELETE] shops/{#}/social-accounts/{#}
+        val requestPath = "[${request.method().toUpperCase()}] $route"
 
         var canProceedWithMock = apiEnableMock // can we use mock or proceed with network api
 
@@ -65,16 +67,17 @@ constructor(
                 Thread.sleep(apiResponseLatency)
                 Response.Builder()
                     .body(responseBody)
-                    .request(chain.request()).message(RESPONSE_MESSAGE)
+                    .request(request)
+                    .message(RESPONSE_MESSAGE)
                     .protocol(Protocol.HTTP_1_1)
                     .code(RESPONSE_CODE)
                     .build()
             } ?: run {
                 // no json found, proceed request from internet
-                chain.proceed(chain.request())
+                chain.proceed(request)
             }
         } else {
-          return chain.proceed(chain.request())
+            return chain.proceed(request)
         }
     }
 }
