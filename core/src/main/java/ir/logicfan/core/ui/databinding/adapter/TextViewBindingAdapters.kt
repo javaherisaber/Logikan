@@ -73,7 +73,7 @@ object TextViewBindingAdapters {
      *
      * @param timestamp Unix epoch timestamp
      */
-    @BindingAdapter(value = ["jalaliDateTimeLabel", "jalaliLabelType", "clockLabelType"], requireAll = true)
+    @BindingAdapter(value = ["jalaliUnixDateTimeLabel", "jalaliLabelType", "clockLabelType"], requireAll = true)
     @JvmStatic
     fun jalaliUnixDateTimeLabel(
         textView: TextView,
