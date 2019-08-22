@@ -104,7 +104,7 @@ data class JalaliCalendar(var year: Int, var month: MonthPersian, var day: Int, 
      * 12 اردیبهشت 1395
      */
     private fun getDateLabelLetterMonth(): String = MessageFormat.format(
-        "{0} {1} {2}",
+        "{0} {1} {2,number,#}",
         this.day,
         this.monthString,
         this.year
@@ -115,7 +115,7 @@ data class JalaliCalendar(var year: Int, var month: MonthPersian, var day: Int, 
      * پنجشنبه 12 تیر 1398
      */
     private fun getDateLabelLetterMonthPlusDay(): String = MessageFormat.format(
-        "{0} {1} {2} {3}",
+        "{0} {1} {2} {3,number,#}",
         this.dayOfWeekString,
         this.day,
         this.monthString,
@@ -127,7 +127,7 @@ data class JalaliCalendar(var year: Int, var month: MonthPersian, var day: Int, 
      * 1398/04/12
      */
     private fun getDateLabelDigit(): String = MessageFormat.format(
-        "{0}/{1}/{2}",
+        "{0,number,#}/{1}/{2}",
         this.year,
         this.month.value,
         this.day
