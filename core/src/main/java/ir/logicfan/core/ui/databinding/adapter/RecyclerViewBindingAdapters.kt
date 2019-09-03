@@ -2,36 +2,67 @@ package ir.logicfan.core.ui.databinding.adapter
 
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import ir.logicfan.core.R
+import ir.logicfan.core.ui.recyclerview.decorator.GridMarginItemDecoration
+import ir.logicfan.core.ui.recyclerview.decorator.HorizontalMarginItemDecoration
+import ir.logicfan.core.ui.recyclerview.decorator.VerticalMarginItemDecoration
 
-object RecyclerViewBindingAdapters {
-
-    /**
-     * Add a default gray color divider to your recyclerView
-     *
-     * @param defaultDividerItemDecoration if true itemDecoration will be added
-     * @param dividerOrientation if provided it decide orientation, if null Vertical will be used
-     */
-    @BindingAdapter(
-        value = ["defaultDividerItemDecoration", "dividerOrientation"],
-        requireAll = false
-    )
-    @JvmStatic
-    fun addDefaultDividerItemDecoration(
-        recyclerView: RecyclerView,
-        defaultDividerItemDecoration: Boolean?,
-        dividerOrientation: Int?
-    ) {
-        fun addItemDecoration(recyclerView: RecyclerView, orientation: Int) {
-            recyclerView.addItemDecoration(DividerItemDecoration(recyclerView.context, orientation))
+/**
+ * Add a default gray color divider to your recyclerView
+ *
+ * @param hasItemDecoration if true itemDecoration will be added
+ * @param dividerOrientation if provided it decide orientation, if null Vertical will be used
+ */
+@BindingAdapter(
+    value = ["hasDefaultDividerItemDecoration", "dividerOrientation"],
+    requireAll = false
+)
+fun RecyclerView.addDefaultDividerItemDecoration(
+    hasItemDecoration: Boolean,
+    dividerOrientation: Int?
+) {
+    if (hasItemDecoration) {
+        if (dividerOrientation == null) {
+            // no orientation provided, use VERTICAL by default
+            addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
+        } else {
+            // orientation provided
+            addItemDecoration(DividerItemDecoration(context, dividerOrientation))
         }
-        if (defaultDividerItemDecoration != null && defaultDividerItemDecoration == true) {
-            if (dividerOrientation == null) {
-                // no orientation provided, use VERTICAL by default
-                addItemDecoration(recyclerView, DividerItemDecoration.VERTICAL)
-            } else {
-                // orientation provided
-                addItemDecoration(recyclerView, dividerOrientation)
+    }
+}
+
+/**
+ * Add margin to recyclerView items
+ *
+ * @param hasItemDecoration if true decorator will be added
+ * @param margin applies to all sides of your item
+ */
+@BindingAdapter(
+    value = ["hasMarginItemDecoration", "itemDecorationMargin"],
+    requireAll = false
+)
+fun RecyclerView.addGridMarginItemDecorator(
+    hasItemDecoration: Boolean,
+    margin: Int?
+) {
+    if (hasItemDecoration) {
+        var itemMargin = resources.getDimension(R.dimen.core_margin_default).toInt()
+        margin?.let {
+            itemMargin = it
+        }
+        when (val itemLayoutManager = layoutManager) {
+            is GridLayoutManager -> addItemDecoration(GridMarginItemDecoration(itemMargin))
+            is LinearLayoutManager -> when (itemLayoutManager.orientation) {
+                LinearLayoutManager.HORIZONTAL -> addItemDecoration(
+                    HorizontalMarginItemDecoration(itemMargin)
+                )
+                LinearLayoutManager.VERTICAL -> addItemDecoration(
+                    VerticalMarginItemDecoration(itemMargin)
+                )
             }
         }
     }
