@@ -25,24 +25,31 @@ class GridMarginItemDecoration(private val margin: Int) :
                 top = margin
             }
             val isLayoutRtl = parent.layoutDirection == ViewCompat.LAYOUT_DIRECTION_RTL
-            if (position.rem(spanCount) == 0) {
-                // first column
-                if (isLayoutRtl) {
-                    right = margin
-                    left = margin / 2
-                } else {
-                    left = margin
-                    right = margin / 2
+            val column = position.rem(spanCount)
+            val firstColumn = 0
+            val lastColumn = spanCount - 1
+            when (column) {
+                firstColumn -> {
+                    if (isLayoutRtl) {
+                        right = margin
+                        left = margin / 2
+                    } else {
+                        left = margin
+                        right = margin / 2
+                    }
                 }
-            }
-            if (position.rem(spanCount) == (spanCount - 1)) {
-                // last column
-                if (isLayoutRtl) {
-                    left = margin
-                    right = margin / 2
-                } else {
-                    right = margin
+                lastColumn -> {
+                    if (isLayoutRtl) {
+                        left = margin
+                        right = margin / 2
+                    } else {
+                        right = margin
+                        left = margin / 2
+                    }
+                }
+                in (firstColumn + 1) until lastColumn -> {
                     left = margin / 2
+                    right = margin / 2
                 }
             }
             bottom = margin
