@@ -27,13 +27,15 @@ open class SimpleBindingViewHolder(val binding: ViewDataBinding) : RecyclerView.
     }
 
     init {
-        lifecycleRegistry.markState(Lifecycle.State.INITIALIZED)
+        lifecycleRegistry.currentState = Lifecycle.State.INITIALIZED
     }
 
-    fun onAppear() = lifecycleRegistry.markState(Lifecycle.State.CREATED)
+    fun onAppear() {
+        lifecycleRegistry.currentState = Lifecycle.State.CREATED
+    }
 
     fun onDisappear() {
-        lifecycleRegistry.markState(Lifecycle.State.DESTROYED)
+        lifecycleRegistry.currentState = Lifecycle.State.DESTROYED
         unbind()
     }
 
