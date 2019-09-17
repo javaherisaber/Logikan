@@ -5,10 +5,14 @@ import androidx.annotation.IdRes
 import androidx.fragment.app.Fragment
 import ir.logicfan.core.R
 
-fun Fragment.openChildFragment(@IdRes viewId: Int, fragment: Fragment) {
-    childFragmentManager.beginTransaction()
-        .replace(viewId, fragment)
-        .commit()
+fun Fragment.openChildFragment(@IdRes viewId: Int, fragment: Fragment, addToBackStack: Boolean = false) {
+    childFragmentManager.beginTransaction().apply {
+        replace(viewId, fragment)
+        if (addToBackStack) {
+            addToBackStack(fragment.tag)
+        }
+        commit()
+    }
 }
 
 fun Fragment.notImplementedToast() {
