@@ -13,19 +13,17 @@ object TextViewBindingAdapters {
      * Set TextView's text with price separated thousands
      * @param priceLabel label being added as prefix text
      */
-    @BindingAdapter(value =["price", "priceLabel"], requireAll = false)
+    @BindingAdapter(value = ["price", "priceLabel"], requireAll = false)
     @JvmStatic
     fun price(textView: TextView, price: Long?, priceLabel: String?) {
-        price?.let {
-            val context = textView.context
-            val priceSeparatedThousands = StringUtils.numberToSeparatedThousands(it)
-            var resultText = ""
-            priceLabel?.let {
-                resultText += "$priceLabel "
-            }
-            resultText += context.getString(R.string.core_all_price_with, priceSeparatedThousands)
-            textView.text = resultText
+        val context = textView.context
+        val priceSeparatedThousands = StringUtils.numberToSeparatedThousands(price ?: 0)
+        var resultText = ""
+        priceLabel?.let {
+            resultText += "$priceLabel "
         }
+        resultText += context.getString(R.string.core_all_price_with, priceSeparatedThousands)
+        textView.text = resultText
     }
 
     /**
