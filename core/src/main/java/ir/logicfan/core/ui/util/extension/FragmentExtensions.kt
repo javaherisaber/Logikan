@@ -9,7 +9,7 @@ fun Fragment.openChildFragment(@IdRes viewId: Int, fragment: Fragment, addToBack
     childFragmentManager.beginTransaction().apply {
         replace(viewId, fragment)
         if (addToBackStack) {
-            addToBackStack(fragment.tag)
+            addToBackStack(fragment.javaClass.simpleName)
         }
         commit()
     }
