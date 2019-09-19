@@ -8,6 +8,7 @@
     -->
 
     <dimen name="core_margin_default">16dp</dimen>
+    <dimen name="core_margin_8dp">8dp</dimen>
 
     <dimen name="core_elevation_mild">2dp</dimen>
     <dimen name="core_elevation_default">4dp</dimen>

@@ -8,6 +8,11 @@ import ir.logicfan.core.util.StringUtils
 import ir.logicfan.core.util.calendar.JalaliCalendar
 import java.text.MessageFormat
 
+@BindingAdapter(value = ["text", "label"], requireAll = true)
+fun TextView.textWithLabel(text: String?, label: String?) {
+    this.text = label.plus(" : ").plus(text)
+}
+
 object TextViewBindingAdapters {
     /**
      * Set TextView's text with price separated thousands
