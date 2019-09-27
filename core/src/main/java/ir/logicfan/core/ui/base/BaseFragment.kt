@@ -3,6 +3,7 @@ package ir.logicfan.core.ui.base
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.annotation.CallSuper
 import androidx.lifecycle.Observer
 import dagger.android.support.DaggerFragment
@@ -35,5 +36,9 @@ abstract class BaseFragment : DaggerFragment() {
 
     companion object {
         private var TAG = BaseFragment::class.java.simpleName
+    }
+
+    fun showToast(message: String) {
+        Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
     }
 }
