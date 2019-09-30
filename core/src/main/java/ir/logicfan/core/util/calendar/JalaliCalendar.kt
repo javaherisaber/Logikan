@@ -7,7 +7,9 @@ import java.text.MessageFormat
 import java.text.SimpleDateFormat
 import java.util.*
 
-data class JalaliCalendar(var year: Int, var month: MonthPersian, var day: Int, var clock: Clock) : Serializable {
+data class JalaliCalendar(
+    var year: Int, var month: MonthPersian, var day: Int, var clock: Clock
+) : Serializable, Comparable<JalaliCalendar> {
 
     init {
         basicArgumentValidating(year, month.value, day)
@@ -133,6 +135,13 @@ data class JalaliCalendar(var year: Int, var month: MonthPersian, var day: Int, 
         this.day
     )
 
+    override fun compareTo(other: JalaliCalendar): Int = when {
+        year != other.year -> year - other.year
+        month != other.month -> month.value - other.month.value
+        day != other.day -> day - other.day
+        else -> clock.compareTo(other.clock)
+    }
+
     /**
      * To be used by [getDateLabel] method to return suitable labeled jalali calendar
      */
@@ -169,23 +178,17 @@ data class JalaliCalendar(var year: Int, var month: MonthPersian, var day: Int, 
          */
         @SuppressLint("SimpleDateFormat")
         @JvmStatic
-        fun getJalaliCalendarFromUnixTimestamp(unixTimestamp: Long): JalaliCalendar? = try {
+        fun getJalaliCalendarFromUnixTimestamp(unixTimestamp: Long): JalaliCalendar {
             val date = Date(unixTimestamp * 1000L)
             val formatted = SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(date)
             val gregorian = getGregorianCalendarFromFormattedIsoTimestamp(formatted)
-            JalaliCalendar(gregorian)
-        } catch (ex: NumberFormatException) {
-            // string does not contain timestamp
-            null
+            return JalaliCalendar(gregorian)
         }
 
         @JvmStatic
-        fun getJalaliCalendarFromIsoTimestamp(isoTimestamp: String): JalaliCalendar? = try {
+        fun getJalaliCalendarFromIsoTimestamp(isoTimestamp: String): JalaliCalendar {
             val gregorian = getGregorianCalendarFromFormattedIsoTimestamp(isoTimestamp)
-            JalaliCalendar(gregorian)
-        } catch (ex: NumberFormatException) {
-            // string does not contain proper timestamp
-            null
+            return JalaliCalendar(gregorian)
         }
 
         /**
@@ -204,6 +207,16 @@ data class JalaliCalendar(var year: Int, var month: MonthPersian, var day: Int, 
                 timeParts[1].toInt(), // minute
                 timeParts[2].toInt() // second
             )
+        }
+
+        @JvmStatic
+        fun isTimeStampExpired(unixTimestamp: Long?): Boolean {
+            unixTimestamp?.let {
+                val timeStampDate = getJalaliCalendarFromUnixTimestamp(it)
+                val today = JalaliCalendar()
+                return today >= timeStampDate
+            }
+            return false
         }
     }
 }

@@ -12,7 +12,7 @@ data class Clock(
     var hour: Int = HOUR_MIN_VALUE,
     var minute: Int = MINUTE_MIN_VALUE,
     var second: Int = SECOND_MIN_VALUE
-) {
+) : Comparable<Clock> {
 
     constructor(seconds: Int) : this(
         seconds.div(HOUR_DURATION_SECONDS),
@@ -141,6 +141,12 @@ data class Clock(
         minuteText += minute
         secondText += second
         return Triple(hourText, minuteText, secondText)
+    }
+
+    override fun compareTo(other: Clock): Int = when {
+        hour != other.hour -> hour - other.hour
+        minute != other.minute -> minute - other.minute
+        else -> second - other.second
     }
 
     /**
