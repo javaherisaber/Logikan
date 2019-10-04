@@ -29,6 +29,7 @@ abstract class BaseViewModel(val compositeDisposable: CompositeDisposable) : Vie
 
     override fun onErrorState(throwable: Throwable) {
         this._errorState.value = throwable
+        Log.e("error message1", throwable.message, throwable)
     }
 
     companion object {

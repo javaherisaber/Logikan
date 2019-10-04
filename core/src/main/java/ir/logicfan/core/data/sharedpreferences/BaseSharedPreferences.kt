@@ -33,7 +33,7 @@ abstract class BaseSharedPreferences(private val context: Context, cipherSecret:
                 edit().putString(KEY_DEVICE_ID, androidDeviceID).apply()
                 storedDeviceID = androidDeviceID
             }
-            return storedDeviceID!!
+            return storedDeviceID
         }
 
     /**
