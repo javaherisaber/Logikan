@@ -1,5 +1,6 @@
 package ir.logicfan.core.ui.databinding.adapter
 
+import android.annotation.SuppressLint
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import ir.logicfan.core.R
@@ -13,10 +14,16 @@ fun TextView.textWithLabel(text: String?, label: String?) {
     this.text = label.plus(" : ").plus(text)
 }
 
+@BindingAdapter("andSeparatedText")
+fun TextView.setAndSeparatedText(data: Collection<Any>?) = data?.let {
+    this.text = it.joinToString(separator = " " + context.getString(R.string.core_all_and) + " ")
+}
+
 /**
  * Set TextView's text with price separated thousands
  * @param priceLabel label being added as prefix text
  */
+@SuppressLint("StringFormatInvalid")
 @BindingAdapter(value = ["price", "priceLabel"], requireAll = false)
 fun TextView.price(price: Long?, priceLabel: String?) {
     val priceSeparatedThousands = StringUtils.numberToSeparatedThousands(price ?: 0)
