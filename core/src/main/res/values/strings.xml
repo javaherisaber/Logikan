@@ -43,6 +43,7 @@
 
     <!-- tools -->
     <string name="core_tools_dummyText">Dummy text to showcase your idea</string>
+    <string name="core_tools_title">عنوان</string>
     <!-- end of tools -->
 
 </resources>

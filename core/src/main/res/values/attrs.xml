@@ -3,4 +3,6 @@
     <declare-styleable name="CoreColoredStrikeThroughTextView">
         <attr name="core_strikeThroughColor" format="color" />
     </declare-styleable>
+
+    <attr name="core_chipDecorationStyle" format="reference"/>
 </resources>

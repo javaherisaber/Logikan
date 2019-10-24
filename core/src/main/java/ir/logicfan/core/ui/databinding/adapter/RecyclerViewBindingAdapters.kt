@@ -50,7 +50,7 @@ fun RecyclerView.addGridMarginItemDecorator(
     margin: Int?
 ) {
     if (hasItemDecoration) {
-        var itemMargin = resources.getDimension(R.dimen.core_margin_8dp).toInt()
+        var itemMargin = resources.getDimension(R.dimen.core_margin_low).toInt()
         margin?.let {
             itemMargin = it
         }
