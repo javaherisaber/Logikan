@@ -2,8 +2,6 @@ package ir.logicfan.core.util
 
 import android.annotation.SuppressLint
 import java.text.MessageFormat
-import java.text.SimpleDateFormat
-import java.util.*
 
 /**
  * Data holder to represent a clock
@@ -153,9 +151,9 @@ data class Clock(
      * To be used by [getClockLabel] method to return suitable labeled clock
      */
     enum class ClockLabelType {
-        HOUR_MINUTE,
-        HOUR_MINUTE_SECOND,
-        MINUTE_SECOND;
+        HOUR_MINUTE, // 20:30
+        HOUR_MINUTE_SECOND, // 20:30:45
+        MINUTE_SECOND; // 15:00
     }
 
     companion object {
@@ -178,20 +176,13 @@ data class Clock(
         }
 
         /**
-         * @param timestamp Unix Timestamp with this format : 1561783493
-         * @return [Clock] object if timestamp is correct or null otherwise
+         * @return Clock with given format (15:30:45)
          */
         @SuppressLint("SimpleDateFormat")
-        @JvmStatic
-        fun getClock(timestamp: String): Clock? = try {
-            val date = Date(timestamp.toLong() * 1000L)
-            val formatted = SimpleDateFormat("HH:mm:ss").format(date)
-            val hourParts = formatted.split(":")
-            Clock(hourParts[0].toInt(), hourParts[1].toInt(), hourParts[2].toInt())
-        } catch (ex: NumberFormatException) {
-            // string does not contain timestamp
-            null
+        @Throws(IllegalArgumentException::class)
+        fun getClock(format: String): Clock {
+            val hourParts = format.split(":")
+            return Clock(hourParts[0].toInt(), hourParts[1].toInt(), hourParts[2].toInt())
         }
-
     }
 }
