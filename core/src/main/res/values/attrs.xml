@@ -4,5 +4,7 @@
         <attr name="core_strikeThroughColor" format="color" />
     </declare-styleable>
 
-    <attr name="core_chipDecorationStyle" format="reference"/>
+    <attr name="core_chipDecorationStyle" format="reference" />
+    <attr name="core_chipCornerRadius" format="dimension" />
+    <attr name="core_chipTextAppearance" format="reference" />
 </resources>

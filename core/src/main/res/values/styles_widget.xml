@@ -2,6 +2,8 @@
 <resources>
     <!-- Chip -->
     <style name="Core.Widget.Chip.Decoration" parent="Widget.MaterialComponents.Chip.Entry">
+        <item name="chipCornerRadius">?attr/core_chipCornerRadius</item>
+        <item name="android:textAppearance">?attr/core_chipTextAppearance</item>
         <item name="android:checkable">false</item>
         <item name="android:selectable">false</item>
         <item name="closeIconVisible">false</item>
@@ -9,8 +11,51 @@
         <item name="checkedIconVisible">false</item>
         <item name="android:focusable">false</item>
         <item name="android:clickable">false</item>
-        <item name="chipCornerRadius">@dimen/core_corner_radius_high</item>
-        <item name="android:textAppearance">@style/Core.TextAppearance.Body1</item>
     </style>
     <!-- End of Chip -->
+
+    <!-- EditText -->
+    <style name="Core.Base.Widget.EditText" parent="Widget.AppCompat.EditText">
+        <item name="android:gravity">start</item>
+        <item name="android:textAppearance">@style/Core.TextAppearance.Body1</item>
+    </style>
+
+    <style name="Core.Widget.EditText" parent="Core.Base.Widget.EditText" />
+
+    <style name="Core.Widget.EditText.Disabled">
+        <item name="android:cursorVisible">false</item>
+        <item name="android:focusable">false</item>
+        <item name="android:focusableInTouchMode">false</item>
+    </style>
+
+    <style name="Core.Widget.EditText.Spinner" parent="Core.Widget.EditText.Disabled">
+        <item name="android:drawableEnd">@drawable/core_ic_all_drop_down_grey_24dp</item>
+        <item name="android:inputType">textNoSuggestions</item>
+    </style>
+    <!-- End of EditText -->
+
+    <!-- TextInputLayout -->
+    <style name="Core.Widget.TextInputLayout.OutlinedBox" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="boxBackgroundColor">@color/core_colorWhite</item>
+        <item name="hintTextAppearance">@style/Core.TextAppearance.Subtitle1</item>
+    </style>
+    <!-- End of TextInputLayout -->
+
+    <!-- Button -->
+    <style name="Core.Widget.Button.ExtendedCheck" parent="Widget.MaterialComponents.Button.Icon">
+        <item name="android:layout_height">60dp</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_margin">16dp</item>
+        <item name="android:layoutDirection">ltr</item>
+        <item name="android:paddingStart">12dp</item>
+        <item name="android:paddingEnd">20dp</item>
+        <item name="android:textAppearance">@style/Core.TextAppearance.Button</item>
+        <item name="cornerRadius">36dp</item>
+        <item name="elevation">@dimen/core_elevation_default</item>
+        <item name="icon">@drawable/core_ic_all_check_white_24dp</item>
+        <item name="iconPadding">12dp</item>
+        <item name="iconSize">24dp</item>
+        <item name="iconTint">@color/core_colorWhite</item>
+    </style>
+    <!-- End of Button -->
 </resources>
