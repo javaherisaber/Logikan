@@ -23,6 +23,7 @@
 
         <!-- custom attributes -->
         <item name="core_chipDecorationStyle">@style/Core.Widget.Chip.Decoration</item>
+        <item name="core_chipEntryStyle">@style/Core.Widget.Chip.Entry</item>
         <item name="core_chipCornerRadius">@dimen/core_corner_radius_high</item>
         <item name="core_chipTextAppearance">@style/Core.TextAppearance.Body1</item>
 

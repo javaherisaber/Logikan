@@ -19,6 +19,33 @@ fun ChipGroup.addDecorationChips(data: Collection<String>?) = data?.let {
     it.forEach { item ->
         val chip = inflater.inflate(R.layout.core_view_chip_decoration, this, false) as Chip
         chip.text = item
-        addView(chip)
+        this.addView(chip)
     }
+}
+
+/**
+ * Inflate Chip with entry style into ChipGroup
+ */
+@BindingAdapter(value = ["entryChipsData", "onCloseIconClick"], requireAll = false)
+fun ChipGroup.addEntryChips(
+    data: Collection<Pair<Int, String>>?, listener: OnChipCloseIconClickListener?
+) = data?.let {
+    if (this.childCount > 0) {
+        removeAllViews()
+    }
+    val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+    it.forEach { item ->
+        val chip = inflater.inflate(R.layout.core_view_chip_entry, this, false) as Chip
+        chip.id = item.first
+        chip.text = item.second
+        chip.setOnCloseIconClickListener { view ->
+            this.removeView(view)
+            listener?.onCloseIconClick(item.first, item.second)
+        }
+        this.addView(chip)
+    }
+}
+
+interface OnChipCloseIconClickListener {
+    fun onCloseIconClick(id: Int, title: String)
 }
