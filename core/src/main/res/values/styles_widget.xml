@@ -34,11 +34,11 @@
         <item name="android:cursorVisible">false</item>
         <item name="android:focusable">false</item>
         <item name="android:focusableInTouchMode">false</item>
+        <item name="android:inputType">textNoSuggestions</item>
     </style>
 
     <style name="Core.Widget.EditText.Spinner" parent="Core.Widget.EditText.Disabled">
         <item name="android:drawableEnd">@drawable/core_ic_all_drop_down_grey_24dp</item>
-        <item name="android:inputType">textNoSuggestions</item>
     </style>
     <!-- End of EditText -->
 
