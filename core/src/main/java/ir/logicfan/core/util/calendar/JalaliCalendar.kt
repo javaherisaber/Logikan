@@ -2,6 +2,7 @@ package ir.logicfan.core.util.calendar
 
 import android.annotation.SuppressLint
 import ir.logicfan.core.util.Clock
+import ir.logicfan.core.util.extension.toZeroTail
 import java.io.Serializable
 import java.text.MessageFormat
 import java.text.SimpleDateFormat
@@ -85,20 +86,12 @@ data class JalaliCalendar(
     @SuppressLint("SimpleDateFormat")
     fun toIsoTimestamp(): String {
         val gregorian = toGregorian()
+
         val year = gregorian.get(Calendar.YEAR)
         val month = gregorian.get(Calendar.MONTH) + 1 // gregorian calendar is zero based
-        var monthText = ""
-        if (month < 10) {
-            monthText += "0"
-        }
-        monthText += month
         val day = gregorian.get(Calendar.DAY_OF_MONTH)
-        var dayText = ""
-        if (day < 10) {
-            dayText += "0"
-        }
-        dayText += day
-        return "$year-$monthText-$dayText ${Clock.getClockLabel(this.clock, Clock.ClockLabelType.HOUR_MINUTE_SECOND)}"
+
+        return "$year-${month.toZeroTail()}-${day.toZeroTail()} ${this.clock}"
     }
 
     /**

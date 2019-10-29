@@ -1,6 +1,7 @@
 package ir.logicfan.core.util
 
 import android.annotation.SuppressLint
+import ir.logicfan.core.util.extension.toZeroTail
 import java.text.MessageFormat
 
 /**
@@ -27,12 +28,15 @@ data class Clock(
      */
     @Throws(IllegalArgumentException::class)
     private fun validateArguments(hour: Int, minute: Int, second: Int) {
-        if (hour > HOUR_MAX_VALUE || hour < HOUR_MIN_VALUE)
-            throw IllegalArgumentException("hour = $hour is wrong, it must be from $HOUR_MIN_VALUE to $HOUR_MAX_VALUE")
-        if (minute > MINUTE_MAX_VALUE || minute < MINUTE_MIN_VALUE)
-            throw IllegalArgumentException("minute = $minute is wrong, it must be from $MINUTE_MIN_VALUE to $MINUTE_MAX_VALUE")
-        if (second > SECOND_MAX_VALUE || second < SECOND_MIN_VALUE)
-            throw IllegalArgumentException("second = $second is wrong, it must be from $SECOND_MIN_VALUE to $SECOND_MAX_VALUE")
+        require(!(hour > HOUR_MAX_VALUE || hour < HOUR_MIN_VALUE)) {
+            "hour = $hour is wrong, it must be from $HOUR_MIN_VALUE to $HOUR_MAX_VALUE"
+        }
+        require(!(minute > MINUTE_MAX_VALUE || minute < MINUTE_MIN_VALUE)) {
+            "minute = $minute is wrong, it must be from $MINUTE_MIN_VALUE to $MINUTE_MAX_VALUE"
+        }
+        require(!(second > SECOND_MAX_VALUE || second < SECOND_MIN_VALUE)) {
+            "second = $second is wrong, it must be from $SECOND_MIN_VALUE to $SECOND_MAX_VALUE"
+        }
     }
 
     /**
@@ -122,24 +126,11 @@ data class Clock(
     /**
      * Convert clock variables to labeled strings
      */
-    private fun getLabels(): Triple<String, String, String> {
-        var hourText = ""
-        var minuteText = ""
-        var secondText = ""
-        if (hour < 10) {
-            hourText += "0"
-        }
-        if (minute < 10) {
-            minuteText += "0"
-        }
-        if (second < 10) {
-            secondText += "0"
-        }
-        hourText += hour
-        minuteText += minute
-        secondText += second
-        return Triple(hourText, minuteText, secondText)
-    }
+    private fun getLabels(): Triple<String, String, String> = Triple(
+        hour.toZeroTail(), minute.toZeroTail(), second.toZeroTail()
+    )
+
+    override fun toString(): String = getClockLabelHourMinuteSecondType()
 
     override fun compareTo(other: Clock): Int = when {
         hour != other.hour -> hour - other.hour
