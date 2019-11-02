@@ -1,7 +1,5 @@
 package ir.logicfan.core.util.calendar
 
-import org.jetbrains.annotations.NonNls
-
 /**
  * Represent day of week in persian calendar (jalali)
  */
@@ -31,14 +29,15 @@ enum class DayOfWeekPersian {
 
     companion object {
 
-        @NonNls
-        internal val PERSIAN_WEEKDAYS_EN =
+        val PERSIAN_WEEKDAYS_EN =
             arrayOf("Yekshanbeh", "Doshanbeh", "Seshhanbeh", "Chaharshanbeh", "Panjshanbeh", "Jomeh", "Shanbeh")
-        @NonNls
-        internal val PERSIAN_WEEKDAYS_FA =
-            arrayOf("یکشنبه", "دوشنبه", "سه شنبه", "چهارشنبه", "پنج شنبه", "جمعه", "شنبه")
+        val PERSIAN_WEEKDAYS_FA = arrayOf("یکشنبه", "دوشنبه", "سه شنبه", "چهارشنبه", "پنج شنبه", "جمعه", "شنبه")
+
+        val valuesPersian =
+            arrayOf(Shanbeh, Yekshanbeh, Doshanbeh, Seshhanbeh, Chaharshanbeh, Panjshanbeh, Jomeh)
 
         @Throws(IllegalArgumentException::class)
+        @JvmStatic
         fun of(value: Int): DayOfWeekPersian {
             if (value < 1 || value > 7) {
                 throw IllegalArgumentException("Invalid day of week for : $value")
@@ -49,5 +48,8 @@ enum class DayOfWeekPersian {
             }
             throw IllegalArgumentException("Invalid day of week for : $value")
         }
+
+        const val firstPersianDayValue = 7
+        const val lastPersianDayValue = 1
     }
 }
