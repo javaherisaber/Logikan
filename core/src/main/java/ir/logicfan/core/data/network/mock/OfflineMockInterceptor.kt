@@ -1,5 +1,6 @@
 package ir.logicfan.core.data.network.mock
 
+import android.annotation.SuppressLint
 import ir.logicfan.core.di.qulifier.ApiBaseUrl
 import ir.logicfan.core.di.qulifier.ExcludeMock
 import ir.logicfan.core.di.qulifier.IncludeMock
@@ -31,13 +32,14 @@ constructor(
         const val RESPONSE_CODE = 200
     }
 
+    @SuppressLint("DefaultLocale")
     @Throws(IOException::class)
     override fun intercept(chain: Interceptor.Chain): Response {
         val request = chain.request()
         val route = request.url().toString()
             .replace(baseUrl, "")  // remove base url
             .replace("\\?.*".toRegex(), "") // remove query parameters
-            .replace("\\d+".toRegex(), "{#}") // replace dynamic path (eg. id) with {#}
+            .replace("\\b\\d+((,\\d)+)?".toRegex(), "{#}") // replace dynamic path (eg. 3,5,7) with {#}
 
         // example requestPath -> [DELETE] shops/{#}/social-accounts/{#}
         val requestPath = "[${request.method().toUpperCase()}] $route"
