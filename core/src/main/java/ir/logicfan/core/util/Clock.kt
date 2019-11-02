@@ -167,13 +167,29 @@ data class Clock(
         }
 
         /**
-         * @return Clock with given format (15:30:45)
+         * @return Clock with given format 15:30:45 or 15:30 or 15 or empty string for 00:00:00
          */
         @SuppressLint("SimpleDateFormat")
         @Throws(IllegalArgumentException::class)
+        @JvmStatic
         fun getClock(format: String): Clock {
             val hourParts = format.split(":")
-            return Clock(hourParts[0].toInt(), hourParts[1].toInt(), hourParts[2].toInt())
+            return Clock(
+                if (hourParts.isNotEmpty()) hourParts[0].toInt() else 0,
+                if (hourParts.size >= 2) hourParts[1].toInt() else 0,
+                if (hourParts.size == 3) hourParts[2].toInt() else 0
+            )
         }
+
+        /**
+         * Check if two time period overlap on each other eg. 08:00-12:00 overlaps on 09:00-14:00
+         */
+        @JvmStatic
+        fun isTimePeriodsOverlap(
+            firstStartTime: Clock,
+            firstEndTime: Clock,
+            secondStartTime: Clock,
+            secondEndTime: Clock
+        ): Boolean = firstStartTime < secondEndTime && firstEndTime > secondStartTime
     }
 }
