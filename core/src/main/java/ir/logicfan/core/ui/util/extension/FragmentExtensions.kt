@@ -1,5 +1,7 @@
 package ir.logicfan.core.ui.util.extension
 
+import android.content.Context
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.annotation.IdRes
 import androidx.appcompat.app.AppCompatActivity
@@ -13,6 +15,13 @@ fun Fragment.initializeToolbar(toolbar: Toolbar, displayTitle: Boolean = false, 
         supportActionBar?.setDisplayShowTitleEnabled(displayTitle)
         supportActionBar?.setDisplayHomeAsUpEnabled(displayBack)
     }
+
+fun Fragment.hideKeyBoard() {
+    (this.activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager).hideSoftInputFromWindow(
+        view?.windowToken,
+        0
+    )
+}
 
 fun Fragment.setToolbarTitle(title: String) = (this.activity as AppCompatActivity).supportActionBar?.apply {
     setDisplayShowTitleEnabled(true)
