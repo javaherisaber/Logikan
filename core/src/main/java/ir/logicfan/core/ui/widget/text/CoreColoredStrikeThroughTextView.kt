@@ -13,6 +13,11 @@ import ir.logicfan.core.R
 class CoreColoredStrikeThroughTextView : TextView {
 
     private lateinit var paint: Paint
+    var lineEnabled = true
+        set(value) {
+            field = value
+            invalidate()
+        }
 
     constructor(context: Context) : super(context) {
         init(null)
@@ -40,6 +45,7 @@ class CoreColoredStrikeThroughTextView : TextView {
             val typedArray = context.obtainStyledAttributes(attrs, R.styleable.CoreColoredStrikeThroughTextView)
             val strikeThroughColor =
                 typedArray.getColor(R.styleable.CoreColoredStrikeThroughTextView_core_strikeThroughColor, Color.GRAY)
+            lineEnabled = typedArray.getBoolean(R.styleable.CoreColoredStrikeThroughTextView_core_lineEnabled, true)
             paint = Paint()
             paint.color = strikeThroughColor
             paint.strokeWidth = resources.displayMetrics.density
@@ -52,6 +58,8 @@ class CoreColoredStrikeThroughTextView : TextView {
 
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
-        canvas?.drawLine(0F, height / 2F, width.toFloat(), height / 2F, paint)
+        if (lineEnabled) {
+            canvas?.drawLine(0F, height / 2F, width.toFloat(), height / 2F, paint)
+        }
     }
 }
