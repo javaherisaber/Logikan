@@ -24,8 +24,12 @@ fun TextView.setAndSeparatedText(data: Collection<Any>?) = data?.let {
  * @param priceLabel label being added as prefix text
  */
 @SuppressLint("StringFormatInvalid")
-@BindingAdapter(value = ["price", "priceLabel"], requireAll = false)
-fun TextView.price(price: Long?, priceLabel: String?) {
+@BindingAdapter(value = ["price", "priceLabel", "hasAvailability"], requireAll = false)
+fun TextView.price(price: Long?, priceLabel: String?, hasAvailability: Boolean) {
+    if (hasAvailability && (price == null || price == 0L)) {
+        this.text = context.getString(R.string.core_all_unavailable)
+        return
+    }
     val priceSeparatedThousands = StringUtils.numberToSeparatedThousands(price ?: 0)
     var resultText = ""
     priceLabel?.let {
