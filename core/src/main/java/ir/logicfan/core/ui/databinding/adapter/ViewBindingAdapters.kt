@@ -7,6 +7,11 @@ import androidx.databinding.BindingAdapter
 import at.blogc.android.views.ExpandableTextView
 import java.util.*
 
+@BindingAdapter("hideIfNullOrZero")
+fun View.hideIfNullOrZero(number: Number?) {
+    this.visibility = if (number == null || number.toDouble() == 0.0) View.GONE else View.VISIBLE
+}
+
 /**
  * Toggle expandableTextView when clicked on expand/collapse button
  */
