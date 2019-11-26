@@ -2,6 +2,7 @@ package ir.logicfan.core.ui.databinding.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
+import android.view.View
 import androidx.databinding.BindingAdapter
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
@@ -40,6 +41,59 @@ fun ChipGroup.addEntryChips(
     }
 }
 
+/**
+ * add choice chips to this ChipGroup
+ * @param chipsData inflate chip with first as title and second as id also enable or disable icon with third property
+ */
+@BindingAdapter(value = ["choiceChipsData", "onChoiceChange"], requireAll = false)
+fun ChipGroup.addChoiceChipsChildren(
+    chipsData: Collection<Triple<Int, String, Boolean>>?, onChoiceChangeListener: OnChipGroupChoiceChangeListener?
+) = chipsData?.let {
+    removeAllViews()
+    val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+    it.forEach { item ->
+        val chip = inflater.inflate(R.layout.core_view_chip_choice, this, false) as Chip
+        chip.id = item.first
+        chip.text = item.second
+        chip.isChipIconVisible = item.third // true if selected any values related to this chip
+        addView(chip)
+    }
+    this.setOnChoiceChangeListener(onChoiceChangeListener)
+}
+
+/**
+ * add choice chips to this ChipGroup
+ * enable icon when user select a chip and disable when unselected
+ */
+@BindingAdapter(value = ["choiceChipsData", "onChoiceChange"], requireAll = false)
+fun ChipGroup.addSingleDotChoiceChipsChildren(
+    chipsData: Collection<Pair<Int, String>>?, onChoiceChangeListener: OnChipGroupChoiceChangeListener?
+) = chipsData?.let {
+    removeAllViews()
+    val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+    it.forEach { item ->
+        val chip = inflater.inflate(R.layout.core_view_chip_choice, this, false) as Chip
+        chip.id = item.first
+        chip.text = item.second
+        chip.isChipIconVisible = false
+        chip.setOnCheckedChangeListener { _, isChecked ->
+            chip.isChipIconVisible = isChecked
+        }
+        addView(chip)
+    }
+    this.setOnChoiceChangeListener(onChoiceChangeListener)
+}
+
+fun ChipGroup.setOnChoiceChangeListener(
+    listener: OnChipGroupChoiceChangeListener?
+) = this.setOnCheckedChangeListener { _, checkedId ->
+    if (checkedId == View.NO_ID) {
+        listener?.onChoiceChanged(false, View.NO_ID)
+    } else {
+        listener?.onChoiceChanged(true, checkedId)
+    }
+}
+
 fun ChipGroup.inflateEntryChip(
     inflater: LayoutInflater,
     item: Pair<Int, String>,
@@ -57,4 +111,8 @@ fun ChipGroup.inflateEntryChip(
 
 interface OnChipCloseIconClickListener {
     fun onCloseIconClick(id: Int, title: String)
+}
+
+interface OnChipGroupChoiceChangeListener {
+    fun onChoiceChanged(isChecked: Boolean, checkedId: Int)
 }

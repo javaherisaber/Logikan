@@ -7,6 +7,7 @@
 
     <attr name="core_chipDecorationStyle" format="reference" />
     <attr name="core_chipEntryStyle" format="reference" />
+    <attr name="core_chipChoiceStyle" format="reference" />
 
     <!-- cornerRadius applied to all chips -->
     <attr name="core_chipCornerRadius" format="dimension" />

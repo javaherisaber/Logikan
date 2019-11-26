@@ -20,12 +20,26 @@
         <item name="android:checkable">false</item>
         <item name="android:clickable">false</item>
     </style>
+
+    <style name="Core.Widget.Chip.Choice" parent="Widget.MaterialComponents.Chip.Choice">
+        <item name="android:layoutDirection">ltr</item>
+        <item name="chipStrokeColor">?attr/colorPrimary</item>
+        <item name="chipStrokeWidth">@dimen/core_stroke_default</item>
+        <item name="chipBackgroundColor">@color/core_bg_all_chip_choice</item>
+        <item name="android:textAppearance">?attr/core_chipTextAppearance</item>
+        <item name="chipIcon">@drawable/core_ic_all_dot_black_8dp</item>
+        <item name="chipCornerRadius">?attr/core_chipCornerRadius</item>
+        <item name="chipIconSize">8dp</item>
+        <item name="chipIconVisible">true</item>
+        <item name="chipIconTint">@color/core_tint_all_chip_choice</item>
+        <item name="android:textColor">@color/core_tint_all_chip_choice</item>
+    </style>
     <!-- End of Chip -->
 
     <!-- EditText -->
     <style name="Core.Base.Widget.EditText" parent="Widget.AppCompat.EditText">
         <item name="android:gravity">start</item>
-        <item name="android:textAppearance">@style/Core.TextAppearance.Body1</item>
+        <item name="android:textAppearance">?attr/textAppearanceBody1</item>
     </style>
 
     <style name="Core.Widget.EditText" parent="Core.Base.Widget.EditText" />
@@ -45,7 +59,7 @@
     <!-- TextInputLayout -->
     <style name="Core.Widget.TextInputLayout.OutlinedBox" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
         <item name="boxBackgroundColor">@color/core_colorWhite</item>
-        <item name="hintTextAppearance">@style/Core.TextAppearance.Subtitle1</item>
+        <item name="hintTextAppearance">?attr/textAppearanceSubtitle1</item>
     </style>
     <!-- End of TextInputLayout -->
 
@@ -54,10 +68,9 @@
         <item name="android:layout_height">60dp</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_margin">16dp</item>
-        <item name="android:layoutDirection">ltr</item>
         <item name="android:paddingStart">12dp</item>
         <item name="android:paddingEnd">20dp</item>
-        <item name="android:textAppearance">@style/Core.TextAppearance.Button</item>
+        <item name="android:textAppearance">?attr/textAppearanceButton</item>
         <item name="cornerRadius">36dp</item>
         <item name="elevation">@dimen/core_elevation_default</item>
         <item name="icon">@drawable/core_ic_all_check_white_24dp</item>
