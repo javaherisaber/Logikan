@@ -130,6 +130,8 @@ data class Clock(
         hour.toZeroTail(), minute.toZeroTail(), second.toZeroTail()
     )
 
+    fun toSeconds() = hour * HOUR_DURATION_SECONDS + minute * MINUTE_DURATION_SECONDS + second
+
     override fun toString(): String = getClockLabelHourMinuteSecondType()
 
     override fun compareTo(other: Clock): Int = when {
@@ -138,6 +140,10 @@ data class Clock(
         else -> second - other.second
     }
 
+    operator fun minus(other: Clock) = Clock(this.toSeconds() - other.toSeconds())
+
+    operator fun plus(other: Clock) = Clock(this.toSeconds() + other.toSeconds())
+
     /**
      * To be used by [getClockLabel] method to return suitable labeled clock
      */
@@ -145,6 +151,12 @@ data class Clock(
         HOUR_MINUTE, // 20:30
         HOUR_MINUTE_SECOND, // 20:30:45
         MINUTE_SECOND; // 15:00
+    }
+
+    fun formatHourMinuteNoLeadingZero(): String = if (minute == 0) {
+        hour.toString()
+    } else {
+        "$hour:${minute.toZeroTail()}"
     }
 
     companion object {
