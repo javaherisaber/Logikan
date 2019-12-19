@@ -18,16 +18,16 @@ data class JalaliCalendar(
 
     val isLeapYear: Boolean
         get() = DateConverter().isJalaliLeapYear(year)
-    val dayOfWeek: DayOfWeekPersian by lazy {
-        DayOfWeekPersian.of(toGregorian().get(Calendar.DAY_OF_WEEK))
-    }
+    val dayOfWeek: DayOfWeekPersian
+        get() = DayOfWeekPersian.of(toGregorian().get(Calendar.DAY_OF_WEEK))
     val yearLength: Int
         get() = if (isLeapYear) 366 else 365
-    val monthString: String = month.toPersian
-    val dayOfWeekString: String by lazy {
-        dayOfWeek.toPersian
-    }
-    val monthLength: Int = MonthPersian.getMonthLength(month, isLeapYear)
+    val monthString: String
+        get() = month.toPersian
+    val dayOfWeekString: String
+        get() = dayOfWeek.toPersian
+    val monthLength: Int
+        get() = MonthPersian.getMonthLength(month, isLeapYear)
 
     /**
      * Now as Jalali Date
@@ -35,6 +35,11 @@ data class JalaliCalendar(
     constructor() : this(DateConverter().gregorianToJalali(GregorianCalendar()))
 
     constructor(jalali: JalaliCalendar) : this(jalali.year, jalali.month.value, jalali.day, jalali.clock)
+
+    // use only with calendar which provides persian date
+    constructor(calendar: Calendar) : this(
+        calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH) + 1, calendar.get(Calendar.DAY_OF_MONTH)
+    )
 
     constructor(gregorian: GregorianCalendar) : this(DateConverter().gregorianToJalali(gregorian))
 
@@ -67,17 +72,25 @@ data class JalaliCalendar(
     fun toGregorian(): GregorianCalendar = DateConverter().jalaliToGregorian(this)
 
     /**
-     * Convert current calendar to Unix Epoch timestamp
+     * Convert current calendar to Unix Epoch (seconds) timestamp
      */
+    fun toUnixTimestamp(): String = (epochMillis() / 1000).toString()
+
     @SuppressLint("SimpleDateFormat")
-    fun toUnixTimestamp(): String {
+    fun epochMillis(): Long {
         val gregorian = toGregorian()
         val year = gregorian.get(Calendar.YEAR)
         val month = gregorian.get(Calendar.MONTH) + 1 // gregorian calendar is zero based
         val day = gregorian.get(Calendar.DAY_OF_MONTH)
         val dateFormat = SimpleDateFormat("yyyy-MM-dd-HH-mm-ss")
         val date = dateFormat.parse("$year-$month-$day-${clock.hour}-${clock.minute}-${clock.second}")
-        return (date.time / 1000).toString()
+        return date.time
+    }
+
+    @SuppressLint("SimpleDateFormat")
+    fun formatToGregorian(pattern: String = "yyyy-MM-dd"): String {
+        val date = Date(this.epochMillis())
+        return SimpleDateFormat(pattern, Locale.US).format(date)
     }
 
     /**
@@ -182,6 +195,23 @@ data class JalaliCalendar(
         fun getJalaliCalendarFromIsoTimestamp(isoTimestamp: String): JalaliCalendar {
             val gregorian = getGregorianCalendarFromFormattedIsoTimestamp(isoTimestamp)
             return JalaliCalendar(gregorian)
+        }
+
+        /**
+         * @return JalaliCalendar from date : 2019-12-11
+         */
+        @JvmStatic
+        fun getJalaliCalendarFromDate(date: String): JalaliCalendar {
+            val parts = date.split("-")
+            val gregorian = GregorianCalendar(parts[0].toInt(), parts[1].toInt() - 1, parts[2].toInt())
+            return JalaliCalendar(gregorian)
+        }
+
+        @JvmStatic
+        fun today(clock: Clock = Clock()): JalaliCalendar {
+            val calendar = JalaliCalendar()
+            calendar.clock = clock
+            return calendar
         }
 
         /**
