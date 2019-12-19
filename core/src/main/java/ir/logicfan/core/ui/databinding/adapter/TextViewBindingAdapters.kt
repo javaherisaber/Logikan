@@ -14,6 +14,14 @@ fun TextView.textWithLabel(text: String?, label: String?) {
     this.text = label.plus(" : ").plus(text)
 }
 
+@BindingAdapter("android:text")
+fun TextView.setTextWithResId(resId: Int) {
+    if (resId == 0) {
+        return
+    }
+    this.setText(resId)
+}
+
 @BindingAdapter("andSeparatedText")
 fun TextView.setAndSeparatedText(data: Collection<Any>?) = data?.let {
     this.text = it.joinToString(separator = " " + context.getString(R.string.core_all_and) + " ")
