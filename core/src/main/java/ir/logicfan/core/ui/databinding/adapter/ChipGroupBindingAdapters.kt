@@ -45,15 +45,20 @@ fun ChipGroup.addEntryChips(
  * add choice chips to this ChipGroup
  * @param chipsData inflate chip with first as title and second as id also enable or disable icon with third property
  */
-@BindingAdapter(value = ["choiceChipsData", "onChoiceChange"], requireAll = false)
+@BindingAdapter(value = ["choiceChipsData", "onChoiceChange", "selectedChoiceChip"], requireAll = false)
 fun ChipGroup.addChoiceChipsChildren(
-    chipsData: Collection<Triple<Int, String, Boolean>>?, onChoiceChangeListener: OnChipGroupChoiceChangeListener?
+    chipsData: Collection<Triple<Int, String, Boolean>>?,
+    onChoiceChangeListener: OnChipGroupChoiceChangeListener?,
+    selectedId: Int?
 ) = chipsData?.let {
     removeAllViews()
     val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
     it.forEach { item ->
         val chip = inflater.inflate(R.layout.core_view_chip_choice, this, false) as Chip
         chip.id = item.first
+        if (chip.id == selectedId) {
+            chip.isChecked = true
+        }
         chip.text = item.second
         chip.isChipIconVisible = item.third // true if selected any values related to this chip
         addView(chip)
@@ -65,9 +70,12 @@ fun ChipGroup.addChoiceChipsChildren(
  * add choice chips to this ChipGroup
  * enable icon when user select a chip and disable when unselected
  */
-@BindingAdapter(value = ["choiceChipsData", "onChoiceChange"], requireAll = false)
+@BindingAdapter(value = ["choiceChipsData", "onChoiceChange", "selectedChoiceChip", "isChipIconVisible"], requireAll = false)
 fun ChipGroup.addSingleDotChoiceChipsChildren(
-    chipsData: Collection<Pair<Int, String>>?, onChoiceChangeListener: OnChipGroupChoiceChangeListener?
+    chipsData: Collection<Pair<Int, String>>?,
+    onChoiceChangeListener: OnChipGroupChoiceChangeListener?,
+    selectedId: Int?,
+    isChipIconVisible: Boolean?
 ) = chipsData?.let {
     removeAllViews()
     val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
@@ -75,9 +83,14 @@ fun ChipGroup.addSingleDotChoiceChipsChildren(
         val chip = inflater.inflate(R.layout.core_view_chip_choice, this, false) as Chip
         chip.id = item.first
         chip.text = item.second
-        chip.isChipIconVisible = false
+        if (chip.id == selectedId) {
+            chip.isChecked = true
+        }
+        chip.isChipIconVisible = isChipIconVisible ?: false
         chip.setOnCheckedChangeListener { _, isChecked ->
-            chip.isChipIconVisible = isChecked
+            if (isChipIconVisible != null && isChipIconVisible) {
+                chip.isChipIconVisible = isChecked
+            }
         }
         addView(chip)
     }
