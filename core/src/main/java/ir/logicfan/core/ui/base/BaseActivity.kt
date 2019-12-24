@@ -42,7 +42,7 @@ abstract class BaseActivity : AppCompatActivity(), HasAndroidInjector, BaseFragm
     lateinit var baseSharedPreferences: BaseSharedPreferences
 
     private val networkConnectivityViewModel: NetworkConnectivityViewModel by viewModels()
-    abstract fun attachBaseViewModel(): List<BaseViewModel>?
+    open fun attachBaseViewModel(): List<BaseViewModel>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         AndroidInjection.inject(this) // inject dagger
@@ -81,7 +81,7 @@ abstract class BaseActivity : AppCompatActivity(), HasAndroidInjector, BaseFragm
         })
     }
 
-    abstract fun attachNetworkAvailabilityContainer(): ViewGroup?
+    open fun attachNetworkAvailabilityContainer(): ViewGroup? = null
 
     protected fun attachNetworkAvailabilityLayoutRes(): Int = R.layout.core_view_network_unavailable
 
