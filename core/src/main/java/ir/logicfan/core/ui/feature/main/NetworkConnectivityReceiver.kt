@@ -1,4 +1,4 @@
-package ir.logicfan.core.data.util
+package ir.logicfan.core.ui.feature.main
 
 import android.content.BroadcastReceiver
 import android.content.Context
@@ -14,6 +14,7 @@ import android.net.NetworkRequest
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.lifecycle.LiveData
+import ir.logicfan.core.data.util.Connectivity
 import javax.inject.Inject
 
 class NetworkConnectivityReceiver @Inject constructor(private val context: Context) : LiveData<Boolean>() {
