@@ -5,6 +5,7 @@ import ir.logicfan.core.util.Clock
 import ir.logicfan.core.util.extension.toZeroTail
 import java.io.Serializable
 import java.text.MessageFormat
+import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -182,18 +183,23 @@ data class JalaliCalendar(
          * @param unixTimestamp Unix Timestamp with this format : 1561783493
          * @return [JalaliCalendar] object is timestamp is correct or null otherwise
          */
-        @SuppressLint("SimpleDateFormat")
         @JvmStatic
         fun getJalaliCalendarFromUnixTimestamp(unixTimestamp: Long): JalaliCalendar {
             val date = Date(unixTimestamp * 1000L)
-            val formatted = SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(date)
-            val gregorian = getGregorianCalendarFromFormattedIsoTimestamp(formatted)
+            val gregorian = GregorianCalendar().apply {
+                time = date
+            }
             return JalaliCalendar(gregorian)
         }
 
+        @SuppressLint("SimpleDateFormat")
         @JvmStatic
-        fun getJalaliCalendarFromIsoTimestamp(isoTimestamp: String): JalaliCalendar {
-            val gregorian = getGregorianCalendarFromFormattedIsoTimestamp(isoTimestamp)
+        @Throws(ParseException::class)
+        fun getJalaliCalendarFromIsoTimestamp(isoTimestamp: String, format: String = "yyyy-MM-dd HH:mm:ss"): JalaliCalendar {
+            val date = SimpleDateFormat(format).parse(isoTimestamp)
+            val gregorian = GregorianCalendar().apply {
+                time = date
+            }
             return JalaliCalendar(gregorian)
         }
 
@@ -212,24 +218,6 @@ data class JalaliCalendar(
             val calendar = JalaliCalendar()
             calendar.clock = clock
             return calendar
-        }
-
-        /**
-         * @param formattedTimestamp date time with this format yyyy-MM-dd HH:mm:ss
-         */
-        @JvmStatic
-        private fun getGregorianCalendarFromFormattedIsoTimestamp(formattedTimestamp: String): GregorianCalendar {
-            val dateTimeParts = formattedTimestamp.split(" ")
-            val dateParts = dateTimeParts[0].split("-")
-            val timeParts = dateTimeParts[1].split(":")
-            return GregorianCalendar(
-                dateParts[0].toInt(), // year
-                dateParts[1].toInt() - 1, // month (gregorian month is zero based)
-                dateParts[2].toInt(), // day of month
-                timeParts[0].toInt(), // hour of day
-                timeParts[1].toInt(), // minute
-                timeParts[2].toInt() // second
-            )
         }
 
         @JvmStatic

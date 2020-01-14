@@ -1,5 +1,6 @@
 package ir.logicfan.core.util.calendar
 
+import ir.logicfan.core.util.Clock
 import org.junit.Assert.*
 import org.junit.Test
 import java.util.*
@@ -50,6 +51,18 @@ class JalaliCalendarTest {
     @Test
     fun getJalaliCalendar() {
         assertEquals(JalaliCalendar.getJalaliCalendarFromUnixTimestamp(TIMESTAMP), jalaliCalendar)
+    }
+
+    @Test
+    fun getJalaliCalendarFromUnixTimestamp() {
+        val calendar = JalaliCalendar(1398, 10, 24, Clock(16, 41, 41))
+        assertEquals(JalaliCalendar.getJalaliCalendarFromUnixTimestamp(1579007501), calendar)
+    }
+
+    @Test
+    fun getJalaliCalendarFromIsoTimestamp() {
+        val calendar = JalaliCalendar(1398, 10, 24, Clock(16, 41, 41))
+        assertEquals(JalaliCalendar.getJalaliCalendarFromIsoTimestamp("2020-01-14 16:41:41"), calendar)
     }
 
     companion object {
