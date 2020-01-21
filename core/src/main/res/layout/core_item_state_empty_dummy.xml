@@ -1,32 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <ImageView
-        android:id="@+id/imageView_core_itemStateEmpty_icon"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:src="@drawable/core_img_all_magnifier"
-        app:layout_constraintBottom_toTopOf="@id/textView_core_itemStateEmpty_message"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_chainStyle="packed"
-        tools:ignore="ContentDescription" />
+    <data>
 
-    <TextView
-        android:id="@+id/textView_core_itemStateEmpty_message"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="@string/core_itemStateEmptyDummy_message"
-        android:textSize="22sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/imageView_core_itemStateEmpty_icon"
-        app:layout_constraintStart_toStartOf="@+id/imageView_core_itemStateEmpty_icon"
-        app:layout_constraintTop_toBottomOf="@+id/imageView_core_itemStateEmpty_icon" />
+    </data>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/imageView_core_itemStateEmpty_icon"
+            android:layout_width="164dp"
+            android:layout_height="164dp"
+            app:layout_constraintBottom_toTopOf="@id/textView_core_itemStateEmpty_message"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed"
+            app:srcCompat="@drawable/core_ic_all_empty_list"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:id="@+id/textView_core_itemStateEmpty_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/core_itemStateEmpty_message"
+            android:textAppearance="?attr/textAppearanceHeadline4"
+            android:textSize="22sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/imageView_core_itemStateEmpty_icon"
+            app:layout_constraintStart_toStartOf="@+id/imageView_core_itemStateEmpty_icon"
+            app:layout_constraintTop_toBottomOf="@+id/imageView_core_itemStateEmpty_icon" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

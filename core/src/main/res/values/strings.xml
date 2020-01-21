@@ -9,7 +9,7 @@
     <string name="core_app_name">core</string>
 
     <!-- item -->
-    <string name="core_itemStateEmptyDummy_message">Empty list</string>
+    <string name="core_itemStateEmpty_message">این لیست خالی است</string>
     <string name="core_itemStateInitialErrorDummy_retry">Retry</string>
     <string name="core_itemStateInitialLoadDummy_message">loading your list</string>
     <!-- end of item -->
