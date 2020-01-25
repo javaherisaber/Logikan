@@ -9,7 +9,6 @@ import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.AsyncDifferConfig
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
-import ir.logicfan.core.R
 import ir.logicfan.core.data.base.AppExecutors
 import ir.logicfan.core.ui.recyclerview.viewholder.DataBindingViewHolder
 
@@ -36,10 +35,6 @@ open class SingleDataAdapter<T>(
         .setBackgroundThreadExecutor(appExecutors.diskIO())
         .build()
 ) {
-
-    override fun onCurrentListChanged(previousList: MutableList<T>, currentList: MutableList<T>) {
-        super.onCurrentListChanged(previousList, currentList)
-    }
 
     private val viewOnClickListenerToBindingIdMap = HashMap<View.OnClickListener, Int>()
     private val dataClickListenerToBindingIdMap = HashMap<DataBindingViewHolder.OnDataClickListener<T>, Int>()
@@ -89,13 +84,6 @@ open class SingleDataAdapter<T>(
         }
         holder.bind()
     }
-
-    override fun getItemViewType(position: Int): Int = if (itemCount == 0) {
-        R.layout.core_item_state_empty_dummy
-    } else {
-        itemLayout
-    }
-
 
     override fun onViewAttachedToWindow(holder: DataBindingViewHolder<T>) {
         super.onViewAttachedToWindow(holder)
