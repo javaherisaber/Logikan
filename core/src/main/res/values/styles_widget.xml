@@ -79,4 +79,11 @@
         <item name="iconTint">@color/core_colorWhite</item>
     </style>
     <!-- End of Button -->
+
+    <style name="Core.Widget.ExtendedFab" parent="Widget.MaterialComponents.ExtendedFloatingActionButton">
+        <item name="iconTint">@color/core_colorWhite</item>
+        <item name="android:textColor">@color/core_colorWhite</item>
+        <item name="iconPadding">@dimen/core_padding_medium</item>
+        <item name="android:paddingStart">@dimen/core_padding_medium</item>
+    </style>
 </resources>
