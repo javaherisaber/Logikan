@@ -40,6 +40,29 @@ fun View.onViewClickToShowPopup(
     }
 }
 
+/**
+ * @param popupData stringArray in strings.xml
+ */
+@BindingAdapter(value = ["popupData", "onPopupItemClick"], requireAll = false)
+fun View.onViewClickToShowPopupWithResId(
+    popupData: Array<String>?,
+    onPopupItemClickListener: OnPopupItemClickListener?
+) = popupData?.let {
+    this.setOnClickListener { view ->
+        val popup = PopupMenu(context, view)
+        for ((index, data) in popupData.withIndex()) {
+            popup.menu.add(data).titleCondensed = index.toString()
+        }
+        popup.show()
+        popup.setOnMenuItemClickListener { menuItem ->
+            onPopupItemClickListener?.onPopupItemClick(
+                menuItem.title.toString(), menuItem.titleCondensed.toString().toInt()
+            )
+            return@setOnMenuItemClickListener false
+        }
+    }
+}
+
 @BindingAdapter("onTimePickListener")
 fun View.onViewClickToShowTimePicker(onTimePickListener: OnTimePickListener?) {
     this.setOnClickListener {
