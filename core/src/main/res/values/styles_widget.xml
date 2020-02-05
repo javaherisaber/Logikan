@@ -61,6 +61,11 @@
         <item name="boxBackgroundColor">@color/core_colorWhite</item>
         <item name="hintTextAppearance">?attr/textAppearanceSubtitle1</item>
     </style>
+
+    <style name="Core.Widget.TextInputLayout.OutlinedBox.Dense" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+        <item name="boxBackgroundColor">@color/core_colorWhite</item>
+        <item name="hintTextAppearance">?attr/textAppearanceSubtitle1</item>
+    </style>
     <!-- End of TextInputLayout -->
 
     <!-- Button -->
