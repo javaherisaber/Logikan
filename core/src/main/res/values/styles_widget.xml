@@ -4,6 +4,7 @@
     <style name="Core.Widget.Chip.Decoration" parent="Widget.MaterialComponents.Chip.Entry">
         <item name="chipCornerRadius">?attr/core_chipCornerRadius</item>
         <item name="android:textAppearance">?attr/core_chipTextAppearance</item>
+        <item name="ensureMinTouchTargetSize">false</item>
         <item name="android:checkable">false</item>
         <item name="android:selectable">false</item>
         <item name="closeIconVisible">false</item>
