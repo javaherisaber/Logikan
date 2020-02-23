@@ -39,9 +39,7 @@ enum class DayOfWeekPersian {
         @Throws(IllegalArgumentException::class)
         @JvmStatic
         fun of(value: Int): DayOfWeekPersian {
-            if (value < 1 || value > 7) {
-                throw IllegalArgumentException("Invalid day of week for : $value")
-            }
+            require(!(value < 1 || value > 7)) { "Invalid day of week for : $value" }
             for (dayOfWeekPersian in values()) {
                 if (dayOfWeekPersian.value == value)
                     return dayOfWeekPersian
