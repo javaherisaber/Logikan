@@ -1,6 +1,7 @@
 package ir.logicfan.core.ui.recyclerview.adapter
 
 import android.graphics.drawable.Drawable
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,10 +26,11 @@ fun RecyclerView.submitList(
         if (newList.isEmpty() && hasEmptyState == true) {
             val inflater = LayoutInflater.from(parent.context)
             val emptyView = DataBindingUtil.inflate<CoreItemStateEmptyBinding>(
-                inflater, R.layout.core_item_state_empty, parent, true
+                inflater, R.layout.core_item_state_empty, parent, false
             )
             emptyDrawable?.let { emptyView.imageViewCoreItemStateEmptyIcon.setImageDrawable(emptyDrawable) }
             emptyText?.let { emptyView.textViewCoreItemStateEmptyMessage.text = emptyText }
+            parent.addView(emptyView.root)
         } else {
             parent.findViewById<View>(R.id.constraintLayout_coreItemStateEmpty)?.apply {
                 // if emptyView already added, and now list is not empty
