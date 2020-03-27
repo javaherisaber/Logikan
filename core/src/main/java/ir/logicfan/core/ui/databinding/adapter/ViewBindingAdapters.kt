@@ -18,6 +18,11 @@ fun View.hideIfNullOrZero(number: Number?) {
     this.visibility = if (number == null || number.toDouble() == 0.0) View.GONE else View.VISIBLE
 }
 
+@BindingAdapter("android:visibility")
+fun View.booleanToVisibility(isVisible: Boolean) {
+    this.visibility = if (isVisible) View.VISIBLE else View.GONE
+}
+
 /**
  * Toggle expandableTextView when clicked on expand/collapse button
  */
