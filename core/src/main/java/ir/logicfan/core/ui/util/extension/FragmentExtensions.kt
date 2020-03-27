@@ -10,6 +10,7 @@ import android.content.Context
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.annotation.IdRes
+import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
@@ -32,6 +33,11 @@ fun Fragment.hideKeyBoard() {
 fun Fragment.setToolbarTitle(title: String) = (this.activity as AppCompatActivity).supportActionBar?.apply {
     setDisplayShowTitleEnabled(true)
     this.title = title
+}
+
+fun Fragment.setToolbarTitle(@StringRes title: Int) = (this.activity as AppCompatActivity).supportActionBar?.apply {
+    setDisplayShowTitleEnabled(true)
+    this.title = getString(title)
 }
 
 fun Fragment.openChildFragment(@IdRes viewId: Int, fragment: Fragment, addToBackStack: Boolean = false) {
