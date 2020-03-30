@@ -33,6 +33,11 @@ fun TextView.setAndSeparatedText(data: Collection<Any>?) = data?.let {
     this.text = it.joinToString(separator = " " + context.getString(R.string.core_all_and) + " ")
 }
 
+@BindingAdapter("commaSeparatedText")
+fun TextView.setCommaSeparatedText(data: Collection<Any>?) = data?.let {
+    this.text = it.joinToString(separator = context.getString(R.string.core_all_comma) + " ")
+}
+
 /**
  * Set TextView's text with price separated thousands
  * @param priceLabel label being added as prefix text
