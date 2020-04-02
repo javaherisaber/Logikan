@@ -11,8 +11,8 @@ import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import ir.logicfan.core.R
 import ir.logicfan.core.util.Clock
-import ir.logicfan.core.util.StringUtils
 import ir.logicfan.core.util.calendar.JalaliCalendar
+import ir.logicfan.core.util.extension.toSeparatedThousands
 import java.text.MessageFormat
 
 @BindingAdapter(value = ["text", "label"], requireAll = true)
@@ -49,7 +49,7 @@ fun TextView.price(price: Long?, priceLabel: String?, hasAvailability: Boolean) 
         this.text = context.getString(R.string.core_all_unavailable)
         return
     }
-    val priceSeparatedThousands = StringUtils.numberToSeparatedThousands(price ?: 0)
+    val priceSeparatedThousands = (price ?: 0).toSeparatedThousands()
     var resultText = ""
     priceLabel?.let {
         resultText += "$priceLabel "
