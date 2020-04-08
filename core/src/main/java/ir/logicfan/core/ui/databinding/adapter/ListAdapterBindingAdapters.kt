@@ -4,10 +4,9 @@
  * Written by Mahdi Javaheri Saber <m.javaherisaber@gmail.com>, Mohammad Hosein Abedini <mohammadhoseinabedini@gmail.com>  2020.
  */
 
-package ir.logicfan.core.ui.recyclerview.adapter
+package ir.logicfan.core.ui.databinding.adapter
 
 import android.graphics.drawable.Drawable
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
