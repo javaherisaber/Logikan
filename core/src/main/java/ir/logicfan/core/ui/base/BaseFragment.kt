@@ -49,11 +49,11 @@ abstract class BaseFragment : Fragment(), HasAndroidInjector {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val baseViewModels = attachBaseViewModel()
         baseViewModels?.forEach { viewModel ->
-            viewModel.errorState.observe(this, Observer {
+            viewModel.errorState.observe(viewLifecycleOwner, Observer {
                 dataTerminalErrorListener.onDataTerminalError(it)
             })
         }
-        networkConnectivityViewModel.networkBecomesAvailable.observe(this, Observer {
+        networkConnectivityViewModel.networkBecomesAvailable.observe(viewLifecycleOwner, Observer {
             baseViewModels?.forEach { viewModel ->
                 viewModel.onNetworkBecomesAvailable()
             }
