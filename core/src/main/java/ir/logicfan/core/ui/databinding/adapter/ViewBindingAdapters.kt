@@ -18,9 +18,20 @@ fun View.hideIfNullOrZero(number: Number?) {
     this.visibility = if (number == null || number.toDouble() == 0.0) View.GONE else View.VISIBLE
 }
 
+/**
+ * Set visibility to [View.GONE] when [isVisible] is false
+ */
 @BindingAdapter("android:visibility")
-fun View.booleanToVisibility(isVisible: Boolean) {
+fun View.setVisibleGone(isVisible: Boolean) {
     this.visibility = if (isVisible) View.VISIBLE else View.GONE
+}
+
+/**
+ * Set visibility to [View.INVISIBLE] when [isVisible] is false
+ */
+@BindingAdapter("visible")
+fun View.setVisibleInVisible(isVisible: Boolean) {
+    this.visibility = if (isVisible) View.VISIBLE else View.INVISIBLE
 }
 
 /**
