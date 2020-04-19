@@ -9,6 +9,7 @@ package ir.logicfan.core.ui.util.extension
 import android.content.Context
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
+import androidx.annotation.DrawableRes
 import androidx.annotation.IdRes
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
@@ -16,11 +17,31 @@ import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import ir.logicfan.core.R
 
+/**
+ * Initialize toolbar with action bar
+ * @param displayTitle should display title
+ * @param displayBack should display home icon
+ */
 fun Fragment.initializeToolbar(toolbar: Toolbar, displayTitle: Boolean = false, displayBack: Boolean = true) =
     (this.activity as AppCompatActivity).apply {
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayShowTitleEnabled(displayTitle)
         supportActionBar?.setDisplayHomeAsUpEnabled(displayBack)
+    }
+
+/**
+ * @return nullable Int if navigation argument is not passed
+ */
+fun Fragment.navIntegerArgument(argument: Int): Int? =
+    if (argument == resources.getInteger(R.integer.core_navigation_integer_default)) null else argument
+
+fun Fragment.initializeToolbar(toolbar: Toolbar) = (this.activity as AppCompatActivity).apply {
+    setSupportActionBar(toolbar)
+}
+
+fun Fragment.setToolbarHomeIcon(@DrawableRes drawable: Int) =
+    (this.activity as AppCompatActivity).apply {
+        supportActionBar?.setHomeAsUpIndicator(drawable)
     }
 
 fun Fragment.hideKeyBoard() {
