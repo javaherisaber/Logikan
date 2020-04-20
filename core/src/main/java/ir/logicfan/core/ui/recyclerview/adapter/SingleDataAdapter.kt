@@ -53,6 +53,10 @@ open class SingleDataAdapter<T>(
        this.listListener = listListener
     }
 
+    fun removeListChangeListener() {
+        this.listListener = null
+    }
+
     fun addPositionalDataClickListener(
         onPositionalDataClickListener: DataBindingViewHolder.OnPositionalDataClickListener<T>,
         bindingVariableId: Int
