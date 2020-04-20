@@ -71,6 +71,12 @@ fun Fragment.openChildFragment(@IdRes viewId: Int, fragment: Fragment, addToBack
     }
 }
 
+fun Fragment.removeChildFragment(fragment: Fragment?) = fragment?.let {
+    childFragmentManager.beginTransaction()
+        .remove(it)
+        .commit()
+}
+
 fun Fragment.notImplementedToast() {
     Toast.makeText(this.context, "Not implemented yet!", Toast.LENGTH_SHORT).show()
 }
