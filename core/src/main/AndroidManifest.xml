@@ -1,8 +1,4 @@
-<!--
-  ~ Copyright (C) Logicfan, Inc - All Rights Reserved
-  ~ Unauthorized copying of this file, via any medium is strictly prohibited Proprietary and confidential
-  ~ Written by Mahdi Javaheri Saber <m.javaherisaber@gmail.com>, Mohammad Hosein Abedini <mohammadhoseinabedini@gmail.com>  2020.
-  -->
+
 
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="ir.logicfan.core">
