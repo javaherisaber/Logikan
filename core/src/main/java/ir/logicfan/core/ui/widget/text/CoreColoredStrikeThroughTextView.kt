@@ -1,8 +1,4 @@
-/*
- * Copyright (C) Logicfan, Inc - All Rights Reserved
- * Unauthorized copying of this file, via any medium is strictly prohibited Proprietary and confidential
- * Written by Mahdi Javaheri Saber <m.javaherisaber@gmail.com>, Mohammad Hosein Abedini <mohammadhoseinabedini@gmail.com>  2020.
- */
+@file:Suppress("MemberVisibilityCanBePrivate")
 
 package ir.logicfan.core.ui.widget.text
 
@@ -10,13 +6,13 @@ import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
-import android.os.Build
 import android.util.AttributeSet
-import android.widget.TextView
-import androidx.annotation.RequiresApi
+import androidx.appcompat.widget.AppCompatTextView
 import ir.logicfan.core.R
 
-class CoreColoredStrikeThroughTextView : TextView {
+class CoreColoredStrikeThroughTextView @JvmOverloads constructor (
+    context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
+): AppCompatTextView(context, attrs, defStyleAttr) {
 
     private lateinit var paint: Paint
     var lineEnabled = true
@@ -25,26 +21,7 @@ class CoreColoredStrikeThroughTextView : TextView {
             invalidate()
         }
 
-    constructor(context: Context) : super(context) {
-        init(null)
-    }
-
-    constructor(context: Context, attrs: AttributeSet) : super(context, attrs) {
-        init(attrs)
-    }
-
-    constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int) : super(context, attrs, defStyleAttr) {
-        init(attrs)
-    }
-
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int, defStyleRes: Int) : super(
-        context, attrs, defStyleAttr, defStyleRes
-    ) {
-        init(attrs)
-    }
-
-    private fun init(attrs: AttributeSet?) {
+    init {
         if (attrs == null) {
             paintFlags = paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
         } else {
