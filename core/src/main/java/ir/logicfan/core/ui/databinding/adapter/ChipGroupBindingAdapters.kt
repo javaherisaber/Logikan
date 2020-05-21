@@ -56,6 +56,7 @@ fun ChipGroup.addChoiceChipsChildren(
     onChoiceChangeListener: OnChipGroupChoiceChangeListener?,
     selectedId: Int?
 ) = chipsData?.let {
+    isSingleSelection = true
     removeAllViews()
     val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
     TextAppearanceConfig.setShouldLoadFontSynchronously(true)
@@ -84,6 +85,7 @@ fun ChipGroup.addSingleDotChoiceChipsChildren(
     selectedId: Int?,
     isChipIconVisible: Boolean?
 ) = chipsData?.let {
+    isSingleSelection = true
     removeAllViews()
     val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
     TextAppearanceConfig.setShouldLoadFontSynchronously(true)
@@ -93,8 +95,10 @@ fun ChipGroup.addSingleDotChoiceChipsChildren(
         chip.text = item.second
         if (chip.id == selectedId) {
             chip.isChecked = true
+            chip.isChipIconVisible = isChipIconVisible ?: false
+        } else {
+            chip.isChipIconVisible = false
         }
-        chip.isChipIconVisible = isChipIconVisible ?: false
         chip.setOnCheckedChangeListener { _, isChecked ->
             if (isChipIconVisible != null && isChipIconVisible) {
                 chip.isChipIconVisible = isChecked
