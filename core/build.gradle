@@ -56,6 +56,7 @@ dependencies {
     api "androidx.recyclerview:recyclerview:$versions.recyclerView"
     api "androidx.cardview:cardview:$versions.cardView"
     api "androidx.core:core-ktx:$versions.coreKTX"
+    api "androidx.preference:preference-ktx:$versions.preference"
 
     // image
     api "com.github.bumptech.glide:glide:$versions.glide"

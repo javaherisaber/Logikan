@@ -26,11 +26,9 @@ import ir.logicfan.core.ui.util.LocaleUtils
 import javax.inject.Inject
 
 /**
- * Created by Mahdi on 12/16/2017.
  * All of our activities extends this class to inherit top level functionality
  */
-
-abstract class BaseActivity : AppCompatActivity(), HasAndroidInjector, BaseFragment.DataTerminalErrorListener {
+abstract class BaseActivity : AppCompatActivity(), HasAndroidInjector, DataTerminalErrorListener {
 
     @Inject
     lateinit var androidInjector: DispatchingAndroidInjector<Any>

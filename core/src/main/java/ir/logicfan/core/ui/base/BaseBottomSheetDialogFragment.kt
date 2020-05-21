@@ -6,18 +6,18 @@ import android.util.Log
 import android.view.View
 import androidx.annotation.CallSuper
 import androidx.annotation.MainThread
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.createViewModelLazy
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelStoreOwner
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.support.AndroidSupportInjection
 import ir.logicfan.core.ui.feature.main.NetworkConnectivityViewModel
 import ir.logicfan.core.ui.util.delegate.autoClearedActivityListener
 import javax.inject.Inject
 
-abstract class BaseFragment : Fragment(), BaseFragmentCompat {
+abstract class BaseBottomSheetDialogFragment : BottomSheetDialogFragment(), BaseFragmentCompat {
 
     @Inject
     override lateinit var androidInjector: DispatchingAndroidInjector<Any>
@@ -55,6 +55,6 @@ abstract class BaseFragment : Fragment(), BaseFragmentCompat {
     ) = createViewModelLazy(VM::class, { requireActivity().viewModelStore }, factoryProducer)
 
     companion object {
-        private var TAG = BaseFragment::class.java.simpleName
+        private var TAG = BaseBottomSheetDialogFragment::class.java.simpleName
     }
 }
