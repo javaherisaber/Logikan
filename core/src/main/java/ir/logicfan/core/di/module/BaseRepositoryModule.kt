@@ -15,11 +15,9 @@ import ir.logicfan.core.data.repository.GenericRepositoryImpl
 @Module
 abstract class BaseRepositoryModule {
 
-    @Module
     companion object {
         @Provides
         @Reusable
-        @JvmStatic
         fun dummyRepository(dummyApi: DummyApi): DummyRepository = DummyRepositoryImpl(
             dummyApi,
             ReactiveUtil(),
@@ -28,7 +26,6 @@ abstract class BaseRepositoryModule {
 
         @Provides
         @Reusable
-        @JvmStatic
         fun genericRepository(genericApi: GenericApi): GenericRepository = GenericRepositoryImpl(
             genericApi, ASyncTransformer()
         )

@@ -10,16 +10,13 @@ import retrofit2.Retrofit
 @Module
 abstract class BaseEndpointModule {
 
-    @Module
     companion object {
         @Provides
         @Reusable
-        @JvmStatic
         fun dummyApi(retrofit: Retrofit): DummyApi = retrofit.create(DummyApi::class.java)
 
         @Provides
         @Reusable
-        @JvmStatic
         fun genericApi(retrofit: Retrofit): GenericApi = retrofit.create(GenericApi::class.java)
     }
 }

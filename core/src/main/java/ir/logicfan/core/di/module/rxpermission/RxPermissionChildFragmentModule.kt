@@ -10,12 +10,9 @@ import ir.logicfan.core.di.scope.PerChildFragment
 @Module
 abstract class RxPermissionChildFragmentModule {
 
-    @Module
     companion object {
-
         @Provides
         @PerChildFragment
-        @JvmStatic
         fun rxPermission(@ChildFragment fragment: Fragment): RxPermissions {
             return RxPermissions(fragment)
         }

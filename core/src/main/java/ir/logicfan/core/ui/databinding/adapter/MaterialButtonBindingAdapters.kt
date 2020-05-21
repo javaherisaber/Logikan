@@ -10,7 +10,7 @@ import com.google.android.material.button.MaterialButton
 /**
  * Set background tint with colorInt
  */
-@BindingAdapter("app:backgroundTint")
+@BindingAdapter("backgroundTint")
 fun MaterialButton.setBackgroundTint(@ColorInt tint: Int) {
     this.backgroundTintList = ColorStateList.valueOf(tint)
 }
