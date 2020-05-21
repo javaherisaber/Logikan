@@ -1,12 +1,14 @@
-package ir.logicfan.core.data.base
+package ir.logicfan.core.data.util
 
 import io.reactivex.Observable
+import ir.logicfan.core.data.base.DataOutcome
+import ir.logicfan.core.data.base.Mapper
 import ir.logicfan.core.data.mapper.NetworkApiResponseToDataOutcomeMapper
 import ir.logicfan.core.data.network.base.NetworkApiResponse
 import ir.logicfan.core.data.reactive.ASyncTransformer
 import ir.logicfan.core.data.reactive.Transformer
 
-typealias ImperativeReactiveUtil = DataReactiveUtil<Nothing>
+typealias ImperativeReactiveUtil = ReactiveUtil<Nothing>
 /**
  * Define a utility class to process data layout result in reactive stream
  *
@@ -14,7 +16,7 @@ typealias ImperativeReactiveUtil = DataReactiveUtil<Nothing>
  * @property mapper map data from network layer to result
  * @property transformer transform stream with context threading (runtime or test contexts)
  */
-class DataReactiveUtil<T>(
+class ReactiveUtil<T>(
     private val mapper: Mapper<NetworkApiResponse<T>, DataOutcome<T>> = NetworkApiResponseToDataOutcomeMapper(),
     private val transformer: Transformer<DataOutcome<T>> = ASyncTransformer()
 ) {
