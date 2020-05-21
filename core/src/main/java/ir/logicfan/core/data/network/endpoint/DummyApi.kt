@@ -1,8 +1,7 @@
 package ir.logicfan.core.data.network.endpoint
 
-import io.reactivex.Observable
-import ir.logicfan.core.data.network.base.NetworkApiResponse
 import ir.logicfan.core.data.entity.DummyData
+import ir.logicfan.core.data.network.base.NetworkResult
 import retrofit2.http.GET
 
 /**
@@ -11,8 +10,8 @@ import retrofit2.http.GET
 interface DummyApi {
 
     @GET("dummy/item")
-    fun getItem(): Observable<NetworkApiResponse<DummyData>>
+    fun getItem(): NetworkResult<DummyData>
 
     @GET("dummy/list")
-    fun getList(): Observable<NetworkApiResponse<List<DummyData>>>
+    fun getList(): NetworkResult<List<DummyData>>
 }

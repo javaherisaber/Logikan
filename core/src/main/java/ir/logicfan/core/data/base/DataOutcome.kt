@@ -1,8 +1,11 @@
 package ir.logicfan.core.data.base
 
+import io.reactivex.Observable
 import ir.logicfan.core.data.entity.ErrorData
 import ir.logicfan.core.data.entity.PaginationData
 
+typealias ImperativeDataResult = DataResult<Nothing>
+typealias DataResult<S> = Observable<DataOutcome<S>>
 /**
  * Define an outcome from data layer
  * there is only one active State at a given object
