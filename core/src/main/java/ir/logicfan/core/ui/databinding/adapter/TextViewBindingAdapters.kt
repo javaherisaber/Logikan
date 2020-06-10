@@ -17,6 +17,7 @@ fun TextView.textWithLabel(text: String?, label: String?) {
 @BindingAdapter("android:text")
 fun TextView.setTextWithResId(resId: Int) {
     if (resId == 0) {
+        this.text = null
         return
     }
     this.setText(resId)
