@@ -1,13 +1,11 @@
 package ir.logicfan.core.ui.databinding.adapter
 
-import android.content.Context
-import android.view.LayoutInflater
 import android.view.View
 import androidx.databinding.BindingAdapter
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
-import com.google.android.material.resources.TextAppearanceConfig
 import ir.logicfan.core.R
+import ir.logicfan.core.ui.util.extension.inflateViewWithSynchronizedFont
 
 /**
  * Inflate Chip with decoration style into ChipGroup
@@ -17,14 +15,13 @@ fun ChipGroup.addDecorationChips(data: Collection<String>?) = data?.let {
     if (this.childCount > 0) {
         this.removeAllViews()
     }
-    val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-    TextAppearanceConfig.setShouldLoadFontSynchronously(true)
-    it.forEach { item ->
-        val chip = inflater.inflate(R.layout.core_view_chip_decoration, this, false) as Chip
-        chip.text = item
-        this.addView(chip)
+    inflateViewWithSynchronizedFont {
+        data.forEach { item ->
+            val chip = it.inflate(R.layout.core_view_chip_decoration, this, false) as Chip
+            chip.text = item
+            this.addView(chip)
+        }
     }
-    TextAppearanceConfig.setShouldLoadFontSynchronously(false)
 }
 
 /**
@@ -37,40 +34,38 @@ fun ChipGroup.addEntryChips(
     if (this.childCount > 0 && (keepChildren == false || keepChildren == null)) {
         removeAllViews()
     }
-    val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-    TextAppearanceConfig.setShouldLoadFontSynchronously(true)
-    it.forEach { item ->
-        val chip = this.inflateEntryChip(inflater, item, listener)
-        this.addView(chip)
+    inflateViewWithSynchronizedFont {
+        data.forEach { item ->
+            val chip = this.inflateEntryChip(item, listener)
+            this.addView(chip)
+        }
     }
-    TextAppearanceConfig.setShouldLoadFontSynchronously(false)
 }
 
 /**
  * add choice chips to this ChipGroup
- * @param chipsData inflate chip with first as title and second as id also enable or disable icon with third property
+ * @param data inflate chip with first as title and second as id also enable or disable icon with third property
  */
 @BindingAdapter(value = ["choiceChipsData", "onChoiceChange", "selectedChoiceChip"], requireAll = false)
 fun ChipGroup.addChoiceChipsChildren(
-    chipsData: Collection<Triple<Int, String, Boolean>>?,
+    data: Collection<Triple<Int, String, Boolean>>?,
     onChoiceChangeListener: OnChipGroupChoiceChangeListener?,
     selectedId: Int?
-) = chipsData?.let {
+) = data?.let {
     isSingleSelection = true
     removeAllViews()
-    val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-    TextAppearanceConfig.setShouldLoadFontSynchronously(true)
-    it.forEach { item ->
-        val chip = inflater.inflate(R.layout.core_view_chip_choice, this, false) as Chip
-        chip.id = item.first
-        if (chip.id == selectedId) {
-            chip.isChecked = true
+    inflateViewWithSynchronizedFont {
+        data.forEach { item ->
+            val chip = it.inflate(R.layout.core_view_chip_choice, this, false) as Chip
+            chip.id = item.first
+            if (chip.id == selectedId) {
+                chip.isChecked = true
+            }
+            chip.text = item.second
+            chip.isChipIconVisible = item.third // true if selected any values related to this chip
+            addView(chip)
         }
-        chip.text = item.second
-        chip.isChipIconVisible = item.third // true if selected any values related to this chip
-        addView(chip)
     }
-    TextAppearanceConfig.setShouldLoadFontSynchronously(false)
     this.setOnChoiceChangeListener(onChoiceChangeListener)
 }
 
@@ -78,35 +73,37 @@ fun ChipGroup.addChoiceChipsChildren(
  * add choice chips to this ChipGroup
  * enable icon when user select a chip and disable when unselected
  */
-@BindingAdapter(value = ["choiceChipsData", "onChoiceChange", "selectedChoiceChip", "isChipIconVisible"], requireAll = false)
+@BindingAdapter(
+    value = ["choiceChipsData", "onChoiceChange", "selectedChoiceChip", "isChipIconVisible"],
+    requireAll = false
+)
 fun ChipGroup.addSingleDotChoiceChipsChildren(
-    chipsData: Collection<Pair<Int, String>>?,
+    data: Collection<Pair<Int, String>>?,
     onChoiceChangeListener: OnChipGroupChoiceChangeListener?,
     selectedId: Int?,
     isChipIconVisible: Boolean?
-) = chipsData?.let {
+) = data?.let {
     isSingleSelection = true
     removeAllViews()
-    val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-    TextAppearanceConfig.setShouldLoadFontSynchronously(true)
-    it.forEach { item ->
-        val chip = inflater.inflate(R.layout.core_view_chip_choice, this, false) as Chip
-        chip.id = item.first
-        chip.text = item.second
-        if (chip.id == selectedId) {
-            chip.isChecked = true
-            chip.isChipIconVisible = isChipIconVisible ?: false
-        } else {
-            chip.isChipIconVisible = false
-        }
-        chip.setOnCheckedChangeListener { _, isChecked ->
-            if (isChipIconVisible != null && isChipIconVisible) {
-                chip.isChipIconVisible = isChecked
+    inflateViewWithSynchronizedFont {
+        data.forEach { item ->
+            val chip = it.inflate(R.layout.core_view_chip_choice, this, false) as Chip
+            chip.id = item.first
+            chip.text = item.second
+            if (chip.id == selectedId) {
+                chip.isChecked = true
+                chip.isChipIconVisible = isChipIconVisible ?: false
+            } else {
+                chip.isChipIconVisible = false
             }
+            chip.setOnCheckedChangeListener { _, isChecked ->
+                if (isChipIconVisible != null && isChipIconVisible) {
+                    chip.isChipIconVisible = isChecked
+                }
+            }
+            addView(chip)
         }
-        addView(chip)
     }
-    TextAppearanceConfig.setShouldLoadFontSynchronously(false)
     this.setOnChoiceChangeListener(onChoiceChangeListener)
 }
 
@@ -120,22 +117,17 @@ fun ChipGroup.setOnChoiceChangeListener(
     }
 }
 
-fun ChipGroup.inflateEntryChip(
-    inflater: LayoutInflater,
-    item: Pair<Int, String>,
-    listener: OnChipCloseIconClickListener?
-): Chip {
-    TextAppearanceConfig.setShouldLoadFontSynchronously(true)
-    val chip = inflater.inflate(R.layout.core_view_chip_entry, this, false) as Chip
-    chip.id = item.first
-    chip.text = item.second
-    chip.setOnCloseIconClickListener { view ->
-        this.removeView(view)
-        listener?.onCloseIconClick(item.first, item.second)
+fun ChipGroup.inflateEntryChip(item: Pair<Int, String>, listener: OnChipCloseIconClickListener?): Chip =
+    inflateViewWithSynchronizedFont {
+        val chip = it.inflate(R.layout.core_view_chip_entry, this, false) as Chip
+        chip.id = item.first
+        chip.text = item.second
+        chip.setOnCloseIconClickListener { view ->
+            this.removeView(view)
+            listener?.onCloseIconClick(item.first, item.second)
+        }
+        return@inflateViewWithSynchronizedFont chip
     }
-    TextAppearanceConfig.setShouldLoadFontSynchronously(false)
-    return chip
-}
 
 interface OnChipCloseIconClickListener {
     fun onCloseIconClick(id: Int, title: String)
