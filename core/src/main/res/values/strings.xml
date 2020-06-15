@@ -27,6 +27,7 @@
     <string name="core_all_female">زن</string>
     <string name="core_all_other">دیگر</string>
     <string name="core_all_unavailable">ناموجود</string>
+    <string name="core_all_textInsideParentheses">%1$s (%2$s)</string>
     <!-- end of all -->
 
     <!-- error -->

@@ -1,3 +1,5 @@
+@file:Suppress("unused")
+
 package ir.logicfan.core.ui.databinding.adapter
 
 import android.annotation.SuppressLint
@@ -14,6 +16,9 @@ fun TextView.textWithLabel(text: String?, label: String?) {
     this.text = label.plus(" : ").plus(text)
 }
 
+/**
+ * Set text from R.string resource
+ */
 @BindingAdapter("android:text")
 fun TextView.setTextWithResId(resId: Int) {
     if (resId == 0) {
@@ -21,6 +26,13 @@ fun TextView.setTextWithResId(resId: Int) {
         return
     }
     this.setText(resId)
+}
+
+@BindingAdapter(value = ["android:text", "insideParentheses"], requireAll = false)
+fun TextView.setInsideParenthesesText(text: String?, insideParentheses: String?) = insideParentheses?.let {
+    this.text = context.getString(R.string.core_all_textInsideParentheses, text, insideParentheses)
+} ?: run {
+    this.text = text
 }
 
 @BindingAdapter("andSeparatedText")
