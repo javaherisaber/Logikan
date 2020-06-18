@@ -28,11 +28,11 @@ fun TextView.setTextWithResId(resId: Int) {
     this.setText(resId)
 }
 
-@BindingAdapter(value = ["android:text", "insideParentheses"], requireAll = false)
-fun TextView.setInsideParenthesesText(text: String?, insideParentheses: String?) = insideParentheses?.let {
-    this.text = context.getString(R.string.core_all_textInsideParentheses, text, insideParentheses)
-} ?: run {
-    this.text = text
+@BindingAdapter(value = ["beforeParentheses", "insideParentheses"], requireAll = false)
+fun TextView.setInsideParenthesesText(beforeParentheses: String?, insideParentheses: String?) = insideParentheses?.let {
+    this.text = context.getString(R.string.core_all_textInsideParentheses, beforeParentheses, insideParentheses)
+} ?: beforeParentheses?.let {
+    this.text = beforeParentheses
 }
 
 @BindingAdapter("andSeparatedText")
