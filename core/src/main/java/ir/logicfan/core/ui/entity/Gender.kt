@@ -12,6 +12,9 @@ enum class Gender(val code: Int, val label: String, val index: Int, @StringRes v
 
     companion object {
         @JvmStatic
+        fun iranLegalValues(): List<Gender> = values().filter { item -> item.name != OTHER.name }
+
+        @JvmStatic
         @Throws(IllegalArgumentException::class)
         fun getGenderWithLabel(label: String): Gender {
             val allGenders = values()
