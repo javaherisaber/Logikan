@@ -11,7 +11,7 @@ import ir.logicfan.core.ui.feature.main.NetworkConnectivityViewModel
 interface BaseFragmentCompat : HasAndroidInjector {
     var androidInjector: DispatchingAndroidInjector<Any>
     var viewModelFactory: ViewModelProvider.Factory
-    val dataTerminalErrorListener: DataTerminalErrorListener
+    val dataTerminalStateListener: DataTerminalStateListener
     val networkConnectivityViewModel: NetworkConnectivityViewModel
 
     fun attachBaseViewModel(): List<BaseViewModel>? = null
@@ -22,7 +22,10 @@ interface BaseFragmentCompat : HasAndroidInjector {
         val baseViewModels = attachBaseViewModel()
         baseViewModels?.forEach { viewModel ->
             viewModel.errorState.observe(lifecycleOwner, Observer {
-                dataTerminalErrorListener.onDataTerminalError(it)
+                dataTerminalStateListener.onDataTerminalError(it)
+            })
+            viewModel.updateState.observe(lifecycleOwner, Observer {
+                dataTerminalStateListener.onUpdateState(it)
             })
         }
         networkConnectivityViewModel.networkBecomesAvailable.observe(lifecycleOwner, Observer {

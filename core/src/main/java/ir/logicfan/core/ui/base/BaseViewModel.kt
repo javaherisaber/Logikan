@@ -6,13 +6,17 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
-import ir.logicfan.core.data.reactive.ErrorStateObserver
+import ir.logicfan.core.data.entity.UpdateData
+import ir.logicfan.core.data.reactive.TerminalStateObserver
 import ir.logicfan.core.ui.reactive.SingleLiveEvent
 
-abstract class BaseViewModel(val compositeDisposable: CompositeDisposable) : ViewModel(), ErrorStateObserver {
+abstract class BaseViewModel(val compositeDisposable: CompositeDisposable) : ViewModel(), TerminalStateObserver {
 
     private val _errorState: SingleLiveEvent<Throwable> = SingleLiveEvent()
     val errorState: LiveData<Throwable> = _errorState
+
+    private val _updateState: SingleLiveEvent<UpdateData> = SingleLiveEvent()
+    val updateState: LiveData<UpdateData> = _updateState
 
     fun disposableContext(operation: () -> Disposable) = compositeDisposable.add(operation())
 
@@ -28,7 +32,11 @@ abstract class BaseViewModel(val compositeDisposable: CompositeDisposable) : Vie
     }
 
     override fun onErrorState(throwable: Throwable) {
-        this._errorState.value = throwable
+        _errorState.value = throwable
+    }
+
+    override fun onUpdateState(update: UpdateData) {
+        _updateState.value = update
     }
 
     companion object {

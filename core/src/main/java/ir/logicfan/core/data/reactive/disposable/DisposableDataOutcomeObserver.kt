@@ -1,10 +1,11 @@
 package ir.logicfan.core.data.reactive.disposable
 
 import ir.logicfan.core.data.base.DataOutcome
+import ir.logicfan.core.data.entity.UpdateData
 import ir.logicfan.core.data.error.DataException
 import ir.logicfan.core.data.error.DataNonTerminalErrorType
 import ir.logicfan.core.data.error.DataTerminalErrorType
-import ir.logicfan.core.data.reactive.ErrorStateObserver
+import ir.logicfan.core.data.reactive.TerminalStateObserver
 
 /**
  * Define a disposable observer with DataOutcome object
@@ -16,7 +17,7 @@ import ir.logicfan.core.data.reactive.ErrorStateObserver
  * @property onNonTerminalErrorFunc emit non terminal error
  */
 class DisposableDataOutcomeObserver<T>(
-    errorStateObserver: ErrorStateObserver,
+    private val terminalStateObserver: TerminalStateObserver,
     private val onNextSingleDataFunc: (DataOutcome.SingleDataState<T>) -> Unit = {},
     private val onNextListDataFunc: (DataOutcome.ListDataState<T>) -> Unit = {},
     private val onNextPagedListDataFunc: (DataOutcome.PagedListDataState<T>) -> Unit = {},
@@ -25,21 +26,36 @@ class DisposableDataOutcomeObserver<T>(
     onNextFunc: (DataOutcome<T>) -> Unit = {},
     onCompleteFunc: () -> Unit = {},
     onErrorFunc: (Throwable) -> Unit = {}
-) : DisposableDelegateErrorObserver<DataOutcome<T>>(errorStateObserver, onNextFunc, onCompleteFunc, onErrorFunc) {
+) : DisposableDelegateErrorObserver<DataOutcome<T>>(terminalStateObserver, onNextFunc, onCompleteFunc, onErrorFunc) {
 
-    override fun onNext(t: DataOutcome<T>) {
+    override fun onNext(outcome: DataOutcome<T>) {
         if (!isDisposed) {
-            when (t) {
+            when (outcome) {
                 is DataOutcome.ErrorState -> {
-                    DataNonTerminalErrorType.findNonTerminalExceptionOrNull(t.errorList)?.let { onNonTerminalErrorFunc(it) }
-                    DataTerminalErrorType.findTerminalExceptionOrNull(t.errorList)?.let { onError(it) }
+                    handleUpdateState(outcome.update)
+                    DataNonTerminalErrorType.findNonTerminalExceptionOrNull(outcome.errorList)?.let { onNonTerminalErrorFunc(it) }
+                    DataTerminalErrorType.findTerminalExceptionOrNull(outcome.errorList)?.let { onError(it) }
                 }
-                is DataOutcome.SingleDataState -> onNextSingleDataFunc(t)
-                is DataOutcome.ListDataState -> onNextListDataFunc(t)
-                is DataOutcome.PagedListDataState -> onNextPagedListDataFunc(t)
-                is DataOutcome.ImperativeState -> onNextImperativeState(t)
+                is DataOutcome.SingleDataState -> {
+                    handleUpdateState(outcome.update)
+                    onNextSingleDataFunc(outcome)
+                }
+                is DataOutcome.ListDataState -> {
+                    handleUpdateState(outcome.update)
+                    onNextListDataFunc(outcome)
+                }
+                is DataOutcome.PagedListDataState -> {
+                    handleUpdateState(outcome.update)
+                    onNextPagedListDataFunc(outcome)
+                }
+                is DataOutcome.ImperativeState -> {
+                    handleUpdateState(outcome.update)
+                    onNextImperativeState(outcome)
+                }
             }
-            onNextFunc(t)
+            onNextFunc(outcome)
         }
     }
+
+    private fun handleUpdateState(update: UpdateData?) = update?.let { terminalStateObserver.onUpdateState(it) }
 }

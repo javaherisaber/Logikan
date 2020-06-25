@@ -17,6 +17,7 @@ import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasAndroidInjector
 import ir.logicfan.core.R
+import ir.logicfan.core.data.entity.UpdateData
 import ir.logicfan.core.data.error.DataException
 import ir.logicfan.core.data.sharedpreferences.BaseSharedPreferences
 import ir.logicfan.core.databinding.CoreViewNetworkUnavailableBinding
@@ -28,7 +29,7 @@ import javax.inject.Inject
 /**
  * All of our activities extends this class to inherit top level functionality
  */
-abstract class BaseActivity : AppCompatActivity(), HasAndroidInjector, DataTerminalErrorListener {
+abstract class BaseActivity : AppCompatActivity(), HasAndroidInjector, DataTerminalStateListener {
 
     @Inject
     lateinit var androidInjector: DispatchingAndroidInjector<Any>
@@ -59,6 +60,9 @@ abstract class BaseActivity : AppCompatActivity(), HasAndroidInjector, DataTermi
             viewModel.errorState.observe(this, Observer {
                 onDataTerminalError(it)
             })
+            viewModel.updateState.observe(this, Observer {
+                onUpdateState(it)
+            })
         }
         networkConnectivityViewModel.networkBecomesAvailable.observe(this, Observer {
             baseViewModels?.forEach { viewModel ->
@@ -88,6 +92,11 @@ abstract class BaseActivity : AppCompatActivity(), HasAndroidInjector, DataTermi
         if (throwable  is DataException.Terminal.Offline) {
             networkConnectivityViewModel.onNetworkAvailabilityChange(false)
         }
+    }
+
+    @CallSuper
+    override fun onUpdateState(updateData: UpdateData) {
+        // do nothing here, consumer needs to handle this
     }
 
     @MainThread

@@ -1,19 +1,19 @@
 package ir.logicfan.core.data.reactive.disposable
 
 import io.reactivex.observers.DisposableObserver
-import ir.logicfan.core.data.reactive.ErrorStateObserver
+import ir.logicfan.core.data.reactive.TerminalStateObserver
 
 /**
  * Define a disposable observer with an extra ErrorStateObserver to let you delegate error to suitable handler
  *
  * @param T data type of your stream
- * @property errorStateObserver emit error for the callback receiver
+ * @property terminalStateObserver emit error for the callback receiver
  * @property onNextFunc emit next data
  * @property onCompleteFunc declare completion of stream
  * @property onErrorFunc emit error for the lambda
  */
 open class DisposableDelegateErrorObserver<T>(
-    private val errorStateObserver: ErrorStateObserver,
+    private val terminalStateObserver: TerminalStateObserver,
     val onNextFunc: (T) -> Unit,
     val onCompleteFunc: () -> Unit = {},
     val onErrorFunc: (Throwable) -> Unit = {}
@@ -25,16 +25,16 @@ open class DisposableDelegateErrorObserver<T>(
         }
     }
 
-    override fun onNext(t: T) {
+    override fun onNext(outcome: T) {
         if (!isDisposed) {
-            onNextFunc(t)
+            onNextFunc(outcome)
         }
     }
 
-    override fun onError(e: Throwable) {
+    override fun onError(error: Throwable) {
         if (!isDisposed) {
-            errorStateObserver.onErrorState(e)
-            onErrorFunc(e)
+            terminalStateObserver.onErrorState(error)
+            onErrorFunc(error)
         }
     }
 }

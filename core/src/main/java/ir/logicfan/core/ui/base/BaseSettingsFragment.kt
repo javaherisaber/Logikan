@@ -25,7 +25,7 @@ abstract class BaseSettingsFragment : PreferenceFragmentCompat(), BaseFragmentCo
     @Inject
     override lateinit var viewModelFactory: ViewModelProvider.Factory
 
-    override val dataTerminalErrorListener: DataTerminalErrorListener by autoClearedActivityListener()
+    override val dataTerminalStateListener: DataTerminalStateListener by autoClearedActivityListener()
     override val networkConnectivityViewModel: NetworkConnectivityViewModel by activityViewModels()
 
     override fun onAttach(context: Context) {
