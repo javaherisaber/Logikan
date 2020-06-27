@@ -14,5 +14,7 @@ data class UpdateData(
     @field:SerializedName("url")
     val url: String,
     @field:SerializedName("deep_link")
-    val deepLink: String?
+    val deepLink: String?,
+    @field:SerializedName("deep_link_package")
+    val deepLinkPackage: String?
 )
