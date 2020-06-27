@@ -15,15 +15,18 @@ class NetworkConnectivityViewModel @Inject constructor() : ViewModel() {
     private val _networkBecomesAvailable = LiveEvent<Unit>()
     val networkBecomesAvailable: LiveData<Unit> = _networkBecomesAvailable
 
+    private var wasOffline = false
+
     fun onNetworkAvailabilityChange(isActive: Boolean) {
-        if (isActive) {
+        if (isActive && wasOffline) {
             _alertPanelVisibility.value = false
             _networkBecomesAvailable.value = Unit
-        } else {
+        } else if (!isActive && !wasOffline) {
             if (_alertPanelVisibility.value == null || _alertPanelVisibility.value == false) {
                 _alertPanelVisibility.value = true
             }
         }
+        wasOffline = !isActive
     }
 
     fun onCloseClick() {
