@@ -7,8 +7,8 @@ data class UpdateData(
     val versionName: String,
     @field:SerializedName("version_code")
     val versionCode: Int,
-    @field:SerializedName("is_force")
-    val isForce: Boolean,
+    @field:SerializedName("is_forced")
+    val isForced: Boolean,
     @field:SerializedName("message")
     val message: String?,
     @field:SerializedName("url")
