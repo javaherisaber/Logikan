@@ -1,21 +1,12 @@
 apply plugin: 'com.android.library'
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-kapt'
 apply plugin: 'org.jetbrains.dokka-android'
+apply from: '..\\..\\build-features-library.gradle'
 
 android {
     resourcePrefix "core"
-    compileSdkVersion config.compileSdk
     defaultConfig {
-        minSdkVersion config.minSdk
-        targetSdkVersion config.targetSdk
         versionCode 17
         versionName "1.4"
-        vectorDrawables.useSupportLibrary = true
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-    }
-    dataBinding {
-        enabled = true
     }
     buildTypes {
         release {
@@ -24,27 +15,8 @@ android {
             consumerProguardFiles 'proguard-rules.pro' // Rules appended to the integrating app
         }
     }
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
-    kotlinOptions {
-        jvmTarget = "1.8"
-    }
-    kapt {
-        useBuildCache = true
-        correctErrorTypes = true
-        javacOptions {
-            // Increase the max count of errors from annotation processors.
-            // Default is 100.
-            option("-Xmaxerrs", 500)
-        }
-    }
     dokka {
-        outputFormat = 'html'
         outputDirectory = "$rootDir/androidprojectdocs/docs/build/docs/orchid/dokka/coredocs"
-        skipDeprecated = false // include deprecated members
-        reportUndocumented = true // Emit warnings about not documented members.
     }
 }
 
