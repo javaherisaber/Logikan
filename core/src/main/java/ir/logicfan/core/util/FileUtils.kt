@@ -23,9 +23,10 @@ object FileUtils {
     }
 
     @JvmStatic
-    fun getFileTypeFromURI(uri: Uri, context: Context): String? {
+    fun getFileTypeFromURI(uri: Uri, context: Context): String {
         val contentResolver = context.contentResolver
         return contentResolver.getType(uri)?.split("/")?.toTypedArray()?.get(0)
+            ?: error("Wrong uri")
     }
 
     @JvmStatic

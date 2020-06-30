@@ -1,9 +1,8 @@
 package ir.logicfan.core.data.sharedpreferences
 
-
 import android.annotation.SuppressLint
 import android.content.Context
-import android.preference.PreferenceManager
+import androidx.preference.PreferenceManager
 import android.provider.Settings
 import ir.logicfan.core.R
 import ir.logicfan.core.ui.util.LocaleUtils

@@ -84,7 +84,9 @@ data class JalaliCalendar(
         val month = gregorian.get(Calendar.MONTH) + 1 // gregorian calendar is zero based
         val day = gregorian.get(Calendar.DAY_OF_MONTH)
         val dateFormat = SimpleDateFormat("yyyy-MM-dd-HH-mm-ss")
-        val date = dateFormat.parse("$year-$month-$day-${clock.hour}-${clock.minute}-${clock.second}")
+        val date = dateFormat.parse(
+            "$year-$month-$day-${clock.hour}-${clock.minute}-${clock.second}"
+        ) ?: error("Wrong date format")
         return date.time
     }
 
@@ -196,7 +198,7 @@ data class JalaliCalendar(
         @JvmStatic
         @Throws(ParseException::class)
         fun getJalaliCalendarFromIsoTimestamp(isoTimestamp: String, format: String = "yyyy-MM-dd HH:mm:ss"): JalaliCalendar {
-            val date = SimpleDateFormat(format).parse(isoTimestamp)
+            val date = SimpleDateFormat(format).parse(isoTimestamp) ?: error("Wrong timestamp")
             val gregorian = GregorianCalendar().apply {
                 time = date
             }
