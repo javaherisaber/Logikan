@@ -50,10 +50,10 @@ fun TextView.setCommaSeparatedText(data: Collection<Any>?) = data?.let {
  * @param priceLabel label being added as prefix text
  */
 @SuppressLint("StringFormatInvalid")
-@BindingAdapter(value = ["price", "priceLabel", "hasAvailability"], requireAll = false)
-fun TextView.price(price: Long?, priceLabel: String?, hasAvailability: Boolean) {
-    if (hasAvailability && (price == null || price == 0L)) {
-        this.text = context.getString(R.string.core_all_unavailable)
+@BindingAdapter(value = ["price", "priceLabel", "zeroValueMessage"], requireAll = false)
+fun TextView.price(price: Long?, priceLabel: String?, zeroValueMessage: String?) {
+    if (zeroValueMessage != null && (price == null || price == 0L)) {
+        this.text = zeroValueMessage
         return
     }
     val priceSeparatedThousands = (price ?: 0).toSeparatedThousands()
