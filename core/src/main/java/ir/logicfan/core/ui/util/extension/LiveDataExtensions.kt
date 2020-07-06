@@ -13,6 +13,14 @@ fun MutableLiveData<OneShotEvent<Unit>>.postOneShotUnit() {
 /**
  * Post a OneShotEvent of type T
  */
-fun <T> MutableLiveData<OneShotEvent<T>>.postOneShot(value: T){
+fun <T> MutableLiveData<OneShotEvent<T>>.postOneShot(value: T) {
     this.value = OneShotEvent(value)
+}
+
+/**
+ * Append new list with current value of live data and post new value
+ */
+fun <T> MutableLiveData<List<T>>.appendPost(newList: List<T>) {
+    val previous = this.value ?: listOf()
+    this.value = previous + newList
 }
