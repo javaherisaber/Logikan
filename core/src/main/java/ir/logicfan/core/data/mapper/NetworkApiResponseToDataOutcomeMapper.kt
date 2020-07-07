@@ -15,10 +15,10 @@ class NetworkApiResponseToDataOutcomeMapper<T> : Mapper<NetworkApiResponse<T>, D
             DataOutcome.ListDataState(from.success, from.data, from.update)
         from.data == null && from.error == null && from.pagination == null ->
             DataOutcome.ImperativeState(from.success, from.update)
+        from.data != null && from.error == null && from.pagination != null ->
+            DataOutcome.PagedListDataState(from.success, from.data, from.pagination, from.update)
         from.data != null && from.pagination == null ->
             DataOutcome.SingleDataState(from.success, from.data, from.update)
-        from.data != null && from.pagination != null && from.data is List<*> ->
-            DataOutcome.PagedListDataState(from.success, from.data, from.pagination, from.update)
         from.error != null ->
             DataOutcome.ErrorState(from.error, from.update)
         else ->
