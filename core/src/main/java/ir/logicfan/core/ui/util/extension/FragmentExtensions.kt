@@ -45,7 +45,7 @@ fun Fragment.hideKeyBoard() {
     )
 }
 
-fun Fragment.setToolbarTitle(title: String) = (this.activity as AppCompatActivity).supportActionBar?.apply {
+fun Fragment.setToolbarTitle(title: String?) = (this.activity as AppCompatActivity).supportActionBar?.apply {
     setDisplayShowTitleEnabled(true)
     this.title = title
 }
