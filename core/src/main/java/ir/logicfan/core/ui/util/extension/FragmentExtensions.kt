@@ -1,6 +1,7 @@
 package ir.logicfan.core.ui.util.extension
 
 import android.content.Context
+import android.net.Uri
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.annotation.DrawableRes
@@ -9,7 +10,19 @@ import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import ir.logicfan.core.R
+
+/**
+ * Navigate to deep link with list of path <key, value> being replaced in uri
+ */
+fun Fragment.navigateDeepLink(@StringRes res: Int, vararg path: Pair<String, Any>) {
+    var deepLink = getString(res)
+    path.forEach { (key, value) ->
+        deepLink = deepLink.replace("{$key}", value.toString())
+    }
+    findNavController().navigate(Uri.parse(deepLink))
+}
 
 /**
  * Initialize toolbar with action bar
