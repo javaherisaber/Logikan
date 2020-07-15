@@ -68,23 +68,6 @@
     </style>
     <!-- End of TextInputLayout -->
 
-    <!-- Button -->
-    <style name="Core.Widget.Button.ExtendedCheck" parent="Widget.MaterialComponents.Button.Icon">
-        <item name="android:layout_height">60dp</item>
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_margin">16dp</item>
-        <item name="android:paddingStart">12dp</item>
-        <item name="android:paddingEnd">20dp</item>
-        <item name="android:textAppearance">?attr/textAppearanceButton</item>
-        <item name="cornerRadius">36dp</item>
-        <item name="elevation">@dimen/core_elevation_default</item>
-        <item name="icon">@drawable/core_ic_all_check_white_24dp</item>
-        <item name="iconPadding">12dp</item>
-        <item name="iconSize">24dp</item>
-        <item name="iconTint">@color/core_colorWhite</item>
-    </style>
-    <!-- End of Button -->
-
     <style name="Core.Widget.ExtendedFab" parent="Widget.MaterialComponents.ExtendedFloatingActionButton">
         <item name="iconTint">@color/core_colorWhite</item>
         <item name="android:textColor">@color/core_colorWhite</item>
