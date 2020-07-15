@@ -1,5 +1,7 @@
 package ir.logicfan.core.ui.databinding.adapter
 
+import android.os.Build
+import androidx.core.view.ViewCompat
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
@@ -65,5 +67,17 @@ fun RecyclerView.addGridMarginItemDecorator(
                 )
             }
         }
+    }
+}
+
+/**
+ * Set nestedScrollingViewEnabled attribute and respect backward compatibility
+ */
+@BindingAdapter("isNestedScrollingEnabled")
+fun RecyclerView.setNestedScrollingViewEnabled(isEnabled: Boolean) {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+        this.isNestedScrollingEnabled = isEnabled
+    } else {
+        ViewCompat.setNestedScrollingEnabled(this, isEnabled)
     }
 }
