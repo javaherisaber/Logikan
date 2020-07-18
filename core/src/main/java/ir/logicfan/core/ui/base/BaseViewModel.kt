@@ -6,9 +6,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
+import ir.logicbase.livex.SingleLiveEvent
 import ir.logicfan.core.data.entity.UpdateData
 import ir.logicfan.core.data.reactive.TerminalStateObserver
-import ir.logicfan.core.ui.reactive.SingleLiveEvent
 
 abstract class BaseViewModel(val compositeDisposable: CompositeDisposable) : ViewModel(), TerminalStateObserver {
 

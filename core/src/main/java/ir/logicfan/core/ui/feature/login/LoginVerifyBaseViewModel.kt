@@ -1,17 +1,16 @@
 package ir.logicfan.core.ui.feature.login
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import io.reactivex.disposables.CompositeDisposable
+import ir.logicbase.livex.OneShotLiveEvent
 import ir.logicfan.core.ui.base.BaseViewModel
-import ir.logicfan.core.ui.reactive.OneShotEvent
 
 abstract class LoginVerifyBaseViewModel(
     compositeDisposable: CompositeDisposable
 ) : BaseViewModel(compositeDisposable) {
-    protected val _showTryLaterError = MutableLiveData<OneShotEvent<Unit>>()
-    val showTryLaterError: LiveData<OneShotEvent<Unit>> = _showTryLaterError
+    protected val _showTryLaterError = OneShotLiveEvent<Unit>()
+    val showTryLaterError: LiveData<Unit> = _showTryLaterError
 
-    protected val _showWrongCode = MutableLiveData<OneShotEvent<Unit>>()
-    val showWrongCode: LiveData<OneShotEvent<Unit>> = _showWrongCode
+    protected val _showWrongCode = OneShotLiveEvent<Unit>()
+    val showWrongCode: LiveData<Unit> = _showWrongCode
 }

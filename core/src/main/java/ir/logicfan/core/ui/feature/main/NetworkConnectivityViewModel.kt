@@ -3,7 +3,7 @@ package ir.logicfan.core.ui.feature.main
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.hadilq.liveevent.LiveEvent
+import ir.logicbase.livex.LiveEvent
 import javax.inject.Inject
 
 class NetworkConnectivityViewModel @Inject constructor() : ViewModel() {

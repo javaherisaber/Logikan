@@ -64,7 +64,7 @@ dependencies {
     api "androidx.lifecycle:lifecycle-extensions:$versions.archLifecycle"
     api "androidx.lifecycle:lifecycle-reactivestreams-ktx:$versions.archLifecycle" // reactive stream support for live data
     api "androidx.lifecycle:lifecycle-common-java8:$versions.archLifecycle"
-    api "com.github.hadilq.liveevent:liveevent:$versions.liveEvent"
+    api "com.github.javaherisaber:LiveX:$versions.liveX"
 
     // test
     testImplementation "junit:junit:$versions.junit"
