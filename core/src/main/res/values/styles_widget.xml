@@ -52,7 +52,7 @@
     </style>
 
     <style name="Core.Widget.EditText.Spinner" parent="Core.Widget.EditText.Disabled">
-        <item name="android:drawableEnd">@drawable/core_ic_all_drop_down_grey_24dp</item>
+        <item name="drawableEndCompat">@drawable/core_ic_all_drop_down_grey_24dp</item>
     </style>
     <!-- End of EditText -->
 
