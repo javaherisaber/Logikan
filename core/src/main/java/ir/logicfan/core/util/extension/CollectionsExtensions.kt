@@ -6,6 +6,9 @@ package ir.logicfan.core.util.extension
  */
 fun <T> Collection<T>.createCommaSeparatedValues(): String = this.joinToString(separator = ",") { it.toString() }
 
+fun <T> Collection<T>.commaSeparatedValuesOrNull(): String? =
+    if (this.isNullOrEmpty()) null else createCommaSeparatedValues()
+
 fun <T : Any> Collection<T?>.whenAllNotNull(block: () -> Unit) {
     if (this.all { it != null }) {
         block()
