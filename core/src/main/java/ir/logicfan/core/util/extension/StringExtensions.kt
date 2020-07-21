@@ -16,7 +16,7 @@ fun String.isValidIranMobile(): Boolean = this.matches("(0(9[0-9]{9}))|(\\+98(9[
 /**
  * Add Bearer prefix to token string
  */
-fun String.toBearerToken(): String = "Bearer $this"
+fun String.toBearerToken(): String = if (this != "null") "Bearer $this" else this
 
 /**
  * Remove ',' chars from text
