@@ -23,6 +23,9 @@ fun RecyclerView.submitList(
         adapter.submitList(newList)
         val parent = viewGroup ?: this.parent as ViewGroup
         if (newList.isEmpty() && hasEmptyState == true) {
+            if (parent.findViewById<View?>(R.id.constraintLayout_coreItemStateEmpty) != null) {
+                return@let
+            }
             val inflater = LayoutInflater.from(parent.context)
             val emptyView = DataBindingUtil.inflate<CoreItemStateEmptyBinding>(
                 inflater, R.layout.core_item_state_empty, parent, false
