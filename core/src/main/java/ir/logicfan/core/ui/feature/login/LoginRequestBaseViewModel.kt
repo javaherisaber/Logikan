@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import io.reactivex.disposables.CompositeDisposable
 import ir.logicbase.livex.OneShotLiveEvent
-import ir.logicbase.livex.OneShotLiveEvent.Companion.call
+import ir.logicbase.livex.call
 import ir.logicfan.core.ui.base.BaseViewModel
 import ir.logicfan.core.util.extension.isValidIranMobile
 
