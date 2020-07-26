@@ -1,6 +1,0 @@
-<resources>
-    <!-- Base application theme. -->
-    <style name="CoreAppTheme" parent="CoreAppThemeParent">
-        <item name="android:statusBarColor">@color/core_colorStatusBar</item>
-    </style>
-</resources>

@@ -1,5 +1,4 @@
 <resources>
-
     <!--
     # CODE OF CONDUCT
     NEVER directly reference these colors in your application because doing so will result in coupled resources
@@ -7,42 +6,81 @@
     you can use inherit your own theme from these styles
     -->
 
-    <!-- Base application theme. -->
-    <style name="CoreAppTheme" parent="CoreAppThemeParent" />
-
-    <style name="CoreAppThemeParent" parent="Theme.MaterialComponents.Light.NoActionBar">
-
-        <!-- major attributes -->
-        <item name="colorPrimary">@color/core_colorPrimary</item>
-        <item name="colorPrimaryDark">@color/core_colorPrimaryDark</item>
-        <item name="colorAccent">@color/core_colorSecondary</item>
-        <item name="colorError">@color/core_colorError</item>
-        <item name="colorSecondary">@color/core_colorSecondary</item>
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-
-        <!-- custom attributes -->
-        <item name="core_chipCornerRadius">@dimen/core_corner_radius_default</item>
-        <item name="core_chipTextAppearance">?attr/textAppearanceBody1</item>
-        <item name="core_chipDecorationStyle">@style/Core.Widget.Chip.Decoration</item>
-        <item name="core_chipEntryStyle">@style/Core.Widget.Chip.Entry</item>
-        <item name="core_chipChoiceStyle">@style/Core.Widget.Chip.Choice</item>
-
-        <!-- text attributes -->
-        <item name="textAppearanceHeadline1">@style/Core.TextAppearance.Headline1</item>
-        <item name="textAppearanceHeadline2">@style/Core.TextAppearance.Headline2</item>
-        <item name="textAppearanceHeadline3">@style/Core.TextAppearance.Headline3</item>
-        <item name="textAppearanceHeadline4">@style/Core.TextAppearance.Headline4</item>
-        <item name="textAppearanceHeadline5">@style/Core.TextAppearance.Headline5</item>
-        <item name="textAppearanceHeadline6">@style/Core.TextAppearance.Headline6</item>
-        <item name="textAppearanceSubtitle1">@style/Core.TextAppearance.Subtitle1</item>
-        <item name="textAppearanceSubtitle2">@style/Core.TextAppearance.Subtitle2</item>
-        <item name="textAppearanceBody1">@style/Core.TextAppearance.Body1</item>
-        <item name="textAppearanceBody2">@style/Core.TextAppearance.Body2</item>
-        <item name="textAppearanceCaption">@style/Core.TextAppearance.Caption</item>
-        <item name="textAppearanceButton">@style/Core.TextAppearance.Button</item>
-        <item name="textAppearanceOverline">@style/Core.TextAppearance.Overline</item>
+    <!-- Chip -->
+    <style name="Core.Widget.Chip.Decoration" parent="Widget.MaterialComponents.Chip.Entry">
+        <item name="chipCornerRadius">?attr/core_chipCornerRadius</item>
+        <item name="android:textAppearance">?attr/core_chipTextAppearance</item>
+        <item name="ensureMinTouchTargetSize">false</item>
+        <item name="android:checkable">false</item>
+        <item name="android:selectable">false</item>
+        <item name="closeIconVisible">false</item>
+        <item name="chipIconVisible">false</item>
+        <item name="checkedIconVisible">false</item>
+        <item name="android:focusable">false</item>
+        <item name="android:clickable">false</item>
     </style>
-    <!-- End of Base application theme -->
 
+    <style name="Core.Widget.Chip.Entry" parent="Widget.MaterialComponents.Chip.Entry">
+        <item name="chipCornerRadius">?attr/core_chipCornerRadius</item>
+        <item name="android:textAppearance">?attr/core_chipTextAppearance</item>
+        <item name="closeIconVisible">true</item>
+        <item name="android:checkable">false</item>
+        <item name="android:clickable">false</item>
+    </style>
+
+    <style name="Core.Widget.Chip.Choice" parent="Widget.MaterialComponents.Chip.Choice">
+        <item name="android:layoutDirection">ltr</item>
+        <item name="chipStrokeColor">?attr/colorPrimary</item>
+        <item name="chipStrokeWidth">@dimen/core_stroke_default</item>
+        <item name="chipBackgroundColor">@color/core_bg_all_chip_choice</item>
+        <item name="android:textAppearance">?attr/core_chipTextAppearance</item>
+        <item name="chipIcon">@drawable/core_ic_all_dot_black_8dp</item>
+        <item name="chipCornerRadius">?attr/core_chipCornerRadius</item>
+        <item name="chipIconSize">8dp</item>
+        <item name="chipIconVisible">true</item>
+        <item name="chipIconTint">@color/core_tint_all_chip_choice</item>
+        <item name="android:textColor">@color/core_tint_all_chip_choice</item>
+    </style>
+    <!-- End of Chip -->
+
+    <!-- EditText -->
+    <style name="Core.Base.Widget.EditText" parent="Widget.AppCompat.EditText">
+        <item name="android:gravity">start</item>
+        <item name="android:textAppearance">?attr/textAppearanceBody1</item>
+    </style>
+
+    <style name="Core.Widget.EditText" parent="Core.Base.Widget.EditText" />
+
+    <style name="Core.Widget.EditText.Disabled">
+        <item name="android:cursorVisible">false</item>
+        <item name="android:focusable">false</item>
+        <item name="android:focusableInTouchMode">false</item>
+        <item name="android:inputType">textNoSuggestions</item>
+    </style>
+
+    <style name="Core.Widget.EditText.Spinner" parent="Core.Widget.EditText.Disabled">
+        <item name="drawableEndCompat">@drawable/core_ic_all_drop_down_grey_24dp</item>
+    </style>
+    <!-- End of EditText -->
+
+    <!-- TextInputLayout -->
+    <style name="Core.Widget.TextInputLayout.OutlinedBox" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="boxBackgroundColor">@color/core_colorWhite</item>
+        <item name="hintTextAppearance">?attr/textAppearanceSubtitle1</item>
+    </style>
+
+    <style name="Core.Widget.TextInputLayout.OutlinedBox.Dense" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+        <item name="boxBackgroundColor">@color/core_colorWhite</item>
+        <item name="hintTextAppearance">?attr/textAppearanceSubtitle1</item>
+    </style>
+    <!-- End of TextInputLayout -->
+
+    <!-- ExtendedFab -->
+    <style name="Core.Widget.ExtendedFab" parent="Widget.MaterialComponents.ExtendedFloatingActionButton">
+        <item name="iconTint">@color/core_colorWhite</item>
+        <item name="android:textColor">@color/core_colorWhite</item>
+        <item name="iconPadding">@dimen/core_padding_medium</item>
+        <item name="android:paddingStart">@dimen/core_padding_medium</item>
+    </style>
+    <!-- End of ExtendedFab -->
 </resources>

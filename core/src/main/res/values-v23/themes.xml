@@ -1,7 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Base application theme. -->
-    <style name="CoreAppTheme" parent="CoreAppThemeParent">
+    <!-- AppTheme -->
+    <style name="Core.AppTheme.Light" parent="Core.Base.AppTheme.Light">
         <item name="android:statusBarColor">@color/core_colorStatusBar</item>
         <item name="android:windowLightStatusBar">true</item>
     </style>
+    <!-- End of AppTheme -->
 </resources>
