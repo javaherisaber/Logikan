@@ -14,6 +14,11 @@ fun String?.stripHtml(): Spanned =
 fun String.isValidIranMobile(): Boolean = this.matches("(0(9[0-9]{9}))|(\\+98(9[0-9]{9}))".toRegex())
 
 /**
+ * Convert 09XXX to 989XXX
+ */
+fun String.toIranMobile(): String = this.replaceFirst("0", "98")
+
+/**
  * Add Bearer prefix to token string
  */
 fun String.toBearerToken(): String = if (this != "null") "Bearer $this" else this
