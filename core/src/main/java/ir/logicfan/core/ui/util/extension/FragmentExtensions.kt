@@ -16,11 +16,23 @@ import ir.logicfan.core.R
 /**
  * Navigate to deep link with list of path <key, value> being replaced in uri
  */
-fun Fragment.navigateDeepLink(@StringRes res: Int, vararg path: Pair<String, Any>) {
+@Suppress("RegExpRedundantEscape")
+fun Fragment.navigateDeepLink(@StringRes res: Int, vararg path: Pair<String, Any?>) {
     var deepLink = getString(res)
     path.forEach { (key, value) ->
-        deepLink = deepLink.replace("{$key}", value.toString())
+        if (value == null || (value is String && value == "null")) {
+            // remove null values
+            deepLink = deepLink.replace("""\?($key)=\{\1\}""".toRegex(), "")
+            deepLink = deepLink.replace("""\?($key)=\{\1\}&""".toRegex(), "")
+            deepLink = deepLink.replace("""&($key)=\{\1\}""".toRegex(), "")
+        } else {
+            deepLink = deepLink.replace("{$key}", value.toString())
+        }
     }
+    // remove null queries
+    deepLink = deepLink.replace("""\?(.*)=\{\1\}""".toRegex(), "")
+    deepLink = deepLink.replace("""\?(.*)=\{\1\}&""".toRegex(), "")
+    deepLink = deepLink.replace("""&(.*)=\{\1\}""".toRegex(), "")
     findNavController().navigate(Uri.parse(deepLink))
 }
 
