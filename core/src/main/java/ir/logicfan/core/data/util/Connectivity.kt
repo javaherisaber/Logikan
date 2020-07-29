@@ -20,6 +20,7 @@ object Connectivity {
             val activeNetwork =
                 connectivityManager.getNetworkCapabilities(networkCapabilities) ?: return false
             result = when {
+                activeNetwork.hasTransport(NetworkCapabilities.TRANSPORT_VPN) -> true
                 activeNetwork.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> true
                 activeNetwork.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> true
                 activeNetwork.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET) -> true
@@ -30,12 +31,12 @@ object Connectivity {
                 @Suppress("DEPRECATION")
                 connectivityManager.activeNetworkInfo?.run {
                     result = when (type) {
+                        ConnectivityManager.TYPE_VPN -> true
                         ConnectivityManager.TYPE_WIFI -> true
                         ConnectivityManager.TYPE_MOBILE -> true
                         ConnectivityManager.TYPE_ETHERNET -> true
                         else -> false
                     }
-
                 }
             }
         }
