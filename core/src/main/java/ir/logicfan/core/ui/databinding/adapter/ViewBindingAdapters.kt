@@ -9,6 +9,11 @@ import java.util.*
 
 @BindingAdapter("hideIfNullOrZero")
 fun View.hideIfNullOrZero(number: Number?) {
+    this.visibility = if (number == null || number.toDouble() == 0.0) View.INVISIBLE else View.VISIBLE
+}
+
+@BindingAdapter("goneIfNullOrZero")
+fun View.goneIfNullOrZero(number: Number?) {
     this.visibility = if (number == null || number.toDouble() == 0.0) View.GONE else View.VISIBLE
 }
 
