@@ -4,10 +4,12 @@ package ir.logicfan.core.ui.databinding.adapter
 
 import android.annotation.SuppressLint
 import android.widget.TextView
+import androidx.annotation.StringRes
 import androidx.databinding.BindingAdapter
 import ir.logicfan.core.R
 import ir.logicfan.core.util.Clock
 import ir.logicfan.core.util.calendar.JalaliCalendar
+import ir.logicfan.core.util.extension.stripHtml
 import ir.logicfan.core.util.extension.toSeparatedThousands
 import java.text.MessageFormat
 
@@ -20,12 +22,26 @@ fun TextView.textWithLabel(text: String?, label: String?) {
  * Set text from R.string resource
  */
 @BindingAdapter("android:text")
-fun TextView.setTextWithResId(resId: Int) {
+fun TextView.setTextWithResId(@StringRes resId: Int) {
     if (resId == 0) {
         this.text = null
         return
     }
     this.setText(resId)
+}
+
+@BindingAdapter("textHtml")
+fun TextView.setTextHtml(resource: String) {
+    this.text = resource.stripHtml()
+}
+
+@BindingAdapter("textHtml")
+fun TextView.setTextHtml(@StringRes resource: Int) {
+    if (resource == 0) {
+        this.text = null
+        return
+    }
+    this.text = context.getText(resource).toString().stripHtml()
 }
 
 @BindingAdapter(value = ["beforeParentheses", "insideParentheses"], requireAll = false)
