@@ -1,7 +1,9 @@
 package ir.logicfan.core.ui.util.extension
 
 import android.content.Context
+import android.content.Intent
 import android.net.Uri
+import android.provider.MediaStore
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.annotation.DrawableRes
@@ -12,6 +14,24 @@ import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import ir.logicfan.core.R
+
+/**
+ * Pick image from file manager
+ */
+fun Fragment.pickImage(requestCode: Int, chooserTitle: String) {
+    val getIntent = Intent(Intent.ACTION_GET_CONTENT)
+    getIntent.type = "image/*"
+    val pickIntent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+    pickIntent.type = "image/*"
+    val chooserIntent = Intent.createChooser(getIntent, chooserTitle)
+    chooserIntent.putExtra(Intent.EXTRA_INITIAL_INTENTS, arrayOf(pickIntent))
+    startActivityForResult(chooserIntent, requestCode)
+}
+
+fun Fragment.pickImage(requestCode: Int, @StringRes chooserTitle: Int) {
+    val title = getString(chooserTitle)
+    pickImage(requestCode, title)
+}
 
 /**
  * Navigate to deep link with list of path <key, value> being replaced in uri
