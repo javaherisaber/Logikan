@@ -87,10 +87,20 @@ fun RecyclerView.setNestedScrollingViewEnabled(isEnabled: Boolean) {
 
 /**
  * Add new list of data for inside a given recyclerView
+ * @param isZeroIndex shall we add empty view to parent's index 0
  */
-@BindingAdapter(value = ["hasEmptyState", "submitList", "emptyText", "emptyDrawable", "emptyViewGroup"], requireAll = false)
+@BindingAdapter(
+    value = [
+        "hasEmptyState", "submitList", "emptyText", "emptyDrawable", "emptyViewGroup", "isZeroIndex"
+    ], requireAll = false
+)
 fun RecyclerView.submitList(
-    hasEmptyState: Boolean?, newList: List<Nothing>?, emptyText: String?, emptyDrawable: Drawable?, viewGroup: ViewGroup?
+    hasEmptyState: Boolean?,
+    newList: List<Nothing>?,
+    emptyText: String?,
+    emptyDrawable: Drawable?,
+    viewGroup: ViewGroup?,
+    isZeroIndex: Boolean?
 ) = newList?.let {
     val adapter = this.adapter ?: throw RuntimeException("Adapter not set when binding")
     if (adapter is ListAdapter<*, *>) {
@@ -106,7 +116,11 @@ fun RecyclerView.submitList(
             )
             emptyDrawable?.let { emptyView.imageViewCoreItemStateEmptyIcon.setImageDrawable(emptyDrawable) }
             emptyText?.let { emptyView.textViewCoreItemStateEmptyMessage.text = emptyText }
-            parent.addView(emptyView.root, 0)
+            if (isZeroIndex != null && isZeroIndex) {
+                parent.addView(emptyView.root, 0)
+            } else {
+                parent.addView(emptyView.root)
+            }
         } else {
             parent.findViewById<View>(R.id.constraintLayout_coreItemStateEmpty)?.apply {
                 // if emptyView already added, and now list is not empty
