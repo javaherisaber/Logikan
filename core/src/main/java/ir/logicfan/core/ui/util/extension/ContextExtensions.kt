@@ -36,6 +36,10 @@ fun Context.drawableAt(@DrawableRes drawable: Int): Drawable =
 @ColorInt
 fun Context.colorAt(@ColorRes color: Int): Int = ContextCompat.getColor(this, color)
 
+fun Context.pixelToDp(pixel: Int) = (pixel / resources.displayMetrics.density).toInt()
+
+fun Context.dpToPixel(dp: Int) = (dp * resources.displayMetrics.density).toInt()
+
 /**
  * Get color from theme eg. context.themeColorAt(R.attr.colorPrimary)
  */
