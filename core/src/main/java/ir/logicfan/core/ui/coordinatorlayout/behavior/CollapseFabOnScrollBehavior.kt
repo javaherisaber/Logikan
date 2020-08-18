@@ -7,6 +7,7 @@ import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.coordinatorlayout.widget.CoordinatorLayout.Behavior
 import androidx.core.view.ViewCompat
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+import ir.logicfan.core.ui.util.extension.dpToPixel
 
 /**
  * The [Behavior] for a View within a [CoordinatorLayout] to hide the view off the
@@ -29,9 +30,22 @@ open class CollapseFabOnScrollBehavior<V : ExtendedFloatingActionButton>(
         child: V, target: View, dxConsumed: Int, dyConsumed: Int, dxUnconsumed: Int, dyUnconsumed: Int
     ) {
         if (dyConsumed > 0) {
-            child.shrink()
+            child.shrink(shrunkStateCallback)
         } else if (dyConsumed < 0) {
             child.extend()
         }
+    }
+
+    private val shrunkStateCallback = object : ExtendedFloatingActionButton.OnChangedCallback() {
+        override fun onShrunken(extendedFab: ExtendedFloatingActionButton) {
+            extendedFab.layoutParams.apply {
+                height = extendedFab.context.dpToPixel(SHRUNK_LAYOUT_SIZE)
+                width = extendedFab.context.dpToPixel(SHRUNK_LAYOUT_SIZE)
+            }
+        }
+    }
+
+    companion object {
+        const val SHRUNK_LAYOUT_SIZE = 56
     }
 }
