@@ -10,6 +10,10 @@
     <!-- AppTheme -->
     <style name="Core.AppTheme.Light" parent="Core.Base.AppTheme.Light" />
 
+    <style name="Core.AppTheme.DayNight" parent="Core.Base.AppTheme.DayNight" />
+
+    <style name="Core.Base.AppTheme.DayNight" parent="Theme.MaterialComponents.DayNight.NoActionBar" />
+
     <style name="Core.Base.AppTheme.Light" parent="Theme.MaterialComponents.Light.NoActionBar">
 
         <!-- major attributes -->
