@@ -24,11 +24,11 @@ open class DataBindingViewHolder<T>(binding: ViewDataBinding) : SimpleBindingVie
      * @param R type of data being passed through this listener
      * (You can use same data in your item or any other types, maybe you only need a single ID)
      */
-    interface OnDataClickListener<R> {
+    fun interface OnDataClickListener<R> {
         fun onViewHolderClick(view: View, data: R)
     }
 
-    interface OnPositionalDataClickListener<R> {
+    fun interface OnPositionalDataClickListener<R> {
         fun onViewHolderClick(view: View, data: R, position: Int)
     }
 

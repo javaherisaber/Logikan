@@ -8,7 +8,6 @@ import androidx.annotation.CallSuper
 import androidx.annotation.MainThread
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelLazy
 import androidx.lifecycle.ViewModelProvider
@@ -47,7 +46,7 @@ abstract class BaseActivity : AppCompatActivity(), HasAndroidInjector, DataTermi
         AndroidInjection.inject(this) // inject dagger
         super.onCreate(savedInstanceState)
         ConfigurationUtils.createConfigContext(this) // update locale when activity starts
-        networkConnectivityReceiver.observe(this, Observer {
+        networkConnectivityReceiver.observe(this, {
             if (it) {
                 // network connection is active now
                 networkConnectivityViewModel.onNetworkAvailabilityChange(true)
@@ -57,21 +56,21 @@ abstract class BaseActivity : AppCompatActivity(), HasAndroidInjector, DataTermi
         // handle terminal errors
         val baseViewModels = attachBaseViewModel()
         baseViewModels?.forEach { viewModel ->
-            viewModel.errorState.observe(this, Observer {
+            viewModel.errorState.observe(this, {
                 onDataTerminalError(it)
             })
-            viewModel.updateState.observe(this, Observer {
+            viewModel.updateState.observe(this, {
                 onUpdateState(it)
             })
         }
-        networkConnectivityViewModel.networkBecomesAvailable.observe(this, Observer {
+        networkConnectivityViewModel.networkBecomesAvailable.observe(this, {
             baseViewModels?.forEach { viewModel ->
                 viewModel.onNetworkBecomesAvailable()
             }
         })
 
-        networkConnectivityViewModel.alertPanelVisibility.observe(this, Observer { isVisible ->
-            val container = attachGlobalAlertContainer() ?: return@Observer
+        networkConnectivityViewModel.alertPanelVisibility.observe(this, { isVisible ->
+            val container = attachGlobalAlertContainer() ?: return@observe
             if (container.childCount > 0) {
                 container.removeAllViews()
             }
