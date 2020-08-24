@@ -1,9 +1,8 @@
 package ir.logicfan.core.util
 
 import android.annotation.SuppressLint
+import ir.logicfan.core.util.extension.toZeroTail
 import java.text.MessageFormat
-import java.text.SimpleDateFormat
-import java.util.*
 
 /**
  * Data holder to represent a clock
@@ -12,7 +11,7 @@ data class Clock(
     var hour: Int = HOUR_MIN_VALUE,
     var minute: Int = MINUTE_MIN_VALUE,
     var second: Int = SECOND_MIN_VALUE
-) {
+) : Comparable<Clock> {
 
     constructor(seconds: Int) : this(
         seconds.div(HOUR_DURATION_SECONDS),
@@ -29,12 +28,15 @@ data class Clock(
      */
     @Throws(IllegalArgumentException::class)
     private fun validateArguments(hour: Int, minute: Int, second: Int) {
-        if (hour > HOUR_MAX_VALUE || hour < HOUR_MIN_VALUE)
-            throw IllegalArgumentException("hour = $hour is wrong, it must be from $HOUR_MIN_VALUE to $HOUR_MAX_VALUE")
-        if (minute > MINUTE_MAX_VALUE || minute < MINUTE_MIN_VALUE)
-            throw IllegalArgumentException("minute = $minute is wrong, it must be from $MINUTE_MIN_VALUE to $MINUTE_MAX_VALUE")
-        if (second > SECOND_MAX_VALUE || second < SECOND_MIN_VALUE)
-            throw IllegalArgumentException("second = $second is wrong, it must be from $SECOND_MIN_VALUE to $SECOND_MAX_VALUE")
+        require(!(hour > HOUR_MAX_VALUE || hour < HOUR_MIN_VALUE)) {
+            "hour = $hour is wrong, it must be from $HOUR_MIN_VALUE to $HOUR_MAX_VALUE"
+        }
+        require(!(minute > MINUTE_MAX_VALUE || minute < MINUTE_MIN_VALUE)) {
+            "minute = $minute is wrong, it must be from $MINUTE_MIN_VALUE to $MINUTE_MAX_VALUE"
+        }
+        require(!(second > SECOND_MAX_VALUE || second < SECOND_MIN_VALUE)) {
+            "second = $second is wrong, it must be from $SECOND_MIN_VALUE to $SECOND_MAX_VALUE"
+        }
     }
 
     /**
@@ -124,32 +126,37 @@ data class Clock(
     /**
      * Convert clock variables to labeled strings
      */
-    private fun getLabels(): Triple<String, String, String> {
-        var hourText = ""
-        var minuteText = ""
-        var secondText = ""
-        if (hour < 10) {
-            hourText += "0"
-        }
-        if (minute < 10) {
-            minuteText += "0"
-        }
-        if (second < 10) {
-            secondText += "0"
-        }
-        hourText += hour
-        minuteText += minute
-        secondText += second
-        return Triple(hourText, minuteText, secondText)
+    private fun getLabels(): Triple<String, String, String> = Triple(
+        hour.toZeroTail(), minute.toZeroTail(), second.toZeroTail()
+    )
+
+    fun toSeconds() = hour * HOUR_DURATION_SECONDS + minute * MINUTE_DURATION_SECONDS + second
+
+    override fun toString(): String = getClockLabelHourMinuteSecondType()
+
+    override fun compareTo(other: Clock): Int = when {
+        hour != other.hour -> hour - other.hour
+        minute != other.minute -> minute - other.minute
+        else -> second - other.second
     }
+
+    operator fun minus(other: Clock) = Clock(this.toSeconds() - other.toSeconds())
+
+    operator fun plus(other: Clock) = Clock(this.toSeconds() + other.toSeconds())
 
     /**
      * To be used by [getClockLabel] method to return suitable labeled clock
      */
     enum class ClockLabelType {
-        HOUR_MINUTE,
-        HOUR_MINUTE_SECOND,
-        MINUTE_SECOND;
+        HOUR_MINUTE, // 20:30
+        HOUR_MINUTE_SECOND, // 20:30:45
+        MINUTE_SECOND; // 15:00
+    }
+
+    fun formatHourMinuteNoLeadingZero(): String = if (minute == 0) {
+        hour.toString()
+    } else {
+        "$hour:${minute.toZeroTail()}"
     }
 
     companion object {
@@ -172,20 +179,29 @@ data class Clock(
         }
 
         /**
-         * @param timestamp Unix Timestamp with this format : 1561783493
-         * @return [Clock] object if timestamp is correct or null otherwise
+         * @return Clock with given format 15:30:45 or 15:30 or 15 or empty string for 00:00:00
          */
         @SuppressLint("SimpleDateFormat")
+        @Throws(IllegalArgumentException::class)
         @JvmStatic
-        fun getClock(timestamp: String): Clock? = try {
-            val date = Date(timestamp.toLong() * 1000L)
-            val formatted = SimpleDateFormat("HH:mm:ss").format(date)
-            val hourParts = formatted.split(":")
-            Clock(hourParts[0].toInt(), hourParts[1].toInt(), hourParts[2].toInt())
-        } catch (ex: NumberFormatException) {
-            // string does not contain timestamp
-            null
+        fun getClock(format: String): Clock {
+            val hourParts = format.split(":")
+            return Clock(
+                if (hourParts.isNotEmpty()) hourParts[0].toInt() else 0,
+                if (hourParts.size >= 2) hourParts[1].toInt() else 0,
+                if (hourParts.size == 3) hourParts[2].toInt() else 0
+            )
         }
 
+        /**
+         * Check if two time period overlap on each other eg. 08:00-12:00 overlaps on 09:00-14:00
+         */
+        @JvmStatic
+        fun isTimePeriodsOverlap(
+            firstStartTime: Clock,
+            firstEndTime: Clock,
+            secondStartTime: Clock,
+            secondEndTime: Clock
+        ): Boolean = firstStartTime < secondEndTime && firstEndTime > secondStartTime
     }
 }

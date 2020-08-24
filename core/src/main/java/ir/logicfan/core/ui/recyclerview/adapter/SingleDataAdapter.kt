@@ -7,6 +7,7 @@ import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.AsyncDifferConfig
+import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import ir.logicfan.core.data.base.AppExecutors
@@ -40,6 +41,15 @@ open class SingleDataAdapter<T>(
     private val dataClickListenerToBindingIdMap = HashMap<DataBindingViewHolder.OnDataClickListener<T>, Int>()
     private val positionalDataClickListenerToBindingIdMap =
         HashMap<DataBindingViewHolder.OnPositionalDataClickListener<T>, Int>()
+    private var listListener: AsyncListDiffer.ListListener<T>? = null
+
+    fun setListChangeListener(listListener: AsyncListDiffer.ListListener<T>) {
+       this.listListener = listListener
+    }
+
+    fun removeListChangeListener() {
+        this.listListener = null
+    }
 
     fun addPositionalDataClickListener(
         onPositionalDataClickListener: DataBindingViewHolder.OnPositionalDataClickListener<T>,
@@ -63,6 +73,10 @@ open class SingleDataAdapter<T>(
         return createViewHolder(parent)
     }
 
+    override fun onCurrentListChanged(previousList: List<T>, currentList: List<T>) {
+        listListener?.onCurrentListChanged(previousList, currentList)
+    }
+
     open fun createViewHolder(parent: ViewGroup): DataBindingViewHolder<T> {
         val binding = DataBindingUtil.inflate<ViewDataBinding>(
             LayoutInflater.from(parent.context), itemLayout, parent, false
@@ -84,8 +98,6 @@ open class SingleDataAdapter<T>(
         }
         holder.bind()
     }
-
-    override fun getItemViewType(position: Int): Int = itemLayout
 
     override fun onViewAttachedToWindow(holder: DataBindingViewHolder<T>) {
         super.onViewAttachedToWindow(holder)

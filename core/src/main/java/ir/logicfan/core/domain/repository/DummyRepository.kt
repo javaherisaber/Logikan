@@ -1,10 +1,9 @@
 package ir.logicfan.core.domain.repository
 
-import io.reactivex.Observable
-import ir.logicfan.core.data.base.DataOutcome
+import ir.logicfan.core.data.base.DataResult
 import ir.logicfan.core.data.entity.DummyData
 
 interface DummyRepository {
-    fun getItem(): Observable<DataOutcome<DummyData>>
-    fun getList(): Observable<DataOutcome<List<DummyData>>>
+    fun getItem(): DataResult<DummyData>
+    fun getList(): DataResult<List<DummyData>>
 }

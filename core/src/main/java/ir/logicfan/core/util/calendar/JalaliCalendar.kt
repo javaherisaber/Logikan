@@ -2,12 +2,16 @@ package ir.logicfan.core.util.calendar
 
 import android.annotation.SuppressLint
 import ir.logicfan.core.util.Clock
+import ir.logicfan.core.util.extension.toZeroTail
 import java.io.Serializable
 import java.text.MessageFormat
+import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
 
-data class JalaliCalendar(var year: Int, var month: MonthPersian, var day: Int, var clock: Clock) : Serializable {
+data class JalaliCalendar(
+    var year: Int, var month: MonthPersian, var day: Int, var clock: Clock
+) : Serializable, Comparable<JalaliCalendar> {
 
     init {
         basicArgumentValidating(year, month.value, day)
@@ -15,16 +19,16 @@ data class JalaliCalendar(var year: Int, var month: MonthPersian, var day: Int, 
 
     val isLeapYear: Boolean
         get() = DateConverter().isJalaliLeapYear(year)
-    val dayOfWeek: DayOfWeekPersian by lazy {
-        DayOfWeekPersian.of(toGregorian().get(Calendar.DAY_OF_WEEK))
-    }
+    val dayOfWeek: DayOfWeekPersian
+        get() = DayOfWeekPersian.of(toGregorian().get(Calendar.DAY_OF_WEEK))
     val yearLength: Int
         get() = if (isLeapYear) 366 else 365
-    val monthString: String = month.toPersian
-    val dayOfWeekString: String by lazy {
-        dayOfWeek.toPersian
-    }
-    val monthLength: Int = MonthPersian.getMonthLength(month, isLeapYear)
+    val monthString: String
+        get() = month.toPersian
+    val dayOfWeekString: String
+        get() = dayOfWeek.toPersian
+    val monthLength: Int
+        get() = MonthPersian.getMonthLength(month, isLeapYear)
 
     /**
      * Now as Jalali Date
@@ -32,6 +36,11 @@ data class JalaliCalendar(var year: Int, var month: MonthPersian, var day: Int, 
     constructor() : this(DateConverter().gregorianToJalali(GregorianCalendar()))
 
     constructor(jalali: JalaliCalendar) : this(jalali.year, jalali.month.value, jalali.day, jalali.clock)
+
+    // use only with calendar which provides persian date
+    constructor(calendar: Calendar) : this(
+        calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH) + 1, calendar.get(Calendar.DAY_OF_MONTH)
+    )
 
     constructor(gregorian: GregorianCalendar) : this(DateConverter().gregorianToJalali(gregorian))
 
@@ -64,17 +73,27 @@ data class JalaliCalendar(var year: Int, var month: MonthPersian, var day: Int, 
     fun toGregorian(): GregorianCalendar = DateConverter().jalaliToGregorian(this)
 
     /**
-     * Convert current calendar to Unix Epoch timestamp
+     * Convert current calendar to Unix Epoch (seconds) timestamp
      */
+    fun toUnixTimestamp(): String = (epochMillis() / 1000).toString()
+
     @SuppressLint("SimpleDateFormat")
-    fun toUnixTimestamp(): String {
+    fun epochMillis(): Long {
         val gregorian = toGregorian()
         val year = gregorian.get(Calendar.YEAR)
         val month = gregorian.get(Calendar.MONTH) + 1 // gregorian calendar is zero based
         val day = gregorian.get(Calendar.DAY_OF_MONTH)
         val dateFormat = SimpleDateFormat("yyyy-MM-dd-HH-mm-ss")
-        val date = dateFormat.parse("$year-$month-$day-${clock.hour}-${clock.minute}-${clock.second}")
-        return (date.time / 1000).toString()
+        val date = dateFormat.parse(
+            "$year-$month-$day-${clock.hour}-${clock.minute}-${clock.second}"
+        ) ?: error("Wrong date format")
+        return date.time
+    }
+
+    @SuppressLint("SimpleDateFormat")
+    fun formatToGregorian(pattern: String = "yyyy-MM-dd"): String {
+        val date = Date(this.epochMillis())
+        return SimpleDateFormat(pattern, Locale.US).format(date)
     }
 
     /**
@@ -83,20 +102,12 @@ data class JalaliCalendar(var year: Int, var month: MonthPersian, var day: Int, 
     @SuppressLint("SimpleDateFormat")
     fun toIsoTimestamp(): String {
         val gregorian = toGregorian()
+
         val year = gregorian.get(Calendar.YEAR)
         val month = gregorian.get(Calendar.MONTH) + 1 // gregorian calendar is zero based
-        var monthText = ""
-        if (month < 10) {
-            monthText += "0"
-        }
-        monthText += month
         val day = gregorian.get(Calendar.DAY_OF_MONTH)
-        var dayText = ""
-        if (day < 10) {
-            dayText += "0"
-        }
-        dayText += day
-        return "$year-$monthText-$dayText ${Clock.getClockLabel(this.clock, Clock.ClockLabelType.HOUR_MINUTE_SECOND)}"
+
+        return "$year-${month.toZeroTail()}-${day.toZeroTail()} ${this.clock}"
     }
 
     /**
@@ -104,7 +115,7 @@ data class JalaliCalendar(var year: Int, var month: MonthPersian, var day: Int, 
      * 12 اردیبهشت 1395
      */
     private fun getDateLabelLetterMonth(): String = MessageFormat.format(
-        "{0} {1} {2}",
+        "{0} {1} {2,number,#}",
         this.day,
         this.monthString,
         this.year
@@ -115,7 +126,7 @@ data class JalaliCalendar(var year: Int, var month: MonthPersian, var day: Int, 
      * پنجشنبه 12 تیر 1398
      */
     private fun getDateLabelLetterMonthPlusDay(): String = MessageFormat.format(
-        "{0} {1} {2} {3}",
+        "{0} {1} {2} {3,number,#}",
         this.dayOfWeekString,
         this.day,
         this.monthString,
@@ -127,11 +138,18 @@ data class JalaliCalendar(var year: Int, var month: MonthPersian, var day: Int, 
      * 1398/04/12
      */
     private fun getDateLabelDigit(): String = MessageFormat.format(
-        "{0}/{1}/{2}",
+        "{0,number,#}/{1}/{2}",
         this.year,
         this.month.value,
         this.day
     )
+
+    override fun compareTo(other: JalaliCalendar): Int = when {
+        year != other.year -> year - other.year
+        month != other.month -> month.value - other.month.value
+        day != other.day -> day - other.day
+        else -> clock.compareTo(other.clock)
+    }
 
     /**
      * To be used by [getDateLabel] method to return suitable labeled jalali calendar
@@ -167,43 +185,51 @@ data class JalaliCalendar(var year: Int, var month: MonthPersian, var day: Int, 
          * @param unixTimestamp Unix Timestamp with this format : 1561783493
          * @return [JalaliCalendar] object is timestamp is correct or null otherwise
          */
-        @SuppressLint("SimpleDateFormat")
         @JvmStatic
-        fun getJalaliCalendarFromUnixTimestamp(unixTimestamp: Long): JalaliCalendar? = try {
+        fun getJalaliCalendarFromUnixTimestamp(unixTimestamp: Long): JalaliCalendar {
             val date = Date(unixTimestamp * 1000L)
-            val formatted = SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(date)
-            val gregorian = getGregorianCalendarFromFormattedIsoTimestamp(formatted)
-            JalaliCalendar(gregorian)
-        } catch (ex: NumberFormatException) {
-            // string does not contain timestamp
-            null
+            val gregorian = GregorianCalendar().apply {
+                time = date
+            }
+            return JalaliCalendar(gregorian)
         }
 
+        @SuppressLint("SimpleDateFormat")
         @JvmStatic
-        fun getJalaliCalendarFromIsoTimestamp(isoTimestamp: String): JalaliCalendar? = try {
-            val gregorian = getGregorianCalendarFromFormattedIsoTimestamp(isoTimestamp)
-            JalaliCalendar(gregorian)
-        } catch (ex: NumberFormatException) {
-            // string does not contain proper timestamp
-            null
+        @Throws(ParseException::class)
+        fun getJalaliCalendarFromIsoTimestamp(isoTimestamp: String, format: String = "yyyy-MM-dd HH:mm:ss"): JalaliCalendar {
+            val date = SimpleDateFormat(format).parse(isoTimestamp) ?: error("Wrong timestamp")
+            val gregorian = GregorianCalendar().apply {
+                time = date
+            }
+            return JalaliCalendar(gregorian)
         }
 
         /**
-         * @param formattedTimestamp date time with this format yyyy-MM-dd HH:mm:ss
+         * @return JalaliCalendar from date : 2019-12-11
          */
         @JvmStatic
-        private fun getGregorianCalendarFromFormattedIsoTimestamp(formattedTimestamp: String): GregorianCalendar {
-            val dateTimeParts = formattedTimestamp.split(" ")
-            val dateParts = dateTimeParts[0].split("-")
-            val timeParts = dateTimeParts[1].split(":")
-            return GregorianCalendar(
-                dateParts[0].toInt(), // year
-                dateParts[1].toInt() - 1, // month (gregorian month is zero based)
-                dateParts[2].toInt(), // day of month
-                timeParts[0].toInt(), // hour of day
-                timeParts[1].toInt(), // minute
-                timeParts[2].toInt() // second
-            )
+        fun getJalaliCalendarFromDate(date: String): JalaliCalendar {
+            val parts = date.split("-")
+            val gregorian = GregorianCalendar(parts[0].toInt(), parts[1].toInt() - 1, parts[2].toInt())
+            return JalaliCalendar(gregorian)
+        }
+
+        @JvmStatic
+        fun today(clock: Clock = Clock()): JalaliCalendar {
+            val calendar = JalaliCalendar()
+            calendar.clock = clock
+            return calendar
+        }
+
+        @JvmStatic
+        fun isTimeStampExpired(unixTimestamp: Long?): Boolean {
+            unixTimestamp?.let {
+                val timeStampDate = getJalaliCalendarFromUnixTimestamp(it)
+                val today = JalaliCalendar()
+                return today >= timeStampDate
+            }
+            return false
         }
     }
 }

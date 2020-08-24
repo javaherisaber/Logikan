@@ -14,4 +14,5 @@ import kotlin.reflect.KProperty1
 class SimpleDiffCallback<T : Equatable>(private val uniqueProperty: KProperty1<T, *>) : DiffUtil.ItemCallback<T>() {
     override fun areItemsTheSame(oldItem: T, newItem: T): Boolean = uniqueProperty.get(oldItem) == uniqueProperty.get(newItem)
     override fun areContentsTheSame(oldItem: T, newItem: T): Boolean = oldItem == newItem
+    override fun getChangePayload(oldItem: T, newItem: T): Any? = newItem
 }

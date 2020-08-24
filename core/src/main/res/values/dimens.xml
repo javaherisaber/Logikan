@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!--
     # CODE OF CONDUCT
@@ -7,12 +6,42 @@
     you can copy and paste these dimens into your own app and then remove "core_" prefix
     -->
 
-    <dimen name="core_fab_margin">16dp</dimen>
-    <dimen name="core_stroke_cardView">2dp</dimen>
-    <dimen name="core_corner_radius_cardView">15dp</dimen>
-    <dimen name="core_corner_radius_button">10dp</dimen>
-    <dimen name="core_elevation_mild">2dp</dimen>
+    <!-- margin -->
+    <dimen name="core_margin_lowest">4dp</dimen>
+    <dimen name="core_margin_low">8dp</dimen>
+    <dimen name="core_margin_medium">12dp</dimen>
+    <dimen name="core_margin_default">16dp</dimen>
+    <dimen name="core_margin_mild">24dp</dimen>
+    <dimen name="core_margin_high">32dp</dimen>
+    <dimen name="core_margin_highest">64dp</dimen>
+
+    <!-- padding -->
+    <dimen name="core_padding_lowest">4dp</dimen>
+    <dimen name="core_padding_low">8dp</dimen>
+    <dimen name="core_padding_medium">12dp</dimen>
+    <dimen name="core_padding_default">16dp</dimen>
+    <dimen name="core_padding_mild">24dp</dimen>
+    <dimen name="core_padding_high">32dp</dimen>
+    <dimen name="core_padding_highest">64dp</dimen>
+
+    <!-- stroke -->
+    <dimen name="core_stroke_default">1dp</dimen>
+    <dimen name="core_stroke_mild">2dp</dimen>
+    <dimen name="core_stroke_high">3dp</dimen>
+    <dimen name="core_stroke_highest">4dp</dimen>
+
+    <!-- corner radius -->
+    <dimen name="core_corner_radius_default">5dp</dimen>
+    <dimen name="core_corner_radius_mild">10dp</dimen>
+    <dimen name="core_corner_radius_high">15dp</dimen>
+    <dimen name="core_corner_radius_highest">20dp</dimen>
+    <dimen name="core_corner_radius_extreme">50dp</dimen>
+
+    <!-- elevation -->
+    <dimen name="core_elevation_low">2dp</dimen>
     <dimen name="core_elevation_default">4dp</dimen>
+    <dimen name="core_elevation_mild">6dp</dimen>
     <dimen name="core_elevation_high">8dp</dimen>
     <dimen name="core_elevation_highest">10dp</dimen>
+
 </resources>

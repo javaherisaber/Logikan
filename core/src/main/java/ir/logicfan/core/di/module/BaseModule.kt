@@ -20,10 +20,8 @@ abstract class BaseModule {
     @Binds
     abstract fun viewModelFactory(viewModelFactory: ViewModelFactory): ViewModelProvider.Factory
 
-    @Module
     companion object {
         @Provides
-        @JvmStatic
         fun compositeDisposable(): CompositeDisposable = CompositeDisposable()
     }
 }

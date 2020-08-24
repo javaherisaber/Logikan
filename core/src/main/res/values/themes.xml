@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--
+    # CODE OF CONDUCT
+    NEVER directly reference these colors in your application because doing so will result in coupled resources
+    and makes your resources less flexible to change
+    you can use inherit your own theme from these styles
+    -->
+
+    <!-- AppTheme -->
+    <style name="Core.AppTheme.Light" parent="Core.Base.AppTheme.Light" />
+
+    <style name="Core.AppTheme.DayNight" parent="Core.Base.AppTheme.DayNight" />
+
+    <style name="Core.Base.AppTheme.DayNight" parent="Theme.MaterialComponents.DayNight.NoActionBar" />
+
+    <style name="Core.Base.AppTheme.Light" parent="Theme.MaterialComponents.Light.NoActionBar">
+
+        <!-- major attributes -->
+        <item name="colorPrimary">@color/core_colorPrimary</item>
+        <item name="colorPrimaryDark">@color/core_colorPrimaryDark</item>
+        <item name="colorAccent">@color/core_colorSecondary</item>
+        <item name="colorError">@color/core_colorError</item>
+        <item name="colorSecondary">@color/core_colorSecondary</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+
+        <!-- custom attributes -->
+        <item name="core_chipCornerRadius">@dimen/core_corner_radius_default</item>
+        <item name="core_chipTextAppearance">?attr/textAppearanceBody1</item>
+        <item name="core_chipDecorationStyle">@style/Core.Widget.Chip.Decoration</item>
+        <item name="core_chipEntryStyle">@style/Core.Widget.Chip.Entry</item>
+        <item name="core_chipChoiceStyle">@style/Core.Widget.Chip.Choice</item>
+
+        <!-- text attributes -->
+        <item name="textAppearanceHeadline1">@style/Core.TextAppearance.Headline1</item>
+        <item name="textAppearanceHeadline2">@style/Core.TextAppearance.Headline2</item>
+        <item name="textAppearanceHeadline3">@style/Core.TextAppearance.Headline3</item>
+        <item name="textAppearanceHeadline4">@style/Core.TextAppearance.Headline4</item>
+        <item name="textAppearanceHeadline5">@style/Core.TextAppearance.Headline5</item>
+        <item name="textAppearanceHeadline6">@style/Core.TextAppearance.Headline6</item>
+        <item name="textAppearanceSubtitle1">@style/Core.TextAppearance.Subtitle1</item>
+        <item name="textAppearanceSubtitle2">@style/Core.TextAppearance.Subtitle2</item>
+        <item name="textAppearanceBody1">@style/Core.TextAppearance.Body1</item>
+        <item name="textAppearanceBody2">@style/Core.TextAppearance.Body2</item>
+        <item name="textAppearanceCaption">@style/Core.TextAppearance.Caption</item>
+        <item name="textAppearanceButton">@style/Core.TextAppearance.Button</item>
+        <item name="textAppearanceOverline">@style/Core.TextAppearance.Overline</item>
+    </style>
+    <!-- End of AppTheme -->
+</resources>

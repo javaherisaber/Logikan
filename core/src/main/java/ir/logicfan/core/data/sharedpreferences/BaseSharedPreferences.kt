@@ -1,9 +1,8 @@
 package ir.logicfan.core.data.sharedpreferences
 
-
 import android.annotation.SuppressLint
 import android.content.Context
-import android.preference.PreferenceManager
+import androidx.preference.PreferenceManager
 import android.provider.Settings
 import ir.logicfan.core.R
 import ir.logicfan.core.ui.util.LocaleUtils
@@ -14,13 +13,8 @@ import ir.logicfan.core.ui.util.LocaleUtils
  *
  * @param cipherSecret a secret code to encrypt shared preferences from manipulating on root devices
  */
-abstract class BaseSharedPreferences (private val context: Context, cipherSecret: CharArray) :
+abstract class BaseSharedPreferences(private val context: Context, cipherSecret: CharArray) :
     SecureSharedPreferences(cipherSecret, context, context.getSharedPreferences(PREF_ID, Context.MODE_PRIVATE)) {
-
-    companion object {
-        private const val PREF_ID = "securePreference"
-        private const val KEY_DEVICE_ID = "deviceID"
-    }
 
     /**
      * AndroidID of device
@@ -30,15 +24,15 @@ abstract class BaseSharedPreferences (private val context: Context, cipherSecret
     val deviceID: String
         @SuppressLint("HardwareIds")
         get() {
-            var storedDeviceID = getString(KEY_DEVICE_ID, null)
-            if (storedDeviceID == null) {
+            var storedDeviceID = getString(KEY_DEVICE_ID, STRING_DEFAULT)
+            if (storedDeviceID == STRING_DEFAULT) {
                 val androidDeviceID = Settings.Secure.getString(
                     context.contentResolver, Settings.Secure.ANDROID_ID
                 )
                 edit().putString(KEY_DEVICE_ID, androidDeviceID).apply()
                 storedDeviceID = androidDeviceID
             }
-            return storedDeviceID!!
+            return storedDeviceID
         }
 
     /**
@@ -57,4 +51,15 @@ abstract class BaseSharedPreferences (private val context: Context, cipherSecret
                 .putString(context.getString(R.string.core_sharedPreferencesKey_localeSetting), value)
                 .apply()
         }
+
+    companion object {
+        private const val PREF_ID = "securePreference"
+        private const val KEY_DEVICE_ID = "deviceID"
+
+        const val STRING_DEFAULT = "null"
+        const val INT_DEFAULT = -1
+        const val FLOAT_DEFAULT = -1f
+        const val LONG_DEFAULT = -1L
+        const val BOOLEAN_DEFAULT = false
+    }
 }

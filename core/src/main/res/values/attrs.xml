@@ -1,6 +1,15 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <declare-styleable name="CoreColoredStrikeThroughTextView">
         <attr name="core_strikeThroughColor" format="color" />
+        <attr name="core_lineEnabled" format="boolean" />
     </declare-styleable>
+
+    <attr name="core_chipDecorationStyle" format="reference" />
+    <attr name="core_chipEntryStyle" format="reference" />
+    <attr name="core_chipChoiceStyle" format="reference" />
+
+    <!-- cornerRadius applied to all chips -->
+    <attr name="core_chipCornerRadius" format="dimension" />
+    <!-- textAppearance applied to all chips -->
+    <attr name="core_chipTextAppearance" format="reference" />
 </resources>

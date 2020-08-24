@@ -114,9 +114,9 @@ abstract class SecureSharedPreferences(
         return if (v != null) java.lang.Long.parseLong(decrypt(v)) else defValue
     }
 
-    override fun getString(key: String, defValue: String?): String? {
+    override fun getString(key: String, defValue: String?): String {
         val v = delegate.getString(key, null)
-        return v?.let { decrypt(it) } ?: defValue
+        return v?.let { decrypt(it) } ?: defValue ?: "null" // fixme: use better approach
     }
 
     override fun getStringSet(s: String, set: Set<String>?): Set<String>? {

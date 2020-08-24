@@ -2,6 +2,10 @@ package ir.logicfan.core.ui.util
 
 import android.os.Handler
 
+@Deprecated("We can use android os built-in class from android.os.CountDownTimer see " +
+        "https://github.com/google-developer-training/android-kotlin-fundamentals-apps/blob/" +
+        "master/GuessTheWordTransformation/app/src/main/java/com/example/android/guesstheword" +
+        "/screens/game/GameViewModel.kt")
 class Timer(private var seconds: Int, private val listener: TimerListener?) {
 
     companion object {
