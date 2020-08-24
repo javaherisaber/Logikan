@@ -5,8 +5,8 @@ apply from: '..\\..\\build-features-library.gradle'
 android {
     resourcePrefix "core"
     defaultConfig {
-        versionCode 17
-        versionName "1.4"
+        versionCode 18
+        versionName "1.5"
     }
     buildTypes {
         release {
