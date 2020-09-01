@@ -7,9 +7,11 @@ import java.util.*
 
 object LocaleUtils {
 
-    const val DEFAULT_LOCALE = "fa"
+    internal const val DEFAULT_LOCALE = "fa"
 
     @JvmStatic
+    @Deprecated("Use ConfigurationUtils.createConfigContext() instead " +
+            "and set applicationLanguage first time app starts", level = DeprecationLevel.ERROR)
     fun setLocale(context: Context, lang: String): Context {
         val locale = Locale(lang)
         Locale.setDefault(locale)

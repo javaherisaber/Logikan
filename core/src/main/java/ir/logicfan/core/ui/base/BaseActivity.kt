@@ -23,7 +23,7 @@ import ir.logicfan.core.data.sharedpreferences.BaseSharedPreferences
 import ir.logicfan.core.databinding.CoreViewNetworkUnavailableBinding
 import ir.logicfan.core.ui.feature.main.NetworkConnectivityReceiver
 import ir.logicfan.core.ui.feature.main.NetworkConnectivityViewModel
-import ir.logicfan.core.ui.util.LocaleUtils
+import ir.logicfan.core.ui.util.ConfigurationUtils
 import javax.inject.Inject
 
 /**
@@ -46,7 +46,7 @@ abstract class BaseActivity : AppCompatActivity(), HasAndroidInjector, DataTermi
     override fun onCreate(savedInstanceState: Bundle?) {
         AndroidInjection.inject(this) // inject dagger
         super.onCreate(savedInstanceState)
-        LocaleUtils.setLocale(this, baseSharedPreferences.localeSetting) // setup locale
+        ConfigurationUtils.createConfigContext(this) // update locale when activity starts
         networkConnectivityReceiver.observe(this, Observer {
             if (it) {
                 // network connection is active now
@@ -85,6 +85,7 @@ abstract class BaseActivity : AppCompatActivity(), HasAndroidInjector, DataTermi
 
     open fun attachNetworkAvailabilityContainer(): ViewGroup? = null
 
+    @Suppress("MemberVisibilityCanBePrivate")
     protected fun attachNetworkAvailabilityLayoutRes(): Int = R.layout.core_view_network_unavailable
 
     @CallSuper
