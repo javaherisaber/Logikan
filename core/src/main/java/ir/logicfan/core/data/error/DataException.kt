@@ -15,9 +15,13 @@ sealed class DataException : Exception() {
      */
     sealed class Terminal(val code: Int, val msg: String) : DataException() {
         class Offline : DataException()
-        class InternalServer(code: Int, msg: String) : Terminal(code, msg)
-        class NotFound(code: Int, msg: String) : Terminal(code, msg)
+        class BadRequest(code: Int, msg: String) : Terminal(code, msg)
         class UnAuthorized(code: Int, msg: String) : Terminal(code, msg)
+        class Forbidden(code: Int, msg: String) : Terminal(code, msg)
+        class NotFound(code: Int, msg: String) : Terminal(code, msg)
+        class InternalServer(code: Int, msg: String) : Terminal(code, msg)
+        class ServiceUnavailable(code: Int, msg: String) : Terminal(code, msg)
+        class Timeout(code: Int, msg: String) : Terminal(code, msg)
     }
 
     /**

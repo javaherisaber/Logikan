@@ -2,7 +2,6 @@ package ir.logicfan.core.ui.util.extension
 
 import android.content.Context
 import android.content.Intent
-import android.net.Uri
 import android.provider.MediaStore
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
@@ -33,27 +32,8 @@ fun Fragment.pickImage(requestCode: Int, @StringRes chooserTitle: Int) {
     pickImage(requestCode, title)
 }
 
-/**
- * Navigate to deep link with list of path <key, value> being replaced in uri
- */
-@Suppress("RegExpRedundantEscape")
 fun Fragment.navigateDeepLink(@StringRes res: Int, vararg path: Pair<String, Any?>) {
-    var deepLink = getString(res)
-    path.forEach { (key, value) ->
-        if (value == null || (value is String && value == "null")) {
-            // remove null values
-            deepLink = deepLink.replace("""\?($key)=\{\1\}""".toRegex(), "")
-            deepLink = deepLink.replace("""\?($key)=\{\1\}&""".toRegex(), "")
-            deepLink = deepLink.replace("""&($key)=\{\1\}""".toRegex(), "")
-        } else {
-            deepLink = deepLink.replace("{$key}", value.toString())
-        }
-    }
-    // remove null queries
-    deepLink = deepLink.replace("""\?(.*)=\{\1\}""".toRegex(), "")
-    deepLink = deepLink.replace("""\?(.*)=\{\1\}&""".toRegex(), "")
-    deepLink = deepLink.replace("""&(.*)=\{\1\}""".toRegex(), "")
-    findNavController().navigate(Uri.parse(deepLink))
+    findNavController().navigateDeepLink(getString(res), path)
 }
 
 /**

@@ -70,27 +70,30 @@ abstract class BaseActivity : AppCompatActivity(), HasAndroidInjector, DataTermi
             }
         })
 
-        networkConnectivityViewModel.alertPanelVisibility.observe(this, Observer {
-            val container = attachNetworkAvailabilityContainer()
-            if (container != null && it) {
+        networkConnectivityViewModel.alertPanelVisibility.observe(this, Observer { isVisible ->
+            val container = attachGlobalAlertContainer() ?: return@Observer
+            if (container.childCount > 0) {
+                container.removeAllViews()
+            }
+            if (isVisible) {
                 val viewBinding = DataBindingUtil.inflate<CoreViewNetworkUnavailableBinding>(
                     layoutInflater, attachNetworkAvailabilityLayoutRes(), container, true
                 )
                 viewBinding.onCloseClickListener = View.OnClickListener { networkConnectivityViewModel.onCloseClick() }
             } else {
-                container?.removeAllViews()
+                container.removeAllViews()
             }
         })
     }
 
-    open fun attachNetworkAvailabilityContainer(): ViewGroup? = null
+    open fun attachGlobalAlertContainer(): ViewGroup? = null
 
     @Suppress("MemberVisibilityCanBePrivate")
     protected fun attachNetworkAvailabilityLayoutRes(): Int = R.layout.core_view_network_unavailable
 
     @CallSuper
     override fun onDataTerminalError(throwable: Throwable) {
-        if (throwable  is DataException.Terminal.Offline) {
+        if (throwable is DataException.Terminal.Offline) {
             networkConnectivityViewModel.onNetworkAvailabilityChange(false)
         }
     }
