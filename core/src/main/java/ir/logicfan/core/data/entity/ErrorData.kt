@@ -6,5 +6,7 @@ data class ErrorData(
     @field:SerializedName("code")
     val code: Int,
     @field:SerializedName("message")
-    val msg: String
+    val msg: String,
+    @field:SerializedName("image")
+    val image: String?
 )

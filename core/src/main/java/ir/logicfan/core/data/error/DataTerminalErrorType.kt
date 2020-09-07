@@ -12,33 +12,41 @@ import java.net.HttpURLConnection
  * in Rx world you may consider this as an error being emitted to onError callback
  */
 enum class DataTerminalErrorType(val code: Int) {
+    GENERIC_INPUT(100),
     BAD_REQUEST(HttpURLConnection.HTTP_BAD_REQUEST),
     UNAUTHORIZED(HttpURLConnection.HTTP_UNAUTHORIZED),
     FORBIDDEN(HttpURLConnection.HTTP_FORBIDDEN),
     NOT_FOUND(HttpURLConnection.HTTP_NOT_FOUND),
     INTERNAL_SERVER(HttpURLConnection.HTTP_INTERNAL_ERROR),
     SERVICE_UNAVAILABLE(HttpURLConnection.HTTP_UNAVAILABLE),
-    TIMEOUT(HttpURLConnection.HTTP_CLIENT_TIMEOUT);
+    GATEWAY_TIMEOUT(HttpURLConnection.HTTP_GATEWAY_TIMEOUT),
+    CLIENT_TIMEOUT(HttpURLConnection.HTTP_CLIENT_TIMEOUT);
 
     companion object {
         fun findTerminalExceptionOrNull(errorList: List<ErrorData>): DataException.Terminal? {
             var result: DataException.Terminal? = null
+            val messages = mutableListOf<String>()
             for (error in errorList) {
+                messages.add(error.msg)
                 result = when (error.code) {
-                    BAD_REQUEST.code -> DataException.Terminal.BadRequest(error.code, error.msg)
-                    UNAUTHORIZED.code -> DataException.Terminal.UnAuthorized(error.code, error.msg)
-                    FORBIDDEN.code -> DataException.Terminal.Forbidden(error.code, error.msg)
-                    NOT_FOUND.code -> DataException.Terminal.NotFound(error.code, error.msg)
-                    INTERNAL_SERVER.code -> DataException.Terminal.InternalServer(error.code, error.msg)
-                    SERVICE_UNAVAILABLE.code -> DataException.Terminal.ServiceUnavailable(error.code, error.msg)
-                    TIMEOUT.code -> DataException.Terminal.Timeout(error.code, error.msg)
+                    GENERIC_INPUT.code -> DataException.Terminal.GenericInput(error.code, messages, error.image)
+                    BAD_REQUEST.code -> DataException.Terminal.BadRequest(error.code, messages, error.image)
+                    UNAUTHORIZED.code -> DataException.Terminal.UnAuthorized(error.code, messages, error.image)
+                    FORBIDDEN.code -> DataException.Terminal.Forbidden(error.code, messages, error.image)
+                    NOT_FOUND.code -> DataException.Terminal.NotFound(error.code, messages, error.image)
+                    INTERNAL_SERVER.code -> DataException.Terminal.InternalServer(error.code, messages, error.image)
+                    SERVICE_UNAVAILABLE.code -> {
+                        DataException.Terminal.ServiceUnavailable(error.code, messages, error.image)
+                    }
+                    CLIENT_TIMEOUT.code -> DataException.Terminal.Timeout(error.code, messages, error.image)
+                    GATEWAY_TIMEOUT.code -> DataException.Terminal.Timeout(error.code, messages, error.image)
                     else -> null
                 }
             }
             return result
         }
 
-        fun isTerminal(code: Int): Boolean {
+        private fun isTerminal(code: Int): Boolean {
             for (item in values()) {
                 if (item.code == code) {
                     return true

@@ -11,17 +11,18 @@ sealed class DataException : Exception() {
      * in Rx world you may consider this as an error being emitted to onError callback
      *
      * @property code number of error defined in DataTerminalErrorType
-     * @property msg message of error received from data source
+     * @property messages message of error received from data source
      */
-    sealed class Terminal(val code: Int, val msg: String) : DataException() {
+    sealed class Terminal(val code: Int, val messages: List<String>, val image: String?) : DataException() {
         class Offline : DataException()
-        class BadRequest(code: Int, msg: String) : Terminal(code, msg)
-        class UnAuthorized(code: Int, msg: String) : Terminal(code, msg)
-        class Forbidden(code: Int, msg: String) : Terminal(code, msg)
-        class NotFound(code: Int, msg: String) : Terminal(code, msg)
-        class InternalServer(code: Int, msg: String) : Terminal(code, msg)
-        class ServiceUnavailable(code: Int, msg: String) : Terminal(code, msg)
-        class Timeout(code: Int, msg: String) : Terminal(code, msg)
+        class GenericInput(code: Int, messages: List<String>, image: String?): Terminal(code, messages, image)
+        class BadRequest(code: Int, messages: List<String>, image: String?) : Terminal(code, messages, image)
+        class UnAuthorized(code: Int, messages: List<String>, image: String?) : Terminal(code, messages, image)
+        class Forbidden(code: Int, messages: List<String>, image: String?) : Terminal(code, messages, image)
+        class NotFound(code: Int, messages: List<String>, image: String?) : Terminal(code, messages, image)
+        class InternalServer(code: Int, messages: List<String>, image: String?) : Terminal(code, messages, image)
+        class ServiceUnavailable(code: Int, messages: List<String>, image: String?) : Terminal(code, messages, image)
+        class Timeout(code: Int, messages: List<String>, image: String?) : Terminal(code, messages, image)
     }
 
     /**
@@ -32,8 +33,8 @@ sealed class DataException : Exception() {
      * @property code number of error defined in DataNonTerminalErrorType
      * @property msg msg message of error received from data source
      */
-    sealed class NonTerminal(val code: Int, val msg: String) : DataException() {
-        class WrongPassword(code: Int, msg: String) : NonTerminal(code, msg)
-        class WrongMobile(code: Int, msg: String) : NonTerminal(code, msg)
+    sealed class NonTerminal(val code: Int, val msg: String, val image: String?) : DataException() {
+        class WrongPassword(code: Int, msg: String, image: String?) : NonTerminal(code, msg, image)
+        class WrongMobile(code: Int, msg: String, image: String?) : NonTerminal(code, msg, image)
     }
 }

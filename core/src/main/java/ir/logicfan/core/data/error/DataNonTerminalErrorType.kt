@@ -15,8 +15,12 @@ enum class DataNonTerminalErrorType(val code: Int) {
             val newList = ArrayList<DataException.NonTerminal>()
             for (error in errorList) {
                 when (error.code) {
-                    WRONG_PASSWORD.code -> newList.add(DataException.NonTerminal.WrongPassword(error.code, error.msg))
-                    WRONG_MOBILE.code -> newList.add(DataException.NonTerminal.WrongMobile(error.code, error.msg))
+                    WRONG_PASSWORD.code -> {
+                        newList.add(DataException.NonTerminal.WrongPassword(error.code, error.msg, error.image))
+                    }
+                    WRONG_MOBILE.code -> {
+                        newList.add(DataException.NonTerminal.WrongMobile(error.code, error.msg, error.image))
+                    }
                 }
             }
             return if (newList.size > 0) {
