@@ -40,7 +40,7 @@ abstract class BaseActivity : AppCompatActivity(), HasAndroidInjector, DataTermi
     @Inject
     lateinit var baseSharedPreferences: BaseSharedPreferences
 
-    private val networkConnectivityViewModel: NetworkConnectivityViewModel by viewModels()
+    protected val networkConnectivityViewModel: NetworkConnectivityViewModel by viewModels()
     open fun attachBaseViewModel(): List<BaseViewModel>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
