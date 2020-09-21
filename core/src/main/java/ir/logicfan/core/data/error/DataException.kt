@@ -16,6 +16,7 @@ sealed class DataException : Exception() {
     sealed class Terminal(val code: Int, val messages: List<String>, val image: String?) : DataException() {
         class Offline : DataException()
         class GenericInput(code: Int, messages: List<String>, image: String?): Terminal(code, messages, image)
+        class UnprocessableEntity(code: Int, messages: List<String>, image: String?): Terminal(code, messages, image)
         class BadRequest(code: Int, messages: List<String>, image: String?) : Terminal(code, messages, image)
         class UnAuthorized(code: Int, messages: List<String>, image: String?) : Terminal(code, messages, image)
         class Forbidden(code: Int, messages: List<String>, image: String?) : Terminal(code, messages, image)

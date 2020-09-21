@@ -13,6 +13,7 @@ import java.net.HttpURLConnection
  */
 enum class DataTerminalErrorType(val code: Int) {
     GENERIC_INPUT(100),
+    UNPROCESSABLE_ENTITY(422),
     BAD_REQUEST(HttpURLConnection.HTTP_BAD_REQUEST),
     UNAUTHORIZED(HttpURLConnection.HTTP_UNAUTHORIZED),
     FORBIDDEN(HttpURLConnection.HTTP_FORBIDDEN),
@@ -46,6 +47,16 @@ enum class DataTerminalErrorType(val code: Int) {
             return result
         }
 
+        fun findTerminalExceptionOrNull(throwable: Throwable): DataException.Terminal? = try {
+            if (throwable is HttpException && isTerminal(throwable.code())) {
+                parseHttpException(throwable)
+            } else {
+                null
+            }
+        } catch (ex: Exception) {
+            null
+        }
+
         private fun isTerminal(code: Int): Boolean {
             for (item in values()) {
                 if (item.code == code) {
@@ -55,16 +66,17 @@ enum class DataTerminalErrorType(val code: Int) {
             return false
         }
 
-        fun findTerminalExceptionOrNull(throwable: Throwable): DataException.Terminal? = try {
-            if (throwable is HttpException && isTerminal(throwable.code())) {
-                val errorBody = throwable.response().errorBody()
-                val response = Gson().fromJson(errorBody?.charStream(), NetworkApiResponse::class.java)
-                response.error?.let { findTerminalExceptionOrNull(it) }
-            } else {
-                null
+        private fun parseHttpException(throwable: HttpException): DataException.Terminal? {
+            val errorBody = throwable.response().errorBody()
+            val response = Gson().fromJson(errorBody?.charStream(), NetworkApiResponse::class.java)
+            val errors = response.error ?: return null
+            if (throwable.code() == UNPROCESSABLE_ENTITY.code && errors.isNotEmpty()) {
+                val firstError = errors.first() // we support only one error for unprocessable entity
+                return DataException.Terminal.UnprocessableEntity(
+                    firstError.code, listOf(firstError.msg), firstError.image
+                )
             }
-        } catch (ex: Exception) {
-            null
+            return findTerminalExceptionOrNull(errors)
         }
     }
 }
