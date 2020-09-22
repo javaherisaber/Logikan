@@ -1,7 +1,7 @@
 package ir.logicfan.core.data.network.mock
 
 import android.annotation.SuppressLint
-import android.util.Log
+import ir.logicfan.core.data.network.interceptor.OkHttpLogger
 import ir.logicfan.core.di.qulifier.ApiBaseUrl
 import ir.logicfan.core.di.qulifier.ExcludeMock
 import ir.logicfan.core.di.qulifier.IncludeMock
@@ -26,6 +26,9 @@ constructor(
     @IncludeMock private val apiIncludeIntoMock: Array<String>,
     @ExcludeMock private val apiExcludeFromMock: Array<String>
 ) : Interceptor {
+
+    @Suppress("MemberVisibilityCanBePrivate")
+    var logger: OkHttpLogger = OkHttpLogger.DEFAULT
 
     @SuppressLint("DefaultLocale")
     @Throws(IOException::class)
@@ -61,8 +64,7 @@ constructor(
             val json = mockJsonProvider.getMockJsonOrNull(requestPath)
             return json?.let {
                 // json is found
-                Log.d(TAG, "[$requestMethod] $url")
-                Log.d(TAG, it) // todo: implement logger with proper trim space, respecting logcat max length limit
+                logResponse(requestMethod, url, it)
                 val contentType = MediaType.parse(RESPONSE_MEDIA_TYPE)
                 val responseBody = ResponseBody.create(contentType, it)
                 Thread.sleep(apiResponseLatency)
@@ -82,8 +84,16 @@ constructor(
         }
     }
 
+    private fun logResponse(requestMethod: String, url: String, body: String) {
+        val whitespacePatternInJson = "\\s(?=(?:\"[^\"]*\"|[^\"])*\$)".toRegex()
+        val message = body.replace(whitespacePatternInJson, "")
+        logger.log("<-- Start mock response -->")
+        logger.log("[$requestMethod] $url")
+        logger.log(message)
+        logger.log("<-- End   mock response -->")
+    }
+
     companion object {
-        const val TAG = "OfflineMockJson"
         const val RESPONSE_MEDIA_TYPE = "application/json"
         const val RESPONSE_MESSAGE = "OK"
         const val RESPONSE_CODE = 200
