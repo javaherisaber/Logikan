@@ -13,8 +13,8 @@
 
         <ImageView
             android:id="@+id/imageView_core_itemStateEmpty_icon"
-            android:layout_width="164dp"
-            android:layout_height="164dp"
+            android:layout_width="192dp"
+            android:layout_height="192dp"
             app:layout_constraintBottom_toTopOf="@id/textView_core_itemStateEmpty_message"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -29,8 +29,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:text="@string/core_itemStateEmpty_message"
-            android:textAppearance="?attr/textAppearanceHeadline4"
-            android:textSize="22sp"
+            android:textAppearance="?attr/textAppearanceHeadline3"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/imageView_core_itemStateEmpty_icon"
             app:layout_constraintStart_toStartOf="@+id/imageView_core_itemStateEmpty_icon"

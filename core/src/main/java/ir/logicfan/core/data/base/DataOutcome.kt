@@ -1,12 +1,14 @@
 package ir.logicfan.core.data.base
 
 import io.reactivex.Observable
+import ir.logicfan.core.data.entity.EmptyListData
 import ir.logicfan.core.data.entity.ErrorData
 import ir.logicfan.core.data.entity.PaginationData
 import ir.logicfan.core.data.entity.UpdateData
 
 typealias ImperativeDataResult = DataResult<Nothing>
 typealias DataResult<S> = Observable<DataOutcome<S>>
+
 /**
  * Define an outcome from data layer
  * there is only one active State at a given object
@@ -44,6 +46,14 @@ sealed class DataOutcome<out T> {
      * @property data list of data being emitted
      */
     data class ListDataState<out T>(val success: Boolean, val data: T, val update: UpdateData?) : DataOutcome<T>()
+
+    /**
+     * When list data is empty and we have a remote emptyList object
+     * @property emptyList remote object to display proper artwork and message
+     */
+    data class EmptyListState<out T>(
+        val success: Boolean, val data: T, val emptyList: EmptyListData, val update: UpdateData?
+    ) : DataOutcome<T>()
 
     /**
      * When the result of request is a paged list of data

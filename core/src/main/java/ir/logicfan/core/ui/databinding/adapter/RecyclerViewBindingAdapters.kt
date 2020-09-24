@@ -9,6 +9,7 @@ import androidx.core.view.ViewCompat
 import androidx.databinding.BindingAdapter
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.*
+import com.bumptech.glide.Glide
 import ir.logicfan.core.R
 import ir.logicfan.core.databinding.CoreItemStateEmptyBinding
 import ir.logicfan.core.ui.recyclerview.decorator.GridMarginItemDecoration
@@ -91,7 +92,7 @@ fun RecyclerView.setNestedScrollingViewEnabled(isEnabled: Boolean) {
  */
 @BindingAdapter(
     value = [
-        "hasEmptyState", "submitList", "emptyText", "emptyDrawable", "emptyViewGroup", "isZeroIndex"
+        "hasEmptyState", "submitList", "emptyText", "emptyDrawable", "emptyImageUrl", "emptyViewGroup", "isZeroIndex"
     ], requireAll = false
 )
 fun RecyclerView.submitList(
@@ -99,6 +100,7 @@ fun RecyclerView.submitList(
     newList: List<Nothing>?,
     emptyText: String?,
     emptyDrawable: Drawable?,
+    emptyImageUrl: String?,
     viewGroup: ViewGroup?,
     isZeroIndex: Boolean?
 ) = newList?.let {
@@ -115,6 +117,9 @@ fun RecyclerView.submitList(
                 inflater, R.layout.core_item_state_empty, parent, false
             )
             emptyDrawable?.let { emptyView.imageViewCoreItemStateEmptyIcon.setImageDrawable(emptyDrawable) }
+            emptyImageUrl?.let {
+                Glide.with(context).load(it).into(emptyView.imageViewCoreItemStateEmptyIcon)
+            }
             emptyText?.let { emptyView.textViewCoreItemStateEmptyMessage.text = emptyText }
             if (isZeroIndex != null && isZeroIndex) {
                 parent.addView(emptyView.root, 0)
