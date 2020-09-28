@@ -37,7 +37,12 @@ sealed class DataOutcome<out T> {
      * @param T type of data being emitted
      * @property data data being emitted
      */
-    data class SingleDataState<out T>(val success: Boolean, val data: T, val update: UpdateData?) : DataOutcome<T>()
+    data class SingleDataState<out T>(
+        val success: Boolean,
+        val data: T,
+        val emptyList: EmptyListData?,
+        val update: UpdateData?
+    ) : DataOutcome<T>()
 
     /**
      * When the result of request is a list of data
@@ -45,14 +50,11 @@ sealed class DataOutcome<out T> {
      * @param T type of data being emitted
      * @property data list of data being emitted
      */
-    data class ListDataState<out T>(val success: Boolean, val data: T, val update: UpdateData?) : DataOutcome<T>()
-
-    /**
-     * When list data is empty and we have a remote emptyList object
-     * @property emptyList remote object to display proper artwork and message
-     */
-    data class EmptyListState<out T>(
-        val success: Boolean, val data: T, val emptyList: EmptyListData, val update: UpdateData?
+    data class ListDataState<out T>(
+        val success: Boolean,
+        val data: T,
+        val emptyList: EmptyListData?,
+        val update: UpdateData?
     ) : DataOutcome<T>()
 
     /**
@@ -65,6 +67,7 @@ sealed class DataOutcome<out T> {
     data class PagedListDataState<out T>(
         val success: Boolean,
         val data: T, val pagination: PaginationData,
+        val emptyList: EmptyListData?,
         val update: UpdateData?
     ) : DataOutcome<T>()
 }

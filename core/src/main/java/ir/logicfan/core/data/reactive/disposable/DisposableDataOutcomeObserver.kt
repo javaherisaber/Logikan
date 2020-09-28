@@ -23,7 +23,6 @@ class DisposableDataOutcomeObserver<T>(
     private val onNextPagedListDataFunc: (DataOutcome.PagedListDataState<T>) -> Unit = {},
     private val onNextImperativeState: (DataOutcome.ImperativeState) -> Unit = {},
     private val onNonTerminalErrorFunc: (List<DataException.NonTerminal>) -> Unit = {},
-    private val onNextEmptyListFunc: (DataOutcome.EmptyListState<T>) -> Unit = {},
     onNextFunc: (DataOutcome<T>) -> Unit = {},
     onCompleteFunc: () -> Unit = {},
     onErrorFunc: (Throwable) -> Unit = {}
@@ -36,10 +35,6 @@ class DisposableDataOutcomeObserver<T>(
                     handleUpdateState(outcome.update)
                     DataNonTerminalErrorType.findNonTerminalExceptionOrNull(outcome.errorList)?.let { onNonTerminalErrorFunc(it) }
                     DataTerminalErrorType.findTerminalExceptionOrNull(outcome.errorList)?.let { onError(it) }
-                }
-                is DataOutcome.EmptyListState -> {
-                    handleUpdateState(outcome.update)
-                    onNextEmptyListFunc(outcome)
                 }
                 is DataOutcome.SingleDataState -> {
                     handleUpdateState(outcome.update)
