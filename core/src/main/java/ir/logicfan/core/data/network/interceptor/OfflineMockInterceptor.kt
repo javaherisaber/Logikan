@@ -1,7 +1,9 @@
-package ir.logicfan.core.data.network.mock
+package ir.logicfan.core.data.network.interceptor
 
 import android.annotation.SuppressLint
-import ir.logicfan.core.data.network.interceptor.OkHttpLogger
+import android.content.Context
+import android.util.Log
+import ir.logicfan.core.data.util.FileUtils
 import ir.logicfan.core.di.qulifier.ApiBaseUrl
 import ir.logicfan.core.di.qulifier.ExcludeMock
 import ir.logicfan.core.di.qulifier.IncludeMock
@@ -19,16 +21,14 @@ import javax.inject.Inject
  */
 class OfflineMockInterceptor @Inject
 constructor(
+    private val context: Context,
     @ApiBaseUrl private val baseUrl: String,
-    private val mockJsonProvider: MockJsonProvider,
+    private val requestPathToJsonMap: Map<String, String>,
     private val apiEnableMock: Boolean,
     private val apiResponseLatency: Long,
     @IncludeMock private val apiIncludeIntoMock: Array<String>,
     @ExcludeMock private val apiExcludeFromMock: Array<String>
 ) : Interceptor {
-
-    @Suppress("MemberVisibilityCanBePrivate")
-    var logger: OkHttpLogger = OkHttpLogger.DEFAULT
 
     @SuppressLint("DefaultLocale")
     @Throws(IOException::class)
@@ -61,10 +61,10 @@ constructor(
         }
 
         if (canProceedWithMock) {
-            val json = mockJsonProvider.getMockJsonOrNull(requestPath)
+            val json = getMockJsonOrNull(requestPath)
             return json?.let {
                 // json is found
-                logResponse(requestMethod, url, it)
+                Log.d(TAG, "--> Mocking [$requestMethod] $url")
                 val contentType = MediaType.parse(RESPONSE_MEDIA_TYPE)
                 val responseBody = ResponseBody.create(contentType, it)
                 Thread.sleep(apiResponseLatency)
@@ -84,18 +84,26 @@ constructor(
         }
     }
 
-    private fun logResponse(requestMethod: String, url: String, body: String) {
-        val whitespacePatternInJson = "\\s(?=(?:\"[^\"]*\"|[^\"])*\$)".toRegex()
-        val message = body.replace(whitespacePatternInJson, "")
-        logger.log("<-- Start mock response -->")
-        logger.log("[$requestMethod] $url")
-        logger.log(message)
-        logger.log("<-- End   mock response -->")
+    /**
+     * read mock json or if exception occur's return null
+     *
+     * @param request api request
+     * @return json in string object
+     */
+    @Throws(IOException::class)
+    fun getMockJsonOrNull(request: String): String? {
+        val fileName = requestPathToJsonMap[request]
+        return fileName?.run {
+            // json exists in assets directory
+            FileUtils.readTextFileFromAssets(context, "$MOCK_PATH_IN_ASSETS/$this")
+        }
     }
 
     companion object {
-        const val RESPONSE_MEDIA_TYPE = "application/json"
-        const val RESPONSE_MESSAGE = "OK"
-        const val RESPONSE_CODE = 200
+        private val TAG = this::class.java.simpleName
+        private const val MOCK_PATH_IN_ASSETS = "mock_json"
+        private const val RESPONSE_MEDIA_TYPE = "application/json"
+        private const val RESPONSE_MESSAGE = "OK"
+        private const val RESPONSE_CODE = 200
     }
 }

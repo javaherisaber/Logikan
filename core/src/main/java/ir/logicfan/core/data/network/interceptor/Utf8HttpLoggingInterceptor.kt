@@ -3,6 +3,7 @@ package ir.logicfan.core.data.network.interceptor
 import ir.logicfan.core.util.extension.decodeUnicode
 import okhttp3.*
 import okhttp3.internal.http.HttpHeaders
+import okhttp3.internal.platform.Platform
 import okio.Buffer
 import java.io.EOFException
 import java.io.IOException
@@ -243,6 +244,19 @@ class Utf8HttpLoggingInterceptor @JvmOverloads constructor(private val logger: O
                 return true
             } catch (e: EOFException) {
                 return false // Truncated UTF-8 sequence.
+            }
+        }
+    }
+
+    interface OkHttpLogger {
+        fun log(message: String?)
+
+        companion object {
+            /** A [OkHttpLogger] defaults output appropriate for the current platform.  */
+            val DEFAULT: OkHttpLogger = object : OkHttpLogger {
+                override fun log(message: String?) {
+                    Platform.get().log(Platform.INFO, message, null)
+                }
             }
         }
     }
