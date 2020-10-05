@@ -14,14 +14,14 @@ typealias DataResult<S> = Observable<DataOutcome<S>>
  *
  * @param T type of data being used
  */
-sealed class DataOutcome<out T> {
+sealed class DataOutcome<out T>(val success: Boolean, val update: UpdateData?) {
     /**
      * When there is no need to have data payload
      * suitable for upload and acknowledge requests
      *
      * @property success whether request was successful or not
      */
-    data class ImperativeState(val success: Boolean, val update: UpdateData?) : DataOutcome<Nothing>()
+    class ImperativeState(success: Boolean, update: UpdateData?) : DataOutcome<Nothing>(success, update)
 
     /**
      * When the result of request is a single data
@@ -29,12 +29,12 @@ sealed class DataOutcome<out T> {
      * @param T type of data being emitted
      * @property data data being emitted
      */
-    data class SingleDataState<out T>(
-        val success: Boolean,
+    class SingleDataState<out T>(
         val data: T,
         val emptyList: EmptyListData?,
-        val update: UpdateData?
-    ) : DataOutcome<T>()
+        success: Boolean,
+        update: UpdateData?
+    ) : DataOutcome<T>(success, update)
 
     /**
      * When the result of request is a list of data
@@ -42,12 +42,12 @@ sealed class DataOutcome<out T> {
      * @param T type of data being emitted
      * @property data list of data being emitted
      */
-    data class ListDataState<out T>(
-        val success: Boolean,
+    class ListDataState<out T>(
         val data: T,
         val emptyList: EmptyListData?,
-        val update: UpdateData?
-    ) : DataOutcome<T>()
+        success: Boolean,
+        update: UpdateData?
+    ) : DataOutcome<T>(success, update)
 
     /**
      * When the result of request is a paged list of data
@@ -56,10 +56,11 @@ sealed class DataOutcome<out T> {
      * @property data list of data being emitted
      * @property pagination information need to do pagination on next pages
      */
-    data class PagedListDataState<out T>(
-        val success: Boolean,
-        val data: T, val pagination: PaginationData,
+    class PagedListDataState<out T>(
+        val data: T,
         val emptyList: EmptyListData?,
-        val update: UpdateData?
-    ) : DataOutcome<T>()
+        val pagination: PaginationData,
+        success: Boolean,
+        update: UpdateData?
+    ) : DataOutcome<T>(success, update)
 }
