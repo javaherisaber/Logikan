@@ -2,6 +2,7 @@ package ir.logicfan.core.ui.util.extension
 
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.provider.MediaStore
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
@@ -13,6 +14,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import ir.logicfan.core.R
+import ir.logicfan.core.util.extension.parseDeepLink
 
 /**
  * Pick image from file manager
@@ -32,8 +34,9 @@ fun Fragment.pickImage(requestCode: Int, @StringRes chooserTitle: Int) {
     pickImage(requestCode, title)
 }
 
-fun Fragment.navigateDeepLink(@StringRes res: Int, vararg path: Pair<String, Any?>) {
-    findNavController().navigateDeepLink(getString(res), path)
+fun Fragment.navigateDeepLink(@StringRes res: Int, vararg params: Pair<String, Any?>) {
+    val deepLink = getString(res).parseDeepLink(params)
+    findNavController().navigate(Uri.parse(deepLink))
 }
 
 /**

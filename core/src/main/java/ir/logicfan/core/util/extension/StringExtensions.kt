@@ -41,6 +41,29 @@ fun String.mimeTypeForUrl(): String? {
 }
 
 /**
+ * Parse deep link with given params
+ */
+@Suppress("RegExpRedundantEscape")
+fun String.parseDeepLink(params: Array<out Pair<String, Any?>>): String {
+    var deepLink = this
+    params.forEach { (key, value) ->
+        if (value == null || (value is String && value == "null")) {
+            // remove null values
+            deepLink = deepLink.replace("""\?($key)=\{\1\}""".toRegex(), "")
+            deepLink = deepLink.replace("""\?($key)=\{\1\}&""".toRegex(), "")
+            deepLink = deepLink.replace("""&($key)=\{\1\}""".toRegex(), "")
+        } else {
+            deepLink = deepLink.replace("{$key}", value.toString())
+        }
+    }
+    // remove null queries
+    deepLink = deepLink.replace("""\?(.*)=\{\1\}""".toRegex(), "")
+    deepLink = deepLink.replace("""\?(.*)=\{\1\}&""".toRegex(), "")
+    deepLink = deepLink.replace("""&(.*)=\{\1\}""".toRegex(), "")
+    return deepLink
+}
+
+/**
  * Decode unicode characters from receiver into utf-8 text
  */
 fun String.decodeUnicode(): String {
