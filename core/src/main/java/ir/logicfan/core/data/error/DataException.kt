@@ -46,7 +46,6 @@ sealed class DataException(val code: Int, val messages: List<String>, val image:
             for (error in errorList) {
                 messages.add(error.msg)
                 result = when (error.code) {
-                    422 -> UnprocessableEntity(error.code, messages, error.image)
                     HttpURLConnection.HTTP_BAD_REQUEST -> BadRequest(error.code, messages, error.image)
                     HttpURLConnection.HTTP_UNAUTHORIZED -> UnAuthorized(error.code, messages, error.image)
                     HttpURLConnection.HTTP_FORBIDDEN -> Forbidden(error.code, messages, error.image)
@@ -55,14 +54,16 @@ sealed class DataException(val code: Int, val messages: List<String>, val image:
                     HttpURLConnection.HTTP_UNAVAILABLE -> ServiceUnavailable(error.code, messages, error.image)
                     HttpURLConnection.HTTP_CLIENT_TIMEOUT -> Timeout(error.code, messages, error.image)
                     HttpURLConnection.HTTP_GATEWAY_TIMEOUT -> Timeout(error.code, messages, error.image)
-                    else -> null
+                    else -> UnprocessableEntity(error.code, messages, error.image)
                 }
             }
             return result
         }
 
+        private const val HTTP_UNPROCESSABLE_ENTITY = 422
+
         private val supportedErrors = listOf(
-            422,
+            HTTP_UNPROCESSABLE_ENTITY,
             HttpURLConnection.HTTP_BAD_REQUEST,
             HttpURLConnection.HTTP_UNAUTHORIZED,
             HttpURLConnection.HTTP_FORBIDDEN,
