@@ -3,8 +3,8 @@ package ir.logicfan.core.data.util
 import io.reactivex.Observable
 import ir.logicfan.core.data.base.DataOutcome
 import ir.logicfan.core.data.base.Mapper
-import ir.logicfan.core.data.mapper.NetworkApiResponseToDataOutcomeMapper
-import ir.logicfan.core.data.network.base.NetworkApiResponse
+import ir.logicfan.core.data.mapper.NetworkApiSuccessToDataOutcomeMapper
+import ir.logicfan.core.data.network.base.NetworkApiSuccess
 import ir.logicfan.core.data.reactive.ASyncTransformer
 import ir.logicfan.core.data.reactive.Transformer
 
@@ -17,7 +17,7 @@ typealias ImperativeReactiveUtil = ReactiveUtil<Nothing>
  * @property transformer transform stream with context threading (runtime or test contexts)
  */
 class ReactiveUtil<T>(
-    private val mapper: Mapper<NetworkApiResponse<T>, DataOutcome<T>> = NetworkApiResponseToDataOutcomeMapper(),
+    private val mapper: Mapper<NetworkApiSuccess<T>, DataOutcome<T>> = NetworkApiSuccessToDataOutcomeMapper(),
     private val transformer: Transformer<DataOutcome<T>> = ASyncTransformer()
 ) {
 
@@ -28,5 +28,5 @@ class ReactiveUtil<T>(
      */
     fun composeWith(receiver: () -> Observable<DataOutcome<T>>): Observable<DataOutcome<T>> = receiver().compose(transformer)
 
-    fun map(from: NetworkApiResponse<T>): DataOutcome<T> = mapper.mapFrom(from)
+    fun map(from: NetworkApiSuccess<T>): DataOutcome<T> = mapper.mapFrom(from)
 }

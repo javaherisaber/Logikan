@@ -13,10 +13,10 @@ import javax.inject.Inject
 class NetworkConnectivityInterceptor @Inject
 constructor(private val context: Context) : Interceptor {
 
-    @Throws(DataException.Terminal.Offline::class)
+    @Throws(DataException.Offline::class)
     override fun intercept(chain: Interceptor.Chain): Response {
         if (!Connectivity.isUserOnline(context)) {
-            throw DataException.Terminal.Offline()
+            throw DataException.Offline()
         }
         return chain.proceed(chain.request())
     }

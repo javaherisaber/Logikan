@@ -2,7 +2,6 @@ package ir.logicfan.core.data.base
 
 import io.reactivex.Observable
 import ir.logicfan.core.data.entity.EmptyListData
-import ir.logicfan.core.data.entity.ErrorData
 import ir.logicfan.core.data.entity.PaginationData
 import ir.logicfan.core.data.entity.UpdateData
 
@@ -23,13 +22,6 @@ sealed class DataOutcome<out T> {
      * @property success whether request was successful or not
      */
     data class ImperativeState(val success: Boolean, val update: UpdateData?) : DataOutcome<Nothing>()
-
-    /**
-     * When the result of request is only error
-     *
-     * @property errorList list of errors
-     */
-    data class ErrorState(val errorList: List<ErrorData>, val update: UpdateData?) : DataOutcome<Nothing>()
 
     /**
      * When the result of request is a single data

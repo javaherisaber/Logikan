@@ -1,7 +1,7 @@
 package ir.logicfan.core.data.reactive.disposable
 
 import io.reactivex.observers.DisposableObserver
-import ir.logicfan.core.data.error.DataTerminalErrorType
+import ir.logicfan.core.data.error.DataException
 import ir.logicfan.core.data.reactive.TerminalStateObserver
 
 /**
@@ -34,7 +34,7 @@ open class DisposableDelegateErrorObserver<T>(
 
     override fun onError(error: Throwable) {
         if (!isDisposed) {
-            val resultant = DataTerminalErrorType.findTerminalExceptionOrNull(error) ?: error
+            val resultant = DataException.findExceptionOrNull(error) ?: error
             terminalStateObserver.onErrorState(resultant)
             onErrorFunc(resultant)
         }

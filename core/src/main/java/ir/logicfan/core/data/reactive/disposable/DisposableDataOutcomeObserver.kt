@@ -2,9 +2,6 @@ package ir.logicfan.core.data.reactive.disposable
 
 import ir.logicfan.core.data.base.DataOutcome
 import ir.logicfan.core.data.entity.UpdateData
-import ir.logicfan.core.data.error.DataException
-import ir.logicfan.core.data.error.DataNonTerminalErrorType
-import ir.logicfan.core.data.error.DataTerminalErrorType
 import ir.logicfan.core.data.reactive.TerminalStateObserver
 
 /**
@@ -14,7 +11,6 @@ import ir.logicfan.core.data.reactive.TerminalStateObserver
  * @property onNextSingleDataFunc emit single data
  * @property onNextListDataFunc emit list data
  * @property onNextImperativeState emit imperative response
- * @property onNonTerminalErrorFunc emit non terminal error
  */
 class DisposableDataOutcomeObserver<T>(
     private val terminalStateObserver: TerminalStateObserver,
@@ -22,7 +18,6 @@ class DisposableDataOutcomeObserver<T>(
     private val onNextListDataFunc: (DataOutcome.ListDataState<T>) -> Unit = {},
     private val onNextPagedListDataFunc: (DataOutcome.PagedListDataState<T>) -> Unit = {},
     private val onNextImperativeState: (DataOutcome.ImperativeState) -> Unit = {},
-    private val onNonTerminalErrorFunc: (List<DataException.NonTerminal>) -> Unit = {},
     onNextFunc: (DataOutcome<T>) -> Unit = {},
     onCompleteFunc: () -> Unit = {},
     onErrorFunc: (Throwable) -> Unit = {}
@@ -31,11 +26,6 @@ class DisposableDataOutcomeObserver<T>(
     override fun onNext(outcome: DataOutcome<T>) {
         if (!isDisposed) {
             when (outcome) {
-                is DataOutcome.ErrorState -> {
-                    handleUpdateState(outcome.update)
-                    DataNonTerminalErrorType.findNonTerminalExceptionOrNull(outcome.errorList)?.let { onNonTerminalErrorFunc(it) }
-                    DataTerminalErrorType.findTerminalExceptionOrNull(outcome.errorList)?.let { onError(it) }
-                }
                 is DataOutcome.SingleDataState -> {
                     handleUpdateState(outcome.update)
                     onNextSingleDataFunc(outcome)

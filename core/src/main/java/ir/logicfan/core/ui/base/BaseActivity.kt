@@ -93,7 +93,7 @@ abstract class BaseActivity : AppCompatActivity(), HasAndroidInjector, DataTermi
 
     @CallSuper
     override fun onDataTerminalError(throwable: Throwable) {
-        if (throwable is DataException.Terminal.Offline) {
+        if (throwable is DataException.Offline) {
             networkConnectivityViewModel.onNetworkAvailabilityChange(false)
         }
     }
