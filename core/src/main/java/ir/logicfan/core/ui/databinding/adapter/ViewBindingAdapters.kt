@@ -93,8 +93,7 @@ fun View.onViewClickToShowTimePicker(onTimePickListener: OnTimePickListener?) {
 
         // Show Time Picker Dialog
         val timePickerDialog = TimePickerDialog(
-            this.context,
-            TimePickerDialog.OnTimeSetListener { _, hour, minute ->
+            this.context, { _, hour, minute ->
                 onTimePickListener?.onTimePick(hour, minute)
             }, currentHour, currentMinute, true
         )

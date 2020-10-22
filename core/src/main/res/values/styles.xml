@@ -63,6 +63,14 @@
     </style>
     <!-- End of EditText -->
 
+    <!-- ImageView -->
+    <style name="Core.Widget.ImageView.Icon" parent="">
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+        <item name="android:background">?android:attr/actionBarItemBackground</item>
+    </style>
+    <!-- End of ImageView -->
+
     <!-- TextInputLayout -->
     <style name="Core.Widget.TextInputLayout.OutlinedBox" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
         <item name="boxBackgroundColor">@color/core_colorWhite</item>

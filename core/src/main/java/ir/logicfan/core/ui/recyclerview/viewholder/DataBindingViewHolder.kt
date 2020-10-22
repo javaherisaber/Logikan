@@ -14,6 +14,7 @@ import androidx.databinding.ViewDataBinding
 open class DataBindingViewHolder<T>(binding: ViewDataBinding) : SimpleBindingViewHolder(binding) {
 
     private lateinit var itemDataToBindingId: Pair<T, Int>
+    private var dataToBindingIdMap = HashMap<Any, Int>()
     private var dataClickListenerToBindingIdMap = HashMap<OnDataClickListener<T>, Int>()
     private var positionalDataClickListenerToBindingIdMap = HashMap<OnPositionalDataClickListener<T>, Int>()
 
@@ -23,16 +24,20 @@ open class DataBindingViewHolder<T>(binding: ViewDataBinding) : SimpleBindingVie
      * @param R type of data being passed through this listener
      * (You can use same data in your item or any other types, maybe you only need a single ID)
      */
-    interface OnDataClickListener<R> {
+    fun interface OnDataClickListener<R> {
         fun onViewHolderClick(view: View, data: R)
     }
 
-    interface OnPositionalDataClickListener<R> {
+    fun interface OnPositionalDataClickListener<R> {
         fun onViewHolderClick(view: View, data: R, position: Int)
     }
 
     fun addItemBinding(item: T, bindingId: Int) {
         itemDataToBindingId = item to bindingId
+    }
+
+    fun addDataBinding(dataToBindingIdMap: HashMap<Any, Int>) {
+        this.dataToBindingIdMap = dataToBindingIdMap
     }
 
     fun addPositionalDataClickListener(positionalDataClickListenerToBindingIdMap: HashMap<OnPositionalDataClickListener<T>, Int>) {
@@ -56,6 +61,9 @@ open class DataBindingViewHolder<T>(binding: ViewDataBinding) : SimpleBindingVie
     override fun bind() {
         if (this::itemDataToBindingId.isInitialized) {
             binding.setVariable(itemDataToBindingId.second, itemDataToBindingId.first)
+        }
+        for ((data, variableId) in dataToBindingIdMap) {
+            binding.setVariable(variableId, data)
         }
         for ((listener, variableId) in dataClickListenerToBindingIdMap) {
             binding.setVariable(variableId, listener)

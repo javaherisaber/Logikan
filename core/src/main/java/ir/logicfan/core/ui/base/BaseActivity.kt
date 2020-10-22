@@ -8,7 +8,6 @@ import androidx.annotation.CallSuper
 import androidx.annotation.MainThread
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelLazy
 import androidx.lifecycle.ViewModelProvider
@@ -23,7 +22,7 @@ import ir.logicfan.core.data.sharedpreferences.BaseSharedPreferences
 import ir.logicfan.core.databinding.CoreViewNetworkUnavailableBinding
 import ir.logicfan.core.ui.feature.main.NetworkConnectivityReceiver
 import ir.logicfan.core.ui.feature.main.NetworkConnectivityViewModel
-import ir.logicfan.core.ui.util.LocaleUtils
+import ir.logicfan.core.ui.util.ConfigurationUtils
 import javax.inject.Inject
 
 /**
@@ -40,14 +39,14 @@ abstract class BaseActivity : AppCompatActivity(), HasAndroidInjector, DataTermi
     @Inject
     lateinit var baseSharedPreferences: BaseSharedPreferences
 
-    private val networkConnectivityViewModel: NetworkConnectivityViewModel by viewModels()
+    protected val networkConnectivityViewModel: NetworkConnectivityViewModel by viewModels()
     open fun attachBaseViewModel(): List<BaseViewModel>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         AndroidInjection.inject(this) // inject dagger
         super.onCreate(savedInstanceState)
-        LocaleUtils.setLocale(this, baseSharedPreferences.localeSetting) // setup locale
-        networkConnectivityReceiver.observe(this, Observer {
+        ConfigurationUtils.createConfigContext(this) // update locale when activity starts
+        networkConnectivityReceiver.observe(this, {
             if (it) {
                 // network connection is active now
                 networkConnectivityViewModel.onNetworkAvailabilityChange(true)
@@ -57,39 +56,43 @@ abstract class BaseActivity : AppCompatActivity(), HasAndroidInjector, DataTermi
         // handle terminal errors
         val baseViewModels = attachBaseViewModel()
         baseViewModels?.forEach { viewModel ->
-            viewModel.errorState.observe(this, Observer {
+            viewModel.errorState.observe(this, {
                 onDataTerminalError(it)
             })
-            viewModel.updateState.observe(this, Observer {
+            viewModel.updateState.observe(this, {
                 onUpdateState(it)
             })
         }
-        networkConnectivityViewModel.networkBecomesAvailable.observe(this, Observer {
+        networkConnectivityViewModel.networkBecomesAvailable.observe(this, {
             baseViewModels?.forEach { viewModel ->
                 viewModel.onNetworkBecomesAvailable()
             }
         })
 
-        networkConnectivityViewModel.alertPanelVisibility.observe(this, Observer {
-            val container = attachNetworkAvailabilityContainer()
-            if (container != null && it) {
+        networkConnectivityViewModel.alertPanelVisibility.observe(this, { isVisible ->
+            val container = attachGlobalAlertContainer() ?: return@observe
+            if (container.childCount > 0) {
+                container.removeAllViews()
+            }
+            if (isVisible) {
                 val viewBinding = DataBindingUtil.inflate<CoreViewNetworkUnavailableBinding>(
                     layoutInflater, attachNetworkAvailabilityLayoutRes(), container, true
                 )
                 viewBinding.onCloseClickListener = View.OnClickListener { networkConnectivityViewModel.onCloseClick() }
             } else {
-                container?.removeAllViews()
+                container.removeAllViews()
             }
         })
     }
 
-    open fun attachNetworkAvailabilityContainer(): ViewGroup? = null
+    open fun attachGlobalAlertContainer(): ViewGroup? = null
 
+    @Suppress("MemberVisibilityCanBePrivate")
     protected fun attachNetworkAvailabilityLayoutRes(): Int = R.layout.core_view_network_unavailable
 
     @CallSuper
     override fun onDataTerminalError(throwable: Throwable) {
-        if (throwable  is DataException.Terminal.Offline) {
+        if (throwable is DataException.Offline) {
             networkConnectivityViewModel.onNetworkAvailabilityChange(false)
         }
     }

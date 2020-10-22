@@ -38,17 +38,22 @@ open class SingleDataAdapter<T>(
 ) {
 
     private val viewOnClickListenerToBindingIdMap = HashMap<View.OnClickListener, Int>()
+    private val dataToBindingIdMap = HashMap<Any, Int>()
     private val dataClickListenerToBindingIdMap = HashMap<DataBindingViewHolder.OnDataClickListener<T>, Int>()
     private val positionalDataClickListenerToBindingIdMap =
         HashMap<DataBindingViewHolder.OnPositionalDataClickListener<T>, Int>()
     private var listListener: AsyncListDiffer.ListListener<T>? = null
 
     fun setListChangeListener(listListener: AsyncListDiffer.ListListener<T>) {
-       this.listListener = listListener
+        this.listListener = listListener
     }
 
     fun removeListChangeListener() {
         this.listListener = null
+    }
+
+    fun addDataBinding(data: Any, bindingId: Int) {
+        this.dataToBindingIdMap[data] = bindingId
     }
 
     fun addPositionalDataClickListener(
@@ -84,6 +89,7 @@ open class SingleDataAdapter<T>(
         val viewHolder = provideViewHolder(binding)
         binding.lifecycleOwner = viewHolder  // register for lifecycle events
         viewHolder.addViewOnClickListener(viewOnClickListenerToBindingIdMap)
+        viewHolder.addDataBinding(dataToBindingIdMap)
         viewHolder.addDataClickListener(dataClickListenerToBindingIdMap)
         viewHolder.addPositionalDataClickListener(positionalDataClickListenerToBindingIdMap)
         return viewHolder

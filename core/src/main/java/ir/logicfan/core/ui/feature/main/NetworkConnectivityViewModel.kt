@@ -32,4 +32,13 @@ class NetworkConnectivityViewModel @Inject constructor() : ViewModel() {
     fun onCloseClick() {
         _alertPanelVisibility.value = false
     }
+
+    fun onBackPressed(): Boolean {
+        if (_alertPanelVisibility.value == true) {
+            _alertPanelVisibility.value = false
+            wasOffline = false
+            return true
+        }
+        return false
+    }
 }

@@ -5,6 +5,7 @@ import android.content.pm.ApplicationInfo
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.util.TypedValue
@@ -35,6 +36,8 @@ fun Context.drawableAt(@DrawableRes drawable: Int): Drawable =
  */
 @ColorInt
 fun Context.colorAt(@ColorRes color: Int): Int = ContextCompat.getColor(this, color)
+
+fun Context.colorDrawableAt(@ColorRes color: Int): ColorDrawable = ColorDrawable(colorAt(color))
 
 fun Context.pixelToDp(pixel: Int) = (pixel / resources.displayMetrics.density).toInt()
 

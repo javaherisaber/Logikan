@@ -14,6 +14,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import ir.logicfan.core.R
+import ir.logicfan.core.util.extension.parseDeepLink
 
 /**
  * Pick image from file manager
@@ -33,26 +34,8 @@ fun Fragment.pickImage(requestCode: Int, @StringRes chooserTitle: Int) {
     pickImage(requestCode, title)
 }
 
-/**
- * Navigate to deep link with list of path <key, value> being replaced in uri
- */
-@Suppress("RegExpRedundantEscape")
-fun Fragment.navigateDeepLink(@StringRes res: Int, vararg path: Pair<String, Any?>) {
-    var deepLink = getString(res)
-    path.forEach { (key, value) ->
-        if (value == null || (value is String && value == "null")) {
-            // remove null values
-            deepLink = deepLink.replace("""\?($key)=\{\1\}""".toRegex(), "")
-            deepLink = deepLink.replace("""\?($key)=\{\1\}&""".toRegex(), "")
-            deepLink = deepLink.replace("""&($key)=\{\1\}""".toRegex(), "")
-        } else {
-            deepLink = deepLink.replace("{$key}", value.toString())
-        }
-    }
-    // remove null queries
-    deepLink = deepLink.replace("""\?(.*)=\{\1\}""".toRegex(), "")
-    deepLink = deepLink.replace("""\?(.*)=\{\1\}&""".toRegex(), "")
-    deepLink = deepLink.replace("""&(.*)=\{\1\}""".toRegex(), "")
+fun Fragment.navigateDeepLink(@StringRes res: Int, vararg params: Pair<String, Any?>) {
+    val deepLink = getString(res).parseDeepLink(params)
     findNavController().navigate(Uri.parse(deepLink))
 }
 

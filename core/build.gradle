@@ -5,8 +5,8 @@ apply from: '..\\..\\build-features-library.gradle'
 android {
     resourcePrefix "core"
     defaultConfig {
-        versionCode 18
-        versionName "1.5"
+        versionCode 19
+        versionName "1.6"
     }
     buildTypes {
         release {
@@ -72,6 +72,5 @@ dependencies {
     androidTestImplementation "androidx.test.espresso:espresso-core:$versions.espresso"
 
     // config
-    api "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$versions.kotlin"
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 }

@@ -14,9 +14,9 @@
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardUseCompatPadding="true"
         app:cardCornerRadius="@dimen/core_corner_radius_mild"
-        app:cardElevation="@dimen/core_elevation_mild">
+        app:cardElevation="@dimen/core_elevation_mild"
+        app:cardUseCompatPadding="true">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -24,10 +24,10 @@
             android:padding="@dimen/core_margin_default">
 
             <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:clickable="true"
-                android:focusable="true"
+                style="@style/Core.Widget.ImageView.Icon"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:padding="4dp"
                 android:onClick="@{onCloseClickListener}"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
