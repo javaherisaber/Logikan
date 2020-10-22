@@ -1,7 +1,6 @@
 package ir.logicfan.core.ui.base
 
 import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
@@ -21,14 +20,15 @@ interface BaseFragmentCompat : HasAndroidInjector {
     fun handleBaseViewModelsError(lifecycleOwner: LifecycleOwner) {
         val baseViewModels = attachBaseViewModel()
         baseViewModels?.forEach { viewModel ->
-            viewModel.errorState.observe(lifecycleOwner, Observer {
+            viewModel.errorState.observe(lifecycleOwner, {
                 dataTerminalStateListener.onDataTerminalError(it)
             })
-            viewModel.updateState.observe(lifecycleOwner, Observer {
+            viewModel.updateState.observe(lifecycleOwner, {
                 dataTerminalStateListener.onUpdateState(it)
             })
         }
-        networkConnectivityViewModel.networkBecomesAvailable.observe(lifecycleOwner, Observer {
+
+        networkConnectivityViewModel.networkBecomesAvailable.observe(lifecycleOwner, {
             baseViewModels?.forEach { viewModel ->
                 viewModel.onNetworkBecomesAvailable()
             }
