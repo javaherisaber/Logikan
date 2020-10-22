@@ -1,3 +1,27 @@
+# 1.6
+- Create Context.colorDrawableAt extension function
+- Create ConfigurationUtils Object
+- Handle http terminal errors
+- Create style for iconic imageView
+- Add image to ErrorData and propagate to outer layer
+- Enlarge close icon in core_view_network_unavailable.xml
+- Hide network offline alert when onBackPressed
+- Handle 422 unprocessable entity
+- Add decodeUnicode() extension on String
+- Create http logger to print in console with proper format
+- Create empty state for NetworkApiResponse
+- Add emptyListData to single, list and paged state
+- Remove logger from mock interceptor due to performance impact
+- Move parse deep link logic to StringExtensions.kt
+- Remove Terminal and NonTerminal terminology from data layer
+- Fix swallowed unprocessable entity exception in DataException
+- Inherit common properties from DataOutcome in it's children
+- Add dataToBindingId map in SingleDataAdapter
+- Migrate to Kotlin 1.4.10
+- Use Kotlin 1.4 SAM conversion lambda
+- Remove stdlib dependency from build.gradle
+- Add proguard-rule to keep Gson SerializedName to support R8
+
 # 1.5
 - Add http method support to OfflineMockInterceptor
 - Fix MessageFormat unneeded comma separated number in JalaliCalendar
