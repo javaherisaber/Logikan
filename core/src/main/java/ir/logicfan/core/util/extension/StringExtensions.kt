@@ -18,6 +18,8 @@ fun String.isValidIranMobile(): Boolean = this.matches("(0(9[0-9]{9}))|(\\+98(9[
  */
 fun String.toIranMobile(): String = this.replaceFirst("0", "98")
 
+fun String.fromIranMobile(): String = this.replaceFirst("98", "0")
+
 /**
  * Add Bearer prefix to token string
  */
