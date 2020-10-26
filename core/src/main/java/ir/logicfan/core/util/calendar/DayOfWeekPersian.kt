@@ -3,6 +3,7 @@ package ir.logicfan.core.util.calendar
 /**
  * Represent day of week in persian calendar (jalali)
  */
+@Deprecated("use github library in @javaherisaber")
 enum class DayOfWeekPersian {
     Yekshanbeh,
     Doshanbeh,

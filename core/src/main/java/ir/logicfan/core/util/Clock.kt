@@ -7,6 +7,7 @@ import java.text.MessageFormat
 /**
  * Data holder to represent a clock
  */
+@Deprecated("use github library in @javaherisaber")
 data class Clock(
     var hour: Int = HOUR_MIN_VALUE,
     var minute: Int = MINUTE_MIN_VALUE,

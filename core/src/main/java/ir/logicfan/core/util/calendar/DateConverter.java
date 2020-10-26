@@ -18,6 +18,7 @@ import java.util.GregorianCalendar;
  * @see GregorianCalendar
  * @see JalaliCalendar
  */
+@Deprecated
 public class DateConverter {
     private double julianDayValue;
     private double persianYearValue;

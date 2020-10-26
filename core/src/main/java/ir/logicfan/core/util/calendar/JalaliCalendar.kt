@@ -9,6 +9,7 @@ import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
 
+@Deprecated("use github library in @javaherisaber")
 data class JalaliCalendar(
     var year: Int, var month: MonthPersian, var day: Int, var clock: Clock
 ) : Serializable, Comparable<JalaliCalendar> {

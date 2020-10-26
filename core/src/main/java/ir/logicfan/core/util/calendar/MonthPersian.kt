@@ -5,6 +5,7 @@ import org.jetbrains.annotations.NonNls
 /**
  * Represent month in persian calendar (jalali)
  */
+@Deprecated("use github library in @javaherisaber")
 enum class MonthPersian {
     FARVARDIN,
     ORDIBEHESHT,
