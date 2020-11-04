@@ -7,7 +7,7 @@ object NumberTranscriptUtil {
             return ZERO
         }
         var result: String
-        val (infix, divisor) = infixToDivisor(number)
+        val (base, divisor) = baseToDivisor(number)
         val real = number / divisor
         var reminder = number % divisor
         when {
@@ -24,7 +24,7 @@ object NumberTranscriptUtil {
             real != 0L && divisor == ONE_HUNDRED -> {
                 result = HUNDREDS[real.toInt() - 1]
             }
-            else -> result = transcriptNumber(real) + " $infix "
+            else -> result = transcriptNumber(real) + " $base"
         }
         when {
             reminder != 0L && divisor == TEN -> result += " $SEPARATOR " + UNARY[reminder.toInt() - 1]
@@ -33,7 +33,7 @@ object NumberTranscriptUtil {
         return result
     }
 
-    private fun infixToDivisor(number: Long): Pair<String?, Int> = when {
+    private fun baseToDivisor(number: Long): Pair<String?, Int> = when {
         number / ONE_BILLION != 0L -> BILLION to ONE_BILLION
         number / ONE_MILLION != 0L -> MILLION to ONE_MILLION
         number / ONE_THOUSAND != 0L -> THOUSAND to ONE_THOUSAND
