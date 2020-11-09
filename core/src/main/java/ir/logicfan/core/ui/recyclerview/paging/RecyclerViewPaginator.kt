@@ -18,9 +18,11 @@ abstract class RecyclerViewPaginator : RecyclerView.OnScrollListener() {
      * the app to fetch more transactions when the
      * user scrolls to the 18th item of the list.
      * */
-    private val prefetchSize = PAGE_SIZE
+    abstract val prefetchSize: Int
 
     abstract val isLastPage: Boolean
+
+    abstract fun loadMore()
 
     override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
         super.onScrollStateChanged(recyclerView, newState)
@@ -42,6 +44,4 @@ abstract class RecyclerViewPaginator : RecyclerView.OnScrollListener() {
             }
         }
     }
-
-    abstract fun loadMore()
 }
