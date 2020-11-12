@@ -7,12 +7,4 @@ import ir.logicfan.core.ui.recyclerview.paging.RecyclerViewPaginator
 /**
  * Add paginator to load page by page
  */
-fun RecyclerView.addPaginator(paginator: Paginator) = this.addOnScrollListener(object : RecyclerViewPaginator() {
-    override val prefetchSize: Int
-        get() = paginator.prefetchSize()
-
-    override val isLastPage: Boolean
-        get() = paginator.isLastPage
-
-    override fun loadMore() = paginator.loadNextPage()
-})
+fun RecyclerView.addPaginator(paginator: Paginator) = this.addOnScrollListener(RecyclerViewPaginator(paginator))

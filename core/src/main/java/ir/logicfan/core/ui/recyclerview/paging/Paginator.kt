@@ -17,7 +17,18 @@ interface Paginator {
     var isLastPage: Boolean
 
     /**
+     * is loading current page
+     */
+    fun loadingPage(): Boolean
+
+    /**
      * fetch data before reaching end of list
+     *
+     * This variable is used to set
+     * the threshold. For instance, if I have
+     * set the page limit to 20, this will notify
+     * the app to fetch more transactions when the
+     * user scrolls to the 18th item of the list.
      */
     fun prefetchSize(): Int = PAGE_SIZE / 2
 
