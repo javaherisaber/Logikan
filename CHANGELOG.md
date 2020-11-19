@@ -1,3 +1,12 @@
+# 1.7
+- Remove JalaliCalendar in favor of JalaliCalendar library
+- Abstract out prefetchSize in RecyclerView paginator
+- Add loading page and delete paginator in RecyclerViewPaginator
+- Remove OfflineMockInterceptor in favor of MockFit library
+- Unbundled from master project and upgrade versions.gradle
+- Update LICENSE to GNU GPL V3
+- Update package name to ir.logicbase.core
+
 # 1.6
 - Create Context.colorDrawableAt extension function
 - Create ConfigurationUtils Object
