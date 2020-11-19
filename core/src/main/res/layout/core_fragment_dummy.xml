@@ -6,7 +6,7 @@
 
         <variable
             name="viewModel"
-            type="ir.logicfan.core.ui.feature.dummy.DummyViewModel" />
+            type="ir.logicbase.core.ui.feature.dummy.DummyViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

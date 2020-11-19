@@ -1,12 +1,22 @@
-apply plugin: 'com.android.library'
-apply plugin: 'org.jetbrains.dokka-android'
-apply from: '..\\..\\build-features-library.gradle'
+plugins {
+    id 'com.android.library'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+    id 'com.github.dcendents.android-maven'
+}
+
+group='com.github.javaherisaber'
 
 android {
     resourcePrefix "core"
+    compileSdkVersion config.compileSdk
     defaultConfig {
-        versionCode 19
-        versionName "1.6"
+        versionCode 20
+        versionName "1.7"
+        minSdkVersion config.minSdk
+        targetSdkVersion config.targetSdk
+        vectorDrawables.useSupportLibrary = true
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
         release {
@@ -15,8 +25,24 @@ android {
             consumerProguardFiles 'proguard-rules.pro' // Rules appended to the integrating app
         }
     }
-    dokka {
-        outputDirectory = "$rootDir/androidprojectdocs/docs/build/docs/orchid/dokka/coredocs"
+    buildFeatures {
+        dataBinding true
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+    kapt {
+        useBuildCache = true
+        correctErrorTypes = true
+        javacOptions {
+            // Increase the max count of errors from annotation processors.
+            // Default is 100.
+            option("-Xmaxerrs", 500)
+        }
     }
 }
 
@@ -64,7 +90,10 @@ dependencies {
     api "androidx.lifecycle:lifecycle-extensions:$versions.archLifecycle"
     api "androidx.lifecycle:lifecycle-reactivestreams-ktx:$versions.archLifecycle" // reactive stream support for live data
     api "androidx.lifecycle:lifecycle-common-java8:$versions.archLifecycle"
+
+    // javaherisaber
     api "com.github.javaherisaber:LiveX:$versions.liveX"
+    api "com.github.javaherisaber:JalaliCalendar:$versions.jalaliCalendar"
 
     // test
     testImplementation "junit:junit:$versions.junit"

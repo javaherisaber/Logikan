@@ -3,9 +3,9 @@
 
     <data>
 
-        <import type="ir.logicfan.core.data.entity.DummyData" />
+        <import type="ir.logicbase.core.data.entity.DummyData" />
 
-        <import type="ir.logicfan.core.ui.recyclerview.viewholder.DataBindingViewHolder.OnDataClickListener" />
+        <import type="ir.logicbase.core.ui.recyclerview.viewholder.DataBindingViewHolder.OnDataClickListener" />
 
         <variable
             name="onDataClickListener"
