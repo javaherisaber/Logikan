@@ -6,6 +6,7 @@ ext {
     ]
     versions = [
             kotlin            : '1.4.10',
+            maven             : '2.1',
             expandableTextView: '1.0.5',
             coreKTX           : '1.0.1',
             navigation        : '2.2.2',
