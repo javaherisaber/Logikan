@@ -1,3 +1,1 @@
-# AndroidProjectCore
-
-Core, base and utility functionality required for an android project
+# Logikan: Logicbase core libraries for Kotlin
