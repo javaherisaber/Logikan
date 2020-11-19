@@ -11,8 +11,8 @@ android {
     resourcePrefix "core"
     compileSdkVersion config.compileSdk
     defaultConfig {
-        versionCode 19
-        versionName "1.6"
+        versionCode 20
+        versionName "1.7"
         minSdkVersion config.minSdk
         targetSdkVersion config.targetSdk
         vectorDrawables.useSupportLibrary = true
