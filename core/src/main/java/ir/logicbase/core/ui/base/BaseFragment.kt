@@ -55,6 +55,6 @@ abstract class BaseFragment : Fragment(), BaseFragmentCompat {
     ) = createViewModelLazy(VM::class, { requireActivity().viewModelStore }, factoryProducer)
 
     companion object {
-        private var TAG = BaseFragment::class.java.simpleName
+        val TAG = BaseFragment::class.java.simpleName
     }
 }

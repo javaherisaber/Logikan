@@ -55,6 +55,6 @@ abstract class BaseBottomSheetDialogFragment : BottomSheetDialogFragment(), Base
     ) = createViewModelLazy(VM::class, { requireActivity().viewModelStore }, factoryProducer)
 
     companion object {
-        private var TAG = BaseBottomSheetDialogFragment::class.java.simpleName
+        val TAG = BaseBottomSheetDialogFragment::class.java.simpleName
     }
 }

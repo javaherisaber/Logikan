@@ -73,6 +73,6 @@ open class SimpleBindingViewHolder(val binding: ViewDataBinding) : RecyclerView.
     }
 
     companion object {
-        private var TAG = SimpleBindingViewHolder::class.java.simpleName
+        val TAG = SimpleBindingViewHolder::class.java.simpleName
     }
 }
