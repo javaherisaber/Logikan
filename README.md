@@ -15,6 +15,6 @@ allprojects {
 Module level build.gradle
 ```groovy
 dependencies {
-  implementation "com.github.javaherisaber:Logikan$versions.mockFit"
+  implementation "com.github.javaherisaber:Logikan$versions.Logikan"
 }
 ```
