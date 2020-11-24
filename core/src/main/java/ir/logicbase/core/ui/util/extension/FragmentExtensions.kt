@@ -83,9 +83,17 @@ fun Fragment.setToolbarTitle(@StringRes title: Int) = (this.activity as AppCompa
     this.title = getString(title)
 }
 
-fun Fragment.openChildFragment(@IdRes viewId: Int, fragment: Fragment, addToBackStack: Boolean = false) {
+fun Fragment.openChildFragment(
+    @IdRes viewId: Int,
+    fragment: Fragment,
+    addToBackStack: Boolean = false,
+    tag: String? = null
+) {
+    if (childFragmentManager.findFragmentByTag(tag) != null) {
+        return
+    }
     childFragmentManager.beginTransaction().apply {
-        replace(viewId, fragment)
+        replace(viewId, fragment, tag)
         if (addToBackStack) {
             addToBackStack(fragment.javaClass.simpleName)
         }
