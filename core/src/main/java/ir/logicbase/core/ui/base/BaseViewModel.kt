@@ -40,6 +40,6 @@ abstract class BaseViewModel(val compositeDisposable: CompositeDisposable) : Vie
     }
 
     companion object {
-        val TAG = BaseViewModel::class.java.simpleName
+        private const val TAG = "BaseViewModel"
     }
 }

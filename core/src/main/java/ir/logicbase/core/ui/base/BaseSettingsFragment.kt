@@ -55,6 +55,6 @@ abstract class BaseSettingsFragment : PreferenceFragmentCompat(), BaseFragmentCo
     ) = createViewModelLazy(VM::class, { requireActivity().viewModelStore }, factoryProducer)
 
     companion object {
-        val TAG = BaseSettingsFragment::class.java.simpleName
+        private const val TAG = "BaseSettingsFragment"
     }
 }
