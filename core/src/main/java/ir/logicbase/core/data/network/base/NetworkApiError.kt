@@ -7,5 +7,5 @@ data class NetworkApiError(
     @field:SerializedName("success")
     val success: Boolean,
     @field:SerializedName("error")
-    val error: List<ErrorData>
+    val error: List<ErrorData>?
 )

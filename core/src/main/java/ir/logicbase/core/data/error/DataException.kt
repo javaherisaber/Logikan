@@ -1,10 +1,9 @@
 package ir.logicbase.core.data.error
 
 import com.google.gson.Gson
-import ir.logicbase.core.data.entity.ErrorData
 import ir.logicbase.core.data.network.base.NetworkApiError
+import ir.logicbase.core.data.network.base.NetworkErrorType
 import retrofit2.HttpException
-import java.net.HttpURLConnection
 
 /**
  * Data layer exceptions tree
@@ -25,7 +24,7 @@ sealed class DataException(val code: Int, val messages: List<String>, val image:
 
     companion object {
         fun findExceptionOrNull(throwable: Throwable): Throwable? = try {
-            if (throwable is HttpException && supportedErrors.contains(throwable.code())) {
+            if (throwable is HttpException && NetworkErrorType.isSupported(throwable.code())) {
                 parseHttpException(throwable)
             } else {
                 null
@@ -35,43 +34,30 @@ sealed class DataException(val code: Int, val messages: List<String>, val image:
         }
 
         private fun parseHttpException(throwable: HttpException): Throwable? {
+            var result: DataException? = null
             val errorBody = throwable.response().errorBody()
             val response = Gson().fromJson(errorBody?.charStream(), NetworkApiError::class.java)
-            return findExceptionOrNull(response.error)
-        }
-
-        private fun findExceptionOrNull(errorList: List<ErrorData>): Throwable? {
-            var result: DataException? = null
+            if (response.error == null) {
+                return getDataException(throwable.code(), listOf(), null)
+            }
             val messages = mutableListOf<String>()
-            for (error in errorList) {
+            for (error in response.error) {
                 messages.add(error.msg)
-                result = when (error.code) {
-                    HttpURLConnection.HTTP_BAD_REQUEST -> BadRequest(error.code, messages, error.image)
-                    HttpURLConnection.HTTP_UNAUTHORIZED -> UnAuthorized(error.code, messages, error.image)
-                    HttpURLConnection.HTTP_FORBIDDEN -> Forbidden(error.code, messages, error.image)
-                    HttpURLConnection.HTTP_NOT_FOUND -> NotFound(error.code, messages, error.image)
-                    HttpURLConnection.HTTP_INTERNAL_ERROR -> InternalServer(error.code, messages, error.image)
-                    HttpURLConnection.HTTP_UNAVAILABLE -> ServiceUnavailable(error.code, messages, error.image)
-                    HttpURLConnection.HTTP_CLIENT_TIMEOUT -> Timeout(error.code, messages, error.image)
-                    HttpURLConnection.HTTP_GATEWAY_TIMEOUT -> Timeout(error.code, messages, error.image)
-                    else -> UnprocessableEntity(error.code, messages, error.image)
-                }
+                result = getDataException(error.code, messages, error.image)
             }
             return result
         }
 
-        private const val HTTP_UNPROCESSABLE_ENTITY = 422
-
-        private val supportedErrors = listOf(
-            HTTP_UNPROCESSABLE_ENTITY,
-            HttpURLConnection.HTTP_BAD_REQUEST,
-            HttpURLConnection.HTTP_UNAUTHORIZED,
-            HttpURLConnection.HTTP_FORBIDDEN,
-            HttpURLConnection.HTTP_NOT_FOUND,
-            HttpURLConnection.HTTP_INTERNAL_ERROR,
-            HttpURLConnection.HTTP_UNAVAILABLE,
-            HttpURLConnection.HTTP_CLIENT_TIMEOUT,
-            HttpURLConnection.HTTP_GATEWAY_TIMEOUT
-        )
+        private fun getDataException(code: Int, messages: List<String>, image: String?): DataException = when (code) {
+            NetworkErrorType.HTTP_BAD_REQUEST.code -> BadRequest(code, messages, image)
+            NetworkErrorType.HTTP_UNAUTHORIZED.code -> UnAuthorized(code, messages, image)
+            NetworkErrorType.HTTP_FORBIDDEN.code -> Forbidden(code, messages, image)
+            NetworkErrorType.HTTP_NOT_FOUND.code -> NotFound(code, messages, image)
+            NetworkErrorType.HTTP_INTERNAL_ERROR.code -> InternalServer(code, messages, image)
+            NetworkErrorType.HTTP_UNAVAILABLE.code -> ServiceUnavailable(code, messages, image)
+            NetworkErrorType.HTTP_CLIENT_TIMEOUT.code -> Timeout(code, messages, image)
+            NetworkErrorType.HTTP_GATEWAY_TIMEOUT.code -> Timeout(code, messages, image)
+            else -> UnprocessableEntity(code, messages, image)
+        }
     }
 }
