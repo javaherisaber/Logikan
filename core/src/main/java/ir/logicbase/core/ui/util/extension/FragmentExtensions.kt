@@ -106,15 +106,3 @@ fun Fragment.removeChildFragment(fragment: Fragment?) = fragment?.let {
         .remove(it)
         .commit()
 }
-
-fun Fragment.notImplementedToast() {
-    Toast.makeText(this.context, "Not implemented yet!", Toast.LENGTH_SHORT).show()
-}
-
-fun Fragment.showTryLaterErrorToast() {
-    Toast.makeText(this.context, R.string.core_error_try_later, Toast.LENGTH_LONG).show()
-}
-
-fun Fragment.showTryAgainErrorToast() {
-    Toast.makeText(this.context, R.string.core_error_try_again, Toast.LENGTH_LONG).show()
-}
