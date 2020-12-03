@@ -30,20 +30,6 @@
     <string name="core_all_textInsideParentheses">%1$s (%2$s)</string>
     <!-- end of all -->
 
-    <!-- error -->
-    <string name="core_error_try_later">خطایی رخ داد، لطفا بعدا امتحان کنید</string>
-    <string name="core_error_try_again">خطایی رخ داد، لطفا دوباره امتحان کنید</string>
-    <string name="core_error_unAuthorized_message">دسترسی امکان پذیر نیست، لطفا دوباره وارد حساب کاربری خود شوید</string>
-    <string name="core_error_oops_something_went_wrong">خطایی در اتصال به شبکه رخ داد، لطفا بعدا امتحان کنید</string>
-    <string name="core_error_serverError">اتصال به سرور با مشکل مواجه شد، لطفا بعدا امتحان کنید</string>
-    <string name="core_error_connectivityError">خطایی در اتصال به شبکه رخ داد، دوباره امتحان کنید</string>
-    <string name="core_error_check_your_internet_connection">اینترنت شما وصل نیست</string>
-    <string name="core_error_resource_not_available">این صفحه از دسترس خارج شده</string>
-    <string name="core_error_wrong_number">شماره تلفن اشتباه است</string>
-    <string name="core_error_wrong_code">کد وارد شده اشتباه است</string>
-    <string name="core_error_code_expired_try_again">کد منقضی شد، دوباره امتحان کنید</string>
-    <!-- end of error-->
-
     <!-- view -->
     <string name="core_viewNetworkUnavailable_no_internet">اتصال به اینترنت برقرار نشد</string>
     <!-- End of view -->
