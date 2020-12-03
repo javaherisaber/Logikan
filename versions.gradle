@@ -9,7 +9,7 @@ ext {
             maven             : '2.1',
             expandableTextView: '1.0.5',
             coreKTX           : '1.0.1',
-            navigation        : '2.2.2',
+            navigation        : '2.3.2',
             liveX             : '1.0.1',
             circleImageView   : '3.0.0',
             jalaliCalendar    : '1.3.1',
