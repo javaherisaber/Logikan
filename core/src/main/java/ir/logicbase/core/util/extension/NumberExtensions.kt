@@ -17,3 +17,7 @@ fun Number.toSeparatedThousands(): String = String.format(Locale.US, "%,d", this
  * Convert number to transcript representation
  */
 fun Number.transcript(): String = NumberTranscriptUtil.transcriptNumber(this.toLong())
+
+fun Number?.isNullOrZero(): Boolean = this?.toDouble() == 0.0 || this == null
+
+fun Number?.isNotNullOrZero(): Boolean = this?.toDouble() != 0.0 && this != null
