@@ -63,10 +63,10 @@ fun RecyclerView.addGridMarginItemDecorator(
         when (val itemLayoutManager = layoutManager) {
             is GridLayoutManager -> addItemDecoration(GridMarginItemDecoration(itemMargin))
             is LinearLayoutManager -> when (itemLayoutManager.orientation) {
-                LinearLayoutManager.HORIZONTAL -> addItemDecoration(
+                RecyclerView.HORIZONTAL -> addItemDecoration(
                     HorizontalMarginItemDecoration(itemMargin)
                 )
-                LinearLayoutManager.VERTICAL -> addItemDecoration(
+                RecyclerView.VERTICAL -> addItemDecoration(
                     VerticalMarginItemDecoration(itemMargin)
                 )
             }
