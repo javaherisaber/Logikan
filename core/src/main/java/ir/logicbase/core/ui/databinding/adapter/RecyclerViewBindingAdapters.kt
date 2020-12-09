@@ -8,10 +8,14 @@ import android.view.ViewGroup
 import androidx.core.view.ViewCompat
 import androidx.databinding.BindingAdapter
 import androidx.databinding.DataBindingUtil
-import androidx.recyclerview.widget.*
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.ListAdapter
+import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import ir.logicbase.core.R
 import ir.logicbase.core.databinding.CoreItemStateEmptyBinding
+import ir.logicbase.core.ui.recyclerview.decorator.DividerItemDecoration
 import ir.logicbase.core.ui.recyclerview.decorator.GridMarginItemDecoration
 import ir.logicbase.core.ui.recyclerview.decorator.HorizontalMarginItemDecoration
 import ir.logicbase.core.ui.recyclerview.decorator.VerticalMarginItemDecoration
@@ -23,20 +27,21 @@ import ir.logicbase.core.ui.recyclerview.decorator.VerticalMarginItemDecoration
  * @param dividerOrientation if provided it decide orientation, if null Vertical will be used
  */
 @BindingAdapter(
-    value = ["hasDefaultDividerItemDecoration", "dividerOrientation"],
+    value = ["hasDefaultDividerItemDecoration", "dividerOrientation", "removeLastItemDecoration"],
     requireAll = false
 )
 fun RecyclerView.addDefaultDividerItemDecoration(
     hasItemDecoration: Boolean,
-    dividerOrientation: Int?
+    dividerOrientation: Int?,
+    removeLastItemDecoration: Boolean,
 ) {
     if (hasItemDecoration) {
         if (dividerOrientation == null) {
             // no orientation provided, use VERTICAL by default
-            addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
+            addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL, removeLastItemDecoration))
         } else {
             // orientation provided
-            addItemDecoration(DividerItemDecoration(context, dividerOrientation))
+            addItemDecoration(DividerItemDecoration(context, dividerOrientation, removeLastItemDecoration))
         }
     }
 }
