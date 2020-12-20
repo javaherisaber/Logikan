@@ -9,11 +9,15 @@ import android.view.View
 import android.widget.LinearLayout
 import androidx.recyclerview.widget.RecyclerView
 import kotlin.math.roundToInt
+import androidx.recyclerview.widget.LinearLayoutManager
 
 /**
  * DividerItemDecoration is a [RecyclerView.ItemDecoration] that can be used as a divider
  * between items of a [LinearLayoutManager]. It supports both [.HORIZONTAL] and
  * [.VERTICAL] orientations.
+ *
+ * @param context Current context, it will be used to access resources.
+ * @param orientation Divider orientation. Should be [.HORIZONTAL] or [.VERTICAL].
  *
  * ```
  * dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(),
@@ -38,6 +42,7 @@ class DividerItemDecoration(
      *
      * Sets the orientation for this divider. This should be called if [RecyclerView.LayoutManager] changes orientation.
      */
+    @Suppress("MemberVisibilityCanBePrivate")
     var orientation = orientation
         set(value) {
             require(value == HORIZONTAL || value == VERTICAL) { "Invalid orientation. It should be either HORIZONTAL or VERTICAL" }
@@ -45,11 +50,7 @@ class DividerItemDecoration(
         }
 
     /**
-     * Creates a divider [RecyclerView.ItemDecoration] that can be used with a
-     * [LinearLayoutManager].
-     *
-     * @param context Current context, it will be used to access resources.
-     * @param orientation Divider orientation. Should be [.HORIZONTAL] or [.VERTICAL].
+     * Creates a divider RecyclerView.ItemDecoration that can be used with a LinearLayoutManager.
      */
     init {
         val a = context.obtainStyledAttributes(ATTRS)

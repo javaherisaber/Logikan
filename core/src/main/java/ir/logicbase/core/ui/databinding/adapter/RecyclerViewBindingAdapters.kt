@@ -33,7 +33,7 @@ import ir.logicbase.core.ui.recyclerview.decorator.VerticalMarginItemDecoration
 fun RecyclerView.addDefaultDividerItemDecoration(
     hasItemDecoration: Boolean,
     dividerOrientation: Int?,
-    itemDecorationPadding: Int?,
+    itemDecorationPadding: Float,
     removeLastItemDecoration: Boolean,
 ) {
     if (hasItemDecoration) {
@@ -41,14 +41,14 @@ fun RecyclerView.addDefaultDividerItemDecoration(
             // no orientation provided, use VERTICAL by default
             addItemDecoration(
                 DividerItemDecoration(
-                    context, DividerItemDecoration.VERTICAL, itemDecorationPadding ?: 0, removeLastItemDecoration
+                    context, DividerItemDecoration.VERTICAL, itemDecorationPadding.toInt(), removeLastItemDecoration
                 )
             )
         } else {
             // orientation provided
             addItemDecoration(
                 DividerItemDecoration(
-                    context, dividerOrientation, itemDecorationPadding ?: 0, removeLastItemDecoration
+                    context, dividerOrientation, itemDecorationPadding.toInt(), removeLastItemDecoration
                 )
             )
         }
