@@ -27,21 +27,30 @@ import ir.logicbase.core.ui.recyclerview.decorator.VerticalMarginItemDecoration
  * @param dividerOrientation if provided it decide orientation, if null Vertical will be used
  */
 @BindingAdapter(
-    value = ["hasDefaultDividerItemDecoration", "dividerOrientation", "removeLastItemDecoration"],
+    value = ["hasDefaultDividerItemDecoration", "dividerOrientation", "itemDecorationPadding", "removeLastItemDecoration"],
     requireAll = false
 )
 fun RecyclerView.addDefaultDividerItemDecoration(
     hasItemDecoration: Boolean,
     dividerOrientation: Int?,
+    itemDecorationPadding: Int?,
     removeLastItemDecoration: Boolean,
 ) {
     if (hasItemDecoration) {
         if (dividerOrientation == null) {
             // no orientation provided, use VERTICAL by default
-            addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL, removeLastItemDecoration))
+            addItemDecoration(
+                DividerItemDecoration(
+                    context, DividerItemDecoration.VERTICAL, itemDecorationPadding ?: 0, removeLastItemDecoration
+                )
+            )
         } else {
             // orientation provided
-            addItemDecoration(DividerItemDecoration(context, dividerOrientation, removeLastItemDecoration))
+            addItemDecoration(
+                DividerItemDecoration(
+                    context, dividerOrientation, itemDecorationPadding ?: 0, removeLastItemDecoration
+                )
+            )
         }
     }
 }

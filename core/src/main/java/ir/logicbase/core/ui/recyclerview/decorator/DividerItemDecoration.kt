@@ -24,6 +24,7 @@ import kotlin.math.roundToInt
 class DividerItemDecoration(
     context: Context,
     orientation: Int,
+    private val padding: Int = 0,
     private val removeLastItemDecoration: Boolean = false
 ) : RecyclerView.ItemDecoration() {
     /**
@@ -77,13 +78,14 @@ class DividerItemDecoration(
         canvas.save()
         val left: Int
         val right: Int
-        if (parent.clipToPadding) {
+        if (parent.clipToPadding && padding == 0) {
             left = parent.paddingLeft
             right = parent.width - parent.paddingRight
-            canvas.clipRect(
-                left, parent.paddingTop, right,
-                parent.height - parent.paddingBottom
-            )
+            canvas.clipRect(left, parent.paddingTop, right, parent.height - parent.paddingBottom)
+        } else if (padding != 0) {
+            left = padding
+            right = parent.width - padding
+            canvas.clipRect(left, parent.paddingTop, right, parent.height - parent.paddingBottom)
         } else {
             left = 0
             right = parent.width
@@ -103,13 +105,14 @@ class DividerItemDecoration(
         canvas.save()
         val top: Int
         val bottom: Int
-        if (parent.clipToPadding) {
+        if (parent.clipToPadding && padding == 0) {
             top = parent.paddingTop
             bottom = parent.height - parent.paddingBottom
-            canvas.clipRect(
-                parent.paddingLeft, top,
-                parent.width - parent.paddingRight, bottom
-            )
+            canvas.clipRect(parent.paddingLeft, top, parent.width - parent.paddingRight, bottom)
+        } else if (padding != 0) {
+            top = padding
+            bottom = parent.height - padding
+            canvas.clipRect(parent.paddingLeft, top, parent.width - parent.paddingRight, bottom)
         } else {
             top = 0
             bottom = parent.height
