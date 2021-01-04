@@ -1,6 +1,7 @@
 package ir.logicbase.core.data.error
 
 import com.google.gson.Gson
+import ir.logicbase.core.data.entity.UpdateData
 import ir.logicbase.core.data.network.base.NetworkApiError
 import ir.logicbase.core.data.network.base.NetworkErrorType
 import retrofit2.HttpException
@@ -21,6 +22,7 @@ sealed class DataException(val code: Int, val messages: List<String>, val image:
     class InternalServer(code: Int, messages: List<String>, image: String?) : DataException(code, messages, image)
     class ServiceUnavailable(code: Int, messages: List<String>, image: String?) : DataException(code, messages, image)
     class Timeout(code: Int, messages: List<String>, image: String?) : DataException(code, messages, image)
+    class ForcedUpdate(val update: UpdateData) : Exception()
 
     companion object {
         fun findExceptionOrNull(throwable: Throwable): Throwable? = try {
@@ -45,6 +47,9 @@ sealed class DataException(val code: Int, val messages: List<String>, val image:
                 messages.add(error.msg)
                 result = getDataException(error.code, messages, error.image)
             }
+            if (result is UnprocessableEntity && result.code == FORCED_UPDATE_CODE && response.update != null) {
+                return ForcedUpdate(response.update)
+            }
             return result
         }
 
@@ -59,5 +64,7 @@ sealed class DataException(val code: Int, val messages: List<String>, val image:
             NetworkErrorType.HTTP_GATEWAY_TIMEOUT.code -> Timeout(code, messages, image)
             else -> UnprocessableEntity(code, messages, image)
         }
+
+        private const val FORCED_UPDATE_CODE = 1030
     }
 }
