@@ -1,5 +1,6 @@
 package ir.logicbase.core.ui.util.extension
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.SparseArray
@@ -120,6 +121,11 @@ fun BottomNavigationView.setupWithNavController(
 
     var firstFragmentGraphId = 0
 
+    // set intent to null before creating navHostFragment to prevent unwanted navigate with deep link
+    if (context is Activity) {
+        (context as Activity).intent = null
+    }
+
     // First create a NavHostFragment for each NavGraph ID
     navGraphIds.forEachIndexed { index, navGraphId ->
         val fragmentTag = getFragmentTag(index)
@@ -212,6 +218,9 @@ fun BottomNavigationView.setupWithNavController(
     setupItemReselected(graphIdToTagMap, fragmentManager)
 
     // Handle deep link
+    if (context is Activity) {
+        (context as Activity).intent = intent
+    }
     setupDeepLinks(navGraphIds, fragmentManager, containerId, intent)
 
     // Finally, ensure that we update our BottomNavigationView when the back stack changes
