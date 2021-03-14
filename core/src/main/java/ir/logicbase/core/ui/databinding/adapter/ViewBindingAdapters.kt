@@ -1,6 +1,7 @@
 package ir.logicbase.core.ui.databinding.adapter
 
 import android.app.TimePickerDialog
+import android.view.Menu
 import android.view.View
 import androidx.appcompat.widget.PopupMenu
 import androidx.databinding.BindingAdapter
@@ -43,21 +44,20 @@ fun View.expandableTextViewAnchor(anchor: ExpandableTextView?) = anchor?.let {
 
 @BindingAdapter(value = ["popupData", "onPopupItemClick"], requireAll = false)
 fun View.onViewClickToShowPopup(
-    popupData: Collection<Pair<String, Int>>?,
+    popupData: Collection<PopupData>?,
     onPopupItemClickListener: OnPopupItemClickListener?
 ) = popupData?.let {
     this.setOnClickListener { view ->
         val popup = PopupMenu(context, view)
         for (data in popupData) {
-            popup.menu.add(data.first).titleCondensed = data.second.toString()
+            popup.menu.add(Menu.NONE, data.id, Menu.NONE, data.title)
         }
-        popup.show()
         popup.setOnMenuItemClickListener { menuItem ->
-            onPopupItemClickListener?.onPopupItemClick(
-                menuItem.title.toString(), menuItem.titleCondensed.toString().toInt()
-            )
+            val itemData = PopupData(menuItem.itemId, menuItem.title.toString())
+            onPopupItemClickListener?.onPopupItemClick(itemData)
             return@setOnMenuItemClickListener false
         }
+        popup.show()
     }
 }
 
@@ -72,15 +72,14 @@ fun View.onViewClickToShowPopupWithResId(
     this.setOnClickListener { view ->
         val popup = PopupMenu(context, view)
         for ((index, data) in popupData.withIndex()) {
-            popup.menu.add(data).titleCondensed = index.toString()
+            popup.menu.add(Menu.NONE, index, Menu.NONE, data)
         }
-        popup.show()
         popup.setOnMenuItemClickListener { menuItem ->
-            onPopupItemClickListener?.onPopupItemClick(
-                menuItem.title.toString(), menuItem.titleCondensed.toString().toInt()
-            )
+            val itemData = PopupData(menuItem.itemId, menuItem.title.toString())
+            onPopupItemClickListener?.onPopupItemClick(itemData)
             return@setOnMenuItemClickListener false
         }
+        popup.show()
     }
 }
 
@@ -101,10 +100,12 @@ fun View.onViewClickToShowTimePicker(onTimePickListener: OnTimePickListener?) {
     }
 }
 
-interface OnTimePickListener {
+fun interface OnTimePickListener {
     fun onTimePick(hour: Int, minute: Int)
 }
 
-interface OnPopupItemClickListener {
-    fun onPopupItemClick(title: String, id: Int)
+fun interface OnPopupItemClickListener {
+    fun onPopupItemClick(popupData: PopupData)
 }
+
+data class PopupData(val id: Int, val title: String)
