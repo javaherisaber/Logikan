@@ -124,13 +124,13 @@ fun ChipGroup.inflateEntryChip(item: ChipGroupData, listener: OnChipCloseIconCli
         chip.text = item.title
         chip.setOnCloseIconClickListener { view ->
             this.removeView(view)
-            listener?.onCloseIconClick(item.id, item.title)
+            listener?.onCloseIconClick(item)
         }
         return@inflateViewWithSynchronizedFont chip
     }
 
 fun interface OnChipCloseIconClickListener {
-    fun onCloseIconClick(id: Int, title: String)
+    fun onCloseIconClick(item: ChipGroupData)
 }
 
 fun interface OnChipGroupChoiceChangeListener {
