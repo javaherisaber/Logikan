@@ -29,7 +29,7 @@ fun ChipGroup.addDecorationChips(data: Collection<String>?) = data?.let {
  */
 @BindingAdapter(value = ["entryChipsData", "onCloseIconClick", "keepChildren"], requireAll = false)
 fun ChipGroup.addEntryChips(
-    data: Collection<Pair<Int, String>>?, listener: OnChipCloseIconClickListener?, keepChildren: Boolean?
+    data: Collection<ChipGroupData>?, listener: OnChipCloseIconClickListener?, keepChildren: Boolean?
 ) = data?.let {
     if (this.childCount > 0 && (keepChildren == false || keepChildren == null)) {
         removeAllViews()
@@ -48,7 +48,7 @@ fun ChipGroup.addEntryChips(
  */
 @BindingAdapter(value = ["choiceChipsData", "onChoiceChange", "selectedChoiceChip"], requireAll = false)
 fun ChipGroup.addChoiceChipsChildren(
-    data: Collection<Triple<Int, String, Boolean>>?,
+    data: Collection<ChoiceChipGroupData>?,
     onChoiceChangeListener: OnChipGroupChoiceChangeListener?,
     selectedId: Int?
 ) = data?.let {
@@ -57,12 +57,12 @@ fun ChipGroup.addChoiceChipsChildren(
     inflateViewWithSynchronizedFont {
         data.forEach { item ->
             val chip = it.inflate(R.layout.core_view_chip_choice, this, false) as Chip
-            chip.id = item.first
+            chip.id = item.id
             if (chip.id == selectedId) {
                 chip.isChecked = true
             }
-            chip.text = item.second
-            chip.isChipIconVisible = item.third // true if selected any values related to this chip
+            chip.text = item.title
+            chip.isChipIconVisible = item.displayChipIcon // true if selected any values related to this chip
             addView(chip)
         }
     }
@@ -78,7 +78,7 @@ fun ChipGroup.addChoiceChipsChildren(
     requireAll = false
 )
 fun ChipGroup.addSingleDotChoiceChipsChildren(
-    data: Collection<Pair<Int, String>>?,
+    data: Collection<ChipGroupData>?,
     onChoiceChangeListener: OnChipGroupChoiceChangeListener?,
     selectedId: Int?,
     isChipIconVisible: Boolean?
@@ -88,8 +88,8 @@ fun ChipGroup.addSingleDotChoiceChipsChildren(
     inflateViewWithSynchronizedFont {
         data.forEach { item ->
             val chip = it.inflate(R.layout.core_view_chip_choice, this, false) as Chip
-            chip.id = item.first
-            chip.text = item.second
+            chip.id = item.id
+            chip.text = item.title
             if (chip.id == selectedId) {
                 chip.isChecked = true
                 chip.isChipIconVisible = isChipIconVisible ?: false
@@ -117,22 +117,26 @@ fun ChipGroup.setOnChoiceChangeListener(
     }
 }
 
-fun ChipGroup.inflateEntryChip(item: Pair<Int, String>, listener: OnChipCloseIconClickListener?): Chip =
+fun ChipGroup.inflateEntryChip(item: ChipGroupData, listener: OnChipCloseIconClickListener?): Chip =
     inflateViewWithSynchronizedFont {
         val chip = it.inflate(R.layout.core_view_chip_entry, this, false) as Chip
-        chip.id = item.first
-        chip.text = item.second
+        chip.id = item.id
+        chip.text = item.title
         chip.setOnCloseIconClickListener { view ->
             this.removeView(view)
-            listener?.onCloseIconClick(item.first, item.second)
+            listener?.onCloseIconClick(item.id, item.title)
         }
         return@inflateViewWithSynchronizedFont chip
     }
 
-interface OnChipCloseIconClickListener {
+fun interface OnChipCloseIconClickListener {
     fun onCloseIconClick(id: Int, title: String)
 }
 
-interface OnChipGroupChoiceChangeListener {
+fun interface OnChipGroupChoiceChangeListener {
     fun onChoiceChanged(isChecked: Boolean, checkedId: Int)
 }
+
+data class ChipGroupData(val id: Int, val title: String)
+
+data class ChoiceChipGroupData(val id: Int, val title: String, val displayChipIcon: Boolean)
