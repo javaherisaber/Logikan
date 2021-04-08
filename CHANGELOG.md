@@ -1,3 +1,34 @@
+# [1.8] - April 8, 2021
+## Added
+- Handle data exception for HttpExceptions without errorBody
+- Add extension functions to Number for zeroOrNull checks
+- Add removeLastItemDecoration to RecyclerViewBindingAdapters
+- Add padding support to DividerItemDecoration
+- Add support to forced update in DataException
+- Implement binding adapter for tint condition in imageView
+- Create PopupData class as holder in data binding attribute
+- Create ChipGroupData and ChoiceChipGroupData in data binding
+
+## Changed
+- Change tag variables to public val instead of private var
+- Use string variable for tag instead of static resolution of class name
+- Upgrade Navigation dependency to 2.3.2
+- Move sumByLong() function to IterableExtensions.kt
+- Use RecyclerView orientation constants in binding adapter
+- Update README.md dependencies section
+- Update DividerItemDecoration binding adapter padding type to Float
+- Use ChipGroupData in OnChipCloseIconClickListener parameter type
+
+## Removed
+- Remove Login base view models
+- Remove useless Toast extensions on Activity and Fragment
+- Remove unused string resources
+
+## Fixed
+- Add tag to Fragment.openChildFragment and avoid opening again
+- Fix navigate with deep link in multiple graphs in NavigationExtensions
+- Prevent navigate with deep link when creating navHostFragment
+
 # 1.7
 - Remove JalaliCalendar in favor of JalaliCalendar library
 - Abstract out prefetchSize in RecyclerView paginator
