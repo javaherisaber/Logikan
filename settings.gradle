@@ -1,1 +1,3 @@
-include ':core'
+include ':utils'
+include ':ui'
+include ':data'

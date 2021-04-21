@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <!-- AppTheme -->
-    <style name="Core.AppTheme.Light" parent="Core.Base.AppTheme.Light">
-        <item name="android:statusBarColor">@color/core_colorStatusBar</item>
-    </style>
-    <!-- End of AppTheme -->
-</resources>
