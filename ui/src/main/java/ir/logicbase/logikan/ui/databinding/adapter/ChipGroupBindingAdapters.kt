@@ -1,3 +1,5 @@
+@file:JvmName("ChipGroupBindingAdapters")
+
 package ir.logicbase.logikan.ui.databinding.adapter
 
 import android.view.View

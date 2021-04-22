@@ -1,3 +1,5 @@
+@file:JvmName("ViewExtensions")
+
 package ir.logicbase.logikan.ui.util.extension
 
 import android.content.Context

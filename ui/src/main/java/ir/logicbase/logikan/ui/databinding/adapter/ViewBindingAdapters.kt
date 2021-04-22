@@ -1,3 +1,5 @@
+@file:JvmName("ViewBindingAdapters")
+
 package ir.logicbase.logikan.ui.databinding.adapter
 
 import android.app.TimePickerDialog

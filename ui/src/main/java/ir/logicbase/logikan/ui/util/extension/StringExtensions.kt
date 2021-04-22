@@ -1,3 +1,5 @@
+@file:JvmName("StringExtensions")
+
 package ir.logicbase.logikan.ui.util.extension
 
 import android.os.Build

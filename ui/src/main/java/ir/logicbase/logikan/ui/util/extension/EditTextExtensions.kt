@@ -1,3 +1,5 @@
+@file:JvmName("EditTextExtensions")
+
 package ir.logicbase.logikan.ui.util.extension
 
 import android.text.Editable

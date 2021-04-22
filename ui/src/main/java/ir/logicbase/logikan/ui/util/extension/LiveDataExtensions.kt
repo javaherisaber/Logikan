@@ -1,3 +1,5 @@
+@file:JvmName("LiveDataExtensions")
+
 package ir.logicbase.logikan.ui.util.extension
 
 import androidx.lifecycle.MutableLiveData

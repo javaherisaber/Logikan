@@ -1,3 +1,5 @@
+@file:JvmName("BitmapExtensions")
+
 package ir.logicbase.logikan.ui.util.extension
 
 import android.graphics.Bitmap

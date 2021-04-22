@@ -1,3 +1,5 @@
+@file:JvmName("TextViewBindingAdapters")
+
 package ir.logicbase.logikan.ui.databinding.adapter
 
 import android.annotation.SuppressLint

@@ -1,3 +1,5 @@
+@file:JvmName("ShebaCodeBindingConverter")
+
 package ir.logicbase.logikan.ui.databinding.converter
 
 import androidx.databinding.InverseMethod

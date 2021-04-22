@@ -1,3 +1,5 @@
+@file:JvmName("EditTextBindingAdapters")
+
 package ir.logicbase.logikan.ui.databinding.adapter
 
 import android.view.inputmethod.EditorInfo

@@ -1,3 +1,5 @@
+@file:JvmName("NavControllerExtensions")
+
 package ir.logicbase.logikan.ui.util.extension
 
 import android.net.Uri

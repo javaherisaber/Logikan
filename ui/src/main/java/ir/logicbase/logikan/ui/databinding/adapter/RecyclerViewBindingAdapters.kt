@@ -1,3 +1,5 @@
+@file:JvmName("RecyclerViewBindingAdapters")
+
 package ir.logicbase.logikan.ui.databinding.adapter
 
 import android.graphics.drawable.Drawable

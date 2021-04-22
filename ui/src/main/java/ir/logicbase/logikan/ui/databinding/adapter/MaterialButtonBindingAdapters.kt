@@ -1,3 +1,5 @@
+@file:JvmName("MaterialButtonBindingAdapters")
+
 package ir.logicbase.logikan.ui.databinding.adapter
 
 import android.content.res.ColorStateList

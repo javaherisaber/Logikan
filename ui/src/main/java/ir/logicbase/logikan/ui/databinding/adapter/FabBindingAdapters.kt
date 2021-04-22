@@ -1,3 +1,5 @@
+@file:JvmName("FabBindingAdapters")
+
 package ir.logicbase.logikan.ui.databinding.adapter
 
 import android.graphics.Color

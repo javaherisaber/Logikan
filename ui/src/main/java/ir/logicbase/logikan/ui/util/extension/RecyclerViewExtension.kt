@@ -1,3 +1,5 @@
+@file:JvmName("RecyclerViewExtensions")
+
 package ir.logicbase.logikan.ui.util.extension
 
 import androidx.recyclerview.widget.RecyclerView
