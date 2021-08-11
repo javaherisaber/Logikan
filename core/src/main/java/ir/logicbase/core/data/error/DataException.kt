@@ -62,6 +62,7 @@ sealed class DataException(val code: Int, val messages: List<String>, val image:
             NetworkErrorType.HTTP_UNAVAILABLE.code -> ServiceUnavailable(code, messages, image)
             NetworkErrorType.HTTP_CLIENT_TIMEOUT.code -> Timeout(code, messages, image)
             NetworkErrorType.HTTP_GATEWAY_TIMEOUT.code -> Timeout(code, messages, image)
+            NetworkErrorType.HTTP_TOO_MANY_REQUEST.code -> BadRequest(code, messages, image)
             else -> UnprocessableEntity(code, messages, image)
         }
 
